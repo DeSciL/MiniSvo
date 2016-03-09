@@ -12,3 +12,7 @@ To-do:
 
 - Re-matching treatment
 - AMT integration
+
+To-do Priority 2
+- Channel definition in packages.json is strange
+- In case two games (minisvo + ultimatum) are present, node gets error from other game
