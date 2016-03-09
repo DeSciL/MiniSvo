@@ -1,0 +1,60 @@
+{
+  "name": "ultimatum-game",
+  "channelName": "ultimatum",
+  "description": "Plays an ultimatum game with nodegame",
+  "version": "1.0.1",
+  "author": {
+    "name": "Stefano Balietti",
+    "email": "sbalietti@ethz.ch",
+    "url": "http://www.nodegame.org"
+  },
+  "main": "./index.html",
+  "keywords": [
+    "nodegame",
+    "behavioral",
+    "ultimatum",
+    "game theory"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodegame/ultimatum.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": ">= 2.1.0",
+    "should": ">= 5.0.0"
+  },
+  "engines": {
+    "node": "*",
+    "nodegame": ">= 1.0.0"
+  },
+  "scripts": {
+    "test": "mocha ./test/test.*.js"
+  },
+  "gitHead": "daeb0d83d6fecc6c0aba25dd7a9b7c77ac04e71c",
+  "bugs": {
+    "url": "https://github.com/nodegame/ultimatum/issues"
+  },
+  "homepage": "https://github.com/nodegame/ultimatum#readme",
+  "_id": "ultimatum-game@1.0.1",
+  "_shasum": "43a7e1d4be1b863cb5ff40b154c99bdbb682049e",
+  "_from": "ultimatum-game@latest",
+  "_npmVersion": "2.11.3",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "shakty",
+    "email": "futur.dorko@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "shakty",
+      "email": "futur.dorko@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "43a7e1d4be1b863cb5ff40b154c99bdbb682049e",
+    "tarball": "http://registry.npmjs.org/ultimatum-game/-/ultimatum-game-1.0.1.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ultimatum-game/-/ultimatum-game-1.0.1.tgz"
+}

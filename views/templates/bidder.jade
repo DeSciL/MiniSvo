@@ -1,0 +1,57 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container', style='font-size: 20px')
+        h2=youAre
+        h3=makeAnOffer1
+        
+        
+        // input(type='number', min='0', max='100', name='offer',id='offer')
+        // |\n
+        // br
+        // input(type='number', min='0', max='100', name='offer2',id='offer2')
+        // |\n
+        
+        
+        table(style='width:500px;height:100px;')
+            tr
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive1
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;', class='firstHoverclass' + index)= val
+            tr
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='firstHoverclass' + i)
+                        input(type='radio', name='position', id='firstPos' + i, value=i++)
+            tr
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send1
+                    td(style='font-size:80%;text-align:center;background:#fff;', class='firstHoverclass' + index)= val
+        
+        br
+        h3=makeAnOffer2
+        
+        
+        table(style='width:500px;height:100px;')
+            tr
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive2
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;', class='secondHoverclass' + index)= val
+            tr
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i)
+                        input(type='radio', name='position2', id='secondPos' + i, value=i++)
+            tr
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send2
+                    td(style='font-size:80%;text-align:center;background:#fff;', class='secondHoverclass' + index)= val
+
+        br
+        input(type='button', value=submit, name='submitOffer', id='submitOffer', class='btn')
+        br
+
+
+

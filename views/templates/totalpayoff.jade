@@ -1,0 +1,20 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container', style='font-size: 20px')
+        h2=totalpayoff
+        
+        
+        div(id='payoff')
+            =payoff
+            span(id='totalpayoff')
+            |.</br>
+
+        div(id='realpayoff')
+            =realpayoff
+            span(id='realpayoffSpan')
+            |$.</br>    
+        
+        
+        input(type='button', value=submit, name='continue', id='continue', class='btn')
+        br

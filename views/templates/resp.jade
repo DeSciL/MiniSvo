@@ -1,0 +1,22 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container', style='font-size: 20px')
+        h2=youAreTheRespondant
+        h3=waitingForAnOffer
+        div(id='offered', style='display:none;')
+            =youReceivedAnOffer1
+            span(id='theoffer')
+            |.</br>
+            
+
+
+
+        div(id='offered2', style='display:none;')
+            =youReceivedAnOffer2
+            span(id='theoffer2')
+            |.</br>
+            
+            input(type='button', value=accept, id='accept', class='btn')
+            |\n
+            input(type='button', value=reject, id='reject', class='btn')
