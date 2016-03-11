@@ -13,7 +13,8 @@ If you have an older version installed, follow these steps:
 3. In nodegame folder `cd node_modules/JSUS/`
 4. `git pull`
 5. In nodegame folder `cd node_modules/nodegame-server/`
-6. `node bin/make.js build-client -a -o nodegame-full`
+6. `git pull`
+7. `node bin/make.js build-client -a -o nodegame-full`
 
 
 ### To-do:
