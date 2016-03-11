@@ -623,6 +623,28 @@ function feedback() {
             }
             blackClasses2[0].style.fontWeight = 'bold';
             
+            var blackClassesName3 = 'thirdHoverclass' + otherValueIndex1;
+            var blackClasses3 = W.getElementsByClassName(blackClassesName3);
+            for (var i = 0; i < blackClasses3.length; i++) {
+                blackClasses3[i].style.backgroundColor = '#000';
+                blackClasses3[i].style.color = '#fff';
+                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses3[2].style.fontWeight = 'bold';
+            
+
+            
+            var blackClassesName4 = 'fourthHoverclass' + otherValueIndex2;
+            var blackClasses4 = W.getElementsByClassName(blackClassesName4);
+            for (var i = 0; i < blackClasses4.length; i++) {
+                blackClasses4[i].style.backgroundColor = '#000';
+                blackClasses4[i].style.color = '#fff';
+                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses4[2].style.fontWeight = 'bold';
+            
             
             root = W.getElementById('container');
 

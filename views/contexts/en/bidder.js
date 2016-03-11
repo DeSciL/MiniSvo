@@ -9,7 +9,7 @@ module.exports = function(settings, headers) {
 
     return {
         "title": "Allocations",
-        "youAre": "Allocations",
+        "youAre": "Choices",
         "makeAnOffer1": "Choose one of the following allocations:",
         "makeAnOffer2": "Choose one of the following allocations:",
         "submit": "Submit",

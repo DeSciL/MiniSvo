@@ -3,18 +3,16 @@ extends iframe-layout
 block mainContent
     div(id='container', style='font-size: 20px')
         h2=totalpayoff
-        
-        
-        div(id='payoff')
-            =payoff
-            span(id='totalpayoff')
-            |.</br>
 
-        div(id='realpayoff')
-            =realpayoff
-            span(id='realpayoffSpan')
-            |$.</br>    
         
+        div(class="panel panel-default")
+            div(class="panel-heading")=payoff
+                span(id='totalpayoff', style="font-weight:bold;")
+                |.
+            div(class="panel-body")=realpayoff
+                span(id='realpayoffSpan')
+                |$.   
         
         input(type='button', value=submit, name='continue', id='continue', class='btn')
-        br
+
+ 
