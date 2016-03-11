@@ -5,36 +5,58 @@ block mainContent
         h2=feedback
         h3=choices1
         
-        
-        div(id='chosen1')
-            =youChose1
-            span(id='chosenvalue1')
-            |.</br>
-            
+        table(style='width:500px;height:100px;')
+            tr
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive1
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
+            tr
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='height:34px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='firstHoverclass' + i++)
+                        
+                        //span(class="glyphicon glyphicon-ok", aria-hidden="true", style='color:#fff;')
+                        span(style='color:#fff;font-size:80%;font-weight:bold;')
 
-        div(id='chosen2')
-            =youChose2
-            span(id='chosenvalue2')
-            |.</br>
+                        
+            tr
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send1
+                    td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
         
-        br    
         h3=choices2
         
+        table(style='width:500px;height:100px;')
+            tr
+                td(style='font-weight:bold;') You receive:
+                each val, index in receive2
+                    td(style='font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
+            tr
+                td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                - var i = 0;
+                while i < 9
+                    td(style='height:34px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i++)
+                        
+                        span(style='color:#fff;font-size:80%;font-weight:bold;')
+                        
+            tr
+                td(style='font-weight:bold;') Your partner receives:
+                each val, index in send2
+                    td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
         
-        div(id='offered1')
-            =youReceivedAnOffer1
-            span(id='theoffer1')
-            |.</br>
-            
-
-        div(id='offered2')
-            =youReceivedAnOffer2
-            span(id='theoffer2')
-            |.</br>
-            
+        
+        br    
+        h3=choices3
+        
+        br    
+        h3=choices4
+        
+      
         br
         p=payoff
-            span(id='thepayoff')|.
+            span(id='thepayoff')
+            |.
         br
         
         input(type='button', value=submit, name='continue', id='continue', class='btn')

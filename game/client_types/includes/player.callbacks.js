@@ -378,18 +378,141 @@ function ultimatum() {
                               Math.floor(Math.random() * 101), other);
                 }, 4000);
             });*/
+
+      
             
-            /*
-            var hover1 = W.getElementsByClassName('hoverclass1');
-            b.onmouseover = function () {
-                hover1.style.background = '#ddd';
+            for (var i = 0; i < 9; i++) {
+                var hoverClassesNames = 'firstHoverclass' + i;
+                var hoverClasses = W.getElementsByClassName(hoverClassesNames);
+                for (var j = 0; j < hoverClasses.length; j++) {
+                    hoverClasses[j].onmouseover = function() {
+                       
+                        var thisClass = W.getElementsByClassName(this.className);
+                        for (var k = 0; k < thisClass.length; k++) {
+                            thisClass[k].style.backgroundColor = '#ddd';
+                            //thisClass[k].style.border = '1px solid #000';
+                        }
+                        
+                        //thisClass[0].style.borderTop = '1px solid #000';
+                        //thisClass[0].style.borderLeft = '1px solid #000';
+                        //thisClass[0].style.borderRight = '1px solid #000';
+                                                
+                        thisClass[1].style.borderTop = '1px solid #ddd';
+                        //thisClass[1].style.borderLeft = '1px solid #000';
+                        //thisClass[1].style.borderRight = '1px solid #000';
+                        thisClass[1].style.borderBottom = '1px solid #ddd';
+                        
+                        //thisClass[2].style.borderBottom = '1px solid #000';
+                        //thisClass[2].style.borderLeft = '1px solid #000';
+                        //thisClass[2].style.borderRight = '1px solid #000';
+
+                        
+                    }
+                    
+                    
+                    
+                    hoverClasses[j].onmouseout = function() {
+                        this.style.backgroundColor = '#fff';
+                        var thisClass = W.getElementsByClassName(this.className);
+                        for (var k = 0; k < thisClass.length; k++) {
+                            thisClass[k].style.backgroundColor = '#fff';
+                            //thisClass[k].style.border = '1px solid #fff';
+                        }
+                        
+                        
+                        thisClass[1].style.borderTop = '1px solid #000';
+                        thisClass[1].style.borderBottom = '1px solid #000';
+                       
+                        
+                    }
+                    
+                    
+                    hoverClasses[j].onclick = function() {
+                        
+                        var thisClass = this.className;
+                        var thisNumber = thisClass.slice(-1);
+                        
+                        var thisRadioId = 'firstPos' + thisNumber;
+                        var thisRadioButton = W.getElementById(thisRadioId);
+                        thisRadioButton.checked = true;
+                        
+                        //alert('Check Radio button number ' + thisNumber + '!');
+                        
+                    }
+                }
             }
-            */
+            
+            
+            
+            for (var i = 0; i < 9; i++) {
+                var hoverClassesNames2 = 'secondHoverclass' + i;
+                var hoverClasses2 = W.getElementsByClassName(hoverClassesNames2);
+                for (var j = 0; j < hoverClasses2.length; j++) {
+                    hoverClasses2[j].onmouseover = function() {
+                       
+                        var thisClass = W.getElementsByClassName(this.className);
+                        for (var k = 0; k < thisClass.length; k++) {
+                            thisClass[k].style.backgroundColor = '#ddd';
+                            //thisClass[k].style.border = '1px solid #000';
+                        }
+                        
+                        //thisClass[0].style.borderTop = '1px solid #000';
+                        //thisClass[0].style.borderLeft = '1px solid #000';
+                        //thisClass[0].style.borderRight = '1px solid #000';
+                                                
+                        thisClass[1].style.borderTop = '1px solid #ddd';
+                        //thisClass[1].style.borderLeft = '1px solid #000';
+                        //thisClass[1].style.borderRight = '1px solid #000';
+                        thisClass[1].style.borderBottom = '1px solid #ddd';
+                        
+                        //thisClass[2].style.borderBottom = '1px solid #000';
+                        //thisClass[2].style.borderLeft = '1px solid #000';
+                        //thisClass[2].style.borderRight = '1px solid #000';
+
+                        
+                    }
+                    
+                    
+                    
+                    hoverClasses2[j].onmouseout = function() {
+                        this.style.backgroundColor = '#fff';
+                        var thisClass = W.getElementsByClassName(this.className);
+                        for (var k = 0; k < thisClass.length; k++) {
+                            thisClass[k].style.backgroundColor = '#fff';
+                            //thisClass[k].style.border = '1px solid #fff';
+                        }
+                        
+                     
+                        
+                        
+                        thisClass[1].style.borderTop = '1px solid #000';
+                        thisClass[1].style.borderBottom = '1px solid #000';
+                        
+                        
+                    }
+                    
+                    
+                    hoverClasses2[j].onclick = function() {
+                        
+                        var thisClass = this.className;
+                        var thisNumber = thisClass.slice(-1);
+                        
+                        var thisRadioId = 'secondPos' + thisNumber;
+                        var thisRadioButton = W.getElementById(thisRadioId);
+                        thisRadioButton.checked = true;
+                        
+                        //alert('Check Radio button number ' + thisNumber + '!');
+                        
+                    }
+                }
+            }
+            
+            
+                
+                
             
             b.onclick = function() {
           
-                //var position = W.getElementByClassName('position1');
-                
                 for (var i = 0; i < 9; i++) {
                     
                     var posname = 'firstPos' + i;
@@ -411,111 +534,26 @@ function ultimatum() {
                     }
                 }
                 
+                var badAlert = W.getElementById('badAlert');
+                var goodAlert = W.getElementById('goodAlert');
                 
-                // MISSING: CHECK TO SEE IF PLAYER HAS ACTUALLY CHOSEN ALLOCATION
-                
-                //node.emit('BID_DONE', parseInt(offer.value, 10), parseInt(offer2.value, 10), other);
-                node.emit('BID_DONE', offer1, offer2, other);
+                if (!offer1 || !offer2) {
+                    badAlert.style.display = '';
+                    //alert('Please make a choice for both allocations!');
+                } else {
+                    badAlert.style.display = 'none';
+                    goodAlert.style.display = '';
+                    node.emit('BID_DONE', offer1, offer2, other);
+                }
             };
 
             root = W.getElementById('container');
-
-            /* node.on.data('ACCEPT', function(msg) {
-                W.write(' Your choice of allocations was accepted.', root);
-                node.timer.randomExec(function() {
-                    node.done();
-                }, 3000);
-            });
-
-            node.on.data('REJECT', function(msg) {
-                W.write(' Your choice of allocations was rejected.', root);
-                node.timer.randomExec(function() {
-                    node.done();
-                }, 3000);
-            }); */
 
             node.timer.setTimestamp('bidder_loaded');
 
         }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
     });
 
-    // Load the respondent interface.
-    /* node.on.data('RESPONDENT', function(msg) {
-        console.log('RECEIVED RESPONDENT!');
-        other = msg.data.other;
-        node.set({role: 'RESPONDENT'});
-
-        W.loadFrame('resp.html', function() {
-            options = {
-                milliseconds: 30000
-            };
-
-            node.game.timer.startWaiting(options);
-            node.game.timer.mainBox.hideBox();
-
-            //////////////////////////////////////////////
-            // nodeGame hint:
-            //
-            // nodeGame offers several types of event
-            // listeners. They are all resemble the syntax
-            //
-            // node.on.<target>
-            //
-            // For example: node.on.data(), node.on.plist().
-            //
-            // The low level event listener is simply
-            //
-            // node.on
-            //
-            // For example, node.on('in.say.DATA', cb) can
-            // listen to all incoming DATA messages.
-            //
-            /////////////////////////////////////////////
-            node.on.data('OFFER', function(msg) {
-                var theofferSpan, theofferSpan2, offered, offered2, accept, reject;
-
-                options = {
-                    timeup: function() {
-                        that.randomAccept(msg.data, other);
-                    }
-                };
-                node.game.timer.startTiming(options);
-
-
-                offered = W.getElementById('offered');
-                theofferSpan = W.getElementById('theoffer');
-                theofferSpan.innerHTML = msg.data.offer;
-                offered.style.display = '';
-                
-                offered2 = W.getElementById('offered2');
-                theofferSpan2 = W.getElementById('theoffer2');
-                theofferSpan2.innerHTML = msg.data.offer2;
-                offered2.style.display = '';
-
-                accept = W.getElementById('accept');
-                reject = W.getElementById('reject');
-
-                node.env('auto', function() {
-                    node.timer.randomExec(function() {
-                        that.randomAccept(msg.data, other);
-                    }, 3000);
-                });
-
-                accept.onclick = function() {
-                    node.emit('RESPONSE_DONE', 'ACCEPT', msg.data, other);
-                };
-
-                reject.onclick = function() {
-                    node.emit('RESPONSE_DONE', 'REJECT', msg.data, other);
-                };
-
-                node.timer.setTimestamp('offer_received');
-            });
-
-        }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
-
-    });
-    */
     console.log('Ultimatum');
 }
 
@@ -533,7 +571,6 @@ function feedback() {
 
         node.on.data('OTHER_OFFER', function(msg) {
         
-            var chosenSpan1, chosenSpan2, theofferSpan1, theofferSpan2, thepayoffSpan;
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
@@ -545,35 +582,52 @@ function feedback() {
                     }*/
             };
             node.game.timer.startTiming(options);
+            
+            
                         
             var chosenValueIndex1 = node.game.lastOffer1;
             var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];            
-            chosenSpan1 = W.getElementById('chosenvalue1');
-            chosenSpan1.innerHTML = chosenValue1;
             
             var chosenValueIndex2 = node.game.lastOffer2;
             var chosenValue2 = node.game.settings.receive2[chosenValueIndex2];       
-            chosenSpan2 = W.getElementById('chosenvalue2');
-            chosenSpan2.innerHTML = chosenValue2;
             
             var otherValueIndex1 = msg.data.offer1;
             var otherValue1 = node.game.settings.send1[otherValueIndex1]
-            theofferSpan1 = W.getElementById('theoffer1');
-            theofferSpan1.innerHTML = otherValue1;
             
             var otherValueIndex2 = msg.data.offer2;  
             var otherValue2 = node.game.settings.send2[otherValueIndex2]
-            theofferSpan2 = W.getElementById('theoffer2');
-            theofferSpan2.innerHTML = otherValue2;
             
             var roundpayoff = chosenValue1 + chosenValue2 + otherValue1 + otherValue2;  
-            thepayoffSpan = W.getElementById('thepayoff');
+            var thepayoffSpan = W.getElementById('thepayoff');
             thepayoffSpan.innerHTML = roundpayoff;
+            
+            var blackClassesName1 = 'firstHoverclass' + chosenValueIndex1;
+            var blackClasses1 = W.getElementsByClassName(blackClassesName1);
+            for (var i = 0; i < blackClasses1.length; i++) {
+                blackClasses1[i].style.backgroundColor = '#000';
+                blackClasses1[i].style.color = '#fff';
+                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses1[0].style.fontWeight = 'bold';
+            
+
+            
+            var blackClassesName2 = 'secondHoverclass' + chosenValueIndex2;
+            var blackClasses2 = W.getElementsByClassName(blackClassesName2);
+            for (var i = 0; i < blackClasses2.length; i++) {
+                blackClasses2[i].style.backgroundColor = '#000';
+                blackClasses2[i].style.color = '#fff';
+                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses2[0].style.fontWeight = 'bold';
+            
             
             root = W.getElementById('container');
 
             node.timer.setTimestamp('bidder_loaded');
-
+               
         
         });
         
