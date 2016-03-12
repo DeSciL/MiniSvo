@@ -9,7 +9,7 @@
 - If ultimatum is not present, css will be off
 - To be fixed soon
 
-#### Note:
+#### Note 2:
 You need to have latest nodegame version installed (updated March 9th 2016)
 If you have an older version installed, follow these steps:
 
