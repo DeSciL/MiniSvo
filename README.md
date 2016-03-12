@@ -4,6 +4,11 @@
 1. Install latest version of nodegame: http://nodegame.org/
 2. Clone into /games/ directory
 
+#### Note 1:
+- As of now, the game will only work properly when the default ultimatum game exists in the gamefolder as well
+- If ultimatum is not present, css will be off
+- To be fixed soon
+
 #### Note:
 You need to have latest nodegame version installed (updated March 9th 2016)
 If you have an older version installed, follow these steps:

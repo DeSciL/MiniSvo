@@ -2,3 +2,42 @@
     margin: 5px;
     font-size: 20px;
 }
+
+
+iframe {
+    width:550px;
+}
+
+#ng_header {
+    height:100px;
+}
+
+.stagediv {
+    display:none;
+}
+
+.visualround .panel-heading {
+    display:none;
+}
+
+div#ng_header {
+    
+}
+
+.ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
+    height: 100px !important;
+    width: 530px !important;
+    background:#ddd;
+    margin:0 auto !important;
+}
+
+
+.visualtimer {
+    float: none !important;
+    width: 100px !important;
+}
+
+.visualround {
+    float: none !important;
+    width: 100px !important;
+}

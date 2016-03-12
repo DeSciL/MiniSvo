@@ -4,16 +4,16 @@ block mainContent
     div(id='container', style='font-size: 20px')
         h3=youAre
         
-        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;font-size:80%;")
-            span(style="font-weight:bold;") Warning! 
-            span Please make a choice for BOTH allocations before continuing
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;font-size:75%;width:530px;")
+            span(style="font-weight:bold;") Incomplete. 
+            span Please make a choice for both allocations before continuing.
             
-        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;font-size:80%;")
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;font-size:75%;width:530px;")
             span(style="font-weight:bold;") Success! 
-            span You have submitted your choices
+            span You have submitted your choices.
         
 
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Please make your first choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')
@@ -32,7 +32,7 @@ block mainContent
                         each val, index in send1
                             td(style='font-size:80%;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                 
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Please make your second choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')

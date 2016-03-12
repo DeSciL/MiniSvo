@@ -2,9 +2,9 @@ extends iframe-layout
 
 block mainContent
     div(id='container', style='font-size: 20px')
-        h3 Your choices
+        h3 Your choices:
         
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your first choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')
@@ -26,7 +26,7 @@ block mainContent
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                 
 
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your second choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')
@@ -47,9 +47,9 @@ block mainContent
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
         
-        h3 Your partners choices
+        h3 Your partners choices:
         
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your partners first choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')
@@ -69,7 +69,7 @@ block mainContent
                         each val, index in send1
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='thirdHoverclass' + index)= val
                              
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your partners second choice:
             div(class="panel-body")
                 table(style='width:500px;height:100px;')
@@ -89,7 +89,7 @@ block mainContent
                         each val, index in send2
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='fourthHoverclass' + index)= val
       
-        div(class="panel panel-default")
+        div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading")=payoff
                 span(id='thepayoff', style="font-weight:bold;")
                 |.
