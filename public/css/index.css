@@ -3,9 +3,16 @@
     font-size: 20px;
 }
 
+div#container {
+    width:530px !important;
+    margin:0 auto;
+}
+
+
 
 iframe {
-    width:550px;
+    width:1050px !important;
+    height: 1000px !important;
 }
 
 #ng_header {
@@ -21,13 +28,13 @@ iframe {
 }
 
 div#ng_header {
-    
+    display: none !important;
 }
 
 .ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
     height: 100px !important;
     width: 530px !important;
-    background:#ddd;
+    background:#f5f5f5;
     margin:0 auto !important;
 }
 

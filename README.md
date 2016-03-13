@@ -27,8 +27,8 @@ If you have an older version installed, follow these steps:
 - Timers: actions?
 - Update instructions and all texts
 - Style top bar
-- Re-matching treatment
-- AMT integration
+- __Re-matching treatment__
+- __AMT integration__
 
 #### To-do Priority 2:
 - Channel definition in packages.json is strange
