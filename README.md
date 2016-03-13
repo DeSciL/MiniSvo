@@ -23,6 +23,7 @@ If you have an older version installed, follow these steps:
 
 
 ### To-do:
+- Use max-width for mobile screens and test it
 - Finish feedback page visuals
 - Timers: actions?
 - Update instructions and all texts
