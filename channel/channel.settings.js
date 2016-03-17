@@ -12,9 +12,9 @@ module.exports = {
 
     // alias: 'u1',
 
-    playerServer: 'ultimatum',
+    playerServer: 'minisvo',
 
-    adminServer: 'ultimatum/admin',
+    adminServer: 'minisvo/admin',
 
     verbosity: 100,
 
@@ -23,7 +23,7 @@ module.exports = {
 
     // Unauthorized clients will be redirected here.
     // (defaults: "/pages/accessdenied.htm")
-    accessDeniedUrl: '/ultimatum/unauth.htm',
+    accessDeniedUrl: '/minisvo/unauth.htm',
 
     enableReconnections: true
 };
