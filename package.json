@@ -1,6 +1,5 @@
 {
   "name": "ultimatum-game",
-  "channelName": "minisvo",
   "description": "Plays an ultimatum game with nodegame",
   "version": "1.0.1",
   "author": {

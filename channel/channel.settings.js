@@ -16,6 +16,8 @@ module.exports = {
 
     adminServer: 'ultimatum/admin',
 
+    sioQuery: false,
+
     verbosity: 100,
 
     // If TRUE, players can invoke GET commands on admins.
