@@ -83,7 +83,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('selectLanguage', {
         cb: cbs.selectLanguage,
         timer: 100000,
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
         done: function() {
             // The chosen language prefix will be
             // added automatically to every call to W.loadFrame().
@@ -100,20 +100,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // `minPlayers` triggers the execution of a callback in the case
         // the number of players (including this client) falls the below
         // the chosen threshold. Related: `maxPlayers`, and `exactPlayers`.
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
     });
 
     stager.extendStep('instructions', {
         cb: cbs.instructions,
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
         timer: 90000
     });
 
     stager.extendStep('quiz', {
         cb: cbs.quiz,
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
         // `timer` starts automatically the timer managed by the widget
         // VisualTimer if the widget is loaded. When the time is up it fires
@@ -149,7 +149,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('ultimatum1', {
         cb: cbs.ultimatum,
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
         // `syncOnLoaded` forces the clients to wait for all the others to be
         // fully loaded before releasing the control of the screen to the
         // players.  This options introduces a little overhead in
@@ -160,7 +160,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     
     stager.extendStep('feedback', {
         cb: cbs.feedback,
-        minPlayers: MIN_PLAYERS,
+        // minPlayers: MIN_PLAYERS,
     });
     
     stager.extendStep('totalpayoff', {
