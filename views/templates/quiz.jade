@@ -1,7 +1,7 @@
 extends iframe-layout
 
 block extraHead
-    link(rel='stylesheet', type='text/css', href='/ultimatum/css/quiz.css')
+    link(rel='stylesheet', type='text/css', href='/minisvo/css/quiz.css')
 
 block mainContent
     div(id='container_quiz')
@@ -50,4 +50,4 @@ block mainContent
                 button(onclick='javascript:parent.node.done();', id='submitQuiz', class='btn btn-lg btn-primary')!=clickHere+'<br>'
                     =' '+correctAnswers+' '
                     span(id='answers_counter') 0 / 3
-    script(src='/ultimatum/js/quiz.js')
+    script(src='/minisvo/js/quiz.js')

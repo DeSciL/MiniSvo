@@ -28,7 +28,7 @@ If you have an older version installed, follow these steps:
 - Timers: actions?
 - Update instructions and all texts
 - Style top bar
-- Fix (hard-coded?) references to styles in old "ultimatum" game
+- __Run multiple treatments simultaneously__
 - __Re-matching treatment__
 - __AMT integration__
 
