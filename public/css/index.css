@@ -11,12 +11,13 @@ div#container {
 
 
 iframe {
-    width:1050px !important;
+    width:530px !important;
     height: 1000px !important;
 }
 
 #ng_header {
     height:100px;
+    background:#000;
 }
 
 .stagediv {
@@ -28,23 +29,45 @@ iframe {
 }
 
 div#ng_header {
-    display: none !important;
+    position: relative;
+    top:20px;
 }
 
 .ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
     height: 100px !important;
     width: 530px !important;
-    background:#f5f5f5;
+    background:#0f0;
     margin:0 auto !important;
 }
 
-
-.visualtimer {
-    float: none !important;
-    width: 100px !important;
+.visualtimer > .panel-heading {
+    float:left;
 }
 
+.visualtimer > .panel-body {
+    float:right;
+}
+
+
+
+
+.visualtimer {
+    float: left !important;
+    position: static !important;
+    width: 250px !important;
+}
+
+.title {
+    float:left;
+}
+
+
 .visualround {
-    float: none !important;
-    width: 100px !important;
+    float: right !important;
+    position: static !important;
+    width: 250px !important;
+}
+
+.number {
+    font-size: 60%;
 }

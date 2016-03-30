@@ -55,6 +55,19 @@ function init() {
     node.game.lastStage = node.game.getCurrentGameStage();
 
     node.game.gameTerminated = false;
+    
+    
+    // Re-matching
+    
+    var Matcher = ngc.Matcher;
+    node.game.matcher = new Matcher();
+
+    node.game.matcher.generateMatches('roundrobin', 4); 
+    node.game.matcher.setIds(node.game.pl.id.getAllKeys());
+    node.game.matcher.match();
+    
+    
+    
 
     // If players disconnects and then re-connects within the same round
     // we need to take into account only the final bids within that round.
@@ -311,9 +324,30 @@ function doMatch() {
         if (!this.countdown) notEnoughPlayers();
         return;
     }
+    
+    var round = node.player.stage.round; // or another counter
+    var matches = node.game.matcher.getMatch(round); 
+    var item;
+
+    for (item of matches) {
+        
+        data_b = {
+            //role: 'bidder',
+            other: item[1]
+        };
+        data_r = {
+            //role: 'respondent',
+            other: item[0]
+        };
+        
+        node.say('BIDDER', item[0], data_b);
+        node.say('BIDDER', item[1], data_r);
+    }
+
 
     // Method shuffle accepts one parameter to update the db, as well as
     // returning a shuffled copy.
+    /*
     g = node.game.pl.shuffle();
 
     for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
@@ -343,6 +377,7 @@ function doMatch() {
         node.say('BIDDER', respondent.id, data_r);
         //node.say('RESPONDENT', respondent.id, data_r);
     }
+    */
     console.log('Matching completed.');
 }
 

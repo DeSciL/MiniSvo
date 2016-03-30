@@ -12,7 +12,7 @@ module.exports = {
     SESSION_ID: 100,
 
     // Minimum number of players that must be always connected.
-    MIN_PLAYERS: 2,
+    MIN_PLAYERS: 4,
 
     // Number or rounds to repeat the bidding. *
     REPEAT: 10,
