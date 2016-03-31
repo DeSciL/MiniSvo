@@ -11,13 +11,13 @@ div#container {
 
 
 iframe {
-    width:530px !important;
     height: 1000px !important;
 }
 
 #ng_header {
     height:100px;
     background:#000;
+    display:none; 
 }
 
 .stagediv {

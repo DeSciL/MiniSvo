@@ -4,10 +4,10 @@
 module.exports = {
 
     // How many clients must connect before groups are formed.
-    POOL_SIZE: 4,
+    POOL_SIZE: 2,
 
     // The size of each group.
-    GROUP_SIZE: 4,
+    GROUP_SIZE: 2,
 
     // Maximum waiting time.
     MAX_WAIT_TIME: 600000,

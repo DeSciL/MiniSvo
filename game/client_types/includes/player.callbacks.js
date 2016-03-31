@@ -608,11 +608,10 @@ function feedback() {
             var roundpayoff = chosenValue1 + chosenValue2 + otherValue1 + otherValue2;  
             var thepayoffSpan = W.getElementById('thepayoff');
             thepayoffSpan.innerHTML = roundpayoff;
-            
             var blackClassesName1 = 'firstHoverclass' + chosenValueIndex1;
             var blackClasses1 = W.getElementsByClassName(blackClassesName1);
             for (var i = 0; i < blackClasses1.length; i++) {
-                blackClasses1[i].style.backgroundColor = '#000';
+                blackClasses1[i].style.backgroundColor = '#660';
                 blackClasses1[i].style.color = '#fff';
                 
                 //thisClass[k].style.border = '1px solid #000';
@@ -624,12 +623,58 @@ function feedback() {
             var blackClassesName2 = 'secondHoverclass' + chosenValueIndex2;
             var blackClasses2 = W.getElementsByClassName(blackClassesName2);
             for (var i = 0; i < blackClasses2.length; i++) {
-                blackClasses2[i].style.backgroundColor = '#000';
+                blackClasses2[i].style.backgroundColor = '#660';
                 blackClasses2[i].style.color = '#fff';
                 
                 //thisClass[k].style.border = '1px solid #000';
             }
             blackClasses2[0].style.fontWeight = 'bold';
+            
+            
+            var blackClassesName3 = 'firstHoverclass' + otherValueIndex1;
+            var blackClasses3 = W.getElementsByClassName(blackClassesName3);
+            var numberOfClasses3 = blackClasses3.length;
+            for (var i = 0; i < numberOfClasses3; i++) {
+                
+                if (chosenValueIndex1 == otherValueIndex1) {
+                    //blackClasses3[i].style.backgroundColor = '';
+                    blackClasses3[i].style.background = '#009';
+                    //blackClasses3[i].style.background = 'repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                    blackClasses3[i].style.color = '#fff';
+                }
+                else {
+                    blackClasses3[i].style.backgroundColor = '#606';
+                    blackClasses3[i].style.color = '#fff';
+                }
+                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
+            
+
+            
+            var blackClassesName4 = 'secondHoverclass' + otherValueIndex2;
+            var blackClasses4 = W.getElementsByClassName(blackClassesName4);
+            var numberOfClasses4 = blackClasses4.length;
+            for (var i = 0; i < numberOfClasses4; i++) {
+                
+                if (chosenValueIndex2 == otherValueIndex2) {
+                    //blackClasses4[i].style.backgroundColor = '';
+                    blackClasses4[i].style.background = '#009';
+                    //blackClasses4[i].style.background = 'repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                    blackClasses4[i].style.color = '#fff';
+                }
+                else {
+                    blackClasses4[i].style.backgroundColor = '#606';
+                    blackClasses4[i].style.color = '#fff';
+                }
+                                
+                //thisClass[k].style.border = '1px solid #000';
+            }
+            blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
+            
+            
+            /*
             
             var blackClassesName3 = 'thirdHoverclass' + otherValueIndex1;
             var blackClasses3 = W.getElementsByClassName(blackClassesName3);
@@ -655,6 +700,7 @@ function feedback() {
             }
             blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
             
+            */
             
             root = W.getElementById('container');
 

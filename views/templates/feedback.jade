@@ -12,7 +12,7 @@ block mainContent
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive1
                             td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
-                    //-tr
+                    tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
@@ -34,7 +34,7 @@ block mainContent
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive2
                             td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
-                    //- tr
+                    tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
@@ -47,9 +47,9 @@ block mainContent
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
         
-        h3 Your partners choices:
+        //-h3 Your partners choices:
         
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
+        //-div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your partners first choice:
             div(class="panel-body")
                 table(style='width:500px;')
@@ -57,7 +57,7 @@ block mainContent
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in receive1
                             td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='thirdHoverclass' + index)= val
-                    //- tr
+                    tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
@@ -69,7 +69,7 @@ block mainContent
                         each val, index in send1
                             td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='thirdHoverclass' + index)= val
                              
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
+        //-div(class="panel panel-default", style="font-size:80%;width:530px;")
             div(class="panel-heading") Your partners second choice:
             div(class="panel-body")
                 table(style='width:500px;')
@@ -77,7 +77,7 @@ block mainContent
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in receive2
                             td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='fourthHoverclass' + index)= val
-                    //-tr
+                    tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9

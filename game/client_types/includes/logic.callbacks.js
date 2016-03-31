@@ -325,6 +325,8 @@ function doMatch() {
         return;
     }
     
+    
+    /*
     var round = node.player.stage.round; // or another counter
     var matches = node.game.matcher.getMatch(round); 
     var item;
@@ -343,11 +345,11 @@ function doMatch() {
         node.say('BIDDER', item[0], data_b);
         node.say('BIDDER', item[1], data_r);
     }
-
+    */
 
     // Method shuffle accepts one parameter to update the db, as well as
     // returning a shuffled copy.
-    /*
+    
     g = node.game.pl.shuffle();
 
     for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
@@ -377,7 +379,7 @@ function doMatch() {
         node.say('BIDDER', respondent.id, data_r);
         //node.say('RESPONDENT', respondent.id, data_r);
     }
-    */
+    
     console.log('Matching completed.');
 }
 
