@@ -4,6 +4,35 @@ block mainContent
     div(id='container', style='font-size: 20px')
         h3=totalpayoff
 
+        div(class="panel panel-default", style="width:530px;")
+            div(class="panel-heading") Payoff by round
+
+            table(class="table", style='font-size:60%;')
+                thead
+                    tr
+                        th
+                        th Payoff from Self
+                        th Payoff from Other
+                tbody
+                    - var i = 0;
+                    while i < 10
+
+                        tr
+                            - var round = i + 1;
+                            td= 'Round ' + round
+                            td
+                                span(id='payFromSelf' + i)
+                            td
+                                span(id='payFromOther' + i++)
+                tfoot
+                    tr
+                        td(style='font-weight:bold;border-top:solid 2px #ddd;') Total
+                        td(style='font-weight:bold;border-top:solid 2px #ddd;;')
+                            span(id='totalFromSelf')
+                        td(style='font-weight:bold;border-top:solid 2px #ddd;;')
+                            span(id='totalFromOther')
+                    
+
         
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading")=payoff
@@ -12,6 +41,8 @@ block mainContent
             div(class="panel-body")=realpayoff
                 span(id='realpayoffSpan')
                 |$.   
+                
+                
         
         input(type='button', value=submit, name='continue', id='continue', class='btn')
 

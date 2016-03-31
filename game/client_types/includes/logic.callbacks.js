@@ -57,7 +57,7 @@ function init() {
     node.game.gameTerminated = false;
     
     
-    // Re-matching
+    // Roundrobin Re-matching Table
     
     var Matcher = ngc.Matcher;
     node.game.matcher = new Matcher();
@@ -326,6 +326,10 @@ function doMatch() {
     }
     
     
+    // ROUNDROBIN RE-MATCHING
+    // Set number of players in game.settings (to do)
+    // Number of rounds must make sense in combination with numbers of players
+    
     /*
     var round = node.player.stage.round; // or another counter
     var matches = node.game.matcher.getMatch(round); 
@@ -347,6 +351,7 @@ function doMatch() {
     }
     */
 
+    // RANDOM RE-MATCHING
     // Method shuffle accepts one parameter to update the db, as well as
     // returning a shuffled copy.
     

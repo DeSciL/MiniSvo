@@ -585,14 +585,14 @@ function feedback() {
             
             
             options = {
-                    /*timeup: function() {
+                    timeup: function() {
                         node.done();
-                    }*/
+                    }
             };
             node.game.timer.startTiming(options);
             
             
-                        
+            // Get the input from last round            
             var chosenValueIndex1 = node.game.lastOffer1;
             var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];            
             
@@ -605,9 +605,17 @@ function feedback() {
             var otherValueIndex2 = msg.data.offer2;  
             var otherValue2 = node.game.settings.send2[otherValueIndex2]
             
+            
+            // Pay.off for this round. Not displayed
+            /*
             var roundpayoff = chosenValue1 + chosenValue2 + otherValue1 + otherValue2;  
             var thepayoffSpan = W.getElementById('thepayoff');
             thepayoffSpan.innerHTML = roundpayoff;
+            */
+            
+            // Highlight selected values in sliders on feedback page
+            // Colors?
+            
             var blackClassesName1 = 'firstHoverclass' + chosenValueIndex1;
             var blackClasses1 = W.getElementsByClassName(blackClassesName1);
             for (var i = 0; i < blackClasses1.length; i++) {
@@ -639,11 +647,12 @@ function feedback() {
                 if (chosenValueIndex1 == otherValueIndex1) {
                     //blackClasses3[i].style.backgroundColor = '';
                     blackClasses3[i].style.background = '#009';
-                    //blackClasses3[i].style.background = 'repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                    blackClasses3[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
+                    //blackClasses3[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
                     blackClasses3[i].style.color = '#fff';
                 }
                 else {
-                    blackClasses3[i].style.backgroundColor = '#606';
+                    blackClasses3[i].style.backgroundColor = '#714';
                     blackClasses3[i].style.color = '#fff';
                 }
                 
@@ -661,11 +670,12 @@ function feedback() {
                 if (chosenValueIndex2 == otherValueIndex2) {
                     //blackClasses4[i].style.backgroundColor = '';
                     blackClasses4[i].style.background = '#009';
-                    //blackClasses4[i].style.background = 'repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                    blackClasses4[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
+                    //blackClasses4[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
                     blackClasses4[i].style.color = '#fff';
                 }
                 else {
-                    blackClasses4[i].style.backgroundColor = '#606';
+                    blackClasses4[i].style.backgroundColor = '#714';
                     blackClasses4[i].style.color = '#fff';
                 }
                                 
@@ -728,32 +738,59 @@ function totalpayoff() {
     W.loadFrame('totalpayoff.html', function() {
         node.on.data('PAYOFFS', function(msg) {
             
-            var payoffs, payoffSpan, payoffSum, realPayoff, realPayoffSpan;
-            
-            payoffs = msg.data;
-            payoffSum = 0;
+          
+            var payoffs = msg.data;
+            var payoffSumSelf = 0;
+            var payoffSumOther = 0;
             
             var i;
            
           
             for(i = 0; i < payoffs.length; ++i) {
+                // Pay-Off from your own choices
                 var myIndex = parseInt(payoffs[i].myoffer1);
-                payoffSum += node.game.settings.receive1[myIndex];
+                var payFromSelf1 = node.game.settings.receive1[myIndex];
+
                 var myIndex2 = parseInt(payoffs[i].myoffer2);
-                payoffSum += node.game.settings.receive2[myIndex2];
+                var payFromSelf2 = node.game.settings.receive1[myIndex2];
+                
+                var payFromSelf = payFromSelf1 + payFromSelf2;
+                payoffSumSelf += payFromSelf;
+                var payFromSelfName = 'payFromSelf' + i;
+                var payFromSelfSpan = W.getElementById(payFromSelfName);
+                payFromSelfSpan.innerHTML = payFromSelf;
+                
+                
+                // Pay-Off from your partners choices
                 var otherIndex = parseInt(payoffs[i].otherOffer1);
-                payoffSum += node.game.settings.send1[otherIndex];
+                var payFromOther1 = node.game.settings.send1[otherIndex];
+                
                 var otherIndex2 = parseInt(payoffs[i].otherOffer2);
-                payoffSum += node.game.settings.send2[otherIndex2];
+                var payFromOther2 = node.game.settings.send2[otherIndex2];
+                
+                var payFromOther = payFromOther1 + payFromOther2;
+                payoffSumOther += payFromOther;
+                var payFromOtherName = 'payFromOther' + i;
+                var payFromOtherSpan = W.getElementById(payFromOtherName);
+                payFromOtherSpan.innerHTML = payFromOther;
+                
             }
            
-          
-            payoffSpan = W.getElementById('totalpayoff');
+            
+            var totalFromSelfSpan = W.getElementById('totalFromSelf');
+            totalFromSelfSpan.innerHTML = payoffSumSelf;
+            
+            var totalFromOtherSpan = W.getElementById('totalFromOther');
+            totalFromOtherSpan.innerHTML = payoffSumOther;
+           
+            var payoffSum = payoffSumSelf + payoffSumOther;
+            
+            var payoffSpan = W.getElementById('totalpayoff');
             payoffSpan.innerHTML = payoffSum;
             
-            realPayoff = payoffSum / node.game.settings.EXCHANGE_RATE;
+            var realPayoff = payoffSum / node.game.settings.EXCHANGE_RATE;
             var realPayoffRounded = parseFloat(realPayoff).toFixed(2);
-            realPayoffSpan = W.getElementById('realpayoffSpan');
+            var realPayoffSpan = W.getElementById('realpayoffSpan');
             realPayoffSpan.innerHTML = realPayoffRounded;
 
 
