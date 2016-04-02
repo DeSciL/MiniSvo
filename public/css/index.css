@@ -10,14 +10,11 @@ div#container {
 
 
 
+
 iframe {
     height: 1000px !important;
-}
-
-#ng_header {
-    height:100px;
-    background:#000;
-    display:none; 
+    padding:0;
+    width:100% !important;
 }
 
 .stagediv {
@@ -29,45 +26,93 @@ iframe {
 }
 
 div#ng_header {
+    height:52px;
     position: relative;
     top:20px;
+    background:#eee;
+    border:solid 1px #999;
+    -webkit-border-radius: 5px 5px 5px 5px;-moz-border-radius: 5px 5px 5px 5px;border-radius: 5px 5px 5px 5px;
 }
 
 .ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
-    height: 100px !important;
     width: 530px !important;
-    background:#0f0;
     margin:0 auto !important;
 }
 
-.visualtimer > .panel-heading {
+#ng_header > .visualtimer > .panel-heading {
+    font-weight: bold;
     float:left;
+    font-size:20px !important;
+    background:#eee;
+    border:0;
+    margin:0;
+    padding:10px;
+    height:100% !important;
 }
 
-.visualtimer > .panel-body {
+#ng_header > .visualtimer > .panel-body {
     float:right;
+    margin:0;
+    padding:10px !important;
+    background:#eee;
 }
 
+#ng_header > .visualtimer > .panel-body > div {
+    font-size:20px;
+    position:relative;
+    height:20px;
+}
 
-
-
-.visualtimer {
+#ng_header > .visualtimer {
     float: left !important;
-    position: static !important;
-    width: 250px !important;
+    width: 175px !important;
+    height:40px;
+    border:0;
+    background:#eee;
+    -webkit-box-shadow:inset 0 0px 0px;box-shadow:inset 0 0px 0px;
 }
-
-.title {
-    float:left;
-}
-
 
 .visualround {
     float: right !important;
-    position: static !important;
-    width: 250px !important;
+    width: 310px !important;
+    height:40px;
+    border:0;
+    background:#eee;
+    -webkit-box-shadow:inset 0 0px 0px;box-shadow:inset 0 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;-moz-border-radius: 0px 0px 0px 0px;border-radius: 0px 0px 0px 0px;
+}
+
+.title {
+    font-size:20px !important;
+    margin:0;
+    padding:5;
+    display: inline-block;
+    padding-right:6px;
+    font-weight: bold;
+}
+
+.visualround > .panel-body > div > div.rounddiv {
+    font-size: 20px !important;
+    text-align: left !important;
+}
+
+.visualround > .panel-body {
+    margin:0;
+    padding:10px;
 }
 
 .number {
-    font-size: 60%;
+    font-size:20px !important;
+}
+
+.text {
+    font-size:20px !important;
+}
+
+.waitTimerTitle {
+    display:none !important;
+}
+
+.waitTimerBody {
+    display:none !important;
 }

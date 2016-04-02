@@ -352,13 +352,13 @@ function ultimatum() {
             // Start the timer after an offer was received.
             options = {
                 milliseconds: 30000,
-                /*timeup: function() {
-                    node.emit('BID_DONE',
-                              Math.floor(Math.random() * 101), other, true);
-                }*/
+                timeup: function() {
+                    node.emit('BID_DONE', 4, 4, other, true);
+                }
             };
 
             node.game.timer.startTiming(options);
+
 
             b = W.getElementById('submitOffer');
 
@@ -622,8 +622,10 @@ function feedback() {
                 blackClasses1[i].style.backgroundColor = '#660';
                 blackClasses1[i].style.color = '#fff';
                 
-                //thisClass[k].style.border = '1px solid #000';
+                //blackClasses1[i].style.borderTop = '1px solid #660';
             }
+            blackClasses1[1].style.borderTop = '1px solid #660';
+            blackClasses1[1].style.borderBottom = '1px solid #660';
             blackClasses1[0].style.fontWeight = 'bold';
             
 
@@ -636,6 +638,8 @@ function feedback() {
                 
                 //thisClass[k].style.border = '1px solid #000';
             }
+            blackClasses2[1].style.borderTop = '1px solid #660';
+            blackClasses2[1].style.borderBottom = '1px solid #660';
             blackClasses2[0].style.fontWeight = 'bold';
             
             
@@ -658,6 +662,8 @@ function feedback() {
                 
                 //thisClass[k].style.border = '1px solid #000';
             }
+            blackClasses3[1].style.borderTop = '1px solid #714';
+            blackClasses3[1].style.borderBottom = '1px solid #714';
             blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
             
 
@@ -681,6 +687,8 @@ function feedback() {
                                 
                 //thisClass[k].style.border = '1px solid #000';
             }
+            blackClasses4[1].style.borderTop = '1px solid #714';
+            blackClasses4[1].style.borderBottom = '1px solid #714';
             blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
             
             
@@ -737,6 +745,13 @@ function totalpayoff() {
     
     W.loadFrame('totalpayoff.html', function() {
         node.on.data('PAYOFFS', function(msg) {
+            
+            var options = {
+                    timeup: function() {
+                        node.done();
+                    }
+            };
+            node.game.timer.startTiming(options);
             
           
             var payoffs = msg.data;
