@@ -30,6 +30,7 @@ div#ng_header {
     position: relative;
     top:20px;
     background:#eee;
+    border:0px solid #ddd !important;
     -webkit-border-radius: 5px 5px 5px 5px;-moz-border-radius: 5px 5px 5px 5px;border-radius: 5px 5px 5px 5px;
 }
 
