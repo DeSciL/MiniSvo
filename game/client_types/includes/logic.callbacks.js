@@ -56,7 +56,10 @@ function init() {
 
     node.game.gameTerminated = false;
     
-    
+    node.game.disconnectStr = 'One or more players disconnected. If they ' +
+        'do not reconnect within ' + settings.WAIT_TIME  +
+        ' seconds the game will be terminated.';
+
     // Roundrobin Re-matching Table
     
     var Matcher = ngc.Matcher;
@@ -391,6 +394,8 @@ function doMatch() {
 function notEnoughPlayers() {
     if (this.countdown) return;
     console.log('Warning: not enough players!!');
+    // Pause connected players.
+    node.remoteCommand('pause', 'ROOM', this.disconnectStr);
     this.countdown = setTimeout(function() {
         console.log('Countdown fired. Going to Step: questionnaire.');
         node.remoteCommand('erase_buffer', 'ROOM');
@@ -398,8 +403,9 @@ function notEnoughPlayers() {
         node.game.gameTerminated = true;
         // if syncStepping = false
         //node.remoteCommand('goto_step', 5);
+        // Step must be not-skipped if you give the id (else give a number).
         node.game.gotoStep('questionnaire');
-    }, 30000);
+    }, settings.WAIT_TIME * 1000);
 }
 
 function endgame() {

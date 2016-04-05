@@ -21,7 +21,7 @@ module.exports = function(stager, settings) {
 
         stager.skip('instructions');
         stager.skip('selectLanguage');
-        stager.skip('questionnaire');
+        // stager.skip('questionnaire');
         stager.skip('quiz');
         
         stager.extendStage('ultimatum', {steps: ['ultimatum1', 'feedback']});
