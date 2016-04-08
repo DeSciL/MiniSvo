@@ -19,7 +19,7 @@ module.exports = function(stager, settings) {
         .next('endgame')
         .gameover();
 
-        stager.skip('instructions');
+        // stager.skip('instructions');
         stager.skip('selectLanguage');
         // stager.skip('questionnaire');
         stager.skip('quiz');

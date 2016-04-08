@@ -2,21 +2,19 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h1=instructions
+        h1 Instructions of the Game
         div(id='instructions')
-            =thisGame
+        
+            p Please read them carefully.
+            p This game consists of ten rounds of decisions. 
+            p Each round, you will make two choices. With each choice, you allocate a number of coins to your private account and another number of coins to a random other person who is partnered with you (a random new person each round). 
+
+            p At the same time, a randomly chosen third person (a random new person each round) is faced with the same decision as you, and you will receive the number of coins that he/she allocates to you.
+
+            p At the end of the ten rounds, you will receive the total number of coins that you allocated to yourself plus the total number of coins that the ten third persons anonymously allocated to you.  
+
+            p If you understood the instructions correctly press the button to proceed to the quiz.
+        
+            
             br
-            br
-            !=inEachRound
-            br
-            br
-            =theRespondent
-            br
-            br
-            =theGame
-            br
-            br
-            =ifYouUnderstood
-            br
-            br
-            input(type='button', id='read', value=proceed, class='btn btn-lg btn-primary')
+            input(type='button', id='read', value='Next', class='btn btn-lg btn-primary')

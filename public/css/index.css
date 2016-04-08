@@ -1,3 +1,8 @@
+body {
+    background-color: #e3e3e3;
+}
+
+
 #waitingForPlayers {
     margin: 5px;
     font-size: 20px;
@@ -6,8 +11,12 @@
 div#container {
     width:530px !important;
     margin:0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
-
 
 
 
@@ -15,6 +24,7 @@ iframe {
     height: 1000px !important;
     padding:0;
     width:100% !important;
+    margin-top:15px !important;
 }
 
 .stagediv {
@@ -29,21 +39,21 @@ div#ng_header {
     height:52px;
     position: relative;
     top:20px;
-    background:#eee;
-    border:0px solid #ddd !important;
-    -webkit-border-radius: 5px 5px 5px 5px;-moz-border-radius: 5px 5px 5px 5px;border-radius: 5px 5px 5px 5px;
+    background:#fff;
+    border: 1px solid #e3e3e3 !important;
+    -webkit-border-radius: 4px;-moz-border-radius: 4;border-radius: 4px;
 }
 
 .ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
-    width: 530px !important;
+    width: 580px !important;
     margin:0 auto !important;
 }
 
 #ng_header > .visualtimer > .panel-heading {
-    font-weight: bold;
+    font-weight:;
     float:left;
     font-size:20px !important;
-    background:#eee;
+    background:#fff;
     border:0;
     margin:0;
     padding:10px;
@@ -54,7 +64,7 @@ div#ng_header {
     float:right;
     margin:0;
     padding:10px !important;
-    background:#eee;
+    background:#fff;
 }
 
 #ng_header > .visualtimer > .panel-body > div {
@@ -68,7 +78,7 @@ div#ng_header {
     width: 175px !important;
     height:40px;
     border:0;
-    background:#eee;
+    background:#fff;
     -webkit-box-shadow:inset 0 0px 0px;box-shadow:inset 0 0px 0px;
 }
 
@@ -77,7 +87,7 @@ div#ng_header {
     width: 310px !important;
     height:40px;
     border:0;
-    background:#eee;
+    background:#fff;
     -webkit-box-shadow:inset 0 0px 0px;box-shadow:inset 0 0px 0px;
     -webkit-border-radius: 0px 0px 0px 0px;-moz-border-radius: 0px 0px 0px 0px;border-radius: 0px 0px 0px 0px;
 }
@@ -88,7 +98,7 @@ div#ng_header {
     padding:5;
     display: inline-block;
     padding-right:6px;
-    font-weight: bold;
+    font-weight:;
 }
 
 .visualround > .panel-body > div > div.rounddiv {

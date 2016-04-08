@@ -1,6 +1,17 @@
 div#container {
-    max-width: 530px;
-    margin: 0 auto;
+    max-width:530px;
+    margin:0 auto;
+}   
+
+div#wrapper {    
+    width:580px !important;
+    margin:0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding-bottom: 30px;
 }
 
 .important {
@@ -10,4 +21,8 @@ div#container {
 
 .question {
     font-weight: bold;
+}
+
+body {
+    background-color: #e3e3e3;
 }
