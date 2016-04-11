@@ -1,3 +1,7 @@
+body {
+    background-color: #e3e3e3;
+}
+
 div#container {
     max-width:530px;
     margin:0 auto;
@@ -23,6 +27,8 @@ div#wrapper {
     font-weight: bold;
 }
 
-body {
-    background-color: #e3e3e3;
+.colors > p > span{
+    color: #fff;
+    padding:4px;
+    margin:6px 0;
 }

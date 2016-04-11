@@ -1,25 +1,29 @@
 extends iframe-layout
 
 block mainContent
-    div(id='container', style='font-size: 20px')
+    div(id='container')
         h3=youAre
         
-        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;font-size:75%;width:530px;")
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
             span(style="font-weight:bold;") Incomplete. 
             span Please make a choice for both allocations before continuing.
             
-        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;font-size:75%;width:530px;")
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
             span You have submitted your choices.
+            
+        div
+            span Select your preferred option in each of the two choice situations from the available options. Your choices will determine how payoffs are allocated in each of the two choice situations between yourself and a randomly selected “partner”.
         
+        br
 
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Please make your first choice:
+        div(class="panel panel-default", style="width:530px;")
+            div(class="panel-heading") First choice
             div(class="panel-body")
                 table(style='width:500px;')
                     tr
                         td(style='font-weight:normal;') You receive:
                         each val, index in receive1
-                            td(style='font-size:80%;text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
+                            td(style='text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
@@ -29,16 +33,16 @@ block mainContent
                     tr
                         td(style='font-weight:normal;') Your partner receives:
                         each val, index in send1
-                            td(style='height:33px;font-size:80%;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
+                            td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                 
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Please make your second choice:
+        div(class="panel panel-default", style="width:530px;")
+            div(class="panel-heading") Second choice
             div(class="panel-body")
                 table(style='width:500px;')
                     tr
                         td(style='font-weight:normal;') You receive:
                         each val, index in receive2
-                            td(style='font-size:80%;text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
+                            td(style='text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
@@ -48,7 +52,7 @@ block mainContent
                     tr
                         td(style='font-weight:normal;') Your partner receives:
                         each val, index in send2
-                            td(style='height:33px;font-size:80%;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
+                            td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
         input(type='button', value=submit, name='submitOffer', id='submitOffer', class='btn')
 

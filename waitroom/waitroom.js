@@ -121,7 +121,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
         node.remoteSetup('page', p.id, {
             clearBody: true,
-            title: { title: 'Welcome!', addToBody: true }
+            title: { title: 'Game', addToBody: true }
         });
 
         node.remoteSetup('widgets', p.id, {

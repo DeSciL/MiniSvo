@@ -1,97 +1,55 @@
 extends iframe-layout
 
 block mainContent
-    div(id='container', style='font-size: 20px')
-        h3 Your choices:
+    div(id='container')
+        h3 Feedback
         
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Your first choice:
+        div(class="panel panel-default", style="width:530px;")
+            div(class="panel-heading") First choice
             div(class="panel-body")
                 table(style='width:500px;')
                     tr
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive1
-                            td(style='font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
+                            td(style='text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
                             td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='firstHoverclass' + i++)
-                                
-                                span(style='color:#fff;font-size:80%;font-weight:bold;')
+
                     tr
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in send1
-                            td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
+                            td(style='text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                 
 
-        div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Your second choice:
+        div(class="panel panel-default", style="width:530px;")
+            div(class="panel-heading") Second choice
             div(class="panel-body")
                 table(style='width:500px;')
                     tr
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive2
-                            td(style='font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
+                            td(style='text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
-                            td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i++)
-                                
-                                span(style='color:#fff;font-size:80%;font-weight:bold;')    
+                            td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i++) 
                     tr
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in send2
-                            td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
+                            td(style='text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
-        
-        //-h3 Your partners choices:
-        
-        //-div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Your partners first choice:
-            div(class="panel-body")
-                table(style='width:500px;')
-                    tr
-                        td(style='height:33px;font-weight:normal;') Your partner receives:
-                        each val, index in receive1
-                            td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='thirdHoverclass' + index)= val
-                    tr
-                        td(style='border-top:1px solid black;border-bottom:1px solid black;')
-                        - var i = 0;
-                        while i < 9
-                            td(style='height:34px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='thirdHoverclass' + i++)
-                                
-                                span(style='color:#fff;font-size:80%;font-weight:bold;')    
-                    tr
-                        td(style='height:33px;font-weight:normal;') You receive:
-                        each val, index in send1
-                            td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='thirdHoverclass' + index)= val
-                             
-        //-div(class="panel panel-default", style="font-size:80%;width:530px;")
-            div(class="panel-heading") Your partners second choice:
-            div(class="panel-body")
-                table(style='width:500px;')
-                    tr
-                        td(style='height:33px;font-weight:normal;') Your partner receives:
-                        each val, index in receive2
-                            td(style='border-bottom:1px solid black;font-size:80%;text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='fourthHoverclass' + index)= val
-                    tr
-                        td(style='border-top:1px solid black;border-bottom:1px solid black;')
-                        - var i = 0;
-                        while i < 9
-                            td(style='height:34px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='fourthHoverclass' + i++)
-                                
-                                span(style='color:#fff;font-size:80%;font-weight:bold;')    
-                    tr
-                        td(style='height:33px;font-weight:normal;') You receive:
-                        each val, index in send2
-                            td(style='font-size:80%;text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='fourthHoverclass' + index)= val
-      
-        //-div(class="panel panel-default", style="width:530px;")
-            div(class="panel-heading")=payoff
-                span(id='thepayoff', style="font-weight:bold;")
-                |.
-        
+
+        div(class='colors')
+            p
+                span(style='background:#660') Your choice last round
+            p
+                span(style='background:#714') Your partners choice last round
+            p
+                span(style='background:#f00 url("../pictures/stripes.gif") repeat') You and your partner made the same choice
+
         input(type='button', value=submit, name='continue', id='continue', class='btn')
         

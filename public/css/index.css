@@ -126,3 +126,7 @@ div#ng_header {
 .waitTimerBody {
     display:none !important;
 }
+
+.strike {
+    display:none;
+}

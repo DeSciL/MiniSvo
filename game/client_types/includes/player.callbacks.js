@@ -794,9 +794,13 @@ function totalpayoff() {
             
             var totalFromSelfSpan = W.getElementById('totalFromSelf');
             totalFromSelfSpan.innerHTML = payoffSumSelf;
+            var totalFromSelfSpan2 = W.getElementById('totalFromSelf2');
+            totalFromSelfSpan2.innerHTML = payoffSumSelf;
             
             var totalFromOtherSpan = W.getElementById('totalFromOther');
             totalFromOtherSpan.innerHTML = payoffSumOther;
+            var totalFromOtherSpan2 = W.getElementById('totalFromOther2');
+            totalFromOtherSpan2.innerHTML = payoffSumOther;
            
             var payoffSum = payoffSumSelf + payoffSumOther;
             

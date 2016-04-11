@@ -1,17 +1,17 @@
 extends iframe-layout
 
 block mainContent
-    div(id='container', style='font-size: 20px')
+    div(id='container')
         h3=totalpayoff
 
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") Payoff by round
 
-            table(class="table", style='font-size:60%;')
+            table(class="table")
                 thead
                     tr
-                        th
-                        th Payoff from Self
+                        th(style='width:130px;')
+                        th(style='width:200px;') Payoff from Self
                         th Payoff from Other
                 tbody
                     - var i = 0;
@@ -35,12 +35,30 @@ block mainContent
 
         
         div(class="panel panel-default", style="width:530px;")
-            div(class="panel-heading")=payoff
-                span(id='totalpayoff', style="font-weight:bold;")
-                |.
-            div(class="panel-body")=realpayoff
-                span(id='realpayoffSpan')
-                |$.   
+            div(class="panel-heading") Total payoff
+            
+            table(class='table')
+                tbody
+                    tr
+                        td(style='width:330px;') Total payoff from Self
+                        td(style='width:200px;')
+                            span(id='totalFromSelf2')
+                    tr
+                        td Total payoff from Other
+                        td
+                            span(id='totalFromOther2')
+                    tfoot
+                        tr
+                            td(style='font-weight:bold;border-top:solid 2px #ddd;') Total payoff
+                            td
+                                span(id='totalpayoff', style="font-weight:bold;")
+                        tr
+                            td(style='font-weight:bold;border-top:solid 2px #ddd;') Bonus
+                            td
+                                span(id='realpayoffSpan', style="font-weight:bold;")
+                                |$
+                        
+ 
                 
                 
         
