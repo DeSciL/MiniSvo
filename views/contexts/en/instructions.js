@@ -1,13 +1,14 @@
 module.exports = function(settings, headers) {
 
-    var C = settings.pp.COINS;
+    /*var C = settings.pp.COINS;
     var R = settings.pp.REPEAT;
     var E = settings.pp.EXCHANGE_RATE_INSTRUCTIONS;
 
-    var B = (C*R) * (E/C);
+    var B = (C*R) * (E/C);*/
 
     return {
         title: "INSTRUCTIONS",
+        /*
         instructions: "Instructions of the Ultimatum Game. Please read them carefully.",
         thisGame: "This game is played in rounds by two human players randomly paired.",
         inEachRound: 'In each round, one of the them, called <em>BIDDER</em>, makes an offer to the other player, called <em>RESPONDENT</em>, about how to share ' + C + ' ECU (Experimental Currency). ' + C + ' ECU are equal to ' + E + ' USD.',
@@ -15,5 +16,6 @@ module.exports = function(settings, headers) {
         theGame: "The game is repeated " + R + " rounds, therefore the maximum bonus available is " + B + " dollar/s.",
         ifYouUnderstood: "If you understood the instructions correctly press the button to proceed to the game.",
         proceed: "Proceed to the game"
+        */
     };
 };

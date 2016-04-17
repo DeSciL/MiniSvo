@@ -1,53 +1,81 @@
 extends iframe-layout
 
-block extraHead
-    link(rel='stylesheet', type='text/css', href='/minisvo/css/quiz.css')
-
 block mainContent
-    div(id='container_quiz')
-        h1=beforeStarting
+    div(id='container')
+        h1 Quiz 
+        
+        p Please answer the following questions before continuing to the experiment.
+        
+        p
+            span(style='font-weight:bold;') 1. How many additional persons are there in your group?
+            br
+            span(id="personsQuiz0")
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='0')
+                |  1
+            br
+            span(id="personsQuiz1")
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='1')
+                |  2
+            br
+            span(id="personsQuiz2")
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='2')
+                |  9
+            
+        
+        p 
+            span(style='font-weight:bold;') 2. Suppose it is your choice and your first choice is 85, 15 and your second choise is 100, 50. The total number of coins allocated to you from your choices is:
+            br
+            span(id="payoffQuiz1_0")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio0", value='100')
+                |  85+15=100
+            br
+            span(id="payoffQuiz1_1")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio1", value='185')
+                |  85+100=185
+            br
+            span(id="payoffQuiz1_2")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio2", value='135')
+                |  85+50=135
+            br
+            span(id="payoffQuiz1_3")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio3", value='115')
+                |  15+100=115
+            br
+            span(id="payoffQuiz1_4")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio4", value='65')
+                |  15+50=65
+            br
+            span(id="payoffQuiz1_5")
+                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio5", value='150')
+                |  100+50=150
+        
+        p 
+            span(style='font-weight:bold;') 3. Suppose it is your partner's choice and his first choice is 85, 15 and his second choice is 100, 50. The total number of coins allocated to you from your partner's choices is:
+            br
+            span(id="payoffQuiz2_0")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio0", value='100')
+                span  85+15=100
+            br
+            span(id="payoffQuiz2_1")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio1", value='185')
+                span  85+100=185
+            br
+            span(id="payoffQuiz2_2")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio2", value='135')
+                span  85+50=135
+            br
+            span(id="payoffQuiz2_3")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio3", value='115')
+                span  15+100=115
+            br
+            span(id="payoffQuiz2_4")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio4", value='65')
+                span  15+50=65
+            br
+            span(id="payoffQuiz2_5")
+                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio5", value='150')
+                span  100+50=150
+            
+        
+        input(type='button', value='Continue', name='continue', id='continue', class='btn')
 
-        div(id='quiz')
-            dl
-                dt
-                    strong=Q+'.1'
-                dd
-                    span(id='howMuch_result', class='quiz_result')
-                    form(name='howMuch', id='howMuch')
-                        p(class='question')=howManyCoins
-                        p
-                            - for (x = 0; x < 3; ++x)
-                                input(type='radio', name='howMuch', value=vals[x]+'')
-                                |\n
-                                =vals[x]
-                                br
-
-                dt
-                    strong=Q+'.2'
-                dd
-                    span(id='reject_result', class='quiz_result')
-                    form(name='reject', id='reject')
-                        p(class='question')=ifYouAreTheBidder
-                        p
-                            - for (x = 0; x < 4; ++x)
-                                input(type='radio', name='reject',value=x+'')
-                                |\n
-                                =howMuchYouGet[x]
-                                br
-                dt
-                    strong=Q+'.3'
-                dd
-                    span(id='disconnect_result', class='quiz_result')
-                    form(name='disconnect', id='disconnect')
-                        p(class='question')=considerTheFollowing
-                        p
-                            - for(x = 1; x < 5; ++x)
-                                input(type='radio', name='disconnect', value=x+'')
-                                |\n
-                                =disconnect[x-1]
-                                br
-            div(id='done_box')
-                button(onclick='javascript:parent.node.done();', id='submitQuiz', class='btn btn-lg btn-primary')!=clickHere+'<br>'
-                    =' '+correctAnswers+' '
-                    span(id='answers_counter') 0 / 3
-    script(src='/minisvo/js/quiz.js')

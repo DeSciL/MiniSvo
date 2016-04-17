@@ -327,65 +327,68 @@ function doMatch() {
         if (!this.countdown) notEnoughPlayers();
         return;
     }
+    var treatment = node.env('treatment');
     
     
-    // ROUNDROBIN RE-MATCHING
-    // Set number of players in game.settings (to do)
-    // Number of rounds must make sense in combination with numbers of players
-    
-    /*
-    var round = node.player.stage.round; // or another counter
-    var matches = node.game.matcher.getMatch(round); 
-    var item;
-
-    for (item of matches) {
+    if (treatment == 'rm') {
         
-        data_b = {
-            //role: 'bidder',
-            other: item[1]
-        };
-        data_r = {
-            //role: 'respondent',
-            other: item[0]
-        };
         
-        node.say('BIDDER', item[0], data_b);
-        node.say('BIDDER', item[1], data_r);
-    }
-    */
+        // ROUNDROBIN RE-MATCHING
+        // Set number of players in game.settings (to do)
+        // Number of rounds must make sense in combination with numbers of players
+        var round = node.player.stage.round; // or another counter
+        var matches = node.game.matcher.getMatch(round); 
+        var item;
 
-    // RANDOM RE-MATCHING
-    // Method shuffle accepts one parameter to update the db, as well as
-    // returning a shuffled copy.
-    
-    g = node.game.pl.shuffle();
+        for (item of matches) {
+            
+            data_b = {
+                //role: 'bidder',
+                other: item[1]
+            };
+            data_r = {
+                //role: 'respondent',
+                other: item[0]
+            };
+            
+            node.say('BIDDER', item[0], data_b);
+            node.say('BIDDER', item[1], data_r);
+        }
+    } else {
 
-    for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
-        bidder = g.db[i];
-        respondent = g.db[i+1];
+        // RANDOM RE-MATCHING
+        // Method shuffle accepts one parameter to update the db, as well as
+        // returning a shuffled copy.
+        
+        g = node.game.pl.shuffle();
 
-        data_b = {
-            //role: 'bidder',
-            other: respondent.id
-        };
-        data_r = {
-            //role: 'respondent',
-            other: bidder.id
-        };
+        for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
+            bidder = g.db[i];
+            respondent = g.db[i+1];
 
-        console.log('Group ' + i + ': ', bidder.id, respondent.id);
+            data_b = {
+                //role: 'bidder',
+                other: respondent.id
+            };
+            data_r = {
+                //role: 'respondent',
+                other: bidder.id
+            };
 
-        // Send a message to each player with their role
-        // and the id of the other player.
-        console.log('==================== LOGIC: BIDDER is', bidder.id, 
-                    '; RESPONDENT IS', respondent.id);
-    
-        console.log(node.game.pl.size());
-        console.log(node.nodename);
+            console.log('Group ' + i + ': ', bidder.id, respondent.id);
 
-        node.say('BIDDER', bidder.id, data_b);
-        node.say('BIDDER', respondent.id, data_r);
-        //node.say('RESPONDENT', respondent.id, data_r);
+            // Send a message to each player with their role
+            // and the id of the other player.
+            console.log('==================== LOGIC: BIDDER is', bidder.id, 
+                        '; RESPONDENT IS', respondent.id);
+        
+            console.log(node.game.pl.size());
+            console.log(node.nodename);
+
+            node.say('BIDDER', bidder.id, data_b);
+            node.say('BIDDER', respondent.id, data_r);
+            //node.say('RESPONDENT', respondent.id, data_r);
+        }
     }
     
     console.log('Matching completed.');

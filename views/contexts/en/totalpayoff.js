@@ -1,5 +1,5 @@
 module.exports = function(settings, headers) {
-    var coins = settings.pp.COINS;
+    // var coins = settings.pp.COINS;
 
     return {
         "title": "Total Payoff",

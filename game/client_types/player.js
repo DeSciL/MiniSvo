@@ -123,6 +123,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         //  - an object containing properties _milliseconds_, and _timeup_
         //     the latter being the name of the event to fire (default DONE)
         // - or a function returning the number of milliseconds.
+        
+        /*
         timer: 60000,
         done: function() {
             var b, QUIZ, answers, isTimeup;
@@ -145,6 +147,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             
             return true;
         }
+        
+        */
+    });
+    
+    stager.extendStep('quiz2', {
+        cb: cbs.quiz2
     });
 
     stager.extendStep('ultimatum1', {
@@ -181,7 +189,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // will be evaluated.
         done: function() {
             var q1, q2, q2checked, i, isTimeup;
-            q1 = W.getElementById('comment').value;
+            /*q1 = W.getElementById('comment').value;
             q2 = W.getElementById('disconnect_form');
             q2checked = -1;
 
@@ -190,13 +198,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     q2checked = i;
                     break;
                 }
-            }
+            }*/
 
             isTimeup = node.game.timer.isTimeup();
 
             // If there is still some time left, let's ask the player
             // to complete at least the second question.
-            if (q2checked === -1 && !isTimeup) {
+            /*if (q2checked === -1 && !isTimeup) {
                 alert('Please answer Question 2');
                 return false;
             }
@@ -205,7 +213,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 questionnaire: true,
                 q1: q1 || '',
                 q2: q2checked
-            });
+            });*/
 
             node.emit('INPUT_DISABLE');
 

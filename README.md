@@ -25,13 +25,27 @@ If you have an older version installed, follow these steps:
 
 
 ### To-do:
-- Use max-width for mobile screens and test it
-- Finish feedback page visuals
+- Finish instructions
+- Viewport / mobile screen visuals
 - Timers: actions?
 - Update instructions and all texts
-- Style top bar
-- __Run multiple treatments simultaneously__ - Solve Waitingroom issue.
-- __AMT integration__
+- Random order of values
+- Font size (in sliders)
+- Show static slider in quiz
+- Quiz feedback stage
+- Save data from quiz
+- Waitscreen style
+- Waiting room style (width, etc.)
+- Blue buttons
+- Seperate pages for questionnaire
+- Checks if quiz / questionnaire is completed
+
+
+
 
 #### To-do Priority 2:
 - Channel definition in packages.json is strange
+- Auth failed page
+- "Time left" in endgame-stage
+- Waitscreen Text
+- Pause timers in monitor

@@ -2,14 +2,12 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h1=thankYou
-        !=pleaseGo
-        br
-        !=weUsually
-        ul
-            li!=yourTurker
-            li!=theHIT +'<em>nodeGame</em>'
-            li!=yourExitCode
-            li!=yourBrowser
-        br
-        =notice
+        h1 Checkout
+        p Please copy-pase the code below into the corresponding text box on Amazon Mechanical Turk to receive your payments. The HIT should be approved and the bonus awarded within the next 24 hours. In case of problems submitting the HIT, please search for a HIT called ETH DeSciL Trouble Ticket. We will pay you by bonus.
+        
+        p Exitcode: 
+            input(id='exitCode', type='text', value='ExitCode', class='form-control')
+        
+       
+        p Thanks again for your participation.
+        

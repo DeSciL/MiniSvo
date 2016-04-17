@@ -27,8 +27,13 @@ div#wrapper {
     font-weight: bold;
 }
 
-.colors > p > span{
+#colors > p > span{
     color: #fff;
     padding:4px;
     margin:6px 0;
+}
+
+input#exitCode {
+    width:450px !important;
+    display: inline-block !important;
 }

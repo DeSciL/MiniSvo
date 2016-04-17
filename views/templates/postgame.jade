@@ -2,20 +2,116 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h1=pleaseReport
-        h3=Q+'1'
-        p.question=didTheGameProceed
-        textarea(rows='10', cols='20', id='comment')
-
-        h3=Q+'2'
-        p.question=ifTheGame
-
-        form(id='disconnect_form', name='disconnect_form')
-            - for (x = 0; x < 5; ++x)
-                input(type='radio', name='disconnect',value=x+'')
-                |\n
-                =reason[x]
-                br
+        h1 Questionnaire
+        
+        
+        p
+            span(style='font-weight:bold;') With your choices, did you
+            br
+            span(id="choices0")
+                input(type='radio', name='choices', id='choices_radio0', value='more2others')
+                |  Allocate more to others than they allocated to you?
+            br
+            span(id="choices1")
+                input(type='radio', name='choices', id='choices_radio1', value='less2others')
+                |  Allocate less to others than they allocated to you?
+            br
+            span(id="choices2")
+                input(type='radio', name='choices', id='choices_radio2', value='same2others')
+                |  Allocate the same to them as they allocated to you?
+         
+        p
+            span(style='font-weight:bold;') With your choices, did you intend to
+            br
+            span(id="intend0")
+                input(type='radio', name='intend', id='intend_radio0', value='more2others')
+                |  Allocate more to others than they allocated to you?
+            br
+            span(id="intend1")
+                input(type='radio', name='intend', id='intend_radio1', value='less2others')
+                |  Allocate less to others than they allocated to you?
+            br
+            span(id="intend2")
+                input(type='radio', name='intend', id='intend_radio2', value='same2others')
+                |  Allocate the same to them as they allocated to you?
+            
+        p
+            span(style='font-weight:bold;') Did your choices
+            br
+            span(id="depend0")
+                input(type='radio', name='depend', id='depend_radio0', value='previous2you')
+                |  Depend on how much your previous partner allocated to you?
+            br
+            span(id="depend1")
+                input(type='radio', name='depend', id='depend_radio1', value='next2previous')
+                |  Depend on how much your next partner allocated to his previous partner?
+            br
+            span(id="depend2")
+                input(type='radio', name='depend', id='depend_radio2', value='previous2you+next2previous')
+                |  Depend both on how much your previous partner allocated to you and on how much your next partner allocated to his previous partner?
+            br
+            span(id="depend3")
+                input(type='radio', name='depend', id='depend_radio3', value='notdepend')
+                |  Not depend on others?
+                   
+        p
+            span(style='font-weight:bold;') Overall, was your motivation to make
+            br
+            span(id="motivation0")
+                input(type='radio', name='motivation', id='motivation_radio0', value='maxMoney')
+                |  As much money for yourself as possible?
+            br
+            span(id="motivation1")
+                input(type='radio', name='motivation', id='motivation_radio1', value='maxPayoff')
+                |  The experimenter pay out as much as possible?
+            br
+            span(id="motivation2")
+                input(type='radio', name='motivation', id='motivation_radio2', value='samePayoff')
+                |  All subjects get the same payoff?
+            br
+            span(id="motivation3")
+                input(type='radio', name='motivation', id='motivation_radio3', value='random')
+                |  Random choices?
+            
+        p
+            span(style='font-weight:bold;') Are you female or male?
+            br
+            span(id="gender0")
+                input(type='radio', name='gender', id='gender_radio0', value='female')
+                |  female
+            br
+            span(id="gender1")
+                input(type='radio', name='gender', id='gender_radio1', value='male')
+                |  male
+                
+        p
+            span(style='font-weight:bold;') What is your total of "HITs submitted" on Amazon Mechanical Turk?
+            br
+            span If you don't know this number, you can find it on your Mturk dashboard.
+            br
+            input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15")
+                
+        p
+            span(style='font-weight:bold;') All in all: How well have you understood the instructions?
+            br
+            span(id="understood0")
+                input(type='radio', name='understood', id='understood_radio0', value='notverywell')
+                |  Not very well
+            br
+            span(id="understood1")
+                input(type='radio', name='understood', id='understood_radio1', value='partly')
+                |  Partly
+            br
+            span(id="understood2")
+                input(type='radio', name='understood', id='understood_radio2', value='totally')
+                |  Totally
+        
+        p
+            span(style='font-weight:bold;') Comments
+            br
+            span Do you have any final Comments? Did everything work as expected? We would appreciate your feedback.
+            br
+            textarea(rows="10", style="width:100%;", name="comments")
+        
         br
-        br
-        button(id='comment_done', onclick='javascript:parent.node.done();',class='btn btn-lg btn-primary')=clickHere
+        input(type='button', id='read', value='Continue', class='btn', onclick='javascript:parent.node.done();')

@@ -12,6 +12,7 @@ module.exports = {
     selectLanguage: selectLanguage,
     instructions: instructions,
     quiz: quiz,
+    quiz2: quiz2,
     ultimatum: ultimatum,
     feedback: feedback,
     totalpayoff: totalpayoff,
@@ -156,12 +157,12 @@ function init() {
     treatment = node.env('treatment');
 
     // Adapting the game to the treatment.
-    if (treatment === 'pp') {
-        node.game.instructionsPage = 'instructions_pp.html';
-    }
-    else {
+    // if (treatment === 'pp') {
+    //     node.game.instructionsPage = 'instructions_pp.html';
+    // }
+    // else {
         node.game.instructionsPage = 'instructions.html';
-    }
+    // }
 
     // Set default language prefix.
     W.setUriPrefix(node.player.lang.path);
@@ -282,14 +283,93 @@ function quiz() {
     var that = this;
     W.loadFrame('quiz.html', function() {
 
-        var b, QUIZ;
+        var options = {
+            milliseconds: 60000,
+            timeup: function() {
+                node.done();
+            }
+        };
+
+
+        node.game.timer.startTiming(options);
+
+        /*
         node.env('auto', function() {
             node.timer.randomExec(function() {
                 node.game.timer.doTimeUp();
             });
         });
+        */
+        
+        
+        for (var i = 0; i < 3; i++) {
+            var quizClassesId1 = 'personsQuiz' + i;
+            var quizClasses1 = W.getElementById(quizClassesId1);
+            quizClasses1.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'personsQuiz_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
+            }
+        }
+        
+        for (var i = 0; i < 6; i++) {
+            var quizClassesId2 = 'payoffQuiz1_' + i;
+            var quizClasses2 = W.getElementById(quizClassesId2);
+            quizClasses2.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'payoffQuiz1_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
+            }
+        }
+        
+        for (var i = 0; i < 6; i++) {
+            var quizClassesId3 = 'payoffQuiz2_' + i;
+            var quizClasses3 = W.getElementById(quizClassesId3);
+            quizClasses3.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'payoffQuiz2_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
+            }
+        }
+            
+        var b = W.getElementById('continue');
+
+        b.onclick = function() {
+            node.done();
+        };
+        
     });
     console.log('Quiz');
+}
+
+
+function quiz2() {
+    // Feedback stage for quiz
+    W.loadFrame('quiz2.html', function() {
+
+        var options = {
+            milliseconds: 30000,
+            timeup: function() {
+                node.done();
+            }
+        };
+
+        node.game.timer.startTiming(options);
+        
+        var b = W.getElementById('continue');
+
+        b.onclick = function() {
+            node.done();
+        };
+        
+    });
+    console.log('Quiz Feedback');
 }
 
 function ultimatum() {
@@ -643,82 +723,62 @@ function feedback() {
             blackClasses2[0].style.fontWeight = 'bold';
             
             
-            var blackClassesName3 = 'firstHoverclass' + otherValueIndex1;
-            var blackClasses3 = W.getElementsByClassName(blackClassesName3);
-            var numberOfClasses3 = blackClasses3.length;
-            for (var i = 0; i < numberOfClasses3; i++) {
-                
-                if (chosenValueIndex1 == otherValueIndex1) {
-                    //blackClasses3[i].style.backgroundColor = '';
-                    blackClasses3[i].style.background = '#009';
-                    blackClasses3[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
-                    //blackClasses3[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
-                    blackClasses3[i].style.color = '#fff';
-                }
-                else {
-                    blackClasses3[i].style.backgroundColor = '#714';
-                    blackClasses3[i].style.color = '#fff';
-                }
-                
-                //thisClass[k].style.border = '1px solid #000';
+            var treatment = node.env('treatment');
+            if (treatment == 'nf') {
+                var colors = W.getElementById('colors');
+                colors.style="display:none;";    
             }
-            blackClasses3[1].style.borderTop = '1px solid #714';
-            blackClasses3[1].style.borderBottom = '1px solid #714';
-            blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
-            
+            else {
+        
+                var blackClassesName3 = 'firstHoverclass' + otherValueIndex1;
+                var blackClasses3 = W.getElementsByClassName(blackClassesName3);
+                var numberOfClasses3 = blackClasses3.length;
+                for (var i = 0; i < numberOfClasses3; i++) {
+                    
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        //blackClasses3[i].style.backgroundColor = '';
+                        blackClasses3[i].style.background = '#009';
+                        blackClasses3[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
+                        //blackClasses3[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                        blackClasses3[i].style.color = '#fff';
+                    }
+                    else {
+                        blackClasses3[i].style.backgroundColor = '#714';
+                        blackClasses3[i].style.color = '#fff';
+                    }
+                    
+                    //thisClass[k].style.border = '1px solid #000';
+                }
+                blackClasses3[1].style.borderTop = '1px solid #714';
+                blackClasses3[1].style.borderBottom = '1px solid #714';
+                blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
+                
 
-            
-            var blackClassesName4 = 'secondHoverclass' + otherValueIndex2;
-            var blackClasses4 = W.getElementsByClassName(blackClassesName4);
-            var numberOfClasses4 = blackClasses4.length;
-            for (var i = 0; i < numberOfClasses4; i++) {
                 
-                if (chosenValueIndex2 == otherValueIndex2) {
-                    //blackClasses4[i].style.backgroundColor = '';
-                    blackClasses4[i].style.background = '#009';
-                    blackClasses4[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
-                    //blackClasses4[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
-                    blackClasses4[i].style.color = '#fff';
+                var blackClassesName4 = 'secondHoverclass' + otherValueIndex2;
+                var blackClasses4 = W.getElementsByClassName(blackClassesName4);
+                var numberOfClasses4 = blackClasses4.length;
+                for (var i = 0; i < numberOfClasses4; i++) {
+                    
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        //blackClasses4[i].style.backgroundColor = '';
+                        blackClasses4[i].style.background = '#009';
+                        blackClasses4[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
+                        //blackClasses4[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
+                        blackClasses4[i].style.color = '#fff';
+                    }
+                    else {
+                        blackClasses4[i].style.backgroundColor = '#714';
+                        blackClasses4[i].style.color = '#fff';
+                    }
+                                    
+                    //thisClass[k].style.border = '1px solid #000';
                 }
-                else {
-                    blackClasses4[i].style.backgroundColor = '#714';
-                    blackClasses4[i].style.color = '#fff';
-                }
-                                
-                //thisClass[k].style.border = '1px solid #000';
+                blackClasses4[1].style.borderTop = '1px solid #714';
+                blackClasses4[1].style.borderBottom = '1px solid #714';
+                blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
             }
-            blackClasses4[1].style.borderTop = '1px solid #714';
-            blackClasses4[1].style.borderBottom = '1px solid #714';
-            blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
             
-            
-            /*
-            
-            var blackClassesName3 = 'thirdHoverclass' + otherValueIndex1;
-            var blackClasses3 = W.getElementsByClassName(blackClassesName3);
-            var numberOfClasses3 = blackClasses3.length;
-            for (var i = 0; i < numberOfClasses3; i++) {
-                blackClasses3[i].style.backgroundColor = '#000';
-                blackClasses3[i].style.color = '#fff';
-                
-                //thisClass[k].style.border = '1px solid #000';
-            }
-            blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
-            
-
-            
-            var blackClassesName4 = 'fourthHoverclass' + otherValueIndex2;
-            var blackClasses4 = W.getElementsByClassName(blackClassesName4);
-            var numberOfClasses4 = blackClasses4.length;
-            for (var i = 0; i < numberOfClasses4; i++) {
-                blackClasses4[i].style.backgroundColor = '#000';
-                blackClasses4[i].style.color = '#fff';
-                
-                //thisClass[k].style.border = '1px solid #000';
-            }
-            blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
-            
-            */
             
             root = W.getElementById('container');
 
@@ -842,6 +902,80 @@ function postgame() {
             });
         });
     });
+    
+    for (var i = 0; i < 3; i++) {
+        var questionnaireClassesId1 = 'choices' + i;
+        var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
+        questionnaireClasses1.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'choices_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    for (var i = 0; i < 3; i++) {
+        var questionnaireClassesId2 = 'intend' + i;
+        var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
+        questionnaireClasses2.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'intend_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    for (var i = 0; i < 4; i++) {
+        var questionnaireClassesId3 = 'depend' + i;
+        var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
+        questionnaireClasses3.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'depend_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    for (var i = 0; i < 4; i++) {
+        var questionnaireClassesId4 = 'motivation' + i;
+        var questionnaireClasses4 = W.getElementById(questionnaireClassesId4);
+        questionnaireClasses4.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'motivation_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    for (var i = 0; i < 2; i++) {
+        var questionnaireClassesId5 = 'gender' + i;
+        var questionnaireClasses5 = W.getElementById(questionnaireClassesId5);
+        questionnaireClasses5.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'gender_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    for (var i = 0; i < 3; i++) {
+        var questionnaireClassesId6 = 'understood' + i;
+        var questionnaireClasses6 = W.getElementById(questionnaireClassesId6);
+        questionnaireClasses6.onclick = function(i) {
+            var thisId = this.id;
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = 'understood_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        }
+    }
+    
+    
     console.log('Postgame');
 }
 
@@ -858,8 +992,12 @@ function endgame() {
             codeErr = 'ERROR (code not found)';
             win = msg.data && msg.data.win || 0;
             exitcode = msg.data && msg.data.exitcode || codeErr;
-            W.writeln('Your bonus in this game is: ' + win, root);
-            W.writeln('Your exitcode is: ' + exitcode, root);
+            var exitCodeInput = W.getElementById('exitCode');
+            exitCodeInput.value = exitcode;
+            
+            
+            //W.writeln('Your bonus in this game is: ' + win, root);
+            //W.writeln('Your exitcode is: ' + exitcode, root);
         });
     });
 

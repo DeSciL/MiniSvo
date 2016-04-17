@@ -42,8 +42,7 @@ block mainContent
                         each val, index in send2
                             td(style='text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
-
-        div(class='colors')
+        div(id='colors')
             p
                 span(style='background:#660') Your choice last round
             p
@@ -51,5 +50,5 @@ block mainContent
             p
                 span(style='background:#f00 url("../pictures/stripes.gif") repeat') You and your partner made the same choice
 
-        input(type='button', value=submit, name='continue', id='continue', class='btn')
+        input(type='button', value='Continue', name='continue', id='continue', class='btn')
         

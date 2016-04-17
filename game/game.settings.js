@@ -15,12 +15,12 @@ module.exports = {
     MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. *
-    REPEAT: 10,
+    REPEAT: 2,
 
     // Number of coins to split. *
     COINS: 100,
 
-    // Divider ECU / DOLLARS *
+    // Divider COINS / DOLLARS *
     EXCHANGE_RATE: 4000,
 
 
@@ -30,8 +30,7 @@ module.exports = {
 
     receive2: [100, 98, 96, 94, 93, 91, 89, 87, 85],
     send2: [50, 54, 59, 63, 68, 72, 76, 81, 85],
-
-
+    
     EXCHANGE_RATE_INSTRUCTIONS: 0.01,
 
     // DEBUG.
@@ -41,7 +40,7 @@ module.exports = {
     AUTO: false,
 
     // AUTHORIZATION.
-    AUTH: 'NO', // MTURK, LOCAL, NO.
+    AUTH: 'MTURK', // MTURK, LOCAL, NO.
 
     // Available treatments:
     // (there is also the "standard" treatment, using the options above)
@@ -50,16 +49,26 @@ module.exports = {
         standard: {
             fullName: "Standard",
             description:
-                "More time to wait and no peer pressure.",
+                "No re-matching, feedback stage.",
             WAIT_TIME: 60
         },
 
-        pp: {
-            fullName: "Peer Pressure",
+        nf: {
+            fullName: "No Feedback",
             description:
-                "Introduces peer pressure to players to not disconnect.",
-            WAIT_TIME: 30
+                "No re-matching, no feedback stage.",
+            WAIT_TIME: 60
+        },
+        
+        /*
+
+        rm: {
+            fullName: "Re-Matching",
+            description:
+                "Re-matching, feedback stage.",
+            WAIT_TIME: 60
         }
+        */
     }
 
     // * =  If you change this, you need to update 

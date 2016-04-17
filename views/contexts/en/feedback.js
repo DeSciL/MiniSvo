@@ -1,11 +1,11 @@
 module.exports = function(settings, headers) {
-    var coins = settings.pp.COINS;
+    // var coins = settings.pp.COINS;
 
-    var receive1 = settings.pp.receive1;
-    var send1 = settings.pp.send1;
-    var receive2 = settings.pp.receive2;
-    var send2 = settings.pp.send2;
-
+    var receive1 = settings.standard.receive1;
+    var send1 = settings.standard.send1;
+    var receive2 = settings.standard.receive2;
+    var send2 = settings.standard.send2;
+    
     return {
         "title": "Feedback",
         "feedback": "Feedback",
@@ -23,6 +23,6 @@ module.exports = function(settings, headers) {
         "receive1": receive1,
         "send1": send1,
         "receive2": receive2,
-        "send2": send2
+        "send2": send2,
     };
 };
