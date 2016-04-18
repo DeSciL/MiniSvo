@@ -24,17 +24,19 @@ If you have an older version installed, follow these steps:
 9. `node bin/make.js build-client -a -o nodegame-full`
 
 
-### To-do Important:
+### To-do
+
+### Important:
 - Finish instructions
 - Viewport / mobile screen visuals
 - Timers: actions?
 - Show static slider in quiz
 - Quiz feedback stage
-- Checks if ~~quiz /~~ questionnaire is completed
+- Check if ~~quiz /~~ questionnaire is completed
 - ~~Save quiz data~~
 
 
-### To-do Priority 2:
+### Priority 2:
 - Random order of values
 - Font size (in sliders)
 - Waitscreen style
@@ -43,7 +45,7 @@ If you have an older version installed, follow these steps:
 - Seperate pages for questionnaire
 
 
-#### To-do Priority 3:
+#### Priority 3:
 - Channel definition in packages.json is strange
 - Auth failed page
 - "Time left" in endgame-stage
