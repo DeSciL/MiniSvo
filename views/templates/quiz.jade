@@ -4,21 +4,28 @@ block mainContent
     div(id='container')
         h1 Quiz 
         
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+            span(style="font-weight:bold;") Incomplete. 
+            span Please choose an answer for all questions.
+            
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+            span You have submitted your answers.
+        
         p Please answer the following questions before continuing to the experiment.
         
         p
             span(style='font-weight:bold;') 1. How many additional persons are there in your group?
             br
             span(id="personsQuiz0")
-                input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='0')
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='1')
                 |  1
             br
             span(id="personsQuiz1")
-                input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='1')
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='2')
                 |  2
             br
             span(id="personsQuiz2")
-                input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='2')
+                input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='9')
                 |  9
             
         

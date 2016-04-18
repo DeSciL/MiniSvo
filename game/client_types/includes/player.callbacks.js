@@ -60,6 +60,44 @@ function init() {
 
     // Add event listeners valid for the whole game.
 
+
+    // Event listener for quiz
+    node.on('QUIZ_DONE', function(numberOfPersons, payoffQuiz1, payoffQuiz2, timeup) {
+        var root, time;
+
+        // Time to make a bid.
+        time = node.timer.getTimeSince('quiz_loaded');
+        
+        // Hack. To avoid double offers. Todo: fix.
+        // if (node.game.offerDone) return;
+        // node.game.offerDone = true;
+
+        node.game.timer.clear();
+        node.game.timer.startWaiting({milliseconds: 30000});
+        
+        //save quiz answers for quiz feedback
+        node.game.numberOfPersons = numberOfPersons;
+        node.game.payoffQuiz1 = payoffQuiz1;
+        node.game.payoffQuiz2 = payoffQuiz2;
+        
+        // Notify the other player?
+        // node.say('OFFER', to, {offer1: offer1, offer2: offer2});
+
+        root = W.getElementById('container');
+         
+        // Notify the server.
+        node.done({
+            numberOfPersons: numberOfPersons,
+            payoffQuiz1: payoffQuiz1,
+            payoffQuiz2: payoffQuiz2,
+            time: time,
+            timeup: timeup,
+            //other: node.game.other
+        });
+    });
+    
+    
+
     node.on('BID_DONE', function(offer1, offer2, to, timeup) {
         var root, time;
 
@@ -337,14 +375,67 @@ function quiz() {
                 thisRadio.checked = true;               
             }
         }
+        
+       
+        
             
         var b = W.getElementById('continue');
 
         b.onclick = function() {
-            node.done();
+            //node.done();
+            
+            //get chosen values
+            
+            var numberOfPersons;
+            for (var i = 0; i < 3; i++) {
+                var posname1 = 'personsQuiz_radio' + i;
+                var position1 = W.getElementById(posname1);
+                if (position1.checked) {
+                    numberOfPersons = position1.value;
+                    break;
+                }
+            }
+            
+            
+            var payoffQuiz1;
+            for (var i = 0; i < 6; i++) {
+                var posname2 = 'payoffQuiz1_radio' + i;
+                var position2 = W.getElementById(posname2);
+                if (position2.checked) {
+                    payoffQuiz1 = position2.value;
+                    break;
+                }
+            }
+            
+            var payoffQuiz2;
+            for (var i = 0; i < 6; i++) {
+                var posname3 = 'payoffQuiz2_radio' + i;
+                var position3 = W.getElementById(posname3);
+                if (position3.checked) {
+                    payoffQuiz2 = position3.value;
+                    break;
+                }
+            }
+            
+            var badAlert = W.getElementById('badAlert');
+            var goodAlert = W.getElementById('goodAlert');
+                
+            if (!numberOfPersons || !payoffQuiz1 || !payoffQuiz2) {
+                badAlert.style.display = '';
+            } else {
+                badAlert.style.display = 'none';
+                goodAlert.style.display = '';
+                node.emit('QUIZ_DONE', numberOfPersons, payoffQuiz1, payoffQuiz2);
+            }        
+            
         };
         
+        
+        node.timer.setTimestamp('quiz_loaded');
+        
     });
+    
+    
     console.log('Quiz');
 }
 
@@ -362,7 +453,24 @@ function quiz2() {
 
         node.game.timer.startTiming(options);
         
+       
+        var numberOfPersons = node.game.numberOfPersons;
+        var payoffQuiz1 = node.game.payoffQuiz1;
+        var payoffQuiz2 = node.game.payoffQuiz2;
+        
+        var numberOfPersonsSpan = W.getElementById('numberOfPersons');
+        var payoffQuiz1Span = W.getElementById('payoffQuiz1');
+        var payoffQuiz2Span = W.getElementById('payoffQuiz2');
+        
+        numberOfPersonsSpan.innerHTML = numberOfPersons;
+        payoffQuiz1Span.innerHTML = payoffQuiz1;
+        payoffQuiz2Span.innerHTML = payoffQuiz2;
+        
+        
+        
+        
         var b = W.getElementById('continue');
+        
 
         b.onclick = function() {
             node.done();
