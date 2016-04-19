@@ -26,10 +26,10 @@ If you have an older version installed, follow these steps:
 - Viewport / mobile screen visuals
 - Timers: actions?
 - Show static slider in quiz
-~~- Quiz feedback stage~~
+- ~~Quiz feedback stage~~
 - Check if ~~quiz /~~ questionnaire is completed
 - ~~Save quiz data~~
-- small fixes: timer amounts, line-heights, width on small screens, etc.
+- Small fixes: timer amounts, line-heights, width on small screens, width when scrollbar appears, etc.
 
 
 #### Priority 2:

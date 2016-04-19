@@ -7,21 +7,19 @@ block mainContent
         p
             span(id='quizResult') 
         
-        p(id='numberOfPersonsP', style='display:none;')
+        p(id='numberOfPersons', style='display:none;')
             span(style='font-weight:bold;color:#F00;') 1. How many additional persons are there in your group?
             br
-            span(id='numberOfPersons') The correct answer is 1. You are partnered with one random person.
+            span The correct answer is 1. You are partnered with one random person.
             
-        p(id='payoffQuiz1P', style='display:none;')
+        p(id='payoffQuiz1', style='display:none;')
             span(style='font-weight:bold;color:#F00;') 2. Suppose it is your choice and your first choice is 85, 15 and your second choice is 100, 50. The total number of coins allocated to you from your choices is:
             br
-            span(id='numberOfPersons') The correct answer is 185. You receive 85 from your first choice and 100 from your second choice.
-            span(id='payoffQuiz1')    
+            span The correct answer is 185. You receive 85 from your first choice and 100 from your second choice. 
             
-        p(id='payoffQuiz2P', style='display:none;')
+        p(id='payoffQuiz2', style='display:none;')
             span(style='font-weight:bold;color:#F00;') 3. Suppose it is your partner's choice and his first choice is 85, 15 and his second choice is 100, 50. The total number of coins allocated to you from your partner's choices is:
             br
-            span(id='numberOfPersons') The correct answer is 65. You receive 15 from your partner's first choice and 50 from your partner's second choice.
-            span(id='payoffQuiz2')             
+            span The correct answer is 65. You receive 15 from your partner's first choice and 50 from your partner's second choice.            
         
         input(type='button', value='Continue', name='continue', id='continue', class='btn')

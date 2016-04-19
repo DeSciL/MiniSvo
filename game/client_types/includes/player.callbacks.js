@@ -476,37 +476,21 @@ function quiz2() {
             quizResultText += ' Please review your wrong answers:';
             
             if (numberOfPersons != 1) {
-                var numberOfPersonsP = W.getElementById('numberOfPersonsP');
+                var numberOfPersonsP = W.getElementById('numberOfPersons');
                 numberOfPersonsP.style.display = '';    
             }
             if (payoffQuiz1 != 185) {
-                var payoffQuiz1P = W.getElementById('payoffQuiz1P');
+                var payoffQuiz1P = W.getElementById('payoffQuiz1');
                 payoffQuiz1P.style.display = '';    
             }
             if (payoffQuiz2 != 65) {
-                var payoffQuiz2P = W.getElementById('payoffQuiz2P');
+                var payoffQuiz2P = W.getElementById('payoffQuiz2');
                 payoffQuiz2P.style.display = ''; 
             }
-            
-            /*
-            var numberOfPersonsSpan = W.getElementById('numberOfPersons');
-            var payoffQuiz1Span = W.getElementById('payoffQuiz1');
-            var payoffQuiz2Span = W.getElementById('payoffQuiz2');
-            
-            numberOfPersonsSpan.innerHTML = numberOfPersons;
-            payoffQuiz1Span.innerHTML = payoffQuiz1;
-            payoffQuiz2Span.innerHTML = payoffQuiz2;
-            */
         }
         
         quizResultSpan.innerHTML = quizResultText;
-        
-        
-        
-        
-        
-        
-        
+
         
         var b = W.getElementById('continue');
         
@@ -871,12 +855,11 @@ function feedback() {
             
             
             var treatment = node.env('treatment');
-            if (treatment == 'nf') {
+            if (treatment != 'nf') {
                 var colors = W.getElementById('colors');
-                colors.style="display:none;";    
-            }
-            else {
-        
+                colors.style.display = '';
+                
+                
                 var blackClassesName3 = 'firstHoverclass' + otherValueIndex1;
                 var blackClasses3 = W.getElementsByClassName(blackClassesName3);
                 var numberOfClasses3 = blackClasses3.length;
@@ -925,7 +908,10 @@ function feedback() {
                 blackClasses4[1].style.borderBottom = '1px solid #714';
                 blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
             }
-            
+            else {
+                var colorsNF = W.getElementById('colorsNF');
+                colorsNF.style.display = ''; 
+            }
             
             root = W.getElementById('container');
 
