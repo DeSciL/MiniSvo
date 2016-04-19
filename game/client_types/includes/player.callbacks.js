@@ -458,13 +458,52 @@ function quiz2() {
         var payoffQuiz1 = node.game.payoffQuiz1;
         var payoffQuiz2 = node.game.payoffQuiz2;
         
-        var numberOfPersonsSpan = W.getElementById('numberOfPersons');
-        var payoffQuiz1Span = W.getElementById('payoffQuiz1');
-        var payoffQuiz2Span = W.getElementById('payoffQuiz2');
+        var correctAnswers = 0;
+        if (numberOfPersons == 1){
+            correctAnswers += 1;
+        }
+        if (payoffQuiz1 == 185) {
+            correctAnswers += 1;
+        }
+        if (payoffQuiz2 == 65) {
+            correctAnswers += 1;
+        }
         
-        numberOfPersonsSpan.innerHTML = numberOfPersons;
-        payoffQuiz1Span.innerHTML = payoffQuiz1;
-        payoffQuiz2Span.innerHTML = payoffQuiz2;
+        
+        var quizResultSpan = W.getElementById('quizResult');
+        var quizResultText = 'You have ' + correctAnswers + ' correct answers out of 3 questions.'
+        if (correctAnswers != 3) {
+            quizResultText += ' Please review your wrong answers:';
+            
+            if (numberOfPersons != 1) {
+                var numberOfPersonsP = W.getElementById('numberOfPersonsP');
+                numberOfPersonsP.style.display = '';    
+            }
+            if (payoffQuiz1 != 185) {
+                var payoffQuiz1P = W.getElementById('payoffQuiz1P');
+                payoffQuiz1P.style.display = '';    
+            }
+            if (payoffQuiz2 != 65) {
+                var payoffQuiz2P = W.getElementById('payoffQuiz2P');
+                payoffQuiz2P.style.display = ''; 
+            }
+            
+            /*
+            var numberOfPersonsSpan = W.getElementById('numberOfPersons');
+            var payoffQuiz1Span = W.getElementById('payoffQuiz1');
+            var payoffQuiz2Span = W.getElementById('payoffQuiz2');
+            
+            numberOfPersonsSpan.innerHTML = numberOfPersons;
+            payoffQuiz1Span.innerHTML = payoffQuiz1;
+            payoffQuiz2Span.innerHTML = payoffQuiz2;
+            */
+        }
+        
+        quizResultSpan.innerHTML = quizResultText;
+        
+        
+        
+        
         
         
         

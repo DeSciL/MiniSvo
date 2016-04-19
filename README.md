@@ -4,12 +4,7 @@
 1. Install latest version of nodegame: http://nodegame.org/
 2. Clone into /games/ directory
 
-#### Note 1:
-- As of now, the game will only work properly when the default ultimatum game exists in the gamefolder as well
-- If ultimatum is not present, css will be off
-- To be fixed soon
-
-#### Note 2:
+#### Note:
 You need to have latest nodegame version installed (updated March 28th 2016)
 If you have an older version installed, follow these steps:
 
@@ -26,17 +21,18 @@ If you have an older version installed, follow these steps:
 
 ### To-do
 
-### Important:
+#### Important:
 - Finish instructions
 - Viewport / mobile screen visuals
 - Timers: actions?
 - Show static slider in quiz
-- Quiz feedback stage
+~~- Quiz feedback stage~~
 - Check if ~~quiz /~~ questionnaire is completed
 - ~~Save quiz data~~
+- small fixes: timer amounts, line-heights, width on small screens, etc.
 
 
-### Priority 2:
+#### Priority 2:
 - Random order of values
 - Font size (in sliders)
 - Waitscreen style
