@@ -1,0 +1,49 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h1 Questionnaire II/III
+        
+        
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Overall, was your motivation to make
+                br
+                span(id="motivation0")
+                    input(type='radio', name='motivation', id='motivation_radio0', value='maxMoney')
+                    |  As much money for yourself as possible?
+                br
+                span(id="motivation1")
+                    input(type='radio', name='motivation', id='motivation_radio1', value='maxPayoff')
+                    |  The experimenter pay out as much as possible?
+                br
+                span(id="motivation2")
+                    input(type='radio', name='motivation', id='motivation_radio2', value='samePayoff')
+                    |  All subjects get the same payoff?
+                br
+                span(id="motivation3")
+                    input(type='radio', name='motivation', id='motivation_radio3', value='random')
+                    |  Random choices?
+            
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Are you female or male?
+                br
+                span(id="gender0")
+                    input(type='radio', name='gender', id='gender_radio0', value='female')
+                    |  Female
+                br
+                span(id="gender1")
+                    input(type='radio', name='gender', id='gender_radio1', value='male')
+                    |  Male
+                
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') What is your total of "HITs submitted" on Amazon Mechanical Turk?
+                br
+                span If you don't know this number, you can find it on your Mturk dashboard.
+                br
+                input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15")
+                
+        br
+        input(type='button', id='read', value='Continue', class='btn', onclick='javascript:parent.node.done();')

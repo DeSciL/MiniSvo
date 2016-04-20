@@ -221,6 +221,34 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
+    stager.extendStep('questionnaire2', {
+        cb: cbs.postgame2,
+        timer: 90000,
+        done: function() {
+            var q1, q2, q2checked, i, isTimeup;
+           
+            isTimeup = node.game.timer.isTimeup();
+
+            node.emit('INPUT_DISABLE');
+
+            return true;
+        }
+    });
+
+    stager.extendStep('questionnaire3', {
+        cb: cbs.postgame3,
+        timer: 90000,
+        done: function() {
+            var q1, q2, q2checked, i, isTimeup;
+           
+            isTimeup = node.game.timer.isTimeup();
+
+            node.emit('INPUT_DISABLE');
+
+            return true;
+        }
+    });
+
     // We serialize the game sequence before sending it.
     game.plot = stager.getState();
 

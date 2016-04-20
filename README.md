@@ -29,7 +29,8 @@ If you have an older version installed, follow these steps:
 - ~~Quiz feedback stage~~
 - Check if ~~quiz /~~ questionnaire is completed
 - ~~Save quiz data~~
-- Small fixes: timer amounts, line-heights, width on small screens, width when scrollbar appears, etc.
+- Save questionnaire data
+- Small fixes: timer amounts, line-heights, width on small screens, ~~width when scrollbar appears~~, etc.
 
 
 #### Priority 2:
@@ -38,7 +39,7 @@ If you have an older version installed, follow these steps:
 - Waitscreen style
 - Waiting room style (width, etc.)
 - Blue buttons
-- Seperate pages for questionnaire
+- ~~Seperate pages for questionnaire~~
 
 
 #### Priority 3:

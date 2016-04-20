@@ -1,0 +1,33 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h1 Questionnaire III/III
+                
+                
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') All in all: How well have you understood the instructions?
+                br
+                span(id="understood0")
+                    input(type='radio', name='understood', id='understood_radio0', value='notverywell')
+                    |  Not very well
+                br
+                span(id="understood1")
+                    input(type='radio', name='understood', id='understood_radio1', value='partly')
+                    |  Partly
+                br
+                span(id="understood2")
+                    input(type='radio', name='understood', id='understood_radio2', value='totally')
+                    |  Totally
+        
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Comments
+                br
+                span Do you have any final Comments? Did everything work as expected? We would appreciate your feedback.
+                br
+                textarea(rows="10", style="width:100%;", name="comments")
+        
+        br
+        input(type='button', id='read', value='Continue', class='btn', onclick='javascript:parent.node.done();')

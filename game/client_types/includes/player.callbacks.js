@@ -17,6 +17,8 @@ module.exports = {
     feedback: feedback,
     totalpayoff: totalpayoff,
     postgame: postgame,
+    postgame2: postgame2,
+    postgame3: postgame3,
     endgame: endgame,
     clearFrame: clearFrame,
     notEnoughPlayers: notEnoughPlayers
@@ -234,6 +236,8 @@ function precache() {
         // 'langPath + 'resp.html',
 
         'postgame.html',
+        'postgame2.html',
+        'postgame3.html',
         'ended.html'
     ], function() {
         console.log('Precache done.');
@@ -1072,6 +1076,23 @@ function postgame() {
         }
     }
     
+    
+    console.log('Postgame');
+}
+
+
+function postgame2() {
+    node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
+
+    W.loadFrame('postgame2.html', function() {
+
+        node.env('auto', function() {
+            node.timer.randomExec(function() {
+                node.game.timer.doTimeUp();
+            });
+        });
+    });
+    
     for (var i = 0; i < 4; i++) {
         var questionnaireClassesId4 = 'motivation' + i;
         var questionnaireClasses4 = W.getElementById(questionnaireClassesId4);
@@ -1096,10 +1117,28 @@ function postgame() {
         }
     }
     
+    
+    console.log('Postgame2');
+}
+
+
+function postgame3() {
+    node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
+
+    W.loadFrame('postgame3.html', function() {
+
+        node.env('auto', function() {
+            node.timer.randomExec(function() {
+                node.game.timer.doTimeUp();
+            });
+        });
+    });
+    
+       
     for (var i = 0; i < 3; i++) {
         var questionnaireClassesId6 = 'understood' + i;
         var questionnaireClasses6 = W.getElementById(questionnaireClassesId6);
-        questionnaireClasses6.onclick = function(i) {
+        questionnaireClasses6.onclick = function() {
             var thisId = this.id;
             var thisNumber = thisId.slice(-1);
             var thisRadioId = 'understood_radio' + thisNumber;
@@ -1107,10 +1146,12 @@ function postgame() {
             thisRadio.checked = true;               
         }
     }
+
     
-    
-    console.log('Postgame');
+    console.log('Postgame3');
 }
+
+
 
 function endgame() {
     W.loadFrame('ended.html', function() {
