@@ -37,3 +37,7 @@ input#exitCode {
     width:450px !important;
     display: inline-block !important;
 }
+
+.quizCell {
+    padding-bottom: 6px;
+}
