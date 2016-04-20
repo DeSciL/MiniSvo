@@ -27,10 +27,10 @@ If you have an older version installed, follow these steps:
 - Timers: actions?
 - Show static slider in quiz
 - ~~Quiz feedback stage~~
-- Check if ~~quiz /~~ questionnaire is completed
+- ~~Check if quiz / questionnaire is completed~~
 - ~~Save quiz data~~
-- Save questionnaire data
-- Small fixes: timer amounts, line-heights, width on small screens, ~~width when scrollbar appears~~, etc.
+- ~~Save questionnaire data~~
+- Small fixes: timer amounts, ~~line-heights~~, width on small screens, ~~width when scrollbar appears~~, etc.
 
 
 #### Priority 2:

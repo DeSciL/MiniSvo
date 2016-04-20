@@ -5,6 +5,14 @@ block mainContent
         h1 Questionnaire II/III
         
         
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+            span(style="font-weight:bold;") Incomplete. 
+            span Please choose an answer for all questions.
+            
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+            span You have submitted your answers.
+        
+        
         div(class="panel panel-default")
             div(class="panel-body")
                 span(style='font-weight:bold;') Overall, was your motivation to make
@@ -32,7 +40,7 @@ block mainContent
                 span(id="gender0")
                     input(type='radio', name='gender', id='gender_radio0', value='female')
                     |  Female
-                br
+                br 
                 span(id="gender1")
                     input(type='radio', name='gender', id='gender_radio1', value='male')
                     |  Male
@@ -43,7 +51,7 @@ block mainContent
                 br
                 span If you don't know this number, you can find it on your Mturk dashboard.
                 br
-                input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15")
+                input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15", id="hitsSubmitted")
                 
         br
-        input(type='button', id='read', value='Continue', class='btn', onclick='javascript:parent.node.done();')
+        input(type='button', id='submit', value='Continue', class='btn')

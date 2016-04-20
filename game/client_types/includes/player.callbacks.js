@@ -92,12 +92,50 @@ function init() {
             numberOfPersons: numberOfPersons,
             payoffQuiz1: payoffQuiz1,
             payoffQuiz2: payoffQuiz2,
-            time: time,
             timeup: timeup,
             //other: node.game.other
         });
     });
     
+    
+     // Event listeners for questionnaire
+    node.on('QUEST1_DONE', function(choicesValue, intendValue, dependValue, timeup) {
+        node.game.timer.clear();
+        node.game.timer.startWaiting({milliseconds: 30000});
+         
+        // Notify the server.
+        node.done({
+            choicesValue: choicesValue,
+            intendValue: intendValue,
+            dependValue: dependValue,
+            timeup: timeup,
+        });
+    });
+    
+    node.on('QUEST2_DONE', function(motivationValue, genderValue, hitsSubmittedValue, timeup) {
+        node.game.timer.clear();
+        node.game.timer.startWaiting({milliseconds: 30000});
+         
+        // Notify the server.
+        node.done({
+            motivationValue: motivationValue,
+            genderValue: genderValue,
+            hitsSubmittedValue: hitsSubmittedValue,
+            timeup: timeup,
+        });
+    });
+    
+    node.on('QUEST3_DONE', function(understoodValue, commentsValue, timeup) {
+        node.game.timer.clear();
+        node.game.timer.startWaiting({milliseconds: 30000});
+         
+        // Notify the server.
+        node.done({
+            understoodValue: understoodValue,
+            commentsValue: commentsValue,
+            timeup: timeup,
+        });
+    });
     
 
     node.on('BID_DONE', function(offer1, offer2, to, timeup) {
@@ -386,7 +424,6 @@ function quiz() {
         var b = W.getElementById('continue');
 
         b.onclick = function() {
-            //node.done();
             
             //get chosen values
             
@@ -1076,6 +1113,50 @@ function postgame() {
         }
     }
     
+    var b = W.getElementById('submit');
+    
+    b.onclick = function() {
+
+        for (var i = 0; i < 3; i++) {
+            var posname = 'choices_radio' + i;
+            var position = W.getElementById(posname);
+            if (position.checked) {
+                var choicesValue = position.value;
+                break;
+            }
+        }
+        
+        for (var i = 0; i < 3; i++) {
+            var posname2 = 'intend_radio' + i;
+            var position2 = W.getElementById(posname2);
+            if (position2.checked) {
+                var intendValue = position2.value;
+                break;
+            }
+        }
+        
+        for (var i = 0; i < 4; i++) {
+            var posname3 = 'depend_radio' + i;
+            var position3 = W.getElementById(posname3);
+            if (position3.checked) {
+                var dependValue = position3.value;
+                break;
+            }
+        }
+        
+        
+        var badAlert = W.getElementById('badAlert');
+        var goodAlert = W.getElementById('goodAlert');
+        
+        if (!choicesValue || !intendValue || !dependValue) {
+            badAlert.style.display = '';
+        } else {
+            badAlert.style.display = 'none';
+            goodAlert.style.display = '';
+            node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
+        }    
+        
+    }
     
     console.log('Postgame');
 }
@@ -1118,6 +1199,45 @@ function postgame2() {
     }
     
     
+    var b = W.getElementById('submit');
+    
+    b.onclick = function() {
+
+        for (var i = 0; i < 4; i++) {
+            var posname = 'motivation_radio' + i;
+            var position = W.getElementById(posname);
+            if (position.checked) {
+                var motivationValue = position.value;
+                break;
+            }
+        }
+        
+        for (var i = 0; i < 2; i++) {
+            var posname2 = 'gender_radio' + i;
+            var position2 = W.getElementById(posname2);
+            if (position2.checked) {
+                var genderValue = position2.value;
+                break;
+            }
+        }
+        
+        var hitsSubmitted = W.getElementById('hitsSubmitted');
+        var hitsSubmittedValue = hitsSubmitted.value;
+                
+        
+        var badAlert = W.getElementById('badAlert');
+        var goodAlert = W.getElementById('goodAlert');
+        
+        if (!motivationValue || !genderValue || !hitsSubmittedValue) {
+            badAlert.style.display = '';
+        } else {
+            badAlert.style.display = 'none';
+            goodAlert.style.display = '';
+            node.emit('QUEST2_DONE', motivationValue, genderValue, hitsSubmittedValue);
+        }    
+        
+    }
+    
     console.log('Postgame2');
 }
 
@@ -1147,6 +1267,35 @@ function postgame3() {
         }
     }
 
+    var b = W.getElementById('submit');
+    
+    b.onclick = function() {
+
+        for (var i = 0; i < 3; i++) {
+            var posname = 'understood_radio' + i;
+            var position = W.getElementById(posname);
+            if (position.checked) {
+                var understoodValue = position.value;
+                break;
+            }
+        }
+        
+        var comments = W.getElementById('comments');
+        var commentsValue = comments.value;
+                
+        
+        var badAlert = W.getElementById('badAlert');
+        var goodAlert = W.getElementById('goodAlert');
+        
+        if (!understoodValue) {
+            badAlert.style.display = '';
+        } else {
+            badAlert.style.display = 'none';
+            goodAlert.style.display = '';
+            node.emit('QUEST3_DONE', understoodValue, commentsValue);
+        }    
+        
+    }
     
     console.log('Postgame3');
 }
