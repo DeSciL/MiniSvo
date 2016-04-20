@@ -267,7 +267,8 @@ function precache() {
     W.preCache([
         'languageSelection.html', // no text here.
         node.game.instructionsPage,
-        'quiz.html',
+        // 'quiz.html',
+        // 'bidder.html',
 
         // These two are cached later by loadFrame calls (for demonstration):
         // 'langPath + 'bidder.html',

@@ -25,7 +25,7 @@ If you have an older version installed, follow these steps:
 - Finish instructions
 - Viewport / mobile screen visuals
 - Timers: actions?
-- Show static slider in quiz
+- ~~Show static slider in quiz~~
 - ~~Quiz feedback stage~~
 - ~~Check if quiz / questionnaire is completed~~
 - ~~Save quiz data~~

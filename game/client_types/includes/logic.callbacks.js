@@ -340,19 +340,19 @@ function doMatch() {
         var matches = node.game.matcher.getMatch(round); 
         var item;
 
-        for (item of matches) {
+        for (var j = 0; j < matches.length; j++) {
             
             data_b = {
                 //role: 'bidder',
-                other: item[1]
+                other: matches[i][1]
             };
             data_r = {
                 //role: 'respondent',
-                other: item[0]
+                other: matches[i][0]
             };
             
-            node.say('BIDDER', item[0], data_b);
-            node.say('BIDDER', item[1], data_r);
+            node.say('BIDDER', matches[i][0], data_b);
+            node.say('BIDDER', matches[i][1], data_r);
         }
     } else {
 

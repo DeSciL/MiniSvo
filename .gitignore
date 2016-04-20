@@ -19,3 +19,7 @@ node_modules
 
 *.log
 *.svn
+public/pictures/stripes2.gif
+auth/auth.settings.js
+auth/descil.conf.js
+auth/auth.settings.js
