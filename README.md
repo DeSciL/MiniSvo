@@ -23,8 +23,9 @@ If you have an older version installed, follow these steps:
 
 #### Important:
 - Finish instructions
-- Fix Viewport / mobile screen visuals
+- Imrpove quiy style
 - Timers: default to 0?
+- Fix Viewport / mobile screen visuals
 - ~~Show static slider in quiz~~
 - ~~Quiz feedback stage~~
 - ~~Check if quiz / questionnaire is completed~~
@@ -40,7 +41,7 @@ If you have an older version installed, follow these steps:
 
 #### Priority 2:
 - Random order of values
-- Font size (in sliders)
+- ~~Font size (in sliders)~~
 - Waitscreen style
 - Waiting room style (width, etc.)
 - Blue buttons
