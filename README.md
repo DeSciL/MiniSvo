@@ -23,14 +23,19 @@ If you have an older version installed, follow these steps:
 
 #### Important:
 - Finish instructions
-- Viewport / mobile screen visuals
-- Timers: actions?
+- Fix Viewport / mobile screen visuals
+- Timers: default to 0?
 - ~~Show static slider in quiz~~
 - ~~Quiz feedback stage~~
 - ~~Check if quiz / questionnaire is completed~~
 - ~~Save quiz data~~
 - ~~Save questionnaire data~~
 - Small fixes: timer amounts, ~~line-heights~~, width on small screens, ~~width when scrollbar appears~~, etc.
+- Re-write URL when going live
+- Empty title string
+- Check out for people who wait 10 minutes in waiting room?
+- Re-connection issue
+- Feedback page for re-matching treatment
 
 
 #### Priority 2:
@@ -46,5 +51,6 @@ If you have an older version installed, follow these steps:
 - Channel definition in packages.json is strange
 - Auth failed page
 - "Time left" in endgame-stage
+- Add colon after Time left
 - Waitscreen Text
 - Pause timers in monitor

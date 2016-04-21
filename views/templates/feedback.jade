@@ -44,15 +44,22 @@ block mainContent
 
         div(id='colors', style='display:none;')
             p
-                span(style='background:#660') Your choice last round
-            p
-                span(style='background:#714') Your partner's choice last round
-            p
-                span(style='background:#f00 url("../pictures/stripes.gif") repeat') You and your partner made the same choice
+                div(style='background:#660;display:inline;') 
+                     img(src='../pictures/yourChoice.gif')
+                span  Your choice 
+                div(style='background:#714;display:inline;') 
+                     img(src='../pictures/partnersChoice.gif')
+                span  Partner's choice 
+                div(style='background:background:#f00 url("../pictures/stripes.gif") repeat;display:inline;')
+                     img(src='../pictures/sameChoice.gif')
+                span  Both made the same choice
 
         div(id='colorsNF', style='display:none;')
             p
-                span(style='background:#660') Your choice last round
-
+                div(style='background:#660;display:inline;') 
+                     img(src='../pictures/yourChoice.gif')
+                span  Your choice 
+        
+        br
         input(type='button', value='Continue', name='continue', id='continue', class='btn')
         
