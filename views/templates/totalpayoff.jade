@@ -2,7 +2,7 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h3=totalpayoff
+        h3 Payoffs
 
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") Payoff by round
@@ -35,7 +35,7 @@ block mainContent
 
         
         div(class="panel panel-default", style="width:530px;")
-            div(class="panel-heading") Total payoff
+            div(class="panel-heading") Totals
             
             table(class='table')
                 tbody
@@ -53,7 +53,7 @@ block mainContent
                             td
                                 span(id='totalpayoff', style="font-weight:bold;")
                         tr
-                            td(style='font-weight:bold;border-top:solid 2px #ddd;') Bonus
+                            td(style='font-weight:bold;border-top:solid 2px #ddd;') Bonus in USD
                             td
                                 span(id='realpayoffSpan', style="font-weight:bold;")
                                 |$
