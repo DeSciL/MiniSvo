@@ -260,7 +260,16 @@ function totalpayoff() {
     var playerId, payoffs;
     var i, len, round, other, otherOffer1, otherOffer2;
     var out;
+
+    console.log('TOTALPAYOFFSS!');
+
     for (playerId in node.game.memory.player) {
+        // Only connected players.
+        if (!node.game.pl.id.get(playerId)) {
+            console.log('Noooooot f', playerId);
+            continue;
+        }
+
         payoffs = node.game.memory.player[playerId].select('offer1').fetch();
         i = -1, len = payoffs.length;
         out = new Array(len);
@@ -407,7 +416,8 @@ function notEnoughPlayers() {
         // if syncStepping = false
         //node.remoteCommand('goto_step', 5);
         // Step must be not-skipped if you give the id (else give a number).
-        node.game.gotoStep('questionnaire');
+        // debugger
+        node.game.gotoStep(new GameStage('questionnaire1'));
     }, settings.WAIT_TIME * 1000);
 }
 

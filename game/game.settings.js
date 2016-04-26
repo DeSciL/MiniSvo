@@ -50,14 +50,14 @@ module.exports = {
             fullName: "Standard",
             description:
                 "No re-matching, feedback stage.",
-            WAIT_TIME: 60
+            WAIT_TIME: 10
         },
 
         nf: {
             fullName: "No Feedback",
             description:
                 "No re-matching, no feedback stage.",
-            WAIT_TIME: 60
+            WAIT_TIME: 10
         },
         
         /*

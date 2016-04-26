@@ -88,8 +88,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: function() {
             this.node.log('Total Payoffs');
             cbs.totalpayoff();
-        }
-        //minPlayers: undefined,
+        },
+        minPlayers: undefined,
         //steprule: stepRules.SOLO
     });
 
@@ -98,6 +98,44 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         minPlayers: undefined,
         steprule: stepRules.SOLO
     });
+
+
+    // Handling stepping and synchronization during questionnaire.
+
+//     stager.extendStage('questionnaire', {
+//         minPlayers: undefined
+//     });
+
+    stager.extendStep('questionnaire1', {
+        // stepRule: stepRules.SOLO,
+        minPlayers: undefined,
+        cb: function() {
+            console.log('AAAA - 1');
+//             debugger
+//             node.done();
+        }
+    });
+
+    stager.extendStep('questionnaire2', {
+        minPlayers: undefined,
+        // stepRule: stepRules.SOLO,
+        // syncStepping: false,
+        cb: function() { 
+            console.log('AAAA - 2');
+//            node.done();
+        }
+    });
+
+     stager.extendStep('questionnaire3', {
+        minPlayers: undefined,
+         // syncStepping: false,
+         cb: function() {
+             console.log('AAAA - 3');
+//             node.done(); 
+         }
+     });
+
+
 
     // Here we group together the definition of the game logic.
     return {

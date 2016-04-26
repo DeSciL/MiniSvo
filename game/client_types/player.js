@@ -179,7 +179,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: cbs.endgame
     });
 
-    stager.extendStep('questionnaire', {
+//     stager.extendStage('questionnaire', {
+//         stepRule: stepRules.SOLO
+//     });
+
+    stager.extendStep('questionnaire1', {
         cb: cbs.postgame,
         timer: 90000,
         // `done` is a callback function that is executed as soon as a
