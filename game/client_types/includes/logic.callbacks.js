@@ -416,8 +416,7 @@ function notEnoughPlayers() {
         // if syncStepping = false
         //node.remoteCommand('goto_step', 5);
         // Step must be not-skipped if you give the id (else give a number).
-        // debugger
-        node.game.gotoStep(new GameStage('questionnaire1'));
+        node.game.gotoStep(new GameStage('questionnaire'));
     }, settings.WAIT_TIME * 1000);
 }
 
