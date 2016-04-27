@@ -54,6 +54,8 @@ module.exports = function(settings, waitRoom, runtimeConf) {
                 exit: code.ExitCode
             };
             node.say("TIME", playerID, timeOutData);
+            
+            
 
         }, MAX_WAIT_TIME);
 
