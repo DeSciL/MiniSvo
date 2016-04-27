@@ -10,7 +10,8 @@ module.exports = {
     GROUP_SIZE: 2,
 
     // Maximum waiting time.
-    MAX_WAIT_TIME: 6000,
+    // MAX_WAIT_TIME: 600000,
+    MAX_WAIT_TIME: 20000,       // For testing
 
     // Treatment assigned to groups.
     // If left undefined, a random treatment will be selected.
@@ -22,13 +23,15 @@ module.exports = {
 
         // Enough Time passed, not enough players connected.
         if (data.over === 'Time elapsed!!!') {
+            
+            var codeErr = 'ERROR (code not found)';
 
             timeOut = "<h3 align='center'>Thank you for your patience.<br />";
             timeOut += "Unfortunately, there are not enough participants in ";
             timeOut += "your group to start the experiment.<br />";
             
             timeOut += "<br />Please submit the HIT using the following ExitCode:<br />"
-            timeOut += data.exit;
+            timeOut += data.exit || codeErr;
                
             
         }
