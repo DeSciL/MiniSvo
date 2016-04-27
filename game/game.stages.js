@@ -15,9 +15,10 @@ module.exports = function(stager, settings) {
         .next('quiz')
         .next('quiz2')
         .repeat('ultimatum', settings.REPEAT)
-        .next('totalpayoff')
-        .next('questionnaire')
-        .next('endgame')
+        .next('final')
+//         .next('totalpayoff')
+//         .next('questionnaire')
+//         .next('endgame')
         .gameover();
 
     // stager.skip('instructions');
@@ -28,8 +29,11 @@ module.exports = function(stager, settings) {
     
     stager.extendStage('ultimatum', {steps: ['ultimatum1', 'feedback']});
 
-    stager.extendStage('questionnaire', {steps: ['questionnaire1',
-                                                 'questionnaire2',
-                                                 'questionnaire3']
-                                        })
+    stager.extendStage('final', {steps: [
+        'totalpayoff',
+        'questionnaire1',
+        'questionnaire2',
+        'questionnaire3',
+        'endgame'
+    ]})
 };

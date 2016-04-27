@@ -170,6 +170,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: cbs.feedback,
         // minPlayers: MIN_PLAYERS,
     });
+
+    stager.extendStage('final', {
+        stepRule: stepRules.SOLO
+    });
     
     stager.extendStep('totalpayoff', {
         cb: cbs.totalpayoff
@@ -178,10 +182,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('endgame', {
         cb: cbs.endgame
     });
-
-//     stager.extendStage('questionnaire', {
-//         stepRule: stepRules.SOLO
-//     });
 
     stager.extendStep('questionnaire1', {
         cb: cbs.postgame,

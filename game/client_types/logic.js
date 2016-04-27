@@ -84,32 +84,34 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-    stager.extendStep('totalpayoff', {
-        cb: function() {
-            this.node.log('Total Payoffs');
-            cbs.totalpayoff();
-        },
-        minPlayers: undefined,
-        // syncStepping: false,
-        steprule: stepRules.SOLO
-    });
-
-    stager.extendStep('endgame', {
-        cb: cbs.endgame,
-        minPlayers: undefined,
-        steprule: stepRules.SOLO
-    });
-
 
     // Handling stepping and synchronization during questionnaire.
 
-//     stager.extendStage('questionnaire', {
-//         minPlayers: undefined
-//     });
+     stager.extendStage('final', {
+         minPlayers: undefined,
+         steprule: stepRules.WAIT,
+         init: function() {
+             node.on.data('totpayoff', function(msg) {
+                 cbs.totalpayoff(msg.from);
+             });
+             node.on.data('endgame', function(msg) {
+                 cbs.endgame(msg.from);
+             });
+         }
+     });
+
+    stager.extendStep('totalpayoff', {
+        cb: function() {
+            this.node.log('Total Payoffs');
+            // cbs.totalpayoff();
+        },
+        // minPlayers: undefined,
+        // syncStepping: false,
+    });
 
     stager.extendStep('questionnaire1', {
-        stepRule: stepRules.SOLO,
-        minPlayers: undefined,
+        // stepRule: stepRules.SOLO,
+        // minPlayers: undefined,
         // syncStepping: false,
         cb: function() {
             console.log('AAAA - 1');
@@ -120,7 +122,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('questionnaire2', {
         minPlayers: undefined,
-        stepRule: stepRules.SOLO,
+        // stepRule: stepRules.SOLO,
         // syncStepping: false,
         cb: function() { 
             console.log('AAAA - 2');
@@ -129,7 +131,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
      stager.extendStep('questionnaire3', {
-        minPlayers: undefined,
+        // minPlayers: undefined,
         // syncStepping: false,
         cb: function() {
             console.log('AAAA - 3');
@@ -137,6 +139,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
      });
 
+    stager.extendStep('endgame', {
+        cb: cbs.endgame,
+//        minPlayers: undefined,
+//        steprule: stepRules.SOLO
+    });
 
 
     // Here we group together the definition of the game logic.

@@ -999,8 +999,12 @@ function feedback() {
 function totalpayoff() {
     var b;
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
+
+    // Request payoff.
+    node.say('totpayoff', 'SERVER');
     
     W.loadFrame('totalpayoff.html', function() {
+
         node.on.data('PAYOFFS', function(msg) {
             
             var options = {
@@ -1326,6 +1330,10 @@ function postgame3() {
 
 
 function endgame() {
+    
+    // Request endgame data.
+    node.say('endgame', 'SERVER');
+    
     W.loadFrame('ended.html', function() {
 
         node.game.timer.switchActiveBoxTo(node.game.timer.mainBox);
