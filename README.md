@@ -25,6 +25,7 @@ If you have an older version installed, follow these steps:
 - Make totalpayoffs / questionnaire independent on partner
 - Different timer per round
 - Finish instructions stranger treatment
+- change ExitCode display in waitingroom
 - ~~Improve quiz style~~
 - Timers: choose last chosen value
 - Fix Viewport / mobile screen visuals

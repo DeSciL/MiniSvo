@@ -10,8 +10,8 @@ module.exports = {
     GROUP_SIZE: 2,
 
     // Maximum waiting time.
-    // MAX_WAIT_TIME: 600000,
-    MAX_WAIT_TIME: 20000,       // For testing
+    MAX_WAIT_TIME: 600000,
+    //MAX_WAIT_TIME: 20000,       // For testing
 
     // Treatment assigned to groups.
     // If left undefined, a random treatment will be selected.
