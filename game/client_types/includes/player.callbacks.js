@@ -235,12 +235,12 @@ function init() {
     treatment = node.env('treatment');
 
     // Adapting the game to the treatment.
-    // if (treatment === 'pp') {
-    //     node.game.instructionsPage = 'instructions_pp.html';
-    // }
-    // else {
+    if (treatment == 'nf') {
+        node.game.instructionsPage = 'instructions_nf.html';
+    }
+    else {
         node.game.instructionsPage = 'instructions.html';
-    // }
+    }
 
     // Set default language prefix.
     W.setUriPrefix(node.player.lang.path);
@@ -365,7 +365,7 @@ function quiz() {
     W.loadFrame('quiz.html', function() {
 
         var options = {
-            milliseconds: 60000,
+            milliseconds: 120000,
             timeup: function() {
                 node.done();
             }
@@ -382,6 +382,12 @@ function quiz() {
         });
         */
         
+        /* function selectRadio(i, className, thisId) {
+            var thisNumber = thisId.slice(-1);
+            var thisRadioId = className + '_radio' + thisNumber;
+            var thisRadio = W.getElementById(thisRadioId);
+            thisRadio.checked = true;               
+        } */
         
         for (var i = 0; i < 3; i++) {
             var quizClassesId1 = 'personsQuiz' + i;
@@ -487,7 +493,7 @@ function quiz2() {
     W.loadFrame('quiz2.html', function() {
 
         var options = {
-            milliseconds: 30000,
+            milliseconds: 60000,
             timeup: function() {
                 node.done();
             }
@@ -604,9 +610,9 @@ function ultimatum() {
         W.loadFrame('bidder.html', function() {
             // Start the timer after an offer was received.
             options = {
-                milliseconds: 30000,
+                milliseconds: 60000,
                 timeup: function() {
-                    node.emit('BID_DONE', 4, 4, other, true);
+                    node.emit('BID_DONE', 4, 4, other, true); //Change this to value of last choice! (if undefined = 4)
                 }
             };
 
@@ -838,6 +844,7 @@ function feedback() {
             
             
             options = {
+                    milliseconds: 60000,
                     timeup: function() {
                         node.done();
                     }
@@ -858,6 +865,21 @@ function feedback() {
             var otherValueIndex2 = msg.data.offer2;  
             var otherValue2 = node.game.settings.send2[otherValueIndex2]
             
+            // Show the first sentence for feedback treatment and pass it the values
+            var treatment = node.env('treatment');
+            if (treatment != 'nf') {
+                var feedbackSentence = W.getElementById('feedbackSentence');
+                feedbackSentence.style.display = '';
+                
+                var chosenValueSpan1 = W.getElementById('self1');
+                chosenValueSpan1.innerHTML = chosenValue1;
+                var chosenValueSpan2 = W.getElementById('self2');
+                chosenValueSpan2.innerHTML = chosenValue2;
+                var otherValueSpan1 = W.getElementById('other1');
+                otherValueSpan1.innerHTML = otherValue1;
+                var otherValueSpan2 = W.getElementById('other2');
+                otherValueSpan2.innerHTML = otherValue2;
+            }
             
             // Pay.off for this round. Not displayed
             /*

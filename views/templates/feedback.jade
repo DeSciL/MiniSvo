@@ -4,6 +4,19 @@ block mainContent
     div(id='container')
         h3 Feedback
         
+        div(id='feedbackSentence', style='display:none;')
+            span You receive 
+            span(id='self1') 
+            |  and 
+            span(id='self2') 
+            |  from your own choices (top numbers) and 
+            span(id='other1') 
+            |  and 
+            span(id='other2') 
+            |  from your partner's choices (bottom numbers).
+            br
+            br
+        
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") First choice
             div(class="panel-body")

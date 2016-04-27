@@ -1,5 +1,5 @@
 <!doctype html>
-<title>Ultimatum</title>
+<title>&nbsp;</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=yes">
 <!-- Loading  nodeGame libraries and CSS -->
@@ -17,6 +17,12 @@
 </noscript>
 <script>
   window.onload = function () {
+    // Disable back button
+    history.pushState(null, null, location.href);
+    window.onpopstate = function (event) {
+        history.go(1);
+    };
+      
     // Configuring nodegame.
     // All these properties can get overwritten by remoteSetup from server.
     node.setup('nodegame', {

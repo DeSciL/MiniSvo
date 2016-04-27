@@ -26,7 +26,7 @@ module.exports = function(settings, room, runtimeConf) {
 
             node.remoteSetup('page', player.id, {
                 clearBody: true,
-                title: { title: 'Welcome!', addToBody: true }
+                title: { title: '---', addToBody: true }   // Empty title string
             });
 
             node.remoteSetup('widgets', player.id, {

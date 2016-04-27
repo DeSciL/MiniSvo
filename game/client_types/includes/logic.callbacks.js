@@ -409,14 +409,14 @@ function notEnoughPlayers() {
     // Pause connected players.
     node.remoteCommand('pause', 'ROOM', this.disconnectStr);
     this.countdown = setTimeout(function() {
-        console.log('Countdown fired. Going to Step: questionnaire.');
+        console.log('Countdown fired. Going to Step: totalpayoff.');
         node.remoteCommand('erase_buffer', 'ROOM');
         node.remoteCommand('resume', 'ROOM');
         node.game.gameTerminated = true;
         // if syncStepping = false
         //node.remoteCommand('goto_step', 5);
         // Step must be not-skipped if you give the id (else give a number).
-        node.game.gotoStep(new GameStage('questionnaire'));
+        node.game.gotoStep(new GameStage('totalpayoff'));
     }, settings.WAIT_TIME * 1000);
 }
 
@@ -425,7 +425,7 @@ function endgame() {
     var filename, bonusFile, bonus;
     var EXCHANGE_RATE;
 
-    EXCHANGE_RATE = settings.EXCHANGE_RATE_INSTRUCTIONS / settings.COINS;;
+    EXCHANGE_RATE = settings.EXCHANGE_RATE_INSTRUCTIONS / settings.COINS;
 
     console.log('FINAL PAYOFF PER PLAYER');
     console.log('***********************');

@@ -22,21 +22,22 @@ If you have an older version installed, follow these steps:
 ### To-do
 
 #### Important:
-- Finish instructions
-- Imrpove quiy style
-- Timers: default to 0?
+- Make totalpayoffs / questionnaire independent on partner
+- Different timer per round
+- Finish instructions stranger treatment
+- ~~Imrpove quiy style~~
+- Timers: choose last chosen value
 - Fix Viewport / mobile screen visuals
 - ~~Show static slider in quiz~~
 - ~~Quiz feedback stage~~
 - ~~Check if quiz / questionnaire is completed~~
 - ~~Save quiz data~~
 - ~~Save questionnaire data~~
-- Small fixes: timer amounts, ~~line-heights~~, width on small screens, ~~width when scrollbar appears~~, etc.
-- Re-write URL when going live
-- Empty title string
-- Check out for people who wait 10 minutes in waiting room?
-- Re-connection issue
-- Feedback page for re-matching treatment
+- ~~Small fixes: timer amounts, line-heights, width on small screens, width when scrollbar appears, etc. ~~
+- ~~ Re-write URL when going live ~~
+- ~~ Empty title string ~~
+- ~~ Check out for people who wait 10 minutes in waiting room?~~ 
+- Re-connection issue?
 
 
 #### Priority 2:
@@ -44,7 +45,7 @@ If you have an older version installed, follow these steps:
 - ~~Font size (in sliders)~~
 - Waitscreen style
 - Waiting room style (width, etc.)
-- Blue buttons
+- ~~Blue buttons~~
 - ~~Seperate pages for questionnaire~~
 
 

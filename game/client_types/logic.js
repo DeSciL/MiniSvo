@@ -90,7 +90,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             cbs.totalpayoff();
         },
         minPlayers: undefined,
-        //steprule: stepRules.SOLO
+        // syncStepping: false,
+        steprule: stepRules.SOLO
     });
 
     stager.extendStep('endgame', {
@@ -107,8 +108,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 //     });
 
     stager.extendStep('questionnaire1', {
-        // stepRule: stepRules.SOLO,
+        stepRule: stepRules.SOLO,
         minPlayers: undefined,
+        // syncStepping: false,
         cb: function() {
             console.log('AAAA - 1');
 //             debugger
@@ -118,21 +120,21 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('questionnaire2', {
         minPlayers: undefined,
-        // stepRule: stepRules.SOLO,
+        stepRule: stepRules.SOLO,
         // syncStepping: false,
         cb: function() { 
             console.log('AAAA - 2');
-//            node.done();
+//          node.done();
         }
     });
 
      stager.extendStep('questionnaire3', {
         minPlayers: undefined,
-         // syncStepping: false,
-         cb: function() {
-             console.log('AAAA - 3');
-//             node.done(); 
-         }
+        // syncStepping: false,
+        cb: function() {
+            console.log('AAAA - 3');
+//          node.done(); 
+        }
      });
 
 

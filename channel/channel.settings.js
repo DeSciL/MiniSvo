@@ -10,7 +10,7 @@
  */
 module.exports = {
 
-    // alias: 'u1',
+    alias: 'ms1',
 
     playerServer: 'minisvo',
 

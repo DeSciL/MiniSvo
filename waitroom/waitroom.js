@@ -123,7 +123,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
 
         node.remoteSetup('page', p.id, {
             clearBody: true,
-            title: { title: 'Game', addToBody: true }
+            title: { title: '---', addToBody: false }   //Empty title string
         });
 
         node.remoteSetup('widgets', p.id, {

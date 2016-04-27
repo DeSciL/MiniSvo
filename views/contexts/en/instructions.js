@@ -1,4 +1,9 @@
 module.exports = function(settings, headers) {
+    
+    var receive1 = settings.standard.receive1;
+    var send1 = settings.standard.send1;
+    var receive2 = settings.standard.receive2;
+    var send2 = settings.standard.send2;
 
     /*var C = settings.pp.COINS;
     var R = settings.pp.REPEAT;
@@ -8,6 +13,10 @@ module.exports = function(settings, headers) {
 
     return {
         title: "INSTRUCTIONS",
+        "receive1": receive1,
+        "send1": send1,
+        "receive2": receive2,
+        "send2": send2
         /*
         instructions: "Instructions of the Ultimatum Game. Please read them carefully.",
         thisGame: "This game is played in rounds by two human players randomly paired.",

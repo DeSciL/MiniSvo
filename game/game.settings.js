@@ -15,7 +15,8 @@ module.exports = {
     MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. *
-    REPEAT: 2,
+    REPEAT: 10,
+    //REPEAT: 2,          // For testing
 
     // Number of coins to split. *
     COINS: 100,
@@ -50,14 +51,14 @@ module.exports = {
             fullName: "Standard",
             description:
                 "No re-matching, feedback stage.",
-            WAIT_TIME: 10
+            WAIT_TIME: 20
         },
 
-        nf: {
+        nf_: {                  // Added _ for testing
             fullName: "No Feedback",
             description:
                 "No re-matching, no feedback stage.",
-            WAIT_TIME: 10
+            WAIT_TIME: 20
         },
         
         /*
