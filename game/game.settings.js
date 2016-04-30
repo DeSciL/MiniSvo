@@ -16,7 +16,7 @@ module.exports = {
 
     // Number or rounds to repeat the bidding. *
     // REPEAT: 10,
-    REPEAT: 2,          // For testing
+    REPEAT: 10,          // For testing
 
     // Number of coins to split. *
     COINS: 100,
