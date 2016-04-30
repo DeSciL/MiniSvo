@@ -25,7 +25,11 @@ If you have an older version installed, follow these steps:
 - Fix Viewport / mobile screen visuals
 - Different timer per round
 - Finish instructions stranger treatment
+<<<<<<< HEAD
 - ~~Make totalpayoffs / questionnaire independent on partner~~
+=======
+- change ExitCode display in waitingroom
+>>>>>>> refs/remotes/origin/master
 - ~~Improve quiz style~~
 - ~~Timers: choose last chosen value~~
 - ~~Show static slider in quiz~~
