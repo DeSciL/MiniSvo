@@ -17,7 +17,8 @@ var DUMP_DIR, DUMP_DIR_JSON, DUMP_DIR_CSV;
 module.exports = {
     init: init,
     gameover: gameover,
-    doMatch: doMatch,
+    doMatchPrev: doMatchPrev,
+    doMatchNext: doMatchNext,
     endgame: endgame,
     feedback: feedback,
     totalpayoff: totalpayoff,
@@ -372,7 +373,7 @@ function gameover() {
     // channel.destroyGameRoom(gameRoom.name);
 }
 
-function doMatch() {
+function doMatchPrev() {
     var g, i, bidder, respondent, data_b, data_r;
 
     if (node.game.pl.size() < 2) {
@@ -382,12 +383,15 @@ function doMatch() {
     var treatment = node.env('treatment');
     
     
-    if (treatment == 'rm') {
+    if ((treatment == 'rmNext' && round == 1) || treatment == 'rmPrev' || treatment == 'rmNf') {
         
         
         // ROUNDROBIN RE-MATCHING
-        // Set number of players in game.settings (to do)
+        // Set number of players in game.settings
         // Number of rounds must make sense in combination with numbers of players
+        // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedbacj
+        // Run this once in first round for rmNext treatment because we need a match!
+        
         var round = node.player.stage.round; // or another counter
         var matches = node.game.matcher.getMatch(round); 
         var item;
@@ -406,7 +410,7 @@ function doMatch() {
             node.say('BIDDER', matches[i][0], data_b);
             node.say('BIDDER', matches[i][1], data_r);
         }
-    } else {
+    } else if (treatment == 'standard' || treatment == 'nf'){
 
         // RANDOM RE-MATCHING
         // Method shuffle accepts one parameter to update the db, as well as
@@ -441,9 +445,48 @@ function doMatch() {
             node.say('BIDDER', respondent.id, data_r);
             //node.say('RESPONDENT', respondent.id, data_r);
         }
+        console.log('Matching completed.');
     }
+}
+
+
+function doMatchNext() {
+    var g, i, bidder, respondent, data_b, data_r;
+
+    if (node.game.pl.size() < 2) {
+        if (!this.countdown) notEnoughPlayers();
+        return;
+    }
+    var treatment = node.env('treatment');
     
-    console.log('Matching completed.');
+    
+    if (treatment == 'rmNext') {
+        
+        
+        // ROUNDROBIN RE-MATCHING
+        // Set number of players in game.settings (to do)
+        // Number of rounds must make sense in combination with numbers of players
+        var round = node.player.stage.round; // or another counter
+        var matches = node.game.matcher.getMatch(round); 
+        var item;
+
+        for (var j = 0; j < matches.length; j++) {
+            
+            data_b = {
+                //role: 'bidder',
+                other: matches[i][1]
+            };
+            data_r = {
+                //role: 'respondent',
+                other: matches[i][0]
+            };
+            
+            node.say('BIDDER', matches[i][0], data_b);
+            node.say('BIDDER', matches[i][1], data_r);
+        }
+    
+        console.log('Re-Matching completed.');
+    }
 }
 
 function notEnoughPlayers() {

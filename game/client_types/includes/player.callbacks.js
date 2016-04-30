@@ -612,7 +612,14 @@ function ultimatum() {
             options = {
                 milliseconds: 60000,
                 timeup: function() {
-                    node.emit('BID_DONE', 4, 4, other, true); //Change this to value of last choice! (if undefined = 4)
+                    var lastChosenValue1 = 4;
+                    var lastChosenValue2 = 4;
+                    if (node.game.lastOffer1 && node.game.lastOffer2) {
+                        lastChosenValue1 = node.game.lastOffer1;
+                        lastChosenValue2 = node.game.lastOffer2;
+                    }
+                    
+                    node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true); //Change this to value of last choice! (if undefined = 4)
                 }
             };
 

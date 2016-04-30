@@ -69,11 +69,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             });
         }
     });
+      
 
     stager.extendStep('ultimatum1', {
         cb: function() {
             this.node.log('Ultimatum');
-            cbs.doMatch();
+            cbs.doMatchPrev();
         }
     });
     
@@ -81,6 +82,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: function() {
             this.node.log('Feedback');
             cbs.feedback();
+            cbs.doMatchNext();
         }
     });
 

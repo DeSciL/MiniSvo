@@ -23,9 +23,9 @@ module.exports = function(settings, stages) {
         auto: false
     };
 
-    game.debug = false;
+    game.debug = true;
 
-    game.verbosity = 0;
+    game.verbosity = 1;
 
     game.window = {
         promptOnleave: !game.debug,

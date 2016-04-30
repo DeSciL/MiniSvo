@@ -50,24 +50,37 @@ module.exports = {
         standard: {
             fullName: "Standard",
             description:
-                "No re-matching, feedback stage.",
+                "Partner, feedback.",
             WAIT_TIME: 20
         },
 
-        nf_: {                  // Added _ for testing
+        nf: {                  // Added _ for testing
             fullName: "No Feedback",
             description:
-                "No re-matching, no feedback stage.",
+                "Partner, no feedback.",
             WAIT_TIME: 20
         },
         
         /*
-
-        rm: {
-            fullName: "Re-Matching",
+        rmNf: {
+            fullName: "Re-Matching No Feedback",
             description:
-                "Re-matching, feedback stage.",
-            WAIT_TIME: 60
+                "Stranger re-matching, no feedback.",
+            WAIT_TIME: 20
+        }
+        
+        rmPrev: {
+            fullName: "Re-Matching Next feedback",
+            description:
+                "Stranger re-matching, feedback for previous partner.",
+            WAIT_TIME: 20
+        }
+        
+        rmNext: {
+            fullName: "Re-Matching Previous Feedback",
+            description:
+                "Stranger re-matching, feedback for next partner.",
+            WAIT_TIME: 20
         }
         */
     }

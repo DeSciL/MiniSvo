@@ -185,7 +185,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('questionnaire1', {
         cb: cbs.postgame,
-        timer: 60000,
+        timer: 120000,
         // `done` is a callback function that is executed as soon as a
         // _DONE_ event is emitted. It can perform clean-up operations (such
         // as disabling all the forms) and only if it returns true, the
@@ -227,7 +227,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('questionnaire2', {
         cb: cbs.postgame2,
-        timer: 60000,
+        timer: 120000,
         done: function() {
             var q1, q2, q2checked, i, isTimeup;
            
@@ -241,7 +241,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('questionnaire3', {
         cb: cbs.postgame3,
-        timer: 120000,
+        timer: 180000,
         done: function() {
             var q1, q2, q2checked, i, isTimeup;
            
