@@ -70,6 +70,8 @@ function init() {
     node.game.matcher.setIds(node.game.pl.id.getAllKeys());
     node.game.matcher.match();
     
+    // Bonus
+    
     node.game.bonuses = [];
     
 
@@ -380,7 +382,11 @@ function doMatchPrev() {
         if (!this.countdown) notEnoughPlayers();
         return;
     }
-    var treatment = node.env('treatment');
+    var treatment = settings.treatmentName;
+    //treatment = 'standard';
+    
+    
+    var round = node.player.stage.round; // or another counter
     
     
     if ((treatment == 'rmNext' && round == 1) || treatment == 'rmPrev' || treatment == 'rmNf') {
@@ -392,7 +398,6 @@ function doMatchPrev() {
         // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedbacj
         // Run this once in first round for rmNext treatment because we need a match!
         
-        var round = node.player.stage.round; // or another counter
         var matches = node.game.matcher.getMatch(round); 
         var item;
 
@@ -410,6 +415,7 @@ function doMatchPrev() {
             node.say('BIDDER', matches[i][0], data_b);
             node.say('BIDDER', matches[i][1], data_r);
         }
+        console.log('Re-Matching completed.');
     } else if (treatment == 'standard' || treatment == 'nf'){
 
         // RANDOM RE-MATCHING
