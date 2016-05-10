@@ -15,8 +15,8 @@ module.exports = {
     MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. *
-    // REPEAT: 10,
-    REPEAT: 10,          // For testing
+    REPEAT: 10,
+    // REPEAT: 2,          // For testing
 
     // Number of coins to split. *
     COINS: 100,
@@ -35,7 +35,8 @@ module.exports = {
     EXCHANGE_RATE_INSTRUCTIONS: 0.01,
 
     // DEBUG.
-    DEBUG: true,
+    DEBUG: false,
+    // DEBUG: true,             // Testing
 
     // AUTO-PLAY.
     AUTO: false,
@@ -54,7 +55,7 @@ module.exports = {
             WAIT_TIME: 20
         },
 
-        nf: {                  // Added _ for testing
+        _nf: {                  // Added _ for testing
             fullName: "No Feedback",
             description:
                 "Partner, no feedback.",

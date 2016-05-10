@@ -196,6 +196,15 @@ function init() {
         /////////////////////////////////////////////
         node.done();
     });
+    
+    node.on('BONUS', function(bonus) {
+             
+        
+        node.done({
+            bonus: bonus
+        });
+        
+    });
 
 
     // Clean up stage upon stepping into the next one.
@@ -1091,7 +1100,7 @@ function totalpayoff() {
             b = W.getElementById('continue');
 
             b.onclick = function() {
-                node.done();
+                node.emit('BONUS', realPayoffRounded);
             };
         });
         

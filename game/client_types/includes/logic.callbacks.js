@@ -594,11 +594,14 @@ function endgame(playerId) {
     exitcode = code.ExitCode;
 
     if (node.env('treatment') === 'pp' && node.game.gameTerminated) {
-        code.win = 0;
+        //code.win = 0;
     }
     else {
-        code.win = Number((code.win || 0) * (EXCHANGE_RATE)).toFixed(2);
-        code.win = parseFloat(code.win, 10);
+        bonus = node.game.memory.player[playerId].select('bonus').fetch();
+        code.win = bonus[0].bonus;
+        
+        //code.win = Number((code.win || 0) * (EXCHANGE_RATE)).toFixed(2);
+        //code.win = parseFloat(code.win, 10);
     }
     channel.registry.checkOut(p.id);
 
@@ -615,7 +618,7 @@ function endgame(playerId) {
     
 
     // Not very strong condition. Might need improvement.
-    if (node.game.bonuses.length === node.game.pl.size()) {
+    // if (node.game.bonuses.length === node.game.pl.size()) {
 
         // Write down bonus file.
         filename = DUMP_DIR + 'bonus.csv';
@@ -636,5 +639,5 @@ function endgame(playerId) {
         node.game.memory.save(DUMP_DIR + 'memory_all.json');
 
         // node.done();
-    }
+    // }
 }

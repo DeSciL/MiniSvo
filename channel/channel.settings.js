@@ -18,7 +18,7 @@ module.exports = {
 
     sioQuery: false,
 
-    verbosity: 100,
+    verbosity: 0,
 
     // If TRUE, players can invoke GET commands on admins.
     getFromAdmins: true,
