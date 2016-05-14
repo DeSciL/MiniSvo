@@ -27,6 +27,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     var channel = gameRoom.channel;
     var node = gameRoom.node;
+    var dk = require('descil-mturk')();
 
     // Increment counter.
     counter = counter ? ++counter : settings.SESSION_ID;
@@ -89,18 +90,43 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     // Handling stepping and synchronization during questionnaire.
 
-     stager.extendStage('final', {
-         minPlayers: undefined,
-         steprule: stepRules.WAIT,
-         init: function() {
-             node.on.data('totpayoff', function(msg) {
-                 cbs.totalpayoff(msg.from);
-             });
-             node.on.data('endgame', function(msg) {
-                 cbs.endgame(msg.from);
-             });
-         }
-     });
+    stager.extendStage('final', {
+        minPlayers: undefined,
+        steprule: stepRules.WAIT,
+        init: function() {
+            node.on.data('totpayoff', function(msg) {
+                cbs.totalpayoff(msg.from);
+            });
+            node.on.data('endgame', function(msg) {
+                cbs.endgame(msg.from);
+            });
+            
+            // Since we do not execute the normal STEPPING, we must seperately save data as well
+            node.on.data('done', function(msg) {
+                    
+                var path = require('path');
+                var db, prefix;
+                var DUMP_DIR = path.resolve(channel.getGameDir(), 'data') + '/' + counter + '/';
+                var currentStage = node.game.getCurrentGameStage();
+                var GameStage = ngc.GameStage;
+                var currentStage2 = new GameStage(msg.stage);
+
+                console.log(currentStage);
+                
+                
+                console.log(currentStage2);
+                // node.game.lastStage = currentStage;
+                db = node.game.memory.stage[currentStage2];
+
+                if (db && db.size()) {
+                    prefix = DUMP_DIR + 'memory_' + currentStage2;
+                    db.save(prefix + '.csv', { flags: 'w' }); 
+                    db.save(prefix + '.nddb', { flags: 'w' });
+                    console.log('Round data saved ', currentStage2);
+                }
+            });
+        }
+    });
 
     stager.extendStep('totalpayoff', {
         cb: function() {
@@ -132,17 +158,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-     stager.extendStep('questionnaire3', {
+    stager.extendStep('questionnaire3', {
         // minPlayers: undefined,
         // syncStepping: false,
         cb: function() {
             console.log('AAAA - 3');
-//          node.done(); 
+        //    node.done(); 
         }
-     });
+    });
 
     stager.extendStep('endgame', {
-        cb: cbs.endgame,
+        cb: function() {
+            postPayoffs({AccessCode: 394034, Bonus: 0.15, BonusReason: 'FullBonus'});
+            cb: cbs.endgame
+        }
 //        minPlayers: undefined,
 //        steprule: stepRules.SOLO
     });
@@ -163,5 +192,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             auto: settings.AUTO
         }
     };
+    
+    // Helper functions
+    function postPayoffs(payoffs) {
+        dk.postPayoffs(payoffs, function(err, response, body) {
+            if (err) {
+                node.err("adjustPayoffAndCheckout: " +
+                         "dk.postPayoff: " + err);
+            };
+        });
+    }
 
 };

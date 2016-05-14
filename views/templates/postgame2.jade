@@ -17,19 +17,19 @@ block mainContent
                 span(style='font-weight:bold;') Overall, was your motivation to make
                 br
                 span(id="motivation0")
-                    input(type='radio', name='motivation', id='motivation_radio0', value='maxMoney')
+                    input(type='radio', name='motivation', id='motivation_radio0', value=1)
                     |  as much money for yourself as possible?
                 br
                 span(id="motivation1")
-                    input(type='radio', name='motivation', id='motivation_radio1', value='maxPayoff')
+                    input(type='radio', name='motivation', id='motivation_radio1', value=2)
                     |  the experimenter pay out as much as possible?
                 br
                 span(id="motivation2")
-                    input(type='radio', name='motivation', id='motivation_radio2', value='samePayoff')
+                    input(type='radio', name='motivation', id='motivation_radio2', value=3)
                     |  all subjects get the same payoff?
                 br
                 span(id="motivation3")
-                    input(type='radio', name='motivation', id='motivation_radio3', value='random')
+                    input(type='radio', name='motivation', id='motivation_radio3', value=4)
                     |  random choices?
             
         div(class="panel panel-default")
@@ -37,11 +37,11 @@ block mainContent
                 span(style='font-weight:bold;') Are you female or male?
                 br
                 span(id="gender0")
-                    input(type='radio', name='gender', id='gender_radio0', value='female')
+                    input(type='radio', name='gender', id='gender_radio0', value=1)
                     |  Female
                 br 
                 span(id="gender1")
-                    input(type='radio', name='gender', id='gender_radio1', value='male')
+                    input(type='radio', name='gender', id='gender_radio1', value=2)
                     |  Male
                 
         div(class="panel panel-default")

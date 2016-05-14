@@ -31,6 +31,7 @@ function init() {
 
     that = this;
     this.node.log('Init.');
+    treatment = node.env('treatment');
 
     // Setup the header (by default on the left side).
     if (!W.getHeader()) {
@@ -198,12 +199,10 @@ function init() {
     });
     
     node.on('BONUS', function(bonus) {
-             
-        
         node.done({
-            bonus: bonus
+            bonus: bonus,
+            treatment: treatment
         });
-        
     });
 
 
@@ -241,7 +240,6 @@ function init() {
         return n >= 0 && n <= 100;
     };
 
-    treatment = node.env('treatment');
 
     // Adapting the game to the treatment.
     if (treatment == 'nf') {
@@ -618,8 +616,17 @@ function ultimatum() {
         /////////////////////////////////////////////
         W.loadFrame('bidder.html', function() {
             // Start the timer after an offer was received.
+            var round = node.player.stage.round;
+            var timer;
+            if (round == 1 || round == 2) {
+                timer = 60000;
+            }
+            else {
+                timer = 30000;
+            }
+            
             options = {
-                milliseconds: 60000,
+                milliseconds: timer,
                 timeup: function() {
                     var lastChosenValue1 = 4;
                     var lastChosenValue2 = 4;
@@ -860,7 +867,7 @@ function feedback() {
             
             
             options = {
-                    milliseconds: 60000,
+                    milliseconds: 30000,
                     timeup: function() {
                         node.done();
                     }
@@ -1118,88 +1125,93 @@ function postgame() {
                 node.game.timer.doTimeUp();
             });
         });
-    });
-    
-    for (var i = 0; i < 3; i++) {
-        var questionnaireClassesId1 = 'choices' + i;
-        var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
-        questionnaireClasses1.onclick = function(i) {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'choices_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-    
-    for (var i = 0; i < 3; i++) {
-        var questionnaireClassesId2 = 'intend' + i;
-        var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
-        questionnaireClasses2.onclick = function(i) {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'intend_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-    
-    for (var i = 0; i < 4; i++) {
-        var questionnaireClassesId3 = 'depend' + i;
-        var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
-        questionnaireClasses3.onclick = function(i) {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'depend_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-    
-    var b = W.getElementById('submit');
-    
-    b.onclick = function() {
-
+        
+            
+            
+        
         for (var i = 0; i < 3; i++) {
-            var posname = 'choices_radio' + i;
-            var position = W.getElementById(posname);
-            if (position.checked) {
-                var choicesValue = position.value;
-                break;
+            var questionnaireClassesId1 = 'choices' + i;
+            var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
+            questionnaireClasses1.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'choices_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
         
         for (var i = 0; i < 3; i++) {
-            var posname2 = 'intend_radio' + i;
-            var position2 = W.getElementById(posname2);
-            if (position2.checked) {
-                var intendValue = position2.value;
-                break;
+            var questionnaireClassesId2 = 'intend' + i;
+            var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
+            questionnaireClasses2.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'intend_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
         
         for (var i = 0; i < 4; i++) {
-            var posname3 = 'depend_radio' + i;
-            var position3 = W.getElementById(posname3);
-            if (position3.checked) {
-                var dependValue = position3.value;
-                break;
+            var questionnaireClassesId3 = 'depend' + i;
+            var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
+            questionnaireClasses3.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'depend_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
         
+        var b = W.getElementById('submit');
         
-        var badAlert = W.getElementById('badAlert');
-        var goodAlert = W.getElementById('goodAlert');
+        b.onclick = function() {
+
+            for (var i = 0; i < 3; i++) {
+                var posname = 'choices_radio' + i;
+                var position = W.getElementById(posname);
+                if (position.checked) {
+                    var choicesValue = position.value;
+                    break;
+                }
+            }
+            
+            for (var i = 0; i < 3; i++) {
+                var posname2 = 'intend_radio' + i;
+                var position2 = W.getElementById(posname2);
+                if (position2.checked) {
+                    var intendValue = position2.value;
+                    break;
+                }
+            }
+            
+            for (var i = 0; i < 4; i++) {
+                var posname3 = 'depend_radio' + i;
+                var position3 = W.getElementById(posname3);
+                if (position3.checked) {
+                    var dependValue = position3.value;
+                    break;
+                }
+            }
+            
+            
+            var badAlert = W.getElementById('badAlert');
+            var goodAlert = W.getElementById('goodAlert');
+            
+            if (!choicesValue || !intendValue || !dependValue) {
+                badAlert.style.display = '';
+            } else {
+                badAlert.style.display = 'none';
+                goodAlert.style.display = '';
+                node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
+            }    
+            
+        }
         
-        if (!choicesValue || !intendValue || !dependValue) {
-            badAlert.style.display = '';
-        } else {
-            badAlert.style.display = 'none';
-            goodAlert.style.display = '';
-            node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
-        }    
         
-    }
+    });
     
     console.log('Postgame');
 }
@@ -1215,71 +1227,74 @@ function postgame2() {
                 node.game.timer.doTimeUp();
             });
         });
-    });
-    
-    for (var i = 0; i < 4; i++) {
-        var questionnaireClassesId4 = 'motivation' + i;
-        var questionnaireClasses4 = W.getElementById(questionnaireClassesId4);
-        questionnaireClasses4.onclick = function(i) {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'motivation_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-    
-    for (var i = 0; i < 2; i++) {
-        var questionnaireClassesId5 = 'gender' + i;
-        var questionnaireClasses5 = W.getElementById(questionnaireClassesId5);
-        questionnaireClasses5.onclick = function(i) {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'gender_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-    
-    
-    var b = W.getElementById('submit');
-    
-    b.onclick = function() {
-
+        
+        
+            
         for (var i = 0; i < 4; i++) {
-            var posname = 'motivation_radio' + i;
-            var position = W.getElementById(posname);
-            if (position.checked) {
-                var motivationValue = position.value;
-                break;
+            var questionnaireClassesId4 = 'motivation' + i;
+            var questionnaireClasses4 = W.getElementById(questionnaireClassesId4);
+            questionnaireClasses4.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'motivation_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
         
         for (var i = 0; i < 2; i++) {
-            var posname2 = 'gender_radio' + i;
-            var position2 = W.getElementById(posname2);
-            if (position2.checked) {
-                var genderValue = position2.value;
-                break;
+            var questionnaireClassesId5 = 'gender' + i;
+            var questionnaireClasses5 = W.getElementById(questionnaireClassesId5);
+            questionnaireClasses5.onclick = function(i) {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'gender_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
         
-        var hitsSubmitted = W.getElementById('hitsSubmitted');
-        var hitsSubmittedValue = hitsSubmitted.value;
-                
         
-        var badAlert = W.getElementById('badAlert');
-        var goodAlert = W.getElementById('goodAlert');
+        var b = W.getElementById('submit');
         
-        if (!motivationValue || !genderValue || !hitsSubmittedValue) {
-            badAlert.style.display = '';
-        } else {
-            badAlert.style.display = 'none';
-            goodAlert.style.display = '';
-            node.emit('QUEST2_DONE', motivationValue, genderValue, hitsSubmittedValue);
-        }    
+        b.onclick = function() {
+
+            for (var i = 0; i < 4; i++) {
+                var posname = 'motivation_radio' + i;
+                var position = W.getElementById(posname);
+                if (position.checked) {
+                    var motivationValue = position.value;
+                    break;
+                }
+            }
+            
+            for (var i = 0; i < 2; i++) {
+                var posname2 = 'gender_radio' + i;
+                var position2 = W.getElementById(posname2);
+                if (position2.checked) {
+                    var genderValue = position2.value;
+                    break;
+                }
+            }
+            
+            var hitsSubmitted = W.getElementById('hitsSubmitted');
+            var hitsSubmittedValue = hitsSubmitted.value;
+                    
+            
+            var badAlert = W.getElementById('badAlert');
+            var goodAlert = W.getElementById('goodAlert');
+            
+            if (!motivationValue || !genderValue || !hitsSubmittedValue) {
+                badAlert.style.display = '';
+            } else {
+                badAlert.style.display = 'none';
+                goodAlert.style.display = '';
+                node.emit('QUEST2_DONE', motivationValue, genderValue, hitsSubmittedValue);
+            }    
+            
+        }
         
-    }
+    });
     
     console.log('Postgame2');
 }
@@ -1295,51 +1310,51 @@ function postgame3() {
                 node.game.timer.doTimeUp();
             });
         });
-    });
     
        
-    for (var i = 0; i < 3; i++) {
-        var questionnaireClassesId6 = 'understood' + i;
-        var questionnaireClasses6 = W.getElementById(questionnaireClassesId6);
-        questionnaireClasses6.onclick = function() {
-            var thisId = this.id;
-            var thisNumber = thisId.slice(-1);
-            var thisRadioId = 'understood_radio' + thisNumber;
-            var thisRadio = W.getElementById(thisRadioId);
-            thisRadio.checked = true;               
-        }
-    }
-
-    var b = W.getElementById('submit');
-    
-    b.onclick = function() {
-
         for (var i = 0; i < 3; i++) {
-            var posname = 'understood_radio' + i;
-            var position = W.getElementById(posname);
-            if (position.checked) {
-                var understoodValue = position.value;
-                break;
+            var questionnaireClassesId6 = 'understood' + i;
+            var questionnaireClasses6 = W.getElementById(questionnaireClassesId6);
+            questionnaireClasses6.onclick = function() {
+                var thisId = this.id;
+                var thisNumber = thisId.slice(-1);
+                var thisRadioId = 'understood_radio' + thisNumber;
+                var thisRadio = W.getElementById(thisRadioId);
+                thisRadio.checked = true;               
             }
         }
+
+        var b = W.getElementById('submit');
         
-        var comments = W.getElementById('comments');
-        var commentsValue = comments.value;
-                
-        
-        var badAlert = W.getElementById('badAlert');
-        var goodAlert = W.getElementById('goodAlert');
-        
-        if (!understoodValue) {
-            badAlert.style.display = '';
-        } else {
-            badAlert.style.display = 'none';
-            goodAlert.style.display = '';
-            node.emit('QUEST3_DONE', understoodValue, commentsValue);
-        }    
-        
-    }
+        b.onclick = function() {
+
+            for (var i = 0; i < 3; i++) {
+                var posname = 'understood_radio' + i;
+                var position = W.getElementById(posname);
+                if (position.checked) {
+                    var understoodValue = position.value;
+                    break;
+                }
+            }
+            
+            var comments = W.getElementById('comments');
+            var commentsValue = comments.value;
+                    
+            
+            var badAlert = W.getElementById('badAlert');
+            var goodAlert = W.getElementById('goodAlert');
+            
+            if (!understoodValue) {
+                badAlert.style.display = '';
+            } else {
+                badAlert.style.display = 'none';
+                goodAlert.style.display = '';
+                node.emit('QUEST3_DONE', understoodValue, commentsValue);
+            }    
+            
+        }
     
+    });
     console.log('Postgame3');
 }
 
@@ -1365,9 +1380,6 @@ function endgame() {
             var exitCodeInput = W.getElementById('exitCode');
             exitCodeInput.value = exitcode;
             
-            
-            //W.writeln('Your bonus in this game is: ' + win, root);
-            //W.writeln('Your exitcode is: ' + exitcode, root);
         });
     });
 

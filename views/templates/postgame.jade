@@ -17,15 +17,15 @@ block mainContent
                 span(style='font-weight:bold;') With your choices, did you
                 br
                 span(id="choices0")
-                    input(type='radio', name='choices', id='choices_radio0', value='more2others')
+                    input(type='radio', name='choices', id='choices_radio0', value=1)
                     |  allocate more to others than they allocated to you?
                 br
                 span(id="choices1")
-                    input(type='radio', name='choices', id='choices_radio1', value='less2others')
+                    input(type='radio', name='choices', id='choices_radio1', value=2)
                     |  allocate less to others than they allocated to you?
                 br
                 span(id="choices2")
-                    input(type='radio', name='choices', id='choices_radio2', value='same2others')
+                    input(type='radio', name='choices', id='choices_radio2', value=3)
                     |  Allocate the same to them as they allocated to you?
          
         div(class="panel panel-default")
@@ -33,15 +33,15 @@ block mainContent
                 span(style='font-weight:bold;') With your choices, did you intend to
                 br
                 span(id="intend0")
-                    input(type='radio', name='intend', id='intend_radio0', value='more2others')
+                    input(type='radio', name='intend', id='intend_radio0', value=1)
                     |  allocate more to others than they allocated to you?
                 br
                 span(id="intend1")
-                    input(type='radio', name='intend', id='intend_radio1', value='less2others')
+                    input(type='radio', name='intend', id='intend_radio1', value=2)
                     |  allocate less to others than they allocated to you?
                 br
                 span(id="intend2")
-                    input(type='radio', name='intend', id='intend_radio2', value='same2others')
+                    input(type='radio', name='intend', id='intend_radio2', value=3)
                     |  allocate the same to them as they allocated to you?
             
         div(class="panel panel-default")
@@ -49,19 +49,19 @@ block mainContent
                 span(style='font-weight:bold;') Did your choices
                 br
                 span(id="depend0")
-                    input(type='radio', name='depend', id='depend_radio0', value='previous2you')
+                    input(type='radio', name='depend', id='depend_radio0', value=1)
                     |  depend on how much your previous partner allocated to you?
                 br
                 span(id="depend1")
-                    input(type='radio', name='depend', id='depend_radio1', value='next2previous')
+                    input(type='radio', name='depend', id='depend_radio1', value=2)
                     |  depend on how much your next partner allocated to his previous partner?
                 br
                 span(id="depend2")
-                    input(type='radio', name='depend', id='depend_radio2', value='previous2you+next2previous')
+                    input(type='radio', name='depend', id='depend_radio2', value=3)
                     |  depend both on how much your previous partner allocated to you and on how much your next partner allocated to his previous partner?
                 br
                 span(id="depend3")
-                    input(type='radio', name='depend', id='depend_radio3', value='notdepend')
+                    input(type='radio', name='depend', id='depend_radio3', value=4)
                     |  not depend on others?
               
         br

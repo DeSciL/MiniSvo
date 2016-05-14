@@ -81,7 +81,7 @@ function init() {
 
     // "STEPPING" is the last event emitted before the stage is updated.
     node.on('STEPPING', function() {
-        var currentStage, db, p, gain, prefix;
+        var currentStage, db, prefix;
 
         currentStage = node.game.getCurrentGameStage();
 
@@ -96,6 +96,7 @@ function init() {
         // Update last stage reference.
         node.game.lastStage = currentStage;
 
+        /*
         for (p in node.game.lastBids) {
             if (node.game.lastBids.hasOwnProperty(p)) {
 
@@ -109,6 +110,7 @@ function init() {
                 }
             }
         }
+        */
 
         db = node.game.memory.stage[currentStage];
 
@@ -125,9 +127,11 @@ function init() {
 
             console.log('Round data saved ', currentStage);
         }
-
+        
+        /*
         // Resets last bids;
         node.game.lastBids = {};
+        */    
     });
 
     // Add session name to data in DB.
@@ -259,54 +263,7 @@ function feedback() {
 }
 
 
-// function totalpayoff() {
-//     var playerId, payoffs;
-//     var i, len, round, other, otherOffer1, otherOffer2;
-//     var out;
-// 
-//     console.log('TOTALPAYOFFSS!');
-// 
-//     for (playerId in node.game.memory.player) {
-//         // Only connected players.
-//         if (!node.game.pl.id.get(playerId)) {
-//             console.log('Noooooot f', playerId);
-//             continue;
-//         }
-// 
-//         payoffs = node.game.memory.player[playerId].select('offer1').fetch();
-//         i = -1, len = payoffs.length;
-//         out = new Array(len);
-//         for ( ; ++i < len ; ) {
-//             other = payoffs[i].other;
-//             round = payoffs[i].stage.round;
-//             other = node.game.memory.player[other]
-//                 .select('offer1')
-//                 .and('stage.round', '=', round)
-//                 .last();
-// 
-//             if (!other) {
-//                 console.log('other not found, put def value');
-//                 otherOffer1 = 1;
-//                 otherOffer2 = 1;
-//             }
-//             else {
-//                 otherOffer1 = other.offer1;
-//                 otherOffer2 = other.offer2;
-//             }
-// 
-//             out[i] = {
-//                 myoffer1: payoffs[i].offer1,
-//                 myoffer2: payoffs[i].offer2,
-//                 otherOffer1: otherOffer1,
-//                 otherOffer2: otherOffer2
-//             };
-//         }
-//         node.say('PAYOFFS', playerId, out);
-//     }   
-// }
-
 function totalpayoff(playerId) {
-    var playerId, payoffs;
     var i, len, round, other, otherOffer1, otherOffer2;
     var out;
 
@@ -317,7 +274,7 @@ function totalpayoff(playerId) {
         return;
     }
 
-    payoffs = node.game.memory.player[playerId].select('offer1').fetch();
+    var payoffs = node.game.memory.player[playerId].select('offer1').fetch();
     i = -1, len = payoffs.length;
     out = new Array(len);
     for ( ; ++i < len ; ) {
@@ -348,17 +305,6 @@ function totalpayoff(playerId) {
     node.say('PAYOFFS', playerId, out);
 }
 
-/*
-function totalpayoff() {
-    var playerId, payoffs;
-    for (playerId in node.game.memory.player) {
-        payoffs = node.game.memory.player[playerId].select('offer1').fetchSubObj(['offer1', 'offer2']);
-        // payoffs is an array of objects like: [{offer1: x, offer2: y}, {offer1: z, offer2, w}];
-        node.say('PAYOFFS', playerId, payoffs);
-    }
-   
-}
-*/
 
 function gameover() {
     console.log('************** GAMEOVER ' + gameRoom.name + ' ****************');
@@ -395,7 +341,7 @@ function doMatchPrev() {
         // ROUNDROBIN RE-MATCHING
         // Set number of players in game.settings
         // Number of rounds must make sense in combination with numbers of players
-        // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedbacj
+        // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedback
         // Run this once in first round for rmNext treatment because we need a match!
         
         var matches = node.game.matcher.getMatch(round); 
@@ -615,28 +561,30 @@ function endgame(playerId) {
 
     node.game.bonuses.push([p.id, code.ExitCode || 'na', code.win,
                             node.game.gameTerminated]);
+
+    
     
 
     // Not very strong condition. Might need improvement.
     // if (node.game.bonuses.length === node.game.pl.size()) {
 
-        // Write down bonus file.
-        filename = DUMP_DIR + 'bonus.csv';
-        bonusFile = fs.createWriteStream(filename);
-        bonusFile.on('error', function(err) {
-            console.log('Error while saving bonus file: ', err);
-        });
-        bonusFile.write(["access", "exit", "bonus", "terminated"].join(', ') + '\n');
-        node.game.bonuses.forEach(function(v) {
-            bonusFile.write(v.join(', ') + '\n'); 
-        });
-        bonusFile.end();
+    // Write down bonus file.
+    filename = DUMP_DIR + 'bonus.csv';
+    bonusFile = fs.createWriteStream(filename);
+    bonusFile.on('error', function(err) {
+        console.log('Error while saving bonus file: ', err);
+    });
+    bonusFile.write(["access", "exit", "bonus", "terminated"].join(', ') + '\n');
+    node.game.bonuses.forEach(function(v) {
+        bonusFile.write(v.join(', ') + '\n'); 
+    });
+    bonusFile.end();
 
-        // node.fs.writeCsv(bonusFile, bonus, {
-        //     headers: ["access", "exit", "bonus", "terminated"]
-        // });
+    // node.fs.writeCsv(bonusFile, bonus, {
+    //     headers: ["access", "exit", "bonus", "terminated"]
+    // });
 
-        node.game.memory.save(DUMP_DIR + 'memory_all.json');
+    node.game.memory.save(DUMP_DIR + 'memory_all.json');
 
         // node.done();
     // }

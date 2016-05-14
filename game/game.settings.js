@@ -15,8 +15,8 @@ module.exports = {
     MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. *
-    REPEAT: 10,
-    // REPEAT: 2,          // For testing
+    // REPEAT: 10,
+    REPEAT: 3,          // For testing
 
     // Number of coins to split. *
     COINS: 100,
