@@ -107,22 +107,19 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 var path = require('path');
                 var db, prefix;
                 var DUMP_DIR = path.resolve(channel.getGameDir(), 'data') + '/' + counter + '/';
-                var currentStage = node.game.getCurrentGameStage();
+                // var currentStage = node.game.getCurrentGameStage();
                 var GameStage = ngc.GameStage;
-                var currentStage2 = new GameStage(msg.stage);
+                var currentStage = new GameStage(msg.stage);
 
                 console.log(currentStage);
-                
-                
-                console.log(currentStage2);
                 // node.game.lastStage = currentStage;
-                db = node.game.memory.stage[currentStage2];
+                db = node.game.memory.stage[currentStage];
 
                 if (db && db.size()) {
-                    prefix = DUMP_DIR + 'memory_' + currentStage2;
+                    prefix = DUMP_DIR + 'memory_' + currentStage;
                     db.save(prefix + '.csv', { flags: 'w' }); 
                     db.save(prefix + '.nddb', { flags: 'w' });
-                    console.log('Round data saved ', currentStage2);
+                    console.log('Round data saved ', currentStage);
                 }
             });
         }

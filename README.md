@@ -23,8 +23,9 @@ If you have an older version installed, follow these steps:
 
 #### Important:
 - Fix Viewport / mobile screen visuals
-- Different timer per round
 - Finish instructions stranger treatment
+- Send bonus to descil mturk
+- ~~Different timer per round~~
 - ~~Make totalpayoffs / questionnaire independent on partner~~
 - ~~change ExitCode display in waitingroom~~
 - ~~Improve quiz style~~
