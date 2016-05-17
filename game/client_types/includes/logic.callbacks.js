@@ -226,6 +226,8 @@ function init() {
         // node.remoteCommand('resume', 'ALL');
     });
 
+    /*
+
     // Update the Payoffs
     node.on.data('response', function(msg) {
         var resWin, bidWin, code, response;
@@ -242,6 +244,8 @@ function init() {
             node.game.lastBids[response.from] = bidWin;
         }
     });
+    
+    */
 
     console.log('init');
 }
