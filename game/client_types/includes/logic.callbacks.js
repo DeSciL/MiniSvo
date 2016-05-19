@@ -158,33 +158,6 @@ function init() {
         // Clear any message in the buffer from.
         node.remoteCommand('erase_buffer', 'ROOM');
 
-        // Notify other player he is back.
-        // TODO: add it automatically if we return TRUE? It must be done
-        // both in the alias and the real event handler
-        node.game.pl.each(function(player) {
-            node.socket.send(node.msg.create({
-                target: 'PCONNECT',
-                data: {id: p.id},
-                to: player.id
-            }));
-        });
-
-        // Send currently connected players to reconnecting one.
-        node.socket.send(node.msg.create({
-            target: 'PLIST',
-            data: node.game.pl.fetchSubObj('id'),
-            to: p.id
-        }));
-
-        // We could slice the game plot, and send just what we need
-        // however here we resend all the stages, and move their game plot.
-        console.log('** Player reconnected: ' + p.id + ' **');
-        // Setting metadata, settings, and plot.
-        node.remoteSetup('game_metadata',  p.id, client.metadata);
-        node.remoteSetup('game_settings', p.id, client.settings);
-        node.remoteSetup('plot', p.id, client.plot);
-        node.remoteSetup('env', p.id, client.env);
-
         if (code.lang.name !== 'English') {
             // If lang is different from Eng, remote setup it.
             // TRUE: sets also the URI prefix.
@@ -192,6 +165,10 @@ function init() {
             node.remoteSetup('lang', p.id, [code.lang, true]);
         }
         
+        // Setup newly connected client.
+        gameRoom.setupClient(p.id);
+        node.remoteSetup('env', p.id, {reload: true});
+
         // Start the game on the reconnecting client.
         // Need to give step: false, because otherwise pre-caching will
         // call done() on reconnecting stage.

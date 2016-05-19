@@ -21,11 +21,12 @@ module.exports = function(stager, settings) {
 //         .next('endgame')
         .gameover();
 
-    // stager.skip('instructions');
+    stager.skip('instructions');
     stager.skip('selectLanguage');
     // stager.skip('questionnaire2');
     // stager.skip('questionnaire');
-    // stager.skip('quiz');
+    stager.skip('quiz');
+    stager.skip('quiz2');
     
     stager.extendStage('ultimatum', {steps: ['ultimatum1', 'feedback']});
 

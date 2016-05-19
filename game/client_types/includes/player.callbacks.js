@@ -858,14 +858,16 @@ function feedback() {
         // Hack to avoid double offers. Todo: fix.
         node.game.offerDone = false;
 
-
+        
         node.on.data('OTHER_OFFER', function(msg) {
         
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
-            
-            
+            if (node.env('reload')) {
+                debugger;
+            }
+
             options = {
                     milliseconds: 30000,
                     timeup: function() {
@@ -913,7 +915,6 @@ function feedback() {
             
             // Highlight selected values in sliders on feedback page
             // Colors?
-            
             var blackClassesName1 = 'firstHoverclass' + chosenValueIndex1;
             var blackClasses1 = W.getElementsByClassName(blackClassesName1);
             for (var i = 0; i < blackClasses1.length; i++) {

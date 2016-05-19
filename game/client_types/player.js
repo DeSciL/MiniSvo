@@ -264,7 +264,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     };
     game.verbosity = 0;
 
-    game.debug = settings.DEBUG;
+    game.debug = true; //settings.DEBUG;
     game.nodename = 'player';
 
     return game;
