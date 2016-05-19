@@ -914,8 +914,126 @@ function feedback() {
             */
             
             // Highlight selected values in sliders on feedback page
-            // Colors?
-            var blackClassesName1 = 'firstHoverclass' + chosenValueIndex1;
+            // Change class
+            
+            var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
+            var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
+            var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
+            
+            if (firstSelfTopId) {
+                var firstSelfTop = W.getElementById(firstSelfTopId);
+                firstSelfTop.className += ' highlightSelfTop';
+            }
+            if (firstSelfMiddleId) {
+                var firstSelfMiddle = W.getElementById(firstSelfMiddleId);
+                firstSelfMiddle.className += ' highlightSelfMiddle';
+            }
+            if (firstSelfBottomId) {
+                var firstSelfBottom = W.getElementById(firstSelfBottomId);
+                firstSelfBottom.className += ' highlightSelfBottom';
+            }
+            
+            var otherSelfTopId = 'secondHoverTop' + chosenValueIndex2;
+            var otherSelfMiddleId = 'secondHoverMiddle' + chosenValueIndex2;
+            var otherSelfBottomId = 'secondHoverBottom' + chosenValueIndex2;
+            
+            if (otherSelfTopId) {
+                var otherSelfTop = W.getElementById(otherSelfTopId);
+                otherSelfTop.className += ' highlightSelfTop';
+            }
+            if (otherSelfMiddleId) {
+                var otherSelfMiddle = W.getElementById(otherSelfMiddleId);
+                otherSelfMiddle.className += ' highlightSelfMiddle';
+            }
+            if (otherSelfBottomId) {
+                var otherSelfBottom = W.getElementById(otherSelfBottomId);
+                otherSelfBottom.className += ' highlightSelfBottom';
+            }
+            
+            // Feedback about partners choice
+            var treatment = node.env('treatment');
+            if(treatment != 'nf') {
+                var colors = W.getElementById('colors');
+                colors.style.display = '';
+                
+                var firstOtherTopId = 'firstHoverTop' + otherValueIndex1;
+                var firstOtherMiddleId = 'firstHoverMiddle' + otherValueIndex1;
+                var firstOtherBottomId = 'firstHoverBottom' + otherValueIndex1;
+                
+                if (firstOtherTopId) {
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameTop = W.getElementById(firstOtherTopId);
+                        firstSameTop.className += ' highlightSameTop';
+                    }
+                    else {
+                        var firstOtherTop = W.getElementById(firstOtherTopId);
+                        firstOtherTop.className += ' highlightOtherTop';
+                    }
+                }
+                if (firstOtherMiddleId) {
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameMiddle = W.getElementById(firstOtherMiddleId);
+                        firstSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var firstOtherMiddle = W.getElementById(firstOtherMiddleId);
+                        firstOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+                }
+                if (firstOtherBottomId) {
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameBottom = W.getElementById(firstOtherBottomId);
+                        firstSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var firstOtherBottom = W.getElementById(firstOtherBottomId);
+                        firstOtherBottom.className += ' highlightOtherBottom';
+                    }
+                }
+                
+                
+                var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
+                var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
+                var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
+                
+                if (secondOtherTopId) {
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameTop = W.getElementById(secondOtherTopId);
+                        secondSameTop.className += ' highlightSameTop';
+                    }
+                    else {
+                        var secondOtherTop = W.getElementById(secondOtherTopId);
+                        secondOtherTop.className += ' highlightOtherTop';
+                    }
+                }
+                if (secondOtherMiddleId) {
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                        secondSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
+                        secondOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+                }
+                if (secondOtherBottomId) {
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameBottom = W.getElementById(secondOtherBottomId);
+                        secondSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
+                        secondOtherBottom.className += ' highlightOtherBottom';
+                    }
+                }
+            } else {
+                var colorsNF = W.getElementById('colorsNF');
+                colorsNF.style.display = ''; 
+            }
+                
+            
+            /*
+            var blackClassesName1 = 'firstHover' + chosenValueIndex1;
             var blackClasses1 = W.getElementsByClassName(blackClassesName1);
             for (var i = 0; i < blackClasses1.length; i++) {
                 blackClasses1[i].style.backgroundColor = '#660';
@@ -1000,6 +1118,8 @@ function feedback() {
                 var colorsNF = W.getElementById('colorsNF');
                 colorsNF.style.display = ''; 
             }
+            
+            */
             
             root = W.getElementById('container');
 

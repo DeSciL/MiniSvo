@@ -24,17 +24,17 @@ block mainContent
                     tr
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive1
-                            td(style='text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
+                            td(class='feedbackTop', id='firstHoverTop' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
-                            td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='firstHoverclass' + i++)
+                            td(class='feedbackMiddle', id='firstHoverMiddle' + i++)
 
                     tr
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in send1
-                            td(style='text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
+                            td(class='feedbackBottom', id='firstHoverBottom' + index)= val
                 
 
         div(class="panel panel-default", style="width:530px;")
@@ -44,16 +44,16 @@ block mainContent
                     tr
                         td(style='height:33px;font-weight:normal;') You receive:
                         each val, index in receive2
-                            td(style='text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
+                            td(class='feedbackTop', id='secondHoverTop' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
-                            td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i++) 
+                            td(class='feedbackMiddle', id='secondHoverMiddle' + i++) 
                     tr
                         td(style='height:33px;font-weight:normal;') Your partner receives:
                         each val, index in send2
-                            td(style='text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
+                            td(class='feedbackBottom', id='secondHoverBottom' + index)= val
 
         div(id='colors', style='display:none;')
             p

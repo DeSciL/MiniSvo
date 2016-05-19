@@ -41,3 +41,71 @@ input#exitCode {
 .quizCell {
     padding-bottom: 6px;
 }
+
+
+
+.feedbackTop {
+    text-align:center;width:30px;background:#fff;color:#888;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;
+}
+
+.feedbackMiddle {
+    height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;
+}
+
+.feedbackBottom {
+    text-align:center;background:#fff;color:#888;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;
+}
+
+.highlightSelfTop {
+    background:#660 !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightSelfMiddle {
+    background:#660 !important;
+    color:#fff !important;
+    border-top: 1px solid #660;
+    border-bottom: 1px solid #660;
+}
+
+.highlightSelfBottom {
+    background:#660 !important;
+    color:#fff !important;
+}
+
+.highlightOtherTop {
+    background:#714 !important;
+    color:#fff !important;
+}
+
+.highlightOtherMiddle {
+    background:#714 !important;
+    color:#fff !important;
+    border-top: 1px solid #714;
+    border-bottom: 1px solid #714;
+}
+
+.highlightOtherBottom {
+    background:#714 !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightSameTop {
+    background:#f00 url('../pictures/stripes.gif') repeat !important;
+    color:#fff !important;
+}
+
+.highlightSameMiddle {
+    background:#f00 url('../pictures/stripes.gif') repeat !important;
+    color:#fff !important;
+    border-top: 1px solid #714;
+    border-bottom: 1px solid #714;
+}
+
+.highlightSameBottom {
+    background:#f00 url('../pictures/stripes.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
