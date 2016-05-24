@@ -156,6 +156,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('ultimatum1', {
+        //timeup: node.done(),
         cb: cbs.ultimatum,
         // minPlayers: MIN_PLAYERS,
         // `syncOnLoaded` forces the clients to wait for all the others to be
@@ -264,7 +265,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     };
     game.verbosity = 0;
 
-    game.debug = true; //settings.DEBUG;
+    game.debug = settings.DEBUG;
     game.nodename = 'player';
 
     return game;
