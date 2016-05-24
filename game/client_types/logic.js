@@ -57,6 +57,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         settings.MIN_PLAYERS,
         cbs.notEnoughPlayers
     ]);
+    
+    //stager.setDefaultProperty('pushClients', true);
 
     stager.setDefaultCallback(function() {});
 
@@ -70,13 +72,29 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             });
         }
     });
-      
+    
+    stager.extendStep('instructions', {
+        pushClients: true,
+        timer: 10000
+    });
+    
+    stager.extendStep('quiz', {
+        pushClients: true,
+        timer: 10000
+    });
+    
+    stager.extendStep('quiz2', {
+        pushClients: true,
+        timer: 10000
+    });
 
     stager.extendStep('ultimatum1', {
         cb: function() {
             this.node.log('Ultimatum');
             cbs.doMatchPrev();
-        }
+        },
+        pushClients: true,
+        timer: 10000
     });
     
     stager.extendStep('feedback', {
@@ -84,7 +102,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             this.node.log('Feedback');
             cbs.feedback();
             cbs.doMatchNext();
-        }
+        },
+        pushClients: true,
+        timer: 10000
     });
 
 
@@ -130,6 +150,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             this.node.log('Total Payoffs');
             // cbs.totalpayoff();
         },
+        pushClients: true,
+        timer: 10000
         // minPlayers: undefined,
         // syncStepping: false,
     });
@@ -142,7 +164,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             console.log('AAAA - 1');
 //             debugger
 //             node.done();
-        }
+        },
+        pushClients: true,
+        timer: 10000
     });
 
     stager.extendStep('questionnaire2', {
@@ -152,7 +176,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: function() { 
             console.log('AAAA - 2');
 //          node.done();
-        }
+        },
+        pushClients: true,
+        timer: 10000
     });
 
     stager.extendStep('questionnaire3', {
@@ -161,7 +187,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: function() {
             console.log('AAAA - 3');
         //    node.done(); 
-        }
+        },
+        pushClients: true,
+        timer: 10000
     });
 
     stager.extendStep('endgame', {

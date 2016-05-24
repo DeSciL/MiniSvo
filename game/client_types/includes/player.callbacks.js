@@ -45,7 +45,7 @@ function init() {
             stageOffset: 1
         });
 
-        node.game.timer = node.widgets.append('VisualTimer', header);
+        node.game.visualTimer = node.widgets.append('VisualTimer', header);
     
         W.setHeaderPosition('top');
     }
@@ -75,8 +75,8 @@ function init() {
         // if (node.game.offerDone) return;
         // node.game.offerDone = true;
 
-        node.game.timer.clear();
-        node.game.timer.startWaiting({milliseconds: 30000});
+        node.game.visualTimer.clear();
+        node.game.visualTimer.startWaiting({milliseconds: 30000});
         
         //save quiz answers for quiz feedback
         node.game.numberOfPersons = numberOfPersons;
@@ -101,8 +101,8 @@ function init() {
     
      // Event listeners for questionnaire
     node.on('QUEST1_DONE', function(choicesValue, intendValue, dependValue, timeup) {
-        node.game.timer.clear();
-        node.game.timer.startWaiting({milliseconds: 30000});
+        node.game.visualTimer.clear();
+        node.game.visualTimer.startWaiting({milliseconds: 30000});
          
         // Notify the server.
         node.done({
@@ -114,8 +114,8 @@ function init() {
     });
     
     node.on('QUEST2_DONE', function(motivationValue, genderValue, hitsSubmittedValue, timeup) {
-        node.game.timer.clear();
-        node.game.timer.startWaiting({milliseconds: 30000});
+        node.game.visualTimer.clear();
+        node.game.visualTimer.startWaiting({milliseconds: 30000});
          
         // Notify the server.
         node.done({
@@ -127,8 +127,8 @@ function init() {
     });
     
     node.on('QUEST3_DONE', function(understoodValue, commentsValue, timeup) {
-        node.game.timer.clear();
-        node.game.timer.startWaiting({milliseconds: 30000});
+        node.game.visualTimer.clear();
+        node.game.visualTimer.startWaiting({milliseconds: 30000});
          
         // Notify the server.
         node.done({
@@ -149,8 +149,8 @@ function init() {
         if (node.game.offerDone) return;
         node.game.offerDone = true;
 
-        node.game.timer.clear();
-        node.game.timer.startWaiting({milliseconds: 30000});
+        node.game.visualTimer.clear();
+        node.game.visualTimer.startWaiting({milliseconds: 30000});
 
         W.getElementById('submitOffer').disabled = 'disabled';
         
@@ -379,12 +379,12 @@ function quiz() {
         };
 
 
-        node.game.timer.startTiming(options);
+        node.game.visualTimer.startTiming(options);
 
         /*
         node.env('auto', function() {
             node.timer.randomExec(function() {
-                node.game.timer.doTimeUp();
+                node.game.visualTimer.doTimeUp();
             });
         });
         */
@@ -506,7 +506,7 @@ function quiz2() {
             }
         };
 
-        node.game.timer.startTiming(options);
+        node.game.visualTimer.startTiming(options);
         
        
         var numberOfPersons = node.game.numberOfPersons;
@@ -635,11 +635,11 @@ function ultimatum() {
                         lastChosenValue2 = node.game.lastOffer2;
                     }
                     
-                    node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true); //Change this to value of last choice! (if undefined = 4)
+                    node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true);
                 }
             };
 
-            node.game.timer.startTiming(options);
+            node.game.visualTimer.startTiming(options);
 
 
             b = W.getElementById('submitOffer');
@@ -864,9 +864,9 @@ function feedback() {
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
             //node.set({role: 'BIDDER'});
-            if (node.env('reload')) {
+            /*if (node.env('reload')) {
                 debugger;
-            }
+            }*/
 
             options = {
                     milliseconds: 30000,
@@ -874,7 +874,7 @@ function feedback() {
                         node.done();
                     }
             };
-            node.game.timer.startTiming(options);
+            node.game.visualTimer.startTiming(options);
             
             
             // Get the input from last round
@@ -1159,7 +1159,7 @@ function totalpayoff() {
                         node.done();
                     }
             };
-            node.game.timer.startTiming(options);
+            node.game.visualTimer.startTiming(options);
             
           
             var payoffs = msg.data;
@@ -1223,7 +1223,7 @@ function totalpayoff() {
 
             node.env('auto', function() {
                 node.timer.randomExec(function() {
-                    node.game.timer.doTimeUp();
+                    node.game.visualTimer.doTimeUp();
                 });
             });
             
@@ -1246,7 +1246,7 @@ function postgame() {
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
-                node.game.timer.doTimeUp();
+                node.game.visualTimer.doTimeUp();
             });
         });
         
@@ -1348,7 +1348,7 @@ function postgame2() {
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
-                node.game.timer.doTimeUp();
+                node.game.visualTimer.doTimeUp();
             });
         });
         
@@ -1431,7 +1431,7 @@ function postgame3() {
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
-                node.game.timer.doTimeUp();
+                node.game.visualTimer.doTimeUp();
             });
         });
     
@@ -1491,9 +1491,9 @@ function endgame() {
     
     W.loadFrame('ended.html', function() {
 
-        node.game.timer.switchActiveBoxTo(node.game.timer.mainBox);
-        node.game.timer.waitBox.hideBox();
-        node.game.timer.setToZero();
+        node.game.visualTimer.switchActiveBoxTo(node.game.visualTimer.mainBox);
+        node.game.visualTimer.waitBox.hideBox();
+        node.game.visualTimer.setToZero();
         node.on.data('WIN', function(msg) {
             var win, exitcode, codeErr;
             var root;
