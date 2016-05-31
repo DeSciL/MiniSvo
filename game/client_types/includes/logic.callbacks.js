@@ -423,7 +423,7 @@ function doMatchNext() {
 }
 
 function notEnoughPlayers() {
-    if (this.countdown) return;
+    // if (this.countdown) return;
     console.log('Warning: not enough players!!');
     // Pause connected players.
     node.remoteCommand('pause', 'ROOM', this.disconnectStr);
@@ -437,6 +437,12 @@ function notEnoughPlayers() {
         // Step must be not-skipped if you give the id (else give a number).
         node.game.gotoStep(new GameStage('final'));
     }, settings.WAIT_TIME * 1000);
+}
+
+// remember to export it.
+function enoughPlayersAgain() {
+    // Delete countdown to terminate the game.
+    clearTimeout(this.countdown);
 }
 
 // function endgame() {

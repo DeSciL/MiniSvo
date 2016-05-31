@@ -53,6 +53,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     // Extending default stages.
 
+    var node = gameRoom.node;
     stager.setDefaultProperty('minPlayers', [
         settings.MIN_PLAYERS,
         cbs.notEnoughPlayers
