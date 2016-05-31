@@ -165,6 +165,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // communications and delay in the execution of a stage. It is probably
         // not necessary in local networks, and it is FALSE by default.
         // syncOnLoaded: true
+        timeup: function() {
+            node.done({
+                pushTimeup: true,
+            });
+        }
     });
     
     stager.extendStep('feedback', {

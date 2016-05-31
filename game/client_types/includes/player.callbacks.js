@@ -859,6 +859,14 @@ function feedback() {
         node.game.offerDone = false;
 
         
+        options = {
+                milliseconds: 30000,
+                timeup: function() {
+                    node.done();
+                }
+        };
+        node.game.visualTimer.startTiming(options);
+        
         node.on.data('OTHER_OFFER', function(msg) {
         
             //console.log('CHOICES DONE!');
@@ -868,13 +876,6 @@ function feedback() {
                 debugger;
             }*/
 
-            options = {
-                    milliseconds: 30000,
-                    timeup: function() {
-                        node.done();
-                    }
-            };
-            node.game.visualTimer.startTiming(options);
             
             
             // Get the input from last round
@@ -1033,102 +1034,19 @@ function feedback() {
                     colorsNF.style.display = ''; 
                 }
             }
-                
-            
-            /*
-            var blackClassesName1 = 'firstHover' + chosenValueIndex1;
-            var blackClasses1 = W.getElementsByClassName(blackClassesName1);
-            for (var i = 0; i < blackClasses1.length; i++) {
-                blackClasses1[i].style.backgroundColor = '#660';
-                blackClasses1[i].style.color = '#fff';
-                
-                //blackClasses1[i].style.borderTop = '1px solid #660';
-            }
-            blackClasses1[1].style.borderTop = '1px solid #660';
-            blackClasses1[1].style.borderBottom = '1px solid #660';
-            blackClasses1[0].style.fontWeight = 'bold';
-            
 
-            
-            var blackClassesName2 = 'secondHoverclass' + chosenValueIndex2;
-            var blackClasses2 = W.getElementsByClassName(blackClassesName2);
-            for (var i = 0; i < blackClasses2.length; i++) {
-                blackClasses2[i].style.backgroundColor = '#660';
-                blackClasses2[i].style.color = '#fff';
-                
-                //thisClass[k].style.border = '1px solid #000';
-            }
-            blackClasses2[1].style.borderTop = '1px solid #660';
-            blackClasses2[1].style.borderBottom = '1px solid #660';
-            blackClasses2[0].style.fontWeight = 'bold';
-            
-            
-            var treatment = node.env('treatment');
-            if (treatment != 'nf') {
-                var colors = W.getElementById('colors');
-                colors.style.display = '';
-                
-                
-                var blackClassesName3 = 'firstHoverclass' + otherValueIndex1;
-                var blackClasses3 = W.getElementsByClassName(blackClassesName3);
-                var numberOfClasses3 = blackClasses3.length;
-                for (var i = 0; i < numberOfClasses3; i++) {
-                    
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        //blackClasses3[i].style.backgroundColor = '';
-                        blackClasses3[i].style.background = '#009';
-                        blackClasses3[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
-                        //blackClasses3[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
-                        blackClasses3[i].style.color = '#fff';
-                    }
-                    else {
-                        blackClasses3[i].style.backgroundColor = '#714';
-                        blackClasses3[i].style.color = '#fff';
-                    }
-                    
-                    //thisClass[k].style.border = '1px solid #000';
-                }
-                blackClasses3[1].style.borderTop = '1px solid #714';
-                blackClasses3[1].style.borderBottom = '1px solid #714';
-                blackClasses3[numberOfClasses3 - 1].style.fontWeight = 'bold';
-                
-
-                
-                var blackClassesName4 = 'secondHoverclass' + otherValueIndex2;
-                var blackClasses4 = W.getElementsByClassName(blackClassesName4);
-                var numberOfClasses4 = blackClasses4.length;
-                for (var i = 0; i < numberOfClasses4; i++) {
-                    
-                    if (chosenValueIndex2 == otherValueIndex2) {
-                        //blackClasses4[i].style.backgroundColor = '';
-                        blackClasses4[i].style.background = '#009';
-                        blackClasses4[i].style.background = "#f00 url('../pictures/stripes.gif') repeat";
-                        //blackClasses4[i].style.background = '-moz-repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);';
-                        blackClasses4[i].style.color = '#fff';
-                    }
-                    else {
-                        blackClasses4[i].style.backgroundColor = '#714';
-                        blackClasses4[i].style.color = '#fff';
-                    }
-                                    
-                    //thisClass[k].style.border = '1px solid #000';
-                }
-                blackClasses4[1].style.borderTop = '1px solid #714';
-                blackClasses4[1].style.borderBottom = '1px solid #714';
-                blackClasses4[numberOfClasses4 - 1].style.fontWeight = 'bold';
-            }
-            else {
-                var colorsNF = W.getElementById('colorsNF');
-                colorsNF.style.display = ''; 
-            }
-            
-            */
             
             root = W.getElementById('container');
 
             node.timer.setTimestamp('bidder_loaded');
                
         
+        });
+        
+        // if clients get pushed there is no feedback to be displayed!
+        node.on.data('ERROR_OFFER', function(msg) {
+            var error = W.getElementById('error');
+            error.style.display = ''; 
         });
         
         b = W.getElementById('continue');

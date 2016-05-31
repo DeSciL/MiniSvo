@@ -16,7 +16,11 @@ block mainContent
             |  from your partner's choices (bottom numbers).
             br
             br
-        
+            
+        div(class="alert alert-danger", role="alert", id="error", style="display:none;width:530px;")
+            strong No feedback. 
+            span  There was an error during the choices stage so there is no feedback. However, please continue.
+                                   
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") First choice
             div(class="panel-body")
@@ -72,7 +76,9 @@ block mainContent
                 div(style='background:#660;display:inline;') 
                      img(src='../pictures/yourChoice.gif')
                 span  Your choice 
-        
+                
+                
+
         br
         input(type='button', value='Continue', name='continue', id='continue', class='btn')
         

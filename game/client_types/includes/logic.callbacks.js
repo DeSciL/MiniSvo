@@ -231,16 +231,22 @@ function feedback() {
     var previousStage; 
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
     
+     
     node.game.memory.stage[previousStage].each(function(item) {
 
         var other = item.other;
-       
-        var otherOfferItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-        var otherOffer1 =  otherOfferItem.offer1;
-        var otherOffer2 =  otherOfferItem.offer2;
+        
+        if (other) {
+            var otherOfferItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
+            var otherOffer1 =  otherOfferItem.offer1;
+            var otherOffer2 =  otherOfferItem.offer2;
 
-        node.say('OTHER_OFFER', item.player,  {offer1: otherOffer1, offer2: otherOffer2});
-    });   
+            node.say('OTHER_OFFER', item.player,  {offer1: otherOffer1, offer2: otherOffer2});
+        } else {
+            
+            node.say('ERROR_OFFER', item.player);  
+        }
+    });
 }
 
 
