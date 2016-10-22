@@ -1,11 +1,5 @@
 /**
- * # Logic code for Ultimatum Game
- * Copyright(c) 2015 Stefano Balietti
- * MIT Licensed
- *
- * Handles bidding, and responds between two players.
- *
- * http://www.nodegame.org
+ * # Logic code for MiniSvo Game
  */
 
 var ngc = require('nodegame-client');
@@ -89,9 +83,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         timer: 10000
     });
 
-    stager.extendStep('ultimatum1', {
+    stager.extendStep('decision', {
         cb: function() {
-            this.node.log('Ultimatum');
+            this.node.log('Choices');
             cbs.doMatchPrev();
         },
         pushClients: true,

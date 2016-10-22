@@ -1085,10 +1085,10 @@ function totalpayoff() {
           
             for(i = 0; i < payoffs.length; ++i) {
                 // Pay-Off from your own choices
-                var myIndex = parseInt(payoffs[i].mychoice1);
+                var myIndex = parseInt(payoffs[i].myChoice1);
                 var payFromSelf1 = node.game.settings.receive1[myIndex];
 
-                var myIndex2 = parseInt(payoffs[i].mychoice2);
+                var myIndex2 = parseInt(payoffs[i].myChoice2);
                 var payFromSelf2 = node.game.settings.receive1[myIndex2];
                 
                 var payFromSelf = payFromSelf1 + payFromSelf2;

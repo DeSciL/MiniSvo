@@ -1,9 +1,5 @@
 /**
- * # Functions used by the client of Ultimatum Game
- * Copyright(c) 2014 Stefano Balietti
- * MIT Licensed
- *
- * http://www.nodegame.org
+ * # Functions used by the client of MiniSvo Game
  */
 
 var ngc = require('nodegame-client');
@@ -49,7 +45,7 @@ function init() {
  //   J.mkdirSyncRecursive(DUMP_DIR, 0777);
     fs.mkdirsSync(DUMP_DIR);
 
-    console.log('********************** ultimatum room ' + counter++ +
+    console.log('********************** minisvo room ' + counter++ +
                 ' **********************');
 
     var COINS = settings.COINS;
@@ -238,21 +234,21 @@ function feedback() {
         var other = item.other;
         
         if (other) {
-            var otherOfferItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-            var otherOffer1 =  otherOfferItem.offer1;
-            var otherOffer2 =  otherOfferItem.offer2;
+            var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
+            var otherChoice1 =  otherChoiceItem.choice1;
+            var otherChoice2 =  otherChoiceItem.choice2;
 
-            node.say('OTHER_OFFER', item.player,  {offer1: otherOffer1, offer2: otherOffer2});
+            node.say('OTHER_CHOICE', item.player,  {choice1: otherChoice1, choice2: otherChoice2});
         } else {
             
-            node.say('ERROR_OFFER', item.player);  
+            node.say('ERROR_CHOICE', item.player);  
         }
     });
 }
 
 
 function totalpayoff(playerId) {
-    var i, len, round, other, otherOffer1, otherOffer2;
+    var i, len, round, other, otherChoice1, otherChoice2;
     var out;
 
     console.log('TOTALPAYOFFSS!');
@@ -262,32 +258,32 @@ function totalpayoff(playerId) {
         return;
     }
 
-    var payoffs = node.game.memory.player[playerId].select('offer1').fetch();
+    var payoffs = node.game.memory.player[playerId].select('choice1').fetch();
     i = -1, len = payoffs.length;
     out = new Array(len);
     for ( ; ++i < len ; ) {
         other = payoffs[i].other;
         round = payoffs[i].stage.round;
         other = node.game.memory.player[other]
-            .select('offer1')
+            .select('choice1')
             .and('stage.round', '=', round)
             .last();
 
         if (!other) {
             console.log('other not found, put def value');
-            otherOffer1 = 1;
-            otherOffer2 = 1;
+            otherChoice1 = 1;
+            otherChoice2 = 1;
         }
         else {
-            otherOffer1 = other.offer1;
-            otherOffer2 = other.offer2;
+            otherChoice1 = other.choice1;
+            otherChoice2 = other.choice2;
         }
 
         out[i] = {
-            myoffer1: payoffs[i].offer1,
-            myoffer2: payoffs[i].offer2,
-            otherOffer1: otherOffer1,
-            otherOffer2: otherOffer2
+            myChoice1: payoffs[i].choice1,
+            myChoice2: payoffs[i].choice2,
+            otherChoice1: otherChoice1,
+            otherChoice2: otherChoice2
         };
     }
     node.say('PAYOFFS', playerId, out);

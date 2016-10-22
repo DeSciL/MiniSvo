@@ -14,7 +14,7 @@ module.exports = function(stager, settings) {
         .next('instructions')
         .next('quiz')
         .next('quiz2')
-        .repeat('ultimatum', settings.REPEAT)
+        .repeat('choices', settings.REPEAT)
         .next('final')
 //         .next('totalpayoff')
 //         .next('questionnaire')
@@ -28,7 +28,7 @@ module.exports = function(stager, settings) {
     // stager.skip('quiz');
     // stager.skip('quiz2');
     
-    stager.extendStage('ultimatum', {steps: ['ultimatum1', 'feedback']});
+    stager.extendStage('choices', {steps: ['decision', 'feedback']});
 
     stager.extendStage('final', {steps: [
         'totalpayoff',

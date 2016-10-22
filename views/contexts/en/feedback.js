@@ -15,8 +15,8 @@ module.exports = function(settings, headers) {
         "choices4": "Your partners second choices:",
         "youChose1": "First payoff: ",
         "youChose2": "Second payoff: ",
-        "youReceivedAnOffer1": "First payoff: ",
-        "youReceivedAnOffer2": "Second payoff: ",
+        "youReceivedAChoice1": "First payoff: ",
+        "youReceivedAChoice2": "Second payoff: ",
         "submit": "Continue",
         
         "payoff": "Your total payoff in this round: ",

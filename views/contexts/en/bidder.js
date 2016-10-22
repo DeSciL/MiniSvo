@@ -10,8 +10,8 @@ module.exports = function(settings, headers) {
     return {
         "title": "Allocations",
         "youAre": "Choices",
-        "makeAnOffer1": "Choose one of the following allocations:",
-        "makeAnOffer2": "Choose one of the following allocations:",
+        "makeAChoice1": "Choose one of the following allocations:",
+        "makeAChoice2": "Choose one of the following allocations:",
         "submit": "Submit",
         "receive1": receive1,
         "send1": send1,

@@ -1,12 +1,5 @@
 /**
- * # Player code for Ultimatum Game
- * Copyright(c) 2015 Stefano Balietti
- * MIT Licensed
- *
- * Handles bidding, and responds between two players.
- * Extensively documented tutorial.
- *
- * http://www.nodegame.org
+ * # Player code for MiniSvo Game
  */
 
 var ngc = require('nodegame-client');
@@ -155,9 +148,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: cbs.quiz2
     });
 
-    stager.extendStep('ultimatum1', {
+    stager.extendStep('decision', {
         //timeup: node.done(),
-        cb: cbs.ultimatum,
+        cb: cbs.choices,
         // minPlayers: MIN_PLAYERS,
         // `syncOnLoaded` forces the clients to wait for all the others to be
         // fully loaded before releasing the control of the screen to the
