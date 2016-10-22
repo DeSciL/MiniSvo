@@ -1,10 +1,12 @@
 /**
  * # Standard Waiting Room for a nodeGame Channel
- * Copyright(c) 2015 Stefano Balietti
+ * Copyright(c) 2016 Stefano Balietti
  * MIT Licensed
  *
- * Handles incoming connections, matches them, setups the Ultimatum game
- * in each client, move them in a separate gaming room, and start the game.
+ * Handles incoming connections, setups each client, 
+ * moves them in a separate game room, and starts the game.
+ *
+ * @see GameRoom (nodegame-server)
  */
 module.exports = function(settings, waitRoom, runtimeConf) {
 
@@ -14,76 +16,13 @@ module.exports = function(settings, waitRoom, runtimeConf) {
     var node = waitRoom.node;
     var channel = waitRoom.channel;
 
-    var GROUP_SIZE = settings.GROUP_SIZE;
-    var POOL_SIZE = settings.POOL_SIZE || GROUP_SIZE;
-    var MAX_WAIT_TIME = settings.MAX_WAIT_TIME;
-    var ON_TIMEOUT = settings.ON_TIMEOUT;
-
-    var treatments = Object.keys(channel.gameInfo.settings);
-    var tLen = treatments.length;
-
-    var timeOuts = {};
-
     var stager = new node.Stager();
 
-    // decideTreatment: check if string, or use it.
-    function decideTreatment(t) {
-        if (t === "treatment_rotate") {
-            return treatments[(channel.autoRoomNo) % tLen];
-        }
-        else if ('undefined' === typeof t) {
-            return treatments[J.randomInt(-1,tLen-1)];
-        }
-        return t;
-    }
-
-    function makeTimeOut(playerID) {
-
-        timeOuts[playerID] = setTimeout(function() {            
-            var timeOutData, code;
-
-            channel.sysLogger.log("Timeout has not been cleared!!!");
-
-            channel.registry.checkOut(playerID);            
-
-            // See if an access code is defined, if so checkout remotely also.
-            code = channel.registry.getClient(playerID);           
-            
-            timeOutData = {
-                over: "Time elapsed!!!",
-                exit: code.ExitCode
-            };
-            node.say("TIME", playerID, timeOutData);
-            
-            
-
-        }, MAX_WAIT_TIME);
-
-    }
-
-    function clearTimeOut(playerID) {
-        clearTimeout(timeOuts[playerID]);
-        delete timeOuts[playerID];
-    }
+    // Parses the settings.
+    waitRoom.parseSettings(settings);
 
     function clientReconnects(p) {
         channel.sysLogger.log('Reconnection in the waiting room.', p);
-
-        node.game.pl.each(function(player) {
-            node.socket.send(node.msg.create({
-                target: 'PCONNECT',
-                data: p,
-                to: player.id
-            }));
-        });
-
-        // Send currently connected players to reconnecting one.
-        node.socket.send(node.msg.create({
-            target: 'PLIST',
-            // TODO: this sends a bit too much.
-            data: node.game.pl.db,
-            to: p.id
-        }));
         node.game.pl.add(p);
         clientConnects(p);
     }
@@ -92,7 +31,7 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         var wRoom, i;
 
         // Clear timeout in any case.
-        clearTimeOut(p.id);
+        waitRoom.clearTimeOut(p.id);
 
         // Client really disconnected (not moved into another game room).
         if (channel.registry.clients.disconnected.get(p.id)) {
@@ -101,85 +40,74 @@ module.exports = function(settings, waitRoom, runtimeConf) {
         }
         wRoom = waitRoom.clients.player;
         for (i = 0; i < wRoom.size(); i++) {
-            node.say("PLAYERSCONNECTED", wRoom.db[i].id, wRoom.size());
+            node.say('PLAYERSCONNECTED', wRoom.db[i].id, wRoom.size());
         }
     }
 
+    // Using self-calling function to put `firstTime` into closure.
     function clientConnects(p) {
-        var gameRoom, pList;
-        var NPLAYERS;
-        var i;
-        var timeOutData;
-        var treatmentName;
+        var pList;
         var nPlayers;
-
-        console.log('Client connected to waiting room: ', p.id);
-
-        // Mark code as used.
-        channel.registry.markInvalid(p.id);
-
-        pList = waitRoom.clients.player;
-        nPlayers = pList.size();
+        var waitTime;
+        var widgetConfig;
 
         node.remoteSetup('page', p.id, {
             clearBody: true,
-            title: { title: '---', addToBody: false }   //Empty title string
+            title: { title: 'Welcome!', addToBody: true }
         });
 
         node.remoteSetup('widgets', p.id, {
             destroyAll: true,
-            append: { 'WaitingRoom': {} } 
+            append: { 'WaitingRoom': {} }
         });
 
-        // Send the number of minutes to wait.
-        node.remoteSetup('waitroom', p.id, {
-            poolSize: POOL_SIZE,
-            groupSize: GROUP_SIZE,
-            maxWaitTime: MAX_WAIT_TIME,
-            onTimeout: ON_TIMEOUT
-        });
+        if (waitRoom.isRoomOpen()) {
+            console.log('Client connected to waiting room: ', p.id);
 
-        console.log('NPL ', nPlayers);
+            // Mark code as used.
+            channel.registry.markInvalid(p.id);
 
-        // Notify all players of new connection.        
-        node.say("PLAYERSCONNECTED", 'ROOM', nPlayers);
-        
-        // Start counting a timeout for max stay in waiting room.
-        makeTimeOut(p.id);
+            pList = waitRoom.clients.player;
+            nPlayers = pList.size();
 
-        // Wait for all players to connect.
-        if (nPlayers < POOL_SIZE) return;
 
-        for (i = 0; i < nPlayers; i++) {
-            timeOutData = {
-                over: "AllPlayersConnected",
-                exit: 0
-            };
+            if (waitRoom.START_DATE) {
+                waitTime = new Date(waitRoom.START_DATE).getTime() -
+                    (new Date().getTime());
+            }
+            else if (waitRoom.MAX_WAIT_TIME) {
+                waitTime = waitRoom.MAX_WAIT_TIME;
+            }
+            else {
+                waitTime = null; // Widget won't start timer.
+            }
 
-            node.say("TIME", pList.db[i].id, timeOutData);
-            
-            // Clear body.
-            node.remoteSetup('page', pList.db[i].id, { clearBody: true });
+            // Send the number of minutes to wait and all waitRoom settings.
+            widgetConfig = waitRoom.makeWidgetConfig();
+            widgetConfig.waitTime = waitTime;
+            node.remoteSetup('waitroom', p.id, widgetConfig);
 
-            // Clear timeout for players.
-            clearTimeout(timeOuts[i]);
+            console.log('NPL ', nPlayers);
+
+            // Notify all players of new connection.
+            node.say('PLAYERSCONNECTED', 'ROOM', nPlayers);
+
+            // Start counting a timeout for max stay in waiting room.
+            waitRoom.makeTimeOut(p.id, waitTime);
+
+            // Wait for all players to connect.
+            if (nPlayers < waitRoom.POOL_SIZE) return;
+
+            if (waitRoom.EXECUTION_MODE === 'WAIT_FOR_N_PLAYERS') {
+                waitRoom.dispatch({
+                    action: 'AllPlayersConnected',
+                    exit: 0
+                });
+            }
         }
-
-        // Select a subset of players from pool.
-        tmpPlayerList = pList.shuffle().limit(GROUP_SIZE);
-
-        // Decide treatment.
-        treatmentName = decideTreatment(settings.CHOSEN_TREATMENT);
-        
-        // Create new game room.
-        gameRoom = channel.createGameRoom({
-            clients: tmpPlayerList,
-            treatmentName: treatmentName
-        });
-
-        // Setup and start game.
-        gameRoom.setupGame();
-        gameRoom.startGame(true, []);
+        else {
+            node.say('ROOM_CLOSED', p.id);
+        }
     }
 
     function monitorReconnects(p) {

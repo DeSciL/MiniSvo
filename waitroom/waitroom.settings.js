@@ -2,51 +2,134 @@
  * Standard Waiting Room settings.
  */
 module.exports = {
+    
+    /**
+     * ## EXECUTION_MODE
+     *
+     * Sets the execution mode of the waiting room
+     *
+     * Different modes might have different default values, and need
+     * different settings.
+     *
+     * Available modes:
+     *
+     *   - ´TIMEOUT´, waits until the time is up, then it checks
+     *        whether enough players are connected to start the game.
+     *   - ´WAIT_FOR_N_PLAYERS´, the game starts right away as soon as
+     *        the desired number of connected players is reached.     
+     */
+    // EXECUTION_MODE: 'TIMEOUT',
+    EXECUTION_MODE: 'WAIT_FOR_N_PLAYERS',
 
-    // How many clients must connect before groups are formed.
+    /**
+     * ## POOL_SIZE
+     *
+     * How many clients must connect before groups are formed
+     */ 
     POOL_SIZE: 2,
 
-    // The size of each group.
+    /**
+     * ## GROUP_SIZE
+     *
+     * The size of each group
+     */
     GROUP_SIZE: 2,
 
-    // Maximum waiting time.
-    MAX_WAIT_TIME: 600000,
-    //MAX_WAIT_TIME: 20000,       // For testing
+    /**
+     * ## N_GAMES
+     *
+     * Number of games to dispatch 
+     *
+     * If set, it will close the waiting room after N_GAMES
+     * have been dispatched
+     */
+    // N_GAMES: 1,
 
-    // Treatment assigned to groups.
-    // If left undefined, a random treatment will be selected.
-    // Use "treatment_rotate" for rotating the treatments.
-    CHOSEN_TREATMENT: 'treatment_rotate',
+    /**
+     * ## MAX_WAIT_TIME
+     *
+     * Maximum waiting time in the waiting room
+     */ 
+    MAX_WAIT_TIME: 90000,
 
-    ON_TIMEOUT: function(data) {
-        var timeOut;
+    /**
+     * ## START_DATE
+     *
+     * Time and date of game start.
+     *
+     * Overrides `MAX_WAIT_TIME`. Accepted values: any valid
+     * argument to `Date` constructor.
+     */
+    // START_DATE: 'December 13, 2015 13:24:00', 
+    // START_DATE: new Date().getTime() + 30000,
 
-        // Enough Time passed, not enough players connected.
-        if (data.over === 'Time elapsed!!!') {
-            
-            timeOut = "<h2>Not enough players</h2>" 
-            
-            
-            timeOut += "<p align='center'>Thank you for your patience.<br />";
-            timeOut += "Unfortunately, there are not enough participants in ";
-            timeOut += "your group to start the experiment.<br />";
-               
-        }
+    /**
+     * ## CHOSEN_TREATMENT
+     *
+     * The treatment assigned to every new group
+     *
+     * Accepted values:
+     *
+     *   - "treatment_rotate": rotates the treatments.
+     *   - undefined: a random treatment will be selected.
+     *   - function: a callback returning the name of the treatment. E.g:
+     *
+     *       function(treatments, roomCounter) {
+     *           return treatments[num % treatments.length];
+     *       }
+     *
+     */
+    CHOSEN_TREATMENT: function(treatments, roomCounter) {
+        return treatments[roomCounter % treatments.length];
+    },
 
-        // Too much time passed, but no message from server received.
-        else {
-            timeOut = "An error has occurred. You seem to be ";
-            timeOut += "waiting for too long. Please look for a HIT called ";
-            timeOut += "<strong>ETH Descil Trouble Ticket</strong> and file ";
-            timeOut += "a new trouble ticket reporting your experience."
-        }
+    /**
+     * ## DISCONNECT_IF_NOT_SELECTED (experimental)
+     *
+     * Disconnect clients if not selected for a game when dispatching
+     */
+    DISCONNECT_IF_NOT_SELECTED: false,
 
-        if (data.exit) {
-            timeOut += "<br />Please submit the HIT using the following ExitCode:<br />" + data.exit;
-        }
+    /**
+     * ## ON_TIMEOUT
+     *
+     * A callback function to be executed when wait time expires
+     */
+    // ON_TIMEOUT: function() {
+    //    console.log('I am timed out!');
+    // },
 
-        timeOut += "<br /></p>";
+    /**
+     * ## ON_TIMEOUT_SERVER
+     *
+     * A callback function to be executed on the server when wait time expires
+     *
+     * The context of execution is WaitingRoom.
+     */
+    // ON_TIMEOUT_SERVER: function(code) {
+    //    console.log('*** I am timed out! ', code.id);
+    // }
 
-        this.bodyDiv.innerHTML = timeOut;
-    } 
+    /**
+     * ## DISPATCH_TO_SAME_ROOM
+     *
+     * If TRUE, every new group will be added to the same game room
+     *
+     * A new game room will be created for the first dispatch, and
+     * reused for all successive groups. Default, FALSE.
+     *
+     * !Notice the game must support adding players while it is running.
+     *
+     * @see WaitingRoom.lastGameRoom
+     */
+    // DISPATCH_TO_SAME_ROOM: true
+
+    /**
+     * ## logicPath
+     *
+     * If set, a custom implementation of the wait room will be used
+     *
+     * @see wait.room.js (nodegame-server)
+     */
+    // logicPath: 'path/to/a/wait.room.js'
 };

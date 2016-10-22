@@ -1,9 +1,5 @@
 /**
- * # Functions used by the client of Ultimatum Game
- * Copyright(c) 2015 Stefano Balietti
- * MIT Licensed
- *
- * http://www.nodegame.org
+ * # Functions used by the client of MiniSvo Game
  */
 
 module.exports = {
@@ -13,7 +9,7 @@ module.exports = {
     instructions: instructions,
     quiz: quiz,
     quiz2: quiz2,
-    ultimatum: ultimatum,
+    choices: choices,
     feedback: feedback,
     totalpayoff: totalpayoff,
     postgame: postgame,
@@ -139,37 +135,37 @@ function init() {
     });
     
 
-    node.on('BID_DONE', function(offer1, offer2, to, timeup) {
+    node.on('BID_DONE', function(choice1, choice2, to, timeup) {
         var root, time;
 
         // Time to make a bid.
         time = node.timer.getTimeSince('bidder_loaded');
         
-        // Hack. To avoid double offers. Todo: fix.
-        if (node.game.offerDone) return;
-        node.game.offerDone = true;
+        // Hack. To avoid double choices. Todo: fix.
+        if (node.game.choiceDone) return;
+        node.game.choiceDone = true;
 
         node.game.visualTimer.clear();
         node.game.visualTimer.startWaiting({milliseconds: 30000});
 
-        W.getElementById('submitOffer').disabled = 'disabled';
+        W.getElementById('submitChoice').disabled = 'disabled';
         
         //save choices for feedback step
-        node.game.lastOffer1 = offer1;
-        node.game.lastOffer2 = offer2;
+        node.game.lastChoice1 = choice1;
+        node.game.lastChoice2 = choice2;
         
         // Notify the other player.
-        node.say('OFFER', to, {offer1: offer1, offer2: offer2});
+        node.say('CHOICE', to, {choice1: choice1, choice2: choice2});
 
         root = W.getElementById('container');
         // Leave a space.
-        //W.writeln(' Choice Allocation 1: ' +  offer1 + '. Choice Allocation 2: ' + offer2 +
+        //W.writeln(' Choice Allocation 1: ' +  choice1 + '. Choice Allocation 2: ' + choice2 +
         //          '. Waiting for the respondent... ', root);
                   
         // Notify the server.
         node.done({
-            offer1: offer1,
-            offer2: offer2,
+            choice1: choice1,
+            choice2: choice2,
             time: time,
             timeup: timeup,
             other: node.game.other
@@ -215,19 +211,19 @@ function init() {
 
     this.other = null;
 
-    this.randomAccept = function(offer, other) {
+    this.randomAccept = function(choice, other) {
         var root, accepted;
         accepted = Math.round(Math.random());
         console.log('randomaccept');
-        console.log(offer + ' ' + other);
+        console.log(choice + ' ' + other);
         root = W.getElementById('container');
         if (accepted) {
-            node.emit('RESPONSE_DONE', 'ACCEPT', offer, other);
-            W.write(' You accepted the offer.', root);
+            node.emit('RESPONSE_DONE', 'ACCEPT', choice, other);
+            W.write(' You accepted the choice.', root);
         }
         else {
-            node.emit('RESPONSE_DONE', 'REJECT', offer, other);
-            W.write(' You rejected the offer.', root);
+            node.emit('RESPONSE_DONE', 'REJECT', choice, other);
+            W.write(' You rejected the choice.', root);
         }
     };
 
@@ -558,7 +554,7 @@ function quiz2() {
     console.log('Quiz Feedback');
 }
 
-function ultimatum() {
+function choices() {
 
     //////////////////////////////////////////////
     // nodeGame hint:
@@ -581,8 +577,8 @@ function ultimatum() {
                                      'COUNT_UP_ROUNDS_TO_TOTAL']);
 
 
-    // Hack to avoid double offers. Todo: fix.
-    node.game.offerDone = false;
+    // Hack to avoid double choices. Todo: fix.
+    node.game.choiceDone = false;
 
     // Load the BIDDER interface.
     node.on.data('BIDDER', function(msg) {
@@ -615,7 +611,7 @@ function ultimatum() {
         //
         /////////////////////////////////////////////
         W.loadFrame('bidder.html', function() {
-            // Start the timer after an offer was received.
+            // Start the timer after an choice was received.
             var round = node.player.stage.round;
             var timer;
             if (round == 1 || round == 2) {
@@ -630,9 +626,9 @@ function ultimatum() {
                 timeup: function() {
                     var lastChosenValue1 = 4;
                     var lastChosenValue2 = 4;
-                    if (node.game.lastOffer1 && node.game.lastOffer2) {
-                        lastChosenValue1 = node.game.lastOffer1;
-                        lastChosenValue2 = node.game.lastOffer2;
+                    if (node.game.lastChoice1 && node.game.lastChoice2) {
+                        lastChosenValue1 = node.game.lastChoice1;
+                        lastChosenValue2 = node.game.lastChoice2;
                     }
                     
                     node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true);
@@ -642,7 +638,7 @@ function ultimatum() {
             node.game.visualTimer.startTiming(options);
 
 
-            b = W.getElementById('submitOffer');
+            b = W.getElementById('submitChoice');
 
             /*node.env('auto', function() {
 
@@ -808,7 +804,7 @@ function ultimatum() {
                     var posname = 'firstPos' + i;
                     var position = W.getElementById(posname);
                     if (position.checked) {
-                        var offer1 = position.value;
+                        var choice1 = position.value;
                         break;
                     }
                 }
@@ -819,7 +815,7 @@ function ultimatum() {
                     var posname2 = 'secondPos' + i;
                     var position2 = W.getElementById(posname2);
                     if (position2.checked) {
-                        var offer2 = position2.value;
+                        var choice2 = position2.value;
                         break;
                     }
                 }
@@ -827,13 +823,13 @@ function ultimatum() {
                 var badAlert = W.getElementById('badAlert');
                 var goodAlert = W.getElementById('goodAlert');
                 
-                if (!offer1 || !offer2) {
+                if (!choice1 || !choice2) {
                     badAlert.style.display = '';
                     //alert('Please make a choice for both allocations!');
                 } else {
                     badAlert.style.display = 'none';
                     goodAlert.style.display = '';
-                    node.emit('BID_DONE', offer1, offer2, other);
+                    node.emit('BID_DONE', choice1, choice2, other);
                 }
             };
 
@@ -844,7 +840,7 @@ function ultimatum() {
         }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
     });
 
-    console.log('Ultimatum');
+    console.log('Choices');
 }
 
 function feedback() {
@@ -855,8 +851,8 @@ function feedback() {
 
     W.loadFrame('feedback.html', function() {                                 
 
-        // Hack to avoid double offers. Todo: fix.
-        node.game.offerDone = false;
+        // Hack to avoid double choices. Todo: fix.
+        node.game.choiceDone = false;
 
         
         options = {
@@ -867,7 +863,7 @@ function feedback() {
         };
         node.game.visualTimer.startTiming(options);
         
-        node.on.data('OTHER_OFFER', function(msg) {
+        node.on.data('OTHER_CHOICE', function(msg) {
         
             //console.log('CHOICES DONE!');
             //other = msg.data.other;
@@ -880,22 +876,22 @@ function feedback() {
             
             // Get the input from last round
             // If there is no values (happens on re-connect), just don't show any feedback, they already saw it.   
-            var chosenValueIndex1 = node.game.lastOffer1;
+            var chosenValueIndex1 = node.game.lastChoice1;
             if(chosenValueIndex1) {
                 var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];
             }            
             
-            var chosenValueIndex2 = node.game.lastOffer2;
+            var chosenValueIndex2 = node.game.lastChoice2;
             if(chosenValueIndex2) {
                 var chosenValue2 = node.game.settings.receive2[chosenValueIndex2];
             }       
             
-            var otherValueIndex1 = msg.data.offer1;
+            var otherValueIndex1 = msg.data.choice1;
             if(otherValueIndex1) {
                 var otherValue1 = node.game.settings.send1[otherValueIndex1]
             }
             
-            var otherValueIndex2 = msg.data.offer2;
+            var otherValueIndex2 = msg.data.choice2;
             if(otherValueIndex2) {
                 var otherValue2 = node.game.settings.send2[otherValueIndex2]
             }
@@ -1044,7 +1040,7 @@ function feedback() {
         });
         
         // if clients get pushed there is no feedback to be displayed!
-        node.on.data('ERROR_OFFER', function(msg) {
+        node.on.data('ERROR_CHOICE', function(msg) {
             var error = W.getElementById('error');
             error.style.display = ''; 
         });
@@ -1089,10 +1085,10 @@ function totalpayoff() {
           
             for(i = 0; i < payoffs.length; ++i) {
                 // Pay-Off from your own choices
-                var myIndex = parseInt(payoffs[i].myoffer1);
+                var myIndex = parseInt(payoffs[i].mychoice1);
                 var payFromSelf1 = node.game.settings.receive1[myIndex];
 
-                var myIndex2 = parseInt(payoffs[i].myoffer2);
+                var myIndex2 = parseInt(payoffs[i].mychoice2);
                 var payFromSelf2 = node.game.settings.receive1[myIndex2];
                 
                 var payFromSelf = payFromSelf1 + payFromSelf2;
@@ -1103,10 +1099,10 @@ function totalpayoff() {
                 
                 
                 // Pay-Off from your partners choices
-                var otherIndex = parseInt(payoffs[i].otherOffer1);
+                var otherIndex = parseInt(payoffs[i].otherChoice1);
                 var payFromOther1 = node.game.settings.send1[otherIndex];
                 
-                var otherIndex2 = parseInt(payoffs[i].otherOffer2);
+                var otherIndex2 = parseInt(payoffs[i].otherChoice2);
                 var payFromOther2 = node.game.settings.send2[otherIndex2];
                 
                 var payFromOther = payFromOther1 + payFromOther2;
