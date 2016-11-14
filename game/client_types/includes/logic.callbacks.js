@@ -235,10 +235,11 @@ function feedback() {
         
         if (other) {
             var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-            var otherChoice1 =  otherChoiceItem.choice1;
+            //var otherChoice1 =  otherChoiceItem.choice1;
             var otherChoice2 =  otherChoiceItem.choice2;
 
-            node.say('OTHER_CHOICE', item.player,  {choice1: otherChoice1, choice2: otherChoice2});
+            //node.say('OTHER_CHOICE', item.player,  {choice1: otherChoice1, choice2: otherChoice2});
+            node.say('OTHER_CHOICE', item.player,  {choice2: otherChoice2});
         } else {
             
             node.say('ERROR_CHOICE', item.player);  
@@ -258,7 +259,7 @@ function totalpayoff(playerId) {
         return;
     }
 
-    var payoffs = node.game.memory.player[playerId].select('choice1').fetch();
+    /* var payoffs = node.game.memory.player[playerId].select('choice1').fetch();
     i = -1, len = payoffs.length;
     out = new Array(len);
     for ( ; ++i < len ; ) {
@@ -285,7 +286,38 @@ function totalpayoff(playerId) {
             otherChoice1: otherChoice1,
             otherChoice2: otherChoice2
         };
+    } */
+
+    var payoffs = node.game.memory.player[playerId].select('choice2').fetch();
+    i = -1, len = payoffs.length;
+    out = new Array(len);
+    for ( ; ++i < len ; ) {
+        other = payoffs[i].other;
+        round = payoffs[i].stage.round;
+        other = node.game.memory.player[other]
+            .select('choice2')
+            .and('stage.round', '=', round)
+            .last();
+
+        if (!other) {
+            console.log('other not found, put def value');
+            //otherChoice1 = 1;
+            otherChoice2 = 1;
+        }
+        else {
+            //otherChoice1 = other.choice1;
+            otherChoice2 = other.choice2;
+        }
+
+        out[i] = {
+            //myChoice1: payoffs[i].choice1,
+            myChoice2: payoffs[i].choice2,
+            //otherChoice1: otherChoice1,
+            otherChoice2: otherChoice2
+        };
     }
+
+
     node.say('PAYOFFS', playerId, out);
 }
 

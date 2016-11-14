@@ -19,83 +19,87 @@ block mainContent
                 table(style='width:400px;')
                     tr
                         td(class='quizCell')
-                            span(id="personsQuiz0")
+                            span(id="personsQuiz0", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='1')
                                 |  1
                     tr            
                         td(class='quizCell')
-                            span(id="personsQuiz1")
+                            span(id="personsQuiz1", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='2')
                                 |  2
                     tr
                         td(class='quizCell')
-                            span(id="personsQuiz2")
+                            span(id="personsQuiz2", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='9')
                                 |  9
 
    
         div(class="panel panel-default")
             div(class="panel-body") 
-                span(style='font-weight:bold;') 2. Suppose it is your choice and your first choice is 85 (self), 15 (other) and your second choice is 100 (self), 50 (other). The total number of coins allocated to you from your choices is:
+                span(style='font-weight:bold;') 2. Suppose your choice is 100 (self) and 50 (other). The number of coins allocated to you from your choice is:
                 br
                 table(style='width:400px;')
                     tr
                         td(class='quizCell')
-                            span(id="payoffQuiz1_0")
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio0", value='100')
-                                |  85+15=100
+                            span(id="payoffQuiz1_0", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio0", value='50')
+                                |  50
+                    tr
                         td(class='quizCell')
-                            span(id="payoffQuiz1_1")
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio1", value='185')
-                                |  85+100=185
+                            span(id="payoffQuiz1_1", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio1", value='150')
+                                |  150
+                    tr
                         td(class='quizCell')
-                            span(id="payoffQuiz1_2")
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio2", value='135')
-                                |  85+50=135
-                    tr(style='padding-bottom:10px;')
+                            span(id="payoffQuiz1_2", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio2", value='100')
+                                |  100
+                    //-tr(style='padding-bottom:10px;')
                         td(class='quizCell')
-                            span(id="payoffQuiz1_3")
+                            span(id="payoffQuiz1_3", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio3", value='115')
                                 |  15+100=115
                         td(class='quizCell')
-                            span(id="payoffQuiz1_4")
+                            span(id="payoffQuiz1_4", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio4", value='65')
                                 |  15+50=65
                         td(class='quizCell')
-                            span(id="payoffQuiz1_5")
+                            span(id="payoffQuiz1_5", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio5", value='150')
                                 |  100+50=150
         
         
         div(class="panel panel-default")
             div(class="panel-body")
-                span(style='font-weight:bold;') 3. Suppose it is your partner's choice and his first choice is 85 (self), 15 (other) and his second choice is 100 (self), 50 (other). The total number of coins allocated to you from your partner's choices is:
+                span(style='font-weight:bold;') 3. Suppose your partner's choice is 100 (self) and 50 (other). The number of coins allocated to you from your partner's choice is:
                 br
                 table(style='width:400px;')
                     tr
                         td(class='quizCell')
-                            span(id="payoffQuiz2_0")
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio0", value='100')
-                                span  85+15=100
-                        td(class='quizCell')
-                            span(id="payoffQuiz2_1")
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio1", value='185')
-                                span  85+100=185
-                        td(class='quizCell')
-                            span(id="payoffQuiz2_2")
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio2", value='135')
-                                span  85+50=135
+                            span(id="payoffQuiz2_0", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio0", value='50')
+                                |  50
                     tr
                         td(class='quizCell')
-                            span(id="payoffQuiz2_3")
+                            span(id="payoffQuiz2_1", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio1", value='150')
+                                |  150
+                    tr
+                        td(class='quizCell')
+                            span(id="payoffQuiz2_2", style='cursor:hand;cursor:pointer;')
+                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio2", value='100')
+                                |  100
+                    //-tr
+                        td(class='quizCell')
+                            span(id="payoffQuiz2_3", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio3", value='115')
                                 span  15+100=115
                         td(class='quizCell')
-                            span(id="payoffQuiz2_4")
+                            span(id="payoffQuiz2_4", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio4", value='65')
                                 span  15+50=65
                         td(class='quizCell')
-                            span(id="payoffQuiz2_5")
+                            span(id="payoffQuiz2_5", style='cursor:hand;cursor:pointer;')
                                 input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio5", value='150')
                                 span  100+50=150
                 

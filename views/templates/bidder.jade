@@ -2,20 +2,20 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h3=youAre
+        h3 Choice
         
         div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
-            span Please make a choice for both allocations.
+            span Please make a choice.
             
         div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
-            span You have submitted your choices.
+            span You have submitted your choice.
             
         div
-            span Select your preferred option in each of the two choice situations from the available options.
+            span Select your preferred option in the choice situation from the available options.
         
         br
 
-        div(class="panel panel-default", style="width:530px;")
+        //div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") First choice
             div(class="panel-body")
                 table(style='width:500px;')
@@ -35,23 +35,23 @@ block mainContent
                             td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                 
         div(class="panel panel-default", style="width:530px;")
-            div(class="panel-heading") Second choice
+            div(class="panel-heading") Allocation
             div(class="panel-body")
                 table(style='width:500px;')
                     tr
                         td(style='font-weight:normal;') You receive:
                         each val, index in receive2
-                            td(style='text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
+                            td(style='cursor:hand;cursor:pointer;text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
                         - var i = 0;
                         while i < 9
-                            td(style='height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i)
+                            td(style='cursor:hand;cursor:pointer;height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i)
                                 input(type='radio', name='position2', id='secondPos' + i, value=i++)
                     tr
                         td(style='font-weight:normal;') Your partner receives:
                         each val, index in send2
-                            td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
+                            td(style='cursor:hand;cursor:pointer;height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
         input(type='button', value='Continue', name='submitChoice', id='submitChoice', class='btn')
 

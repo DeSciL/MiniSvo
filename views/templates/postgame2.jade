@@ -6,7 +6,7 @@ block mainContent
         
         
         div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
-            span Please choose an answer for all questions.
+            span Please answer all questions.
             
         div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
             span You have submitted your answers.
@@ -16,19 +16,19 @@ block mainContent
             div(class="panel-body")
                 span(style='font-weight:bold;') Overall, was your motivation to make
                 br
-                span(id="motivation0")
+                span(id="motivation0", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio0', value=1)
                     |  as much money for yourself as possible?
                 br
-                span(id="motivation1")
+                span(id="motivation1", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio1', value=2)
                     |  the experimenter pay out as much as possible?
                 br
-                span(id="motivation2")
+                span(id="motivation2", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio2', value=3)
                     |  all subjects get the same payoff?
                 br
-                span(id="motivation3")
+                span(id="motivation3", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio3', value=4)
                     |  random choices?
             
@@ -36,11 +36,11 @@ block mainContent
             div(class="panel-body")
                 span(style='font-weight:bold;') Are you female or male?
                 br
-                span(id="gender0")
+                span(id="gender0", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='gender', id='gender_radio0', value=1)
                     |  Female
                 br 
-                span(id="gender1")
+                span(id="gender1", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='gender', id='gender_radio1', value=2)
                     |  Male
                 

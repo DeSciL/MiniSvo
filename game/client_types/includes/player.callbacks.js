@@ -135,7 +135,7 @@ function init() {
     });
     
 
-    node.on('BID_DONE', function(choice1, choice2, to, timeup) {
+    node.on('BID_DONE', function(choice2, to, timeup) {
         var root, time;
 
         // Time to make a bid.
@@ -151,11 +151,12 @@ function init() {
         W.getElementById('submitChoice').disabled = 'disabled';
         
         //save choices for feedback step
-        node.game.lastChoice1 = choice1;
+        //node.game.lastChoice1 = choice1;
         node.game.lastChoice2 = choice2;
         
         // Notify the other player.
-        node.say('CHOICE', to, {choice1: choice1, choice2: choice2});
+        //node.say('CHOICE', to, {choice1: choice1, choice2: choice2});
+        node.say('CHOICE', to, {choice2: choice2});
 
         root = W.getElementById('container');
         // Leave a space.
@@ -164,7 +165,7 @@ function init() {
                   
         // Notify the server.
         node.done({
-            choice1: choice1,
+            //choice1: choice1,
             choice2: choice2,
             time: time,
             timeup: timeup,
@@ -404,7 +405,7 @@ function quiz() {
             }
         }
         
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 3; i++) {
             var quizClassesId2 = 'payoffQuiz1_' + i;
             var quizClasses2 = W.getElementById(quizClassesId2);
             quizClasses2.onclick = function(i) {
@@ -416,7 +417,7 @@ function quiz() {
             }
         }
         
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 3; i++) {
             var quizClassesId3 = 'payoffQuiz2_' + i;
             var quizClasses3 = W.getElementById(quizClassesId3);
             quizClasses3.onclick = function(i) {
@@ -449,7 +450,7 @@ function quiz() {
             
             
             var payoffQuiz1;
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 3; i++) {
                 var posname2 = 'payoffQuiz1_radio' + i;
                 var position2 = W.getElementById(posname2);
                 if (position2.checked) {
@@ -459,7 +460,7 @@ function quiz() {
             }
             
             var payoffQuiz2;
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 3; i++) {
                 var posname3 = 'payoffQuiz2_radio' + i;
                 var position3 = W.getElementById(posname3);
                 if (position3.checked) {
@@ -513,10 +514,10 @@ function quiz2() {
         if (numberOfPersons == 1){
             correctAnswers += 1;
         }
-        if (payoffQuiz1 == 185) {
+        if (payoffQuiz1 == 100) {
             correctAnswers += 1;
         }
-        if (payoffQuiz2 == 65) {
+        if (payoffQuiz2 == 50) {
             correctAnswers += 1;
         }
         
@@ -530,11 +531,11 @@ function quiz2() {
                 var numberOfPersonsP = W.getElementById('numberOfPersons');
                 numberOfPersonsP.style.display = '';    
             }
-            if (payoffQuiz1 != 185) {
+            if (payoffQuiz1 != 100) {
                 var payoffQuiz1P = W.getElementById('payoffQuiz1');
                 payoffQuiz1P.style.display = '';    
             }
-            if (payoffQuiz2 != 65) {
+            if (payoffQuiz2 != 50) {
                 var payoffQuiz2P = W.getElementById('payoffQuiz2');
                 payoffQuiz2P.style.display = ''; 
             }
@@ -626,12 +627,13 @@ function choices() {
                 timeup: function() {
                     var lastChosenValue1 = 4;
                     var lastChosenValue2 = 4;
-                    if (node.game.lastChoice1 && node.game.lastChoice2) {
-                        lastChosenValue1 = node.game.lastChoice1;
+                    if (node.game.lastChoice2) {
+                        //lastChosenValue1 = node.game.lastChoice1;
                         lastChosenValue2 = node.game.lastChoice2;
                     }
                     
-                    node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true);
+                    //node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true);
+                    node.emit('BID_DONE', lastChosenValue2, other, true);
                 }
             };
 
@@ -658,10 +660,10 @@ function choices() {
             });*/
 
       
-            var highlightClass1;
+            //var highlightClass1;
             var highlightClass2;
             
-            
+            /*
             for (var i = 0; i < 9; i++) {
                 var hoverClassesNames = 'firstHoverclass' + i;
                 var hoverClasses = W.getElementsByClassName(hoverClassesNames);
@@ -729,7 +731,7 @@ function choices() {
                     }
                 }
             }
-            
+            */
             
             
             for (var i = 0; i < 9; i++) {
@@ -799,7 +801,7 @@ function choices() {
             
             b.onclick = function() {
           
-                for (var i = 0; i < 9; i++) {
+                /*for (var i = 0; i < 9; i++) {
                     
                     var posname = 'firstPos' + i;
                     var position = W.getElementById(posname);
@@ -807,7 +809,7 @@ function choices() {
                         var choice1 = position.value;
                         break;
                     }
-                }
+                }*/
                 
 
                 for (var i = 0; i < 9; i++) {
@@ -823,13 +825,20 @@ function choices() {
                 var badAlert = W.getElementById('badAlert');
                 var goodAlert = W.getElementById('goodAlert');
                 
-                if (!choice1 || !choice2) {
+                /*if (!choice1 || !choice2) {
                     badAlert.style.display = '';
-                    //alert('Please make a choice for both allocations!');
                 } else {
                     badAlert.style.display = 'none';
                     goodAlert.style.display = '';
                     node.emit('BID_DONE', choice1, choice2, other);
+                }*/
+
+                if (!choice2) {
+                    badAlert.style.display = '';
+                } else {
+                    badAlert.style.display = 'none';
+                    goodAlert.style.display = '';
+                    node.emit('BID_DONE', choice2, other);
                 }
             };
 
@@ -876,20 +885,20 @@ function feedback() {
             
             // Get the input from last round
             // If there is no values (happens on re-connect), just don't show any feedback, they already saw it.   
-            var chosenValueIndex1 = node.game.lastChoice1;
+            /*var chosenValueIndex1 = node.game.lastChoice1;
             if(chosenValueIndex1) {
                 var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];
-            }            
+            }*/            
             
             var chosenValueIndex2 = node.game.lastChoice2;
             if(chosenValueIndex2) {
                 var chosenValue2 = node.game.settings.receive2[chosenValueIndex2];
             }       
             
-            var otherValueIndex1 = msg.data.choice1;
+            /*var otherValueIndex1 = msg.data.choice1;
             if(otherValueIndex1) {
                 var otherValue1 = node.game.settings.send1[otherValueIndex1]
-            }
+            }*/
             
             var otherValueIndex2 = msg.data.choice2;
             if(otherValueIndex2) {
@@ -899,7 +908,7 @@ function feedback() {
             
             // Show the first sentence for feedback treatment and pass it the values
             var treatment = node.env('treatment');
-            if (treatment != 'nf' && chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
+            /*if (treatment != 'nf' && chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
                 
@@ -909,6 +918,20 @@ function feedback() {
                 chosenValueSpan2.innerHTML = chosenValue2;
                 var otherValueSpan1 = W.getElementById('other1');
                 otherValueSpan1.innerHTML = otherValue1;
+                var otherValueSpan2 = W.getElementById('other2');
+                otherValueSpan2.innerHTML = otherValue2;
+            }*/
+
+            if (treatment != 'nf' && chosenValue2 && otherValue2) {
+                var feedbackSentence = W.getElementById('feedbackSentence');
+                feedbackSentence.style.display = '';
+                
+                //var chosenValueSpan1 = W.getElementById('self1');
+                //chosenValueSpan1.innerHTML = chosenValue1;
+                var chosenValueSpan2 = W.getElementById('self2');
+                chosenValueSpan2.innerHTML = chosenValue2;
+                //var otherValueSpan1 = W.getElementById('other1');
+                //otherValueSpan1.innerHTML = otherValue1;
                 var otherValueSpan2 = W.getElementById('other2');
                 otherValueSpan2.innerHTML = otherValue2;
             }
@@ -923,7 +946,7 @@ function feedback() {
             // Highlight selected values in sliders on feedback page
             // Change class
             
-            if(chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
+            /*if(chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
                 var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
                 var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
                 var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
@@ -1029,6 +1052,114 @@ function feedback() {
                     var colorsNF = W.getElementById('colorsNF');
                     colorsNF.style.display = ''; 
                 }
+            }*/
+
+            if(chosenValue2 && otherValue2) {
+                /*var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
+                var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
+                var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
+                
+
+                var firstSelfTop = W.getElementById(firstSelfTopId);
+                firstSelfTop.className += ' highlightSelfTop';
+
+                var firstSelfMiddle = W.getElementById(firstSelfMiddleId);
+                firstSelfMiddle.className += ' highlightSelfMiddle';
+
+                var firstSelfBottom = W.getElementById(firstSelfBottomId);
+                firstSelfBottom.className += ' highlightSelfBottom';*/
+
+                
+                var otherSelfTopId = 'secondHoverTop' + chosenValueIndex2;
+                var otherSelfMiddleId = 'secondHoverMiddle' + chosenValueIndex2;
+                var otherSelfBottomId = 'secondHoverBottom' + chosenValueIndex2;
+
+                var otherSelfTop = W.getElementById(otherSelfTopId);
+                otherSelfTop.className += ' highlightSelfTop';
+
+                var otherSelfMiddle = W.getElementById(otherSelfMiddleId);
+                otherSelfMiddle.className += ' highlightSelfMiddle';
+
+                var otherSelfBottom = W.getElementById(otherSelfBottomId);
+                otherSelfBottom.className += ' highlightSelfBottom';
+
+                
+            // Feedback about partners choice
+                var treatment = node.env('treatment');
+                if(treatment != 'nf') {
+                    var colors = W.getElementById('colors');
+                    colors.style.display = '';
+                    
+                    /*var firstOtherTopId = 'firstHoverTop' + otherValueIndex1;
+                    var firstOtherMiddleId = 'firstHoverMiddle' + otherValueIndex1;
+                    var firstOtherBottomId = 'firstHoverBottom' + otherValueIndex1;
+                    
+
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameTop = W.getElementById(firstOtherTopId);
+                        firstSameTop.className += ' highlightSameTop';
+                    }
+                    else {
+                        var firstOtherTop = W.getElementById(firstOtherTopId);
+                        firstOtherTop.className += ' highlightOtherTop';
+                    }
+
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameMiddle = W.getElementById(firstOtherMiddleId);
+                        firstSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var firstOtherMiddle = W.getElementById(firstOtherMiddleId);
+                        firstOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+
+                    if (chosenValueIndex1 == otherValueIndex1) {
+                        var firstSameBottom = W.getElementById(firstOtherBottomId);
+                        firstSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var firstOtherBottom = W.getElementById(firstOtherBottomId);
+                        firstOtherBottom.className += ' highlightOtherBottom';
+                    }*/
+
+                    
+                    
+                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
+                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
+                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
+                    
+
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameTop = W.getElementById(secondOtherTopId);
+                        secondSameTop.className += ' highlightSameTop';
+                    }
+                    else {
+                        var secondOtherTop = W.getElementById(secondOtherTopId);
+                        secondOtherTop.className += ' highlightOtherTop';
+                    }
+
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                        secondSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
+                        secondOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+
+                    if (chosenValueIndex2 == otherValueIndex2) {
+                        var secondSameBottom = W.getElementById(secondOtherBottomId);
+                        secondSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
+                        secondOtherBottom.className += ' highlightOtherBottom';
+                    }
+
+                } else {
+                    var colorsNF = W.getElementById('colorsNF');
+                    colorsNF.style.display = ''; 
+                }
             }
 
             
@@ -1085,13 +1216,14 @@ function totalpayoff() {
           
             for(i = 0; i < payoffs.length; ++i) {
                 // Pay-Off from your own choices
-                var myIndex = parseInt(payoffs[i].myChoice1);
-                var payFromSelf1 = node.game.settings.receive1[myIndex];
+                //var myIndex = parseInt(payoffs[i].myChoice1);
+                //var payFromSelf1 = node.game.settings.receive1[myIndex];
 
                 var myIndex2 = parseInt(payoffs[i].myChoice2);
                 var payFromSelf2 = node.game.settings.receive1[myIndex2];
                 
-                var payFromSelf = payFromSelf1 + payFromSelf2;
+                //var payFromSelf = payFromSelf1 + payFromSelf2;
+                var payFromSelf = payFromSelf2;
                 payoffSumSelf += payFromSelf;
                 var payFromSelfName = 'payFromSelf' + i;
                 var payFromSelfSpan = W.getElementById(payFromSelfName);
@@ -1099,13 +1231,14 @@ function totalpayoff() {
                 
                 
                 // Pay-Off from your partners choices
-                var otherIndex = parseInt(payoffs[i].otherChoice1);
-                var payFromOther1 = node.game.settings.send1[otherIndex];
+                //var otherIndex = parseInt(payoffs[i].otherChoice1);
+                //var payFromOther1 = node.game.settings.send1[otherIndex];
                 
                 var otherIndex2 = parseInt(payoffs[i].otherChoice2);
                 var payFromOther2 = node.game.settings.send2[otherIndex2];
                 
-                var payFromOther = payFromOther1 + payFromOther2;
+                //var payFromOther = payFromOther1 + payFromOther2;
+                var payFromOther = payFromOther2;
                 payoffSumOther += payFromOther;
                 var payFromOtherName = 'payFromOther' + i;
                 var payFromOtherSpan = W.getElementById(payFromOtherName);
