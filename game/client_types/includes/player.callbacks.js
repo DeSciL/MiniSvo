@@ -367,6 +367,7 @@ function instructions() {
 function quiz() {
     var that = this;
     W.loadFrame('quiz.html', function() {
+        window.scrollTo(0,0);
 
         var options = {
             milliseconds: 120000,
@@ -495,6 +496,7 @@ function quiz() {
 function quiz2() {
     // Feedback stage for quiz
     W.loadFrame('quiz2.html', function() {
+        window.scrollTo(0,0);
 
         var options = {
             milliseconds: 60000,
@@ -613,6 +615,8 @@ function choices() {
         /////////////////////////////////////////////
         W.loadFrame('bidder.html', function() {
             // Start the timer after an choice was received.
+            window.scrollTo(0,0);
+
             var round = node.player.stage.round;
             var timer;
             if (round == 1 || round == 2) {
@@ -858,7 +862,8 @@ function feedback() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL',
                                      'COUNT_UP_ROUNDS_TO_TOTAL']);
 
-    W.loadFrame('feedback.html', function() {                                 
+    W.loadFrame('feedback.html', function() {
+        window.scrollTo(0,0);                                 
 
         // Hack to avoid double choices. Todo: fix.
         node.game.choiceDone = false;
@@ -1196,6 +1201,7 @@ function totalpayoff() {
     node.say('totpayoff', 'SERVER');
     
     W.loadFrame('totalpayoff.html', function() {
+        window.scrollTo(0,0);
 
         node.on.data('PAYOFFS', function(msg) {
             
@@ -1290,6 +1296,7 @@ function postgame() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
     W.loadFrame('postgame.html', function() {
+        window.scrollTo(0,0);
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
@@ -1392,6 +1399,7 @@ function postgame2() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
     W.loadFrame('postgame2.html', function() {
+        window.scrollTo(0,0);
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
@@ -1475,6 +1483,7 @@ function postgame3() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
     W.loadFrame('postgame3.html', function() {
+        window.scrollTo(0,0);
 
         node.env('auto', function() {
             node.timer.randomExec(function() {
@@ -1537,6 +1546,7 @@ function endgame() {
     node.say('endgame', 'SERVER');
     
     W.loadFrame('ended.html', function() {
+        window.scrollTo(0,0);
 
         node.game.visualTimer.switchActiveBoxTo(node.game.visualTimer.mainBox);
         node.game.visualTimer.waitBox.hideBox();
