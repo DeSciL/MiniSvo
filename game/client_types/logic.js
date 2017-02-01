@@ -189,8 +189,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('endgame', {
         cb: function() {
-            var payoffs = [{AccessCode: 394034, Bonus: 0.15, BonusReason: 'Test 1'}, {AccessCode: 394035, Bonus: 0.85, BonusReason: 'Test 2'}]
-            postPayoffs(payoffs);
             cb: cbs.endgame
         }
 //        minPlayers: undefined,
