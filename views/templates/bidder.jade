@@ -11,7 +11,7 @@ block mainContent
             span You have submitted your choice.
             
         div
-            span Select your preferred option in the choice situation from the available options.
+            span Select your preferred option.
         
         br
 
@@ -49,7 +49,7 @@ block mainContent
                             td(style='cursor:hand;cursor:pointer;height:33px;border-top:1px solid black;border-bottom:1px solid black;text-align:center;background:#fff;', class='secondHoverclass' + i)
                                 input(type='radio', name='position2', id='secondPos' + i, value=i++)
                     tr
-                        td(style='font-weight:normal;') Your partner receives:
+                        td(style='font-weight:normal;') Other receives:
                         each val, index in send2
                             td(style='cursor:hand;cursor:pointer;height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 

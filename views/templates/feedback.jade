@@ -55,7 +55,7 @@ block mainContent
                         while i < 9
                             td(class='feedbackMiddle', id='secondHoverMiddle' + i++) 
                     tr
-                        td(style='height:33px;font-weight:normal;') Your partner receives:
+                        td(style='height:33px;font-weight:normal;') Other receives:
                         each val, index in send2
                             td(class='feedbackBottom', id='secondHoverBottom' + index)= val
 
@@ -63,10 +63,12 @@ block mainContent
             p
                 div(style='display:inline;') 
                      img(src='../pictures/yourChoice.gif')
-                span  Your choice. 
+                span  Your choice.
+            p
                 div(style='display:inline;') 
                      img(src='../pictures/partnersChoice.gif')
                 span  Other's choice. 
+            p
                 div(style='display:inline;')
                      img(src='../pictures/sameChoice.gif')
                 span  Same choice.
