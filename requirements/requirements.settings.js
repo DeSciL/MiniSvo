@@ -43,8 +43,8 @@ module.exports = {
      * If set, client must have a resolution between the min and max specified
      */
     viewportSize: {
-        minX: 1366,
-        minY: 768,
+        minX: 600,
+        minY: 400,
         // maxX: 13,
         // maxY: 760
     },
@@ -64,7 +64,7 @@ module.exports = {
      *
      * @see https://github.com/faisalman/ua-parser-js
      */
-    browserDetect: {
+    /*browserDetect: {
         cb: function(ua, params) {
             if (ua.device.model || ua.device.type) {
                 return {
@@ -79,7 +79,7 @@ module.exports = {
 
             return { success: true };
         }
-    },
+    },*/
 
     /**
      * ## cookieSupport

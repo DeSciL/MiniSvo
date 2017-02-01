@@ -70,17 +70,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     
     stager.extendStep('instructions', {
         pushClients: true,
-        timer: 10000
+        timer: 120000
     });
     
     stager.extendStep('quiz', {
         pushClients: true,
-        timer: 10000
+        timer: 120000
     });
     
     stager.extendStep('quiz2', {
         pushClients: true,
-        timer: 10000
+        timer: 60000
     });
 
     stager.extendStep('decision', {
@@ -89,7 +89,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             cbs.doMatchPrev();
         },
         pushClients: true,
-        timer: 10000
+        timer: 60000
     });
     
     stager.extendStep('feedback', {
@@ -99,7 +99,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             cbs.doMatchNext();
         },
         pushClients: true,
-        timer: 10000
+        timer: 30000
     });
 
 
@@ -146,7 +146,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // cbs.totalpayoff();
         },
         pushClients: true,
-        timer: 10000
+        timer: 30000
         // minPlayers: undefined,
         // syncStepping: false,
     });
@@ -161,7 +161,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 //             node.done();
         },
         pushClients: true,
-        timer: 10000
+        timer: 120000
     });
 
     stager.extendStep('questionnaire2', {
@@ -173,7 +173,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 //          node.done();
         },
         pushClients: true,
-        timer: 10000
+        timer: 120000
     });
 
     stager.extendStep('questionnaire3', {
@@ -184,7 +184,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         //    node.done(); 
         },
         pushClients: true,
-        timer: 10000
+        timer: 180000
     });
 
     stager.extendStep('endgame', {
