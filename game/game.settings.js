@@ -22,7 +22,7 @@ module.exports = {
     COINS: 100,
 
     // Divider COINS / DOLLARS *
-    EXCHANGE_RATE: 4000,
+    EXCHANGE_RATE: 2000,
 
 
     // Values
@@ -55,7 +55,7 @@ module.exports = {
             WAIT_TIME: 20
         },
 
-        _nf: {                  // Added _ for testing
+        nf: {                  // Added _ for testing
             fullName: "No Feedback",
             description:
                 "Partner, no feedback.",

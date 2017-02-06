@@ -667,6 +667,8 @@ function choices() {
             //var highlightClass1;
             var highlightClass2;
             
+
+            // SECOND ITEM
             /*
             for (var i = 0; i < 9; i++) {
                 var hoverClassesNames = 'firstHoverclass' + i;

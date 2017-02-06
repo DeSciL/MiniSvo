@@ -16,44 +16,34 @@ block mainContent
             div(class="panel-body")
                 span(style='font-weight:bold;') 1. How many additional persons are there in your group?
                 br
-                table(style='width:400px;')
-                    tr
-                        td(class='quizCell')
-                            span(id="personsQuiz0", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='1')
-                                |  1
-                    tr            
-                        td(class='quizCell')
-                            span(id="personsQuiz1", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='2')
-                                |  2
-                    tr
-                        td(class='quizCell')
-                            span(id="personsQuiz2", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='9')
-                                |  9
+                span(id="personsQuiz0", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='numberOfPersons', id='personsQuiz_radio0', value='1')
+                    |  1
+                br
+                span(id="personsQuiz1", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='numberOfPersons', id='personsQuiz_radio1', value='2')
+                    |  2
+                br
+                span(id="personsQuiz2", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='numberOfPersons', id='personsQuiz_radio2', value='9')
+                    |  9
 
    
         div(class="panel panel-default")
             div(class="panel-body") 
                 span(style='font-weight:bold;') 2. Suppose your choice is 100 (self) and 50 (other). The number of coins allocated to you from your choice is:
                 br
-                table(style='width:400px;')
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz1_0", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio0", value='50')
-                                |  50
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz1_1", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio1", value='150')
-                                |  150
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz1_2", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio2", value='100')
-                                |  100
+                span(id="payoffQuiz1_0", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio0", value='50')
+                    |  50
+                br
+                span(id="payoffQuiz1_1", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio1", value='150')
+                    |  150
+                br
+                span(id="payoffQuiz1_2", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='payoffQuiz1', id="payoffQuiz1_radio2", value='100')
+                    |  100
                     //-tr(style='padding-bottom:10px;')
                         td(class='quizCell')
                             span(id="payoffQuiz1_3", style='cursor:hand;cursor:pointer;')
@@ -73,22 +63,17 @@ block mainContent
             div(class="panel-body")
                 span(style='font-weight:bold;') 3. Suppose your partner's choice is 100 (self) and 50 (other). The number of coins allocated to you from your partner's choice is:
                 br
-                table(style='width:400px;')
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz2_0", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio0", value='50')
-                                |  50
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz2_1", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio1", value='150')
-                                |  150
-                    tr
-                        td(class='quizCell')
-                            span(id="payoffQuiz2_2", style='cursor:hand;cursor:pointer;')
-                                input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio2", value='100')
-                                |  100
+                span(id="payoffQuiz2_0", style='cursor:hand;cursor:pointer;background:#0f0;')
+                    input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio0", value='50')
+                    |  50
+                br
+                span(id="payoffQuiz2_1", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio1", value='150')
+                    |  150
+                br
+                span(id="payoffQuiz2_2", style='cursor:hand;cursor:pointer;')
+                    input(type='radio', name='payoffQuiz2', id="payoffQuiz2_radio2", value='100')
+                    |  100
                     //-tr
                         td(class='quizCell')
                             span(id="payoffQuiz2_3", style='cursor:hand;cursor:pointer;')
