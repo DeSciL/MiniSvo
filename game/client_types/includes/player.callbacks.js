@@ -623,27 +623,45 @@ function choices() {
             var round = node.player.stage.round;
             var timer;
             if (round == 1 || round == 2) {
-                timer = 60000;
+                timer = 6000;
             }
             else {
-                timer = 30000;
+                timer = 3000;
             }
             
             options = {
                 milliseconds: timer,
                 timeup: function() {
 
+
+                    var selectionMade = false;
+
+                    // has a selection been made?
+                    for (var i = 0; i < 9; i++) {
                     
-                    // CHANGE: RANDOM!
-                    var payoffSelf = 0;
-                    var choice = Math.floor(Math.random() * 9);
-                    var payoffOther = node.game.settings.send2[choice];
+                        var posname2 = 'secondPos' + i;
+                        var position2 = W.getElementById(posname2);
+                        if (position2.checked) {
+                            var timeupChoice = position2.value;
+                            var payoffSelf = node.game.settings.receive2[timeupChoice];
+                            var payoffOther = node.game.settings.send2[timeupChoice];
+                            selectionMade = true;
+                            break;
+                        }
+                    }
+
+                    // no selection: random value; 0 payoff for self
+                    if(!selectionMade) {
+                        var timeupChoice = Math.floor(Math.random() * 9);
+                        var payoffSelf = 0;
+                        var payoffOther = node.game.settings.send2[timeupChoice];
+                    }
                     
                     /*if (node.game.lastChoice2) {
                         lastChosenValue2 = node.game.lastChoice2;
                     }*/
                     
-                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, true);
+                    node.emit('BID_DONE', timeupChoice, payoffSelf, payoffOther, other, true);
                 }
             };
 
