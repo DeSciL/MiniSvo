@@ -21,26 +21,7 @@ block mainContent
             strong No feedback. 
             span  There was an error during the choices stage so there is no feedback. However, the game should still work. Please continue.
                                    
-        //div(class="panel panel-default", style="width:530px;")
-            div(class="panel-heading") First choice
-            div(class="panel-body")
-                table(style='width:500px;')
-                    tr
-                        td(style='height:33px;font-weight:normal;') You receive:
-                        each val, index in receive1
-                            td(class='feedbackTop', id='firstHoverTop' + index)= val
-                    tr
-                        td(style='border-top:1px solid black;border-bottom:1px solid black;')
-                        - var i = 0;
-                        while i < 9
-                            td(class='feedbackMiddle', id='firstHoverMiddle' + i++)
-
-                    tr
-                        td(style='height:33px;font-weight:normal;') Your partner receives:
-                        each val, index in send1
-                            td(class='feedbackBottom', id='firstHoverBottom' + index)= val
-                
-
+    
         div(class="panel panel-default", style="width:530px;")
             div(class="panel-heading") Choice
             div(class="panel-body")

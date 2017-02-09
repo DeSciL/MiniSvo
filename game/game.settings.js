@@ -29,10 +29,6 @@ module.exports = {
     receive2: [100, 98, 96, 94, 93, 91, 89, 87, 85],
     send2: [50, 54, 59, 63, 68, 72, 76, 81, 85],
 
-    
-    receive2_r: [85, 87, 89, 91, 93, 94, 96, 98, 100],
-    send2_r: [85, 81, 76, 72, 68, 63, 59, 54, 50],
-
     // Second Item
     // receive1: [85, 87, 89, 91, 93, 94, 96, 98, 100],
     // send1: [15, 19, 24, 28, 33, 37, 41, 46, 50],
@@ -60,7 +56,7 @@ module.exports = {
             WAIT_TIME: 20
         },
 
-        nf: {                  // Added _ for testing
+        nf: { 
             fullName: "No Feedback",
             description:
                 "Partner, no feedback.",

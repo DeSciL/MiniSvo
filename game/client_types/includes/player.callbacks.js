@@ -135,7 +135,7 @@ function init() {
     });
     
 
-    node.on('BID_DONE', function(choice2, to, timeup) {
+    node.on('BID_DONE', function(choice, payoffSelf, payoffOther, to, timeup) {
         var root, time;
 
         // Time to make a bid.
@@ -152,11 +152,12 @@ function init() {
         
         //save choices for feedback step
         //node.game.lastChoice1 = choice1;
-        node.game.lastChoice2 = choice2;
+        node.game.lastChoice = choice;
+        node.game.lastTimeup = timeup;
         
         // Notify the other player.
         //node.say('CHOICE', to, {choice1: choice1, choice2: choice2});
-        node.say('CHOICE', to, {choice2: choice2});
+        node.say('CHOICE', to, {choice: choice});
 
         root = W.getElementById('container');
         // Leave a space.
@@ -166,7 +167,9 @@ function init() {
         // Notify the server.
         node.done({
             //choice1: choice1,
-            choice2: choice2,
+            choice: choice,
+            payoffSelf: payoffSelf,
+            payoffOther: payoffOther,
             time: time,
             timeup: timeup,
             other: node.game.other
@@ -629,15 +632,18 @@ function choices() {
             options = {
                 milliseconds: timer,
                 timeup: function() {
-                    var lastChosenValue1 = 4;
-                    var lastChosenValue2 = 4;
-                    if (node.game.lastChoice2) {
-                        //lastChosenValue1 = node.game.lastChoice1;
-                        lastChosenValue2 = node.game.lastChoice2;
-                    }
+
                     
-                    //node.emit('BID_DONE', lastChosenValue1, lastChosenValue2, other, true);
-                    node.emit('BID_DONE', lastChosenValue2, other, true);
+                    // CHANGE: RANDOM!
+                    var payoffSelf = 0;
+                    var choice = Math.floor(Math.random() * 9);
+                    var payoffOther = node.game.settings.send2[choice];
+                    
+                    /*if (node.game.lastChoice2) {
+                        lastChosenValue2 = node.game.lastChoice2;
+                    }*/
+                    
+                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, true);
                 }
             };
 
@@ -823,7 +829,9 @@ function choices() {
                     var posname2 = 'secondPos' + i;
                     var position2 = W.getElementById(posname2);
                     if (position2.checked) {
-                        var choice2 = position2.value;
+                        var choice = position2.value;
+                        var payoffSelf = node.game.settings.receive2[choice];
+                        var payoffOther = node.game.settings.send2[choice];
                         break;
                     }
                 }
@@ -839,12 +847,12 @@ function choices() {
                     node.emit('BID_DONE', choice1, choice2, other);
                 }*/
 
-                if (!choice2) {
+                if (!choice) {
                     badAlert.style.display = '';
                 } else {
                     badAlert.style.display = 'none';
                     goodAlert.style.display = '';
-                    node.emit('BID_DONE', choice2, other);
+                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, false);
                 }
             };
 
@@ -897,19 +905,26 @@ function feedback() {
                 var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];
             }*/            
             
-            var chosenValueIndex2 = node.game.lastChoice2;
-            if(chosenValueIndex2) {
-                var chosenValue2 = node.game.settings.receive2[chosenValueIndex2];
-            }       
+            
+
+            var chosenValueIndex = node.game.lastChoice;
+            if(chosenValueIndex) {
+                if(node.game.lastTimeup != true) {
+                    var chosenValue = node.game.settings.receive2[chosenValueIndex];
+                } else {
+                    var chosenValue = 0;
+                }      
+            }      
+            
             
             /*var otherValueIndex1 = msg.data.choice1;
             if(otherValueIndex1) {
                 var otherValue1 = node.game.settings.send1[otherValueIndex1]
             }*/
             
-            var otherValueIndex2 = msg.data.choice2;
-            if(otherValueIndex2) {
-                var otherValue2 = node.game.settings.send2[otherValueIndex2]
+            var otherValueIndex = msg.data.choice;
+            if(otherValueIndex) {
+                var otherValue = node.game.settings.send2[otherValueIndex]
             }
             
             
@@ -929,139 +944,22 @@ function feedback() {
                 otherValueSpan2.innerHTML = otherValue2;
             }*/
 
-            if (treatment != 'nf' && chosenValue2 && otherValue2) {
+            if (treatment != 'nf' && otherValue) {
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
                 
                 //var chosenValueSpan1 = W.getElementById('self1');
                 //chosenValueSpan1.innerHTML = chosenValue1;
-                var chosenValueSpan2 = W.getElementById('self2');
-                chosenValueSpan2.innerHTML = chosenValue2;
+                var chosenValueSpan = W.getElementById('self2');
+                chosenValueSpan.innerHTML = chosenValue;
                 //var otherValueSpan1 = W.getElementById('other1');
                 //otherValueSpan1.innerHTML = otherValue1;
-                var otherValueSpan2 = W.getElementById('other2');
-                otherValueSpan2.innerHTML = otherValue2;
+                var otherValueSpan = W.getElementById('other2');
+                otherValueSpan.innerHTML = otherValue;
             }
             
-            // Pay.off for this round. Not displayed
-            /*
-            var roundpayoff = chosenValue1 + chosenValue2 + otherValue1 + otherValue2;  
-            var thepayoffSpan = W.getElementById('thepayoff');
-            thepayoffSpan.innerHTML = roundpayoff;
-            */
-            
-            // Highlight selected values in sliders on feedback page
-            // Change class
-            
-            /*if(chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
-                var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
-                var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
-                var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
-                
-
-                var firstSelfTop = W.getElementById(firstSelfTopId);
-                firstSelfTop.className += ' highlightSelfTop';
-
-                var firstSelfMiddle = W.getElementById(firstSelfMiddleId);
-                firstSelfMiddle.className += ' highlightSelfMiddle';
-
-                var firstSelfBottom = W.getElementById(firstSelfBottomId);
-                firstSelfBottom.className += ' highlightSelfBottom';
-
-                
-                var otherSelfTopId = 'secondHoverTop' + chosenValueIndex2;
-                var otherSelfMiddleId = 'secondHoverMiddle' + chosenValueIndex2;
-                var otherSelfBottomId = 'secondHoverBottom' + chosenValueIndex2;
-
-                var otherSelfTop = W.getElementById(otherSelfTopId);
-                otherSelfTop.className += ' highlightSelfTop';
-
-                var otherSelfMiddle = W.getElementById(otherSelfMiddleId);
-                otherSelfMiddle.className += ' highlightSelfMiddle';
-
-                var otherSelfBottom = W.getElementById(otherSelfBottomId);
-                otherSelfBottom.className += ' highlightSelfBottom';
-
-                
-            // Feedback about partners choice
-                var treatment = node.env('treatment');
-                if(treatment != 'nf') {
-                    var colors = W.getElementById('colors');
-                    colors.style.display = '';
-                    
-                    var firstOtherTopId = 'firstHoverTop' + otherValueIndex1;
-                    var firstOtherMiddleId = 'firstHoverMiddle' + otherValueIndex1;
-                    var firstOtherBottomId = 'firstHoverBottom' + otherValueIndex1;
-                    
-
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameTop = W.getElementById(firstOtherTopId);
-                        firstSameTop.className += ' highlightSameTop';
-                    }
-                    else {
-                        var firstOtherTop = W.getElementById(firstOtherTopId);
-                        firstOtherTop.className += ' highlightOtherTop';
-                    }
-
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameMiddle = W.getElementById(firstOtherMiddleId);
-                        firstSameMiddle.className += ' highlightSameMiddle';
-                    }
-                    else {
-                        var firstOtherMiddle = W.getElementById(firstOtherMiddleId);
-                        firstOtherMiddle.className += ' highlightOtherMiddle';
-                    }
-
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameBottom = W.getElementById(firstOtherBottomId);
-                        firstSameBottom.className += ' highlightSameBottom';
-                    }
-                    else {
-                        var firstOtherBottom = W.getElementById(firstOtherBottomId);
-                        firstOtherBottom.className += ' highlightOtherBottom';
-                    }
-
-                    
-                    
-                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
-                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
-                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
-                    
-
-                    if (chosenValueIndex2 == otherValueIndex2) {
-                        var secondSameTop = W.getElementById(secondOtherTopId);
-                        secondSameTop.className += ' highlightSameTop';
-                    }
-                    else {
-                        var secondOtherTop = W.getElementById(secondOtherTopId);
-                        secondOtherTop.className += ' highlightOtherTop';
-                    }
-
-                    if (chosenValueIndex2 == otherValueIndex2) {
-                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
-                        secondSameMiddle.className += ' highlightSameMiddle';
-                    }
-                    else {
-                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
-                        secondOtherMiddle.className += ' highlightOtherMiddle';
-                    }
-
-                    if (chosenValueIndex2 == otherValueIndex2) {
-                        var secondSameBottom = W.getElementById(secondOtherBottomId);
-                        secondSameBottom.className += ' highlightSameBottom';
-                    }
-                    else {
-                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
-                        secondOtherBottom.className += ' highlightOtherBottom';
-                    }
-
-                } else {
-                    var colorsNF = W.getElementById('colorsNF');
-                    colorsNF.style.display = ''; 
-                }
-            }*/
-
-            if(chosenValue2 && otherValue2) {
+          
+            if(chosenValue && otherValue) {
                 /*var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
                 var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
                 var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
@@ -1077,9 +975,9 @@ function feedback() {
                 firstSelfBottom.className += ' highlightSelfBottom';*/
 
                 
-                var otherSelfTopId = 'secondHoverTop' + chosenValueIndex2;
-                var otherSelfMiddleId = 'secondHoverMiddle' + chosenValueIndex2;
-                var otherSelfBottomId = 'secondHoverBottom' + chosenValueIndex2;
+                var otherSelfTopId = 'secondHoverTop' + chosenValueIndex;
+                var otherSelfMiddleId = 'secondHoverMiddle' + chosenValueIndex;
+                var otherSelfBottomId = 'secondHoverBottom' + chosenValueIndex;
 
                 var otherSelfTop = W.getElementById(otherSelfTopId);
                 otherSelfTop.className += ' highlightSelfTop';
@@ -1097,46 +995,13 @@ function feedback() {
                     var colors = W.getElementById('colors');
                     colors.style.display = '';
                     
-                    /*var firstOtherTopId = 'firstHoverTop' + otherValueIndex1;
-                    var firstOtherMiddleId = 'firstHoverMiddle' + otherValueIndex1;
-                    var firstOtherBottomId = 'firstHoverBottom' + otherValueIndex1;
+                    
+                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex;
+                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex;
+                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex;
                     
 
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameTop = W.getElementById(firstOtherTopId);
-                        firstSameTop.className += ' highlightSameTop';
-                    }
-                    else {
-                        var firstOtherTop = W.getElementById(firstOtherTopId);
-                        firstOtherTop.className += ' highlightOtherTop';
-                    }
-
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameMiddle = W.getElementById(firstOtherMiddleId);
-                        firstSameMiddle.className += ' highlightSameMiddle';
-                    }
-                    else {
-                        var firstOtherMiddle = W.getElementById(firstOtherMiddleId);
-                        firstOtherMiddle.className += ' highlightOtherMiddle';
-                    }
-
-                    if (chosenValueIndex1 == otherValueIndex1) {
-                        var firstSameBottom = W.getElementById(firstOtherBottomId);
-                        firstSameBottom.className += ' highlightSameBottom';
-                    }
-                    else {
-                        var firstOtherBottom = W.getElementById(firstOtherBottomId);
-                        firstOtherBottom.className += ' highlightOtherBottom';
-                    }*/
-
-                    
-                    
-                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
-                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
-                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
-                    
-
-                    if (chosenValueIndex2 == otherValueIndex2) {
+                    if (chosenValueIndex == otherValueIndex) {
                         var secondSameTop = W.getElementById(secondOtherTopId);
                         secondSameTop.className += ' highlightSameTop';
                     }
@@ -1145,7 +1010,7 @@ function feedback() {
                         secondOtherTop.className += ' highlightOtherTop';
                     }
 
-                    if (chosenValueIndex2 == otherValueIndex2) {
+                    if (chosenValueIndex == otherValueIndex) {
                         var secondSameMiddle = W.getElementById(secondOtherMiddleId);
                         secondSameMiddle.className += ' highlightSameMiddle';
                     }
@@ -1154,7 +1019,7 @@ function feedback() {
                         secondOtherMiddle.className += ' highlightOtherMiddle';
                     }
 
-                    if (chosenValueIndex2 == otherValueIndex2) {
+                    if (chosenValueIndex == otherValueIndex) {
                         var secondSameBottom = W.getElementById(secondOtherBottomId);
                         secondSameBottom.className += ' highlightSameBottom';
                     }
@@ -1227,11 +1092,15 @@ function totalpayoff() {
                 //var myIndex = parseInt(payoffs[i].myChoice1);
                 //var payFromSelf1 = node.game.settings.receive1[myIndex];
 
-                var myIndex2 = parseInt(payoffs[i].myChoice2);
-                var payFromSelf2 = node.game.settings.receive1[myIndex2];
+                var myIndex = parseInt(payoffs[i].myChoice);
                 
+
+                var payFromSelf = 0;
+                if(payoffs[i].timeup != true){
+                    payFromSelf = node.game.settings.receive2[myIndex];
+                }
+
                 //var payFromSelf = payFromSelf1 + payFromSelf2;
-                var payFromSelf = payFromSelf2;
                 payoffSumSelf += payFromSelf;
                 var payFromSelfName = 'payFromSelf' + i;
                 var payFromSelfSpan = W.getElementById(payFromSelfName);
@@ -1242,11 +1111,10 @@ function totalpayoff() {
                 //var otherIndex = parseInt(payoffs[i].otherChoice1);
                 //var payFromOther1 = node.game.settings.send1[otherIndex];
                 
-                var otherIndex2 = parseInt(payoffs[i].otherChoice2);
-                var payFromOther2 = node.game.settings.send2[otherIndex2];
+                var otherIndex = parseInt(payoffs[i].otherChoice);
+                var payFromOther = node.game.settings.send2[otherIndex];
                 
                 //var payFromOther = payFromOther1 + payFromOther2;
-                var payFromOther = payFromOther2;
                 payoffSumOther += payFromOther;
                 var payFromOtherName = 'payFromOther' + i;
                 var payFromOtherSpan = W.getElementById(payFromOtherName);
