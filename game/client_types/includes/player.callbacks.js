@@ -135,7 +135,7 @@ function init() {
     });
     
 
-    node.on('BID_DONE', function(choice, payoffSelf, payoffOther, to, timeup) {
+    node.on('BID_DONE', function(choice, payoffSelf, payoffOther, to, timeup, secondTimeup) {
         var root, time;
 
         // Time to make a bid.
@@ -154,6 +154,8 @@ function init() {
         //node.game.lastChoice1 = choice1;
         node.game.lastChoice = choice;
         node.game.lastTimeup = timeup;
+        node.game.secondTimeup = secondTimeup;
+
         
         // Notify the other player.
         //node.say('CHOICE', to, {choice1: choice1, choice2: choice2});
@@ -621,13 +623,24 @@ function choices() {
             window.scrollTo(0,0);
 
             var round = node.player.stage.round;
-            var timer;
+            var time, timer;
             if (round == 1 || round == 2) {
-                timer = 6000;
+                time = 12000;
             }
             else {
-                timer = 3000;
+                time = 12000;
             }
+
+            var secondTimeup = node.game.secondTimeup;
+            if (secondTimeup){
+                timer = time/2;
+            }
+            else {
+                timer = time;
+            }
+
+
+
             
             options = {
                 milliseconds: timer,
@@ -635,8 +648,10 @@ function choices() {
 
 
                     var selectionMade = false;
+                    var timeup = false;
                     var lastTimeup = node.game.lastTimeup;
                     var secondTimeup;
+                    var payoffSelf, payoffOther;
 
                     // has a selection been made?
                     for (var i = 0; i < 9; i++) {
@@ -667,7 +682,7 @@ function choices() {
                         lastChosenValue2 = node.game.lastChoice2;
                     }*/
                     
-                    node.emit('BID_DONE', timeupChoice, payoffSelf, payoffOther, other, true);
+                    node.emit('BID_DONE', timeupChoice, payoffSelf, payoffOther, other, timeup, secondTimeup);
                 }
             };
 
@@ -804,7 +819,7 @@ function choices() {
                 } else {
                     badAlert.style.display = 'none';
                     goodAlert.style.display = '';
-                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, false);
+                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, false, false);
                 }
             };
 
