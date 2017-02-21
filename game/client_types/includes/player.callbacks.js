@@ -635,6 +635,8 @@ function choices() {
 
 
                     var selectionMade = false;
+                    var lastTimeup = node.game.lastTimeup;
+                    var secondTimeup;
 
                     // has a selection been made?
                     for (var i = 0; i < 9; i++) {
@@ -643,8 +645,8 @@ function choices() {
                         var position2 = W.getElementById(posname2);
                         if (position2.checked) {
                             var timeupChoice = position2.value;
-                            var payoffSelf = node.game.settings.receive2[timeupChoice];
-                            var payoffOther = node.game.settings.send2[timeupChoice];
+                            payoffSelf = node.game.settings.receive2[timeupChoice];
+                            payoffOther = node.game.settings.send2[timeupChoice];
                             selectionMade = true;
                             break;
                         }
@@ -653,8 +655,12 @@ function choices() {
                     // no selection: random value; 0 payoff for self
                     if(!selectionMade) {
                         var timeupChoice = Math.floor(Math.random() * 9);
-                        var payoffSelf = 0;
-                        var payoffOther = node.game.settings.send2[timeupChoice];
+                        payoffSelf = 0;
+                        timeup = true;
+                        payoffOther = node.game.settings.send2[timeupChoice];
+                        if(lastTimeup){
+                            secondTimeup = true;
+                        }
                     }
                     
                     /*if (node.game.lastChoice2) {
@@ -690,79 +696,7 @@ function choices() {
       
             //var highlightClass1;
             var highlightClass2;
-            
-
-            // SECOND ITEM
-            /*
-            for (var i = 0; i < 9; i++) {
-                var hoverClassesNames = 'firstHoverclass' + i;
-                var hoverClasses = W.getElementsByClassName(hoverClassesNames);
-                for (var j = 0; j < hoverClasses.length; j++) {
-                    hoverClasses[j].onmouseover = function() {
-                        var thisClassName = this.className;                       
-                        var thisClass = W.getElementsByClassName(thisClassName);
-                        var thisNumber = thisClassName.slice(-1);
-                        var thisRadioId = 'firstPos' + thisNumber;
-                        var thisRadioButton = W.getElementById(thisRadioId);
-                        if (thisRadioButton.checked == false) {
-                            for (var k = 0; k < thisClass.length; k++) {
-                                thisClass[k].style.backgroundColor = '#ddd';
-                            }                     
-                            thisClass[1].style.borderTop = '1px solid #ddd';
-                            thisClass[1].style.borderBottom = '1px solid #ddd';
-                        }
-                        
-                    }
-                    
-                   
-                    
-                    
-                    
-                    hoverClasses[j].onmouseout = function() {
-                        var thisClassName = this.className;
-                        var thisClass = W.getElementsByClassName(thisClassName);
-                        var thisNumber = thisClassName.slice(-1);
-                        var thisRadioId = 'firstPos' + thisNumber;
-                        var thisRadioButton = W.getElementById(thisRadioId);
-                        if (thisRadioButton.checked == false) {
-                            this.style.backgroundColor = '#fff';
-                            for (var k = 0; k < thisClass.length; k++) {
-                                thisClass[k].style.backgroundColor = '#fff';
-                            }
-                            thisClass[1].style.borderTop = '1px solid #000';
-                            thisClass[1].style.borderBottom = '1px solid #000';
-                        }
-                    }
-                    
-                    
-                    
-                    
-                    hoverClasses[j].onclick = function() {
-                        var thisClass = this.className;
-                        var thisNumber = thisClass.slice(-1);
-                        if(highlightClass1) {
-                            for (var k = 0; k < highlightClass1.length; k++) {
-                                highlightClass1[k].style.backgroundColor = '#fff';
-                            }
-                            highlightClass1[1].style.borderTop = '1px solid #000';
-                            highlightClass1[1].style.borderBottom = '1px solid #000';     
-                        }
-                        var thisRadioId = 'firstPos' + thisNumber;
-                        var thisRadioButton = W.getElementById(thisRadioId);
-                        thisRadioButton.checked = true;
-                        var thisClassElement = W.getElementsByClassName(thisClass);
-                        highlightClass1 = thisClassElement;
-                        for (var k = 0; k < thisClassElement.length; k++) {
-                            thisClassElement[k].style.backgroundColor = '#ddb';
-                        }
-                        thisClassElement[1].style.borderTop = '1px solid #ddb';
-                        thisClassElement[1].style.borderBottom = '1px solid #ddb';
-                        
-                    }
-                }
-            }
-            */
-            
+                 
             
             for (var i = 0; i < 9; i++) {
                 var hoverClassesNames2 = 'secondHoverclass' + i;
@@ -926,11 +860,12 @@ function feedback() {
             
 
             var chosenValueIndex = node.game.lastChoice;
+            var chosenValue;
             if(chosenValueIndex) {
                 if(node.game.lastTimeup != true) {
-                    var chosenValue = node.game.settings.receive2[chosenValueIndex];
+                    chosenValue = node.game.settings.receive2[chosenValueIndex];
                 } else {
-                    var chosenValue = 0;
+                    chosenValue = 0;
                 }      
             }      
             
@@ -977,7 +912,7 @@ function feedback() {
             }
             
           
-            if(chosenValue && otherValue) {
+            if(chosenValueIndex && otherValue) {
                 /*var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
                 var firstSelfMiddleId = 'firstHoverMiddle' + chosenValueIndex1;
                 var firstSelfBottomId = 'firstHoverBottom' + chosenValueIndex1;
