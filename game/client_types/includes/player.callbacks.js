@@ -631,17 +631,19 @@ function choices() {
             window.scrollTo(0,0);
 
             var round = node.player.stage.round;
+
             var time, timer;
+            var maximumTime = 60000;
             if (round == 1 || round == 2) {
-                time = 6000;
+                time = maximumTime;
             }
             else {
-                time = 6000;
+                time = maximumTime/2;
             }
 
             var secondTimeup = node.game.secondTimeup;
             if (secondTimeup){
-                timer = time/2;
+                timer = maximumTime/10;
             }
             else {
                 timer = time;
@@ -860,7 +862,7 @@ function feedback() {
         time = 30000;
         var secondTimeup = node.game.secondTimeup;
         if (secondTimeup){
-            timer = time/2;
+            timer = time/5;
         }
         else {
             timer = time;

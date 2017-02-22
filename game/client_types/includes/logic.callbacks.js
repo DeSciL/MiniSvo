@@ -463,6 +463,10 @@ function notEnoughPlayers() {
     console.log('Warning: not enough players!!');
     // Pause connected players.
     node.remoteCommand('pause', 'ROOM', this.disconnectStr);
+
+    // only redirect if they are BEFORE final stage
+  
+
     this.countdown = setTimeout(function() {
         console.log('Countdown fired. Going to Step: totalpayoff.');
         node.remoteCommand('erase_buffer', 'ROOM');
@@ -471,8 +475,13 @@ function notEnoughPlayers() {
         // if syncStepping = false
         //node.remoteCommand('goto_step', 5);
         // Step must be not-skipped if you give the id (else give a number).
-        node.game.gotoStep(new GameStage('final'));
+
+        //var stage = node.player.stage.stage;
+        //if (stage < 4) {
+            node.game.gotoStep(new GameStage('final'));
+        //}
     }, settings.WAIT_TIME * 1000);
+
 }
 
 // remember to export it.

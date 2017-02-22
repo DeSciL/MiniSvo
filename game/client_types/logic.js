@@ -145,7 +145,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             this.node.log('Total Payoffs');
             // cbs.totalpayoff();
         },
-        pushClients: true,
+        pushClients: false,
         timer: 30000
         // minPlayers: undefined,
         // syncStepping: false,
@@ -160,7 +160,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 //             debugger
 //             node.done();
         },
-        pushClients: true,
+        pushClients: false,
         timer: 120000
     });
 
@@ -172,7 +172,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             console.log('AAAA - 2');
 //          node.done();
         },
-        pushClients: true,
+        pushClients: false,
         timer: 120000
     });
 
@@ -183,7 +183,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             console.log('AAAA - 3');
         //    node.done(); 
         },
-        pushClients: true,
+        pushClients: false,
         timer: 180000
     });
 
