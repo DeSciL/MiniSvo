@@ -854,8 +854,21 @@ function feedback() {
         node.game.choiceDone = false;
 
         
+
+
+        var time, timer;
+        time = 30000;
+        var secondTimeup = node.game.secondTimeup;
+        if (secondTimeup){
+            timer = time/2;
+        }
+        else {
+            timer = time;
+        }
+
+
         options = {
-                milliseconds: 30000,
+                milliseconds: timer,
                 timeup: function() {
                     node.done();
                 }
