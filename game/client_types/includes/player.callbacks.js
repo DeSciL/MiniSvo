@@ -150,10 +150,18 @@ function init() {
 
         W.getElementById('submitChoice').disabled = 'disabled';
         
-        //save choices for feedback step
+        //save choice and timeup for feedback step
         //node.game.lastChoice1 = choice1;
         node.game.lastChoice = choice;
-        node.game.lastTimeup = timeup;
+
+
+        // shortcut fix on undefined timeout, not robust. FIX!
+        if(typeof timeup == 'undefined') {
+            node.game.lastTimeup = true;
+        }
+        else {
+            node.game.lastTimeup = timeup;
+        }
         node.game.secondTimeup = secondTimeup;
 
         
@@ -1080,7 +1088,10 @@ function totalpayoff() {
                 //var payFromOther1 = node.game.settings.send1[otherIndex];
                 
                 var otherIndex = parseInt(payoffs[i].otherChoice);
-                var payFromOther = node.game.settings.send2[otherIndex];
+                var payFromOther = 0;
+                if(payoffs[i].timeup != true){
+                    payFromOther = node.game.settings.send2[otherIndex];
+                }
                 
                 //var payFromOther = payFromOther1 + payFromOther2;
                 payoffSumOther += payFromOther;
