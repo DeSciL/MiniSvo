@@ -633,10 +633,10 @@ function choices() {
             var round = node.player.stage.round;
             var time, timer;
             if (round == 1 || round == 2) {
-                time = 12000;
+                time = 6000;
             }
             else {
-                time = 12000;
+                time = 6000;
             }
 
             var secondTimeup = node.game.secondTimeup;
@@ -933,7 +933,12 @@ function feedback() {
                 otherValueSpan2.innerHTML = otherValue2;
             }*/
 
-            if (treatment != 'nf' && otherValue) {
+            var timeup = node.game.lastTimeup;
+            if (timeup) {
+                var noSelection = W.getElementById('noSelection');
+                noSelection.style.display = '';
+            }
+            else if(treatment != 'nf' && otherValue) {
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
                 
@@ -946,7 +951,6 @@ function feedback() {
                 var otherValueSpan = W.getElementById('other2');
                 otherValueSpan.innerHTML = otherValue;
             }
-            
           
             if(chosenValueIndex && otherValue) {
                 /*var firstSelfTopId = 'firstHoverTop' + chosenValueIndex1;
