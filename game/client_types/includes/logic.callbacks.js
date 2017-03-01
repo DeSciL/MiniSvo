@@ -461,6 +461,8 @@ function doMatchNext() {
 function notEnoughPlayers() {
     // if (this.countdown) return;
     console.log('Warning: not enough players!!');
+    var disconnectionStage = node.game.lastStage.stage;
+    // console.log(disconnectionStage);
     // Pause connected players.
     node.remoteCommand('pause', 'ROOM', this.disconnectStr);
 
@@ -476,10 +478,10 @@ function notEnoughPlayers() {
         //node.remoteCommand('goto_step', 5);
         // Step must be not-skipped if you give the id (else give a number).
 
-        //var stage = node.player.stage.stage;
-        //if (stage < 4) {
+        // Only push to final stage if final stage has not been reached yet
+        if (disconnectionStage < 6) {
             node.game.gotoStep(new GameStage('final'));
-        //}
+        }
     }, settings.WAIT_TIME * 1000);
 
 }
