@@ -50,7 +50,7 @@ module.exports = {
      *
      * Maximum waiting time in the waiting room
      */ 
-    MAX_WAIT_TIME: 90000,
+    MAX_WAIT_TIME: 300000,
 
     /**
      * ## START_DATE

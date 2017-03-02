@@ -43,8 +43,8 @@ module.exports = {
      * If set, client must have a resolution between the min and max specified
      */
     viewportSize: {
-        minX: 600,
-        minY: 400,
+        minX: 500,
+        minY: 360,
         // maxX: 13,
         // maxY: 760
     },
