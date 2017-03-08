@@ -9,7 +9,7 @@ body {
 }
 
 div#container {
-    width:530px !important;
+    max-width:530px !important;
     margin:0 auto;
     background-color: #ffffff;
     border: 1px solid #e3e3e3;
@@ -57,7 +57,7 @@ div#ng_header {
 }
 
 .ng_header_position-horizontal-t, .ng_header_position-horizontal-b {
-    width: 580px !important;
+    max-width: 580px !important;
     margin:0 auto !important;
 }
 

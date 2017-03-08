@@ -8,7 +8,7 @@ div#container {
 }   
 
 div#wrapper {    
-    width:580px !important;
+    max-width:580px !important;
     margin:0 auto;
     background-color: #ffffff;
     border: 1px solid #e3e3e3;

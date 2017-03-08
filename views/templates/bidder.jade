@@ -4,10 +4,10 @@ block mainContent
     div(id='container')
         h3 Choice
         
-        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;max-width:530px;")
             span Please make a choice.
             
-        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;max-width:530px;")
             span You have submitted your choice.
             
         div
@@ -15,10 +15,10 @@ block mainContent
         
         br
 
-        div(class="panel panel-default", style="width:530px;")
+        div(class="panel panel-default", style="max-width:530px;")
             div(class="panel-heading") Allocation
             div(class="panel-body")
-                table(style='width:500px;')
+                table(style='width:100%;')
                     tr
                         td(style='font-weight:normal;') You receive:
                         each val, index in receive2
