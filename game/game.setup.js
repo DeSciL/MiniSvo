@@ -23,13 +23,13 @@ module.exports = function(settings, stages) {
         auto: false
     };
 
-    game.debug = true;
+    game.debug = false;
 
-    game.verbosity = 1;
+    game.verbosity = 0;
 
     game.window = {
         promptOnleave: !game.debug,
-        disableRightClick: false
+        disableRightClick: true
     }
 
     return game;
