@@ -48,7 +48,9 @@ block mainContent
             div(class="panel-body")
                 span(style='font-weight:bold;') What is your total of "HITs submitted" on Amazon Mechanical Turk?
                 br
-                span If you don't know this number, you can find it on your Mturk dashboard.
+                span If you don't know this number, you can find it on your 
+                    a(href='https://www.mturk.com/mturk/dashboard', target='_blank') Mturk dashboard
+                    | .
                 br
                 input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15", id="hitsSubmitted")
                 
