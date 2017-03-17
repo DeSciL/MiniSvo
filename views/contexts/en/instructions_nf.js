@@ -1,9 +1,9 @@
 module.exports = function(settings, headers) {
     
-    var receive1 = settings.standard.receive1;
-    var send1 = settings.standard.send1;
-    var receive2 = settings.standard.receive2;
-    var send2 = settings.standard.send2;
+    var receive1 = settings.nf.receive1;
+    var send1 = settings.nf.send1;
+    var receive2 = settings.nf.receive2;
+    var send2 = settings.nf.send2;
 
     /*var C = settings.pp.COINS;
     var R = settings.pp.REPEAT;

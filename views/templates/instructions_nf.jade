@@ -10,10 +10,10 @@ block mainContent
             p Each round, you will make a choice to allocate a number of coins to your private account and another number of coins to your recipient.
             p Here is how such a choice works: you make an allocation decision on a slider (see below) – whatever allocation you choose, you will receive the number at the top and your recipient will receive the number at the bottom.
 
-            div(class="panel panel-default", style="width:530px;")
+            div(class="panel panel-default", style="max-width:530px;")
                 div(class="panel-heading") Example choice
                 div(class="panel-body")
-                    table(style='width:500px;')
+                    table(style='width:100%;')
                         tr
                             td(style='font-weight:normal;') You receive:
                             each val, index in receive2
