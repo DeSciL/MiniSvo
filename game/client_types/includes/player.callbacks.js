@@ -135,7 +135,7 @@ function init() {
     });
     
 
-    node.on('BID_DONE', function(choice, payoffSelf, payoffOther, to, timeup, secondTimeup) {
+    node.on('BID_DONE', function(choice, payoffSelf, payoffOther, timeClick, to, timeup, secondTimeup) {
         var root, time;
 
         // Time to make a bid.
@@ -173,14 +173,16 @@ function init() {
         // Leave a space.
         //W.writeln(' Choice Allocation 1: ' +  choice1 + '. Choice Allocation 2: ' + choice2 +
         //          '. Waiting for the respondent... ', root);
-                  
+
+
         // Notify the server.
         node.done({
             //choice1: choice1,
             choice: choice,
             payoffSelf: payoffSelf,
             payoffOther: payoffOther,
-            time: time,
+            timeClick: timeClick,
+            timeSubmit: time,
             timeup: timeup,
             other: node.game.other
         });
@@ -692,7 +694,7 @@ function choices() {
                         lastChosenValue2 = node.game.lastChoice2;
                     }*/
                     
-                    node.emit('BID_DONE', timeupChoice, payoffSelf, payoffOther, other, timeup, secondTimeup);
+                    node.emit('BID_DONE', timeupChoice, payoffSelf, payoffOther, 0, other, timeup, secondTimeup);
                 }
             };
 
@@ -721,6 +723,8 @@ function choices() {
       
             //var highlightClass1;
             var highlightClass2;
+            var time;
+            var timeClick;
                  
             
             for (var i = 0; i < 9; i++) {
@@ -780,6 +784,10 @@ function choices() {
                         }               
                         thisClassElement[1].style.borderTop = '1px solid #ddb';
                         thisClassElement[1].style.borderBottom = '1px solid #ddb';
+
+                        // save timestamnp for click
+                        timeClick = node.timer.getTimeSince('bidder_loaded');
+
                     }
                 }
             }
@@ -829,7 +837,7 @@ function choices() {
                 } else {
                     badAlert.style.display = 'none';
                     goodAlert.style.display = '';
-                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, other, false, false);
+                    node.emit('BID_DONE', choice, payoffSelf, payoffOther, timeClick, other, false, false);
                 }
             };
 
