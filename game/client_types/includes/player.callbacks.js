@@ -672,8 +672,8 @@ function choices() {
                         var position2 = W.getElementById(posname2);
                         if (position2.checked) {
                             var timeupChoice = position2.value;
-                            payoffSelf = node.game.settings.receive2[timeupChoice];
-                            payoffOther = node.game.settings.send2[timeupChoice];
+                            payoffSelf = node.game.settings.receive[timeupChoice];
+                            payoffOther = node.game.settings.send[timeupChoice];
                             selectionMade = true;
                             break;
                         }
@@ -684,7 +684,7 @@ function choices() {
                         var timeupChoice = Math.floor(Math.random() * 9);
                         payoffSelf = 0;
                         timeup = true;
-                        payoffOther = node.game.settings.send2[timeupChoice];
+                        payoffOther = node.game.settings.send[timeupChoice];
                         if(lastTimeup){
                             secondTimeup = true;
                         }
@@ -815,8 +815,8 @@ function choices() {
                     var position2 = W.getElementById(posname2);
                     if (position2.checked) {
                         var choice = position2.value;
-                        var payoffSelf = node.game.settings.receive2[choice];
-                        var payoffOther = node.game.settings.send2[choice];
+                        var payoffSelf = node.game.settings.receive[choice];
+                        var payoffOther = node.game.settings.send[choice];
                         break;
                     }
                 }
@@ -909,7 +909,7 @@ function feedback() {
             var chosenValue;
             if(chosenValueIndex) {
                 if(node.game.lastTimeup != true) {
-                    chosenValue = node.game.settings.receive2[chosenValueIndex];
+                    chosenValue = node.game.settings.receive[chosenValueIndex];
                 } else {
                     chosenValue = 0;
                 }      
@@ -923,7 +923,7 @@ function feedback() {
             
             var otherValueIndex = msg.data.choice;
             if(otherValueIndex) {
-                var otherValue = node.game.settings.send2[otherValueIndex]
+                var otherValue = node.game.settings.send[otherValueIndex]
             }
             
             
@@ -1077,7 +1077,7 @@ function totalpayoff() {
             
             var options = {
                     timeup: function() {
-                        node.done();
+                        node.emit('BONUS', realPayoffRounded);
                     }
             };
             node.game.visualTimer.startTiming(options);
@@ -1100,7 +1100,7 @@ function totalpayoff() {
 
                 var payFromSelf = 0;
                 if(payoffs[i].timeup != true){
-                    payFromSelf = node.game.settings.receive2[myIndex];
+                    payFromSelf = node.game.settings.receive[myIndex];
                 }
 
                 //var payFromSelf = payFromSelf1 + payFromSelf2;
@@ -1117,7 +1117,7 @@ function totalpayoff() {
                 var otherIndex = parseInt(payoffs[i].otherChoice);
                 var payFromOther = 0;
                 if(payoffs[i].timeup != true){
-                    payFromOther = node.game.settings.send2[otherIndex];
+                    payFromOther = node.game.settings.send[otherIndex];
                 }
                 
                 //var payFromOther = payFromOther1 + payFromOther2;

@@ -31,7 +31,7 @@ block mainContent
                 table(style='width:100%;')
                     tr
                         td(style='height:33px;font-weight:normal;') You receive:
-                        each val, index in receive2
+                        each val, index in receive
                             td(style='text-align:center;height:33px;width:30px;', class='feedbackTop', id='secondHoverTop' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
@@ -40,7 +40,7 @@ block mainContent
                             td(class='feedbackMiddle', id='secondHoverMiddle' + i++) 
                     tr
                         td(style='height:33px;font-weight:normal;') Other receives:
-                        each val, index in send2
+                        each val, index in send
                             td(style='text-align:center;height:33px;width:30px;', class='feedbackBottom', id='secondHoverBottom' + index)= val
 
         div(id='colors', style='display:none;')

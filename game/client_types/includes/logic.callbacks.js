@@ -352,7 +352,7 @@ function doMatchPrev() {
     var round = node.player.stage.round; // or another counter
     
     
-    if ((treatment == 'rmNext' && round == 1) || treatment == 'rmPrev' || treatment == 'rmNf') {
+    if ((treatment == 'rmNext' && round == 1) || treatment == 'standard' || treatment == 'rmNf') { // TREATMENT HACK
         
         
         // ROUNDROBIN RE-MATCHING
@@ -379,7 +379,7 @@ function doMatchPrev() {
             node.say('BIDDER', matches[i][1], data_r);
         }
         console.log('Re-Matching completed.');
-    } else if (treatment == 'standard' || treatment == 'nf'){
+    } else if (/*treatment == 'standard' || */treatment == 'nf'){
 
         // RANDOM RE-MATCHING
         // Method shuffle accepts one parameter to update the db, as well as
@@ -420,7 +420,7 @@ function doMatchPrev() {
 
 
 function doMatchNext() {
-    var g, i, bidder, respondent, data_b, data_r;
+    /*var g, i, bidder, respondent, data_b, data_r;
 
     if (node.game.pl.size() < 2) {
         if (!this.countdown) notEnoughPlayers();
@@ -456,6 +456,7 @@ function doMatchNext() {
     
         console.log('Re-Matching completed.');
     }
+    */
 }
 
 function notEnoughPlayers() {

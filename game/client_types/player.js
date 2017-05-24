@@ -182,7 +182,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: cbs.endgame
     });
 
-    stager.extendStep('questionnaire1', {
+    /*stager.extendStep('questionnaire1', {
         cb: cbs.postgame,
         timer: 120000,
         // `done` is a callback function that is executed as soon as a
@@ -203,7 +203,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 }
             }*/
 
-            isTimeup = node.game.timer.isTimeup();
+      //      /*isTimeup = node.game.timer.isTimeup();*/
 
             // If there is still some time left, let's ask the player
             // to complete at least the second question.
@@ -216,13 +216,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 questionnaire: true,
                 q1: q1 || '',
                 q2: q2checked
-            });*/
+            });*//*
 
             node.emit('INPUT_DISABLE');
 
             return true;
         }
-    });
+    });*/
 
     stager.extendStep('questionnaire2', {
         cb: cbs.postgame2,

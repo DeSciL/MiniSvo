@@ -21,7 +21,7 @@ block mainContent
                 table(style='width:100%;')
                     tr
                         td(style='font-weight:normal;') You receive:
-                        each val, index in receive2
+                        each val, index in receive
                             td(style='cursor:hand;cursor:pointer;text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='secondHoverclass' + index)= val
                     tr
                         td(style='border-top:1px solid black;border-bottom:1px solid black;')
@@ -31,7 +31,7 @@ block mainContent
                                 input(type='radio', name='position2', id='secondPos' + i, value=i++)
                     tr
                         td(style='font-weight:normal;') Other receives:
-                        each val, index in send2
+                        each val, index in send
                             td(style='cursor:hand;cursor:pointer;height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='secondHoverclass' + index)= val
 
         input(type='button', value='Continue', name='submitChoice', id='submitChoice', class='btn')

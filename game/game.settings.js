@@ -12,10 +12,10 @@ module.exports = {
     SESSION_ID: 100,
 
     // Minimum number of players that must be always connected.
-    MIN_PLAYERS: 2,
+    MIN_PLAYERS: 4,
 
     // Number or rounds to repeat the bidding. *
-    REPEAT: 10,
+    REPEAT: 4,
 
     // Number of coins to split. *
     COINS: 100,
@@ -25,8 +25,8 @@ module.exports = {
 
 
     // Values
-    receive2: [100, 98, 96, 94, 93, 91, 89, 87, 85],
-    send2: [50, 54, 59, 63, 68, 72, 76, 81, 85],
+    receive: [100, 98, 96, 94, 93, 91, 89, 87, 85],
+    send: [50, 54, 59, 63, 68, 72, 76, 81, 85],
 
     // Second Item
     // receive1: [85, 87, 89, 91, 93, 94, 96, 98, 100],
@@ -55,12 +55,12 @@ module.exports = {
             WAIT_TIME: 20
         },
 
-        nf: { 
+        /*nf: { 
             fullName: "No Feedback",
             description:
                 "Partner, no feedback.",
             WAIT_TIME: 20
-        },
+        },*/
         
         /*
         rmNf: {
@@ -68,17 +68,17 @@ module.exports = {
             description:
                 "Stranger re-matching, no feedback.",
             WAIT_TIME: 20
-        }
+        }*/
         
-        rmPrev: {
-            fullName: "Re-Matching Next feedback",
+        /*rmPrev: {
+            fullName: "Re-Matching Previous FeedbackNext feedback",
             description:
                 "Stranger re-matching, feedback for previous partner.",
             WAIT_TIME: 20
-        }
+        }*/
         
-        rmNext: {
-            fullName: "Re-Matching Previous Feedback",
+        /*rmNext: {
+            fullName: "Re-Matching Next feedback",
             description:
                 "Stranger re-matching, feedback for next partner.",
             WAIT_TIME: 20

@@ -16,7 +16,7 @@ block mainContent
                     table(style='width:100%;')
                         tr
                             td(style='font-weight:normal;') You receive:
-                            each val, index in receive2
+                            each val, index in receive
                                 td(style='text-align:center;height:33px;width:30px;background:#fff;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;border-radius: 5px 5px 0px 0px;', class='firstHoverclass' + index)= val
                         tr
                             td(style='border-top:1px solid black;border-bottom:1px solid black;')
@@ -26,7 +26,7 @@ block mainContent
                                     input(type='radio', name='position', id='firstPos' + i, value=i++, disabled='disabled')
                         tr
                             td(style='font-weight:normal;') Other receives:
-                            each val, index in send2
+                            each val, index in send
                                 td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                     
             
