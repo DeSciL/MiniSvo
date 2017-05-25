@@ -305,7 +305,7 @@ function precache() {
 }
 
 function selectLanguage() {
-    W.loadFrame('languageSelection.html', function() {
+    // W.loadFrame('languageSelection.html', function() {
         var b = W.getElement('input', 'done', {
             type: "button", value: "Choice Made",
             className: "btn btn-lg btn-primary"
@@ -324,7 +324,7 @@ function selectLanguage() {
                 b.click();
             });
         });
-    });
+    // });
 }
 
 function instructions() {
@@ -381,7 +381,7 @@ function instructions() {
 
 function quiz() {
     var that = this;
-    W.loadFrame('quiz.html', function() {
+    // W.loadFrame('quiz.html', function() {
         window.scrollTo(0,0);
 
         var options = {
@@ -501,7 +501,7 @@ function quiz() {
         
         node.timer.setTimestamp('quiz_loaded');
         
-    });
+    // });
     
     
     console.log('Quiz');
@@ -510,7 +510,7 @@ function quiz() {
 
 function quiz2() {
     // Feedback stage for quiz
-    W.loadFrame('quiz2.html', function() {
+    // W.loadFrame('quiz2.html', function() {
         window.scrollTo(0,0);
 
         var options = {
@@ -568,7 +568,7 @@ function quiz2() {
             node.done();
         };
         
-    });
+    // });
     console.log('Quiz Feedback');
 }
 
@@ -599,10 +599,16 @@ function choices() {
     node.game.choiceDone = false;
 
     // Load the BIDDER interface.
-    node.on.data('BIDDER', function(msg) {
+    // node.on.data('BIDDER', function(msg) {
         console.log('RECEIVED BIDDER!');
-        other = msg.data.other;
-        node.game.other = msg.data.other;
+        
+       // COMMENTED: 25 May 2017.
+       // other = msg.data.other;
+       other = node.game.partner;
+
+        node.game.other = other;
+
+    
         //node.set({role: 'BIDDER'});
 
         //////////////////////////////////////////////
@@ -628,7 +634,7 @@ function choices() {
         // all the changes done while the frame was open.
         //
         /////////////////////////////////////////////
-        W.loadFrame('bidder.html', function() {
+        // W.loadFrame('bidder.html', function() {
             // Start the timer after an choice was received.
             window.scrollTo(0,0);
 
@@ -845,8 +851,8 @@ function choices() {
 
             node.timer.setTimestamp('bidder_loaded');
 
-        }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
-    });
+            // }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
+    // });
 
     console.log('Choices');
 }
@@ -857,7 +863,7 @@ function feedback() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL',
                                      'COUNT_UP_ROUNDS_TO_TOTAL']);
 
-    W.loadFrame('feedback.html', function() {
+    // W.loadFrame('feedback.html', function() {
         window.scrollTo(0,0);                                 
 
         // Hack to avoid double choices. Todo: fix.
@@ -1057,7 +1063,7 @@ function feedback() {
             node.done();
         };
         
-    }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
+    // }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
 
  
     console.log('Feedback');
@@ -1070,7 +1076,7 @@ function totalpayoff() {
     // Request payoff.
     node.say('totpayoff', 'SERVER');
     
-    W.loadFrame('totalpayoff.html', function() {
+    // W.loadFrame('totalpayoff.html', function() {
         window.scrollTo(0,0);
 
         node.on.data('PAYOFFS', function(msg) {
@@ -1164,14 +1170,14 @@ function totalpayoff() {
             };
         });
         
-    });
+    // });
     
 }
 
 function postgame() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame.html', function() {
+    // W.loadFrame('postgame.html', function() {
         window.scrollTo(0,0);
 
         node.env('auto', function() {
@@ -1265,7 +1271,7 @@ function postgame() {
         }
         
         
-    });
+    // });
     
     console.log('Postgame');
 }
@@ -1274,7 +1280,7 @@ function postgame() {
 function postgame2() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame2.html', function() {
+    // W.loadFrame('postgame2.html', function() {
         window.scrollTo(0,0);
 
         node.env('auto', function() {
@@ -1349,7 +1355,7 @@ function postgame2() {
             
         }
         
-    });
+    // });
     
     console.log('Postgame2');
 }
@@ -1358,7 +1364,7 @@ function postgame2() {
 function postgame3() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame3.html', function() {
+    // W.loadFrame('postgame3.html', function() {
         window.scrollTo(0,0);
 
         node.env('auto', function() {
@@ -1410,7 +1416,7 @@ function postgame3() {
             
         }
     
-    });
+    // });
     console.log('Postgame3');
 }
 
@@ -1421,7 +1427,7 @@ function endgame() {
     // Request endgame data.
     node.say('endgame', 'SERVER');
     
-    W.loadFrame('ended.html', function() {
+    // W.loadFrame('ended.html', function() {
         window.scrollTo(0,0);
 
         node.game.visualTimer.switchActiveBoxTo(node.game.visualTimer.mainBox);
@@ -1438,7 +1444,7 @@ function endgame() {
             exitCodeInput.value = exitcode;
             
         });
-    });
+    // });
 
     console.log('Game ended');
 }

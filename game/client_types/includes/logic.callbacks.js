@@ -59,13 +59,14 @@ function init() {
         ' seconds the game will be terminated.';
 
     // Roundrobin Re-matching Table
-    
-    var Matcher = ngc.Matcher;
-    node.game.matcher = new Matcher();
 
-    node.game.matcher.generateMatches('roundrobin', 4); 
-    node.game.matcher.setIds(node.game.pl.id.getAllKeys());
-    node.game.matcher.match();
+//    Commented out May 25 2017.
+//    var Matcher = ngc.Matcher;
+//    node.game.matcher = new Matcher();
+
+//    node.game.matcher.generateMatches('roundrobin', 4); 
+//    node.game.matcher.setIds(node.game.pl.id.getAllKeys());
+//    node.game.matcher.match();
     
     // Bonus
     

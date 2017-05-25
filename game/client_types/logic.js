@@ -84,9 +84,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('decision', {
+        matcher: {
+            // roles: [ 'BIDDER', 'RESPONDENT', 'SOLO' ],
+            // match: 'random_pairs',
+            match: 'roundrobin',
+            cycle: 'repeat_invert',
+            // skipBye: false
+            // setPartner: true // default
+        },
         cb: function() {
             this.node.log('Choices');
-            cbs.doMatchPrev();
+            // cbs.doMatchPrev();
         },
         pushClients: true,
         timer: 60000
@@ -101,6 +109,25 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         pushClients: true,
         timer: 30000
     });
+
+//     stager.extendStep('decision', {
+//         cb: function() {
+//             this.node.log('Choices');
+//             cbs.doMatchPrev();
+//         },
+//         pushClients: true,
+//         timer: 60000
+//     });
+//     
+//     stager.extendStep('feedback', {
+//         cb: function() {
+//             this.node.log('Feedback');
+//             cbs.feedback();
+//             cbs.doMatchNext();
+//         },
+//         pushClients: true,
+//         timer: 30000
+//     });
 
 
     // Handling stepping and synchronization during questionnaire.

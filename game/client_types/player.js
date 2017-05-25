@@ -74,6 +74,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     MIN_PLAYERS = [ settings.MIN_PLAYERS, cbs.notEnoughPlayers ];
 
     stager.extendStep('selectLanguage', {
+        frame: 'languageSelection.html',
         cb: cbs.selectLanguage,
         timer: 100000,
         // minPlayers: MIN_PLAYERS,
@@ -105,6 +106,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('quiz', {
+        frame: 'quiz.html',
         cb: cbs.quiz,
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
@@ -145,11 +147,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
     
     stager.extendStep('quiz2', {
+        frame: 'quiz2.html',
         cb: cbs.quiz2
     });
 
     stager.extendStep('decision', {
-        //timeup: node.done(),
+        frame: 'bidder.html',
         cb: cbs.choices,
         // minPlayers: MIN_PLAYERS,
         // `syncOnLoaded` forces the clients to wait for all the others to be
@@ -166,6 +169,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
     
     stager.extendStep('feedback', {
+        // Carry along the partner.
+        partner: function() { return this.partner; },
+        frame: 'feedback.html',
         cb: cbs.feedback,
         // minPlayers: MIN_PLAYERS,
     });
@@ -175,6 +181,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
     
     stager.extendStep('totalpayoff', {
+        frame: 'totalpayoff.html',
         cb: cbs.totalpayoff
     });
 
@@ -183,6 +190,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     /*stager.extendStep('questionnaire1', {
+        frame: 'postgame.html',
         cb: cbs.postgame,
         timer: 120000,
         // `done` is a callback function that is executed as soon as a
@@ -225,6 +233,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });*/
 
     stager.extendStep('questionnaire2', {
+        frame: 'postgame2.html',
         cb: cbs.postgame2,
         timer: 120000,
         done: function() {
@@ -239,6 +248,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('questionnaire3', {
+        frame: 'postgame3.html',
         cb: cbs.postgame3,
         timer: 180000,
         done: function() {
