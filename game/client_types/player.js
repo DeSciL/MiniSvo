@@ -102,48 +102,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: cbs.instructions,
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
-        timer: 120000
+        timer: 90000
     });
 
     stager.extendStep('quiz', {
         frame: 'quiz.html',
         cb: cbs.quiz,
-        // minPlayers: MIN_PLAYERS,
-        // syncOnLoaded: true,
-        // `timer` starts automatically the timer managed by the widget
-        // VisualTimer if the widget is loaded. When the time is up it fires
-        // the DONE event.
-        // It accepts as parameter:
-        //  - a number (in milliseconds),
-        //  - an object containing properties _milliseconds_, and _timeup_
-        //     the latter being the name of the event to fire (default DONE)
-        // - or a function returning the number of milliseconds.
-        
-        /*
-        timer: 60000,
-        done: function() {
-            var b, QUIZ, answers, isTimeup;
-            QUIZ = W.getFrameWindow().QUIZ;
-            b = W.getElementById('submitQuiz');
-
-            answers = QUIZ.checkAnswers(b);
-            isTimeup = node.game.timer.isTimeup();
-
-            if (!answers.__correct__ && !isTimeup) {
-                return false;
-            }
-
-            answers.timeUp = isTimeup;
-            answers.quiz = true;
-
-            // On TimeUp there are no answers
-            node.set(answers);
-            node.emit('INPUT_DISABLE');
-            
-            return true;
-        }
-        
-        */
     });
     
     stager.extendStep('quiz2', {
@@ -186,10 +150,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('endgame', {
+        frame: 'ended.html',
         cb: cbs.endgame
     });
 
-    /*stager.extendStep('questionnaire1', {
+    stager.extendStep('questionnaire1', {
         frame: 'postgame.html',
         cb: cbs.postgame,
         timer: 120000,
@@ -224,13 +189,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 questionnaire: true,
                 q1: q1 || '',
                 q2: q2checked
-            });*//*
+            });*/
 
             node.emit('INPUT_DISABLE');
 
             return true;
         }
-    });*/
+    });
 
     stager.extendStep('questionnaire2', {
         frame: 'postgame2.html',

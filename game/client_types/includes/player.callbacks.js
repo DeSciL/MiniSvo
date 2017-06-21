@@ -928,10 +928,15 @@ function feedback() {
                 var otherValue1 = node.game.settings.send1[otherValueIndex1]
             }*/
             
-            var otherValueIndex = msg.data.choice;
-            if(otherValueIndex) {
+            var otherValueIndex = msg.data.choice
+            if(otherValueIndex && otherValueIndex < 10) {
                 var otherValue = node.game.settings.send[otherValueIndex]
             }
+
+
+            // if the decision was made by bot, let's inform the player affected by it
+            var otherBot = msg.data.bot;
+            var otherBotSameRound = msg.data.botSameRound;
             
             
             // Show the first sentence for feedback treatment and pass it the values
@@ -999,50 +1004,63 @@ function feedback() {
                 otherSelfBottom.className += ' highlightSelfBottom';
 
                 
-            // Feedback about partners choice
-                var treatment = node.env('treatment');
-                if(treatment != 'nf') {
-                    var colors = W.getElementById('colors');
-                    colors.style.display = '';
-                    
-                    
-                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex;
-                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex;
-                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex;
-                    
+                // Feedback about partners choice. only show if bot's choice is really saved.
+                if(otherValueIndex < 10){
+                    var treatment = node.env('treatment');
+                    if(treatment != 'nf') {
+                        var colors = W.getElementById('colors');
+                        colors.style.display = '';
+                        
+                        
+                        var secondOtherTopId = 'secondHoverTop' + otherValueIndex;
+                        var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex;
+                        var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex;
+                        
 
-                    if (chosenValueIndex == otherValueIndex) {
-                        var secondSameTop = W.getElementById(secondOtherTopId);
-                        secondSameTop.className += ' highlightSameTop';
-                    }
-                    else {
-                        var secondOtherTop = W.getElementById(secondOtherTopId);
-                        secondOtherTop.className += ' highlightOtherTop';
-                    }
+                        if (chosenValueIndex == otherValueIndex) {
+                            var secondSameTop = W.getElementById(secondOtherTopId);
+                            secondSameTop.className += ' highlightSameTop';
+                        }
+                        else {
+                            var secondOtherTop = W.getElementById(secondOtherTopId);
+                            secondOtherTop.className += ' highlightOtherTop';
+                        }
 
-                    if (chosenValueIndex == otherValueIndex) {
-                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
-                        secondSameMiddle.className += ' highlightSameMiddle';
-                    }
-                    else {
-                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
-                        secondOtherMiddle.className += ' highlightOtherMiddle';
-                    }
+                        if (chosenValueIndex == otherValueIndex) {
+                            var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                            secondSameMiddle.className += ' highlightSameMiddle';
+                        }
+                        else {
+                            var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
+                            secondOtherMiddle.className += ' highlightOtherMiddle';
+                        }
 
-                    if (chosenValueIndex == otherValueIndex) {
-                        var secondSameBottom = W.getElementById(secondOtherBottomId);
-                        secondSameBottom.className += ' highlightSameBottom';
-                    }
-                    else {
-                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
-                        secondOtherBottom.className += ' highlightOtherBottom';
-                    }
+                        if (chosenValueIndex == otherValueIndex) {
+                            var secondSameBottom = W.getElementById(secondOtherBottomId);
+                            secondSameBottom.className += ' highlightSameBottom';
+                        }
+                        else {
+                            var secondOtherBottom = W.getElementById(secondOtherBottomId);
+                            secondOtherBottom.className += ' highlightOtherBottom';
+                        }
 
-                } else {
-                    var colorsNF = W.getElementById('colorsNF');
-                    colorsNF.style.display = ''; 
+                    } else {
+                        var colorsNF = W.getElementById('colorsNF');
+                        colorsNF.style.display = ''; 
+                    }
                 }
             }
+
+            if(otherBot) {
+                var botSentence = W.getElementById('botSentence');
+                botSentence.style.display = '';
+            }
+            else if(otherBotSameRound) {
+                var botSentence = W.getElementById('botSentence2');
+                botSentence.style.display = '';
+            }
+
+
 
             
             root = W.getElementById('container');
@@ -1214,7 +1232,7 @@ function postgame() {
             }
         }
         
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 2; i++) {
             var questionnaireClassesId3 = 'depend' + i;
             var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
             questionnaireClasses3.onclick = function(i) {

@@ -5,6 +5,8 @@ block mainContent
         h3 Feedback
         
         div(id='feedbackSentence', style='display:none;')
+            p(id='botSentence', style='display:none;') Your partner disconnected. Therefore a random selection was made in his place. In the upcoming round you will be matched with a real player again.
+            p(id='botSentence', style='display:none;') Your partner disconnected. Therefore a random selection was made in his place. This random selection is not visible here but you will see the payoff from this round in end. In the upcoming round you will be matched with a real player again.
             span You receive 
             //span(id='self1') 
             //|  and 
@@ -19,6 +21,10 @@ block mainContent
             
         div(id='noSelection', style='display:none;')
             p You did not select any option. Therefore you receive 0 profit for this round and the following allocation was randomly chosen to determine your partner's profit. If you do make any choice for more than 2 rounds the time available will be shortened.
+
+        div(id='botSentence', style='display:none;')
+            p 
+
 
         div(class="alert alert-danger", role="alert", id="error", style="display:none;max-width:530px;")
             strong No feedback. 

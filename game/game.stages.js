@@ -21,17 +21,16 @@ module.exports = function(stager, settings) {
 //         .next('endgame')
         .gameover();
 
-    // stager.skip('instructions');
+//    stager.skip('instructions');
     stager.skip('selectLanguage');
-    // stager.skip('questionnaire1');
-     stager.skip('quiz');
-     stager.skip('quiz2');
+    stager.skip('quiz');
+    stager.skip('quiz2');
     
     stager.extendStage('choices', {steps: ['decision', 'feedback']});
 
     stager.extendStage('final', {steps: [
         'totalpayoff',
-        //'questionnaire1',
+        'questionnaire1',
         'questionnaire2',
         'questionnaire3',
         'endgame'

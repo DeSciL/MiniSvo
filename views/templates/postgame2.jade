@@ -2,7 +2,7 @@ extends iframe-layout
 
 block mainContent
     div(id='container')
-        h1 Questionnaire I/II
+        h1 Questionnaire II/III
         
         
         div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
@@ -14,23 +14,23 @@ block mainContent
         
         div(class="panel panel-default")
             div(class="panel-body")
-                span(style='font-weight:bold;') Overall, was your motivation to make
+                span(style='font-weight:bold;') Overall, was your motivation to
                 br
                 span(id="motivation0", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio0', value=1)
-                    |  as much money for yourself as possible?
+                    |  make as much money for yourself as possible?
                 br
                 span(id="motivation1", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio1', value=2)
-                    |  the experimenter pay out as much as possible?
+                    |  maximize the total payoff for all subjects?
                 br
                 span(id="motivation2", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio2', value=3)
-                    |  all subjects get the same payoff?
+                    |  make all subjects get the same payoff?
                 br
                 span(id="motivation3", style="cursor:hand;cursor:pointer;")
                     input(type='radio', name='motivation', id='motivation_radio3', value=4)
-                    |  random choices?
+                    |  make random choices?
             
         div(class="panel panel-default")
             div(class="panel-body")

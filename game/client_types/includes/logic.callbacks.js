@@ -144,7 +144,7 @@ function init() {
 
     node.on.pdisconnect(function(player) {
             // TEST:
-            // player.allowReconnect = true; // check if registry maybe
+            player.allowReconnect = false; // check if registry maybe
 
             console.log('Connecting bot to room: ' + gameRoom.name + '. Stage: ' + node.player.stage + '. Player ID: ' + player.id);
             channel.connectBot({
@@ -250,11 +250,22 @@ function feedback() {
         
         if (other) {
             var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-            var timeup = otherChoiceItem.timeup;
-            var otherChoice =  otherChoiceItem.choice;
+            
+            if (otherChoiceItem) {
+                var bot = otherChoiceItem.bot;
+                var timeup = otherChoiceItem.timeup;
+                var botSameRound = false;
+                var otherChoice =  otherChoiceItem.choice;
+            }
+            else {
+                var bot = true;
+                var botSameRound = true;
+                var timeup = true;
+                var otherChoice =  10;
+            }
 
             //node.say('OTHER_CHOICE', item.player,  {choice1: otherChoice1, choice2: otherChoice2});
-            node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup});
+            node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup, bot: bot, botSameRound: botSameRound});
         } else {
             
             node.say('ERROR_CHOICE', item.player);  

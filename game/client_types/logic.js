@@ -186,7 +186,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // syncStepping: false,
     });
 
-    /*stager.extendStep('questionnaire1', {
+    stager.extendStep('questionnaire1', {
         // stepRule: stepRules.SOLO,
         // minPlayers: undefined,
         // syncStepping: false,
@@ -197,7 +197,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         },
         pushClients: false,
         timer: 120000
-    });*/
+    });
 
     stager.extendStep('questionnaire2', {
         minPlayers: undefined,
