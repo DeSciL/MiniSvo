@@ -28,8 +28,9 @@ module.exports = function(settings, stages) {
     game.verbosity = 0;
 
     game.window = {
-        promptOnleave: !game.debug,
-        disableRightClick: true
+        promptOnleave: true,
+        disableRightClick: true,
+        disableBackButton: true
     }
 
     return game;

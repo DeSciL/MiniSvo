@@ -936,7 +936,8 @@ function feedback() {
 
             // if the decision was made by bot, let's inform the player affected by it
             var otherBot = msg.data.bot;
-            var otherBotSameRound = msg.data.botSameRound;
+            var otherBotSameRound = true;
+            otherBotSameRound = msg.data.botSameRound;
             
             
             // Show the first sentence for feedback treatment and pass it the values
@@ -1058,6 +1059,8 @@ function feedback() {
             else if(otherBotSameRound) {
                 var botSentence = W.getElementById('botSentence2');
                 botSentence.style.display = '';
+                var feedbackSentence = W.getElementById('feedbackSentence');
+                feedbackSentence.style.display = '';
             }
 
 

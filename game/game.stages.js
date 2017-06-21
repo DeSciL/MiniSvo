@@ -23,8 +23,8 @@ module.exports = function(stager, settings) {
 
 //    stager.skip('instructions');
     stager.skip('selectLanguage');
-    stager.skip('quiz');
-    stager.skip('quiz2');
+//    stager.skip('quiz');
+//    stager.skip('quiz2');
     
     stager.extendStage('choices', {steps: ['decision', 'feedback']});
 

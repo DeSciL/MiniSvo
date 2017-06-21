@@ -27,6 +27,6 @@ module.exports = {
     // (defaults: "/pages/accessdenied.htm")
     accessDeniedUrl: '/minisvo/unauth.htm',
 
-    enableReconnections: true
+    enableReconnections: false
 };
 

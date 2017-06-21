@@ -26,14 +26,14 @@ module.exports = {
      *
      * How many clients must connect before groups are formed
      */ 
-    POOL_SIZE: 4,
+    POOL_SIZE: 20,
 
     /**
      * ## GROUP_SIZE
      *
      * The size of each group
      */
-    GROUP_SIZE: 4,
+    GROUP_SIZE: 20,
 
     /**
      * ## N_GAMES

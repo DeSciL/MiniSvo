@@ -258,7 +258,7 @@ function feedback() {
                 var otherChoice =  otherChoiceItem.choice;
             }
             else {
-                var bot = true;
+                var bot = false;
                 var botSameRound = true;
                 var timeup = true;
                 var otherChoice =  10;
