@@ -1104,6 +1104,7 @@ function totalpayoff() {
         node.on.data('PAYOFFS', function(msg) {
             
             var options = {
+                    milliseconds: 60000,
                     timeup: function() {
                         node.emit('BONUS', realPayoffRounded);
                     }
