@@ -22,6 +22,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     var node = gameRoom.node;
 
 
+
     // Import other functions used in the game.
     ///////////////////////////////////////////
 
@@ -35,9 +36,56 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Set the default step rule for all the stages.
     stager.setDefaultStepRule(stepRules.WAIT);
 
-    stager.extendStep('ultimatum', {
-        cb: cbs.ultimatum
+
+
+
+    stager.extendStep('instructions', {
+        cb: function() {
+            var that = this;
+            that.node.done();
+        }
     });
+
+    stager.extendStep('quiz', {
+        cb: function() {
+            var that = this;
+            that.node.done();
+        }
+    });
+    
+    stager.extendStep('quiz2', {
+        cb: function() {
+            var that = this;
+            that.node.done();
+        }
+    });
+
+    stager.extendStep('decision', {
+        cb: function() {
+            var that = this;
+            var randomValue = Math.floor((Math.random()*9));
+            that.node.done({
+                choice: randomValue,
+                bot: true
+            });
+        }
+    });
+
+    stager.extendStep('feedback', {
+        cb: function() {
+            var that = this;
+            that.node.done();
+        }
+    });
+
+
+
+
+
+
+    /*stager.extendStep('ultimatum', {
+        cb: cbs.ultimatum
+    });*/
 
     // Prepare the game object to return.
     /////////////////////////////////////

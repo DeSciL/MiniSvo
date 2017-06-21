@@ -184,7 +184,8 @@ function init() {
             timeClick: timeClick,
             timeSubmit: time,
             timeup: timeup,
-            other: node.game.other
+            other: node.game.other,
+            bot: false
         });
     });
 

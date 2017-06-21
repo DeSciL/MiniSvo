@@ -138,9 +138,23 @@ function init() {
     });
 
     // Register player disconnection, and wait for him...
-    node.on.pdisconnect(function(p) {
+    /*node.on.pdisconnect(function(p) {
         console.log('Disconnection in Stage: ' + node.player.stage);
-    });
+    });*/
+
+    node.on.pdisconnect(function(player) {
+            // TEST:
+            // player.allowReconnect = true; // check if registry maybe
+
+            console.log('Connecting bot to room: ' + gameRoom.name + '. Stage: ' + node.player.stage + '. Player ID: ' + player.id);
+            channel.connectBot({
+                room: gameRoom,
+                clientType: 'bot',
+                replaceId: player.id,
+                gotoStep: node.player.stage,
+            });
+        });
+
 
     // Player reconnecting.
     // Reconnections must be handled by the game developer.
@@ -259,35 +273,6 @@ function totalpayoff(playerId) {
         console.log('Noooooot f', playerId);
         return;
     }
-
-    /* var payoffs = node.game.memory.player[playerId].select('choice1').fetch();
-    i = -1, len = payoffs.length;
-    out = new Array(len);
-    for ( ; ++i < len ; ) {
-        other = payoffs[i].other;
-        round = payoffs[i].stage.round;
-        other = node.game.memory.player[other]
-            .select('choice1')
-            .and('stage.round', '=', round)
-            .last();
-
-        if (!other) {
-            console.log('other not found, put def value');
-            otherChoice1 = 1;
-            otherChoice2 = 1;
-        }
-        else {
-            otherChoice1 = other.choice1;
-            otherChoice2 = other.choice2;
-        }
-
-        out[i] = {
-            myChoice1: payoffs[i].choice1,
-            myChoice2: payoffs[i].choice2,
-            otherChoice1: otherChoice1,
-            otherChoice2: otherChoice2
-        };
-    } */
 
     var payoffs = node.game.memory.player[playerId].select('choice').fetch();
     i = -1, len = payoffs.length;

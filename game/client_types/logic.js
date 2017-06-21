@@ -86,9 +86,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('decision', {
         matcher: {
             // roles: [ 'BIDDER', 'RESPONDENT', 'SOLO' ],
-            // match: 'random_pairs',
-            match: 'roundrobin',
-            cycle: 'repeat_invert',
+            match: 'random_pairs',
+            // match: 'roundrobin',
+            // cycle: 'repeat_invert',
             // skipBye: false
             // setPartner: true // default
         },
@@ -105,6 +105,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             this.node.log('Feedback');
             cbs.feedback();
             cbs.doMatchNext();
+        },
+        matcher: {
+            // roles: [ 'BIDDER', 'RESPONDENT', 'SOLO' ],
+            // match: 'random_pairs',
+            match: 'roundrobin',
+            cycle: 'repeat_invert',
+            // skipBye: false
+            // setPartner: true // default
         },
         pushClients: true,
         timer: 30000
