@@ -240,10 +240,49 @@ function init() {
 }
 
 function feedback() {
+
+    //FEEDBACK OF NEXT PARTNER
     var previousStage; 
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
-    
-     
+    var round = node.player.stage.round;
+    var nextRound = parseInt(round) + 1;
+    var matches = node.game.matcher.getMatches("ARRAY", nextRound)
+
+	for (var j = 0; j < matches.length; j++) {
+        var player1 = matches[j][0];
+        var other1 = matches[j][1];
+		var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
+
+        if (otherChoiceItem1) {
+            var bot1 = otherChoiceItem1.bot;
+            var timeup1 = otherChoiceItem1.timeup;
+            var botSameRound1 = false;
+            var otherChoice1 =  otherChoiceItem1.choice;
+            node.say('OTHER_CHOICE', player1,  {choice: otherChoice1, timeup: timeup1, bot: bot1, botSameRound: botSameRound1});
+        }
+        else { node.say('OTHER_CHOICE', player1,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
+
+
+        var player2 = matches[j][1];
+        var other2 = matches[j][0];
+		var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
+
+        if (otherChoiceItem2) {
+            var bot2 = otherChoiceItem2.bot;
+            var timeup2 = otherChoiceItem2.timeup;
+            var botSameRound2 = false;
+            var otherChoice2=  otherChoiceItem2.choice;
+            node.say('OTHER_CHOICE', player2,  {choice: otherChoice2, timeup: timeup2, bot: bot2, botSameRound: botSameRound2});
+        }
+        else { node.say('OTHER_CHOICE', player2,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
+}
+
+
+
+    // FEEDBACK SAME ROUND
+    /*var previousStage; 
+    previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
+
     node.game.memory.stage[previousStage].each(function(item) {
 
         var other = item.other;
@@ -270,7 +309,7 @@ function feedback() {
             
             node.say('ERROR_CHOICE', item.player);  
         }
-    });
+    });*/
 }
 
 
