@@ -1,0 +1,54 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h3 Feedback
+        
+        div(id='feedbackSentence', style='display:none;')
+            p(id='botSentence', style='display:none;') Your next partner disconnected. Therefore a random selection was made in his/her place during this round and a random selection will be made next round. In the following rounds you will be paired with a real person again.
+            p(id='botSentence2', style='display:none;') Your next partner disconnected. Therefore a random selection was made in his/her place during this round and a random selection will be made next round. In the following rounds you will be paired with a real person again.
+            
+        div(id='noSelection', style='display:none;')
+            p You did not select any option. Therefore you receive 0 for this round and the following allocation was randomly chosen to determine your partner's payoff. If you do make any choice for more than 2 rounds the time available will be shortened.
+
+        div(class="alert alert-danger", role="alert", id="error", style="display:none;max-width:530px;")
+            strong No feedback. 
+            span  There was an error during the choices stage so there is no feedback for this round. Apologies. However, the game should still work for the upcoming rounds. Please continue.
+                                   
+    
+        div(class="panel panel-default", style="max-width:530px;")
+            div(class="panel-heading") Allocation
+            div(class="panel-body")
+                table(style='width:100%;')
+                    tr
+                        td(style='height:33px;font-weight:normal;') You receive:
+                        each val, index in receive
+                            td(style='text-align:center;height:33px;width:30px;', class='feedbackTop', id='secondHoverTop' + index)= val
+                    tr
+                        td(style='border-top:1px solid black;border-bottom:1px solid black;')
+                        - var i = 0;
+                        while i < 9
+                            td(class='feedbackMiddle', id='secondHoverMiddle' + i++) 
+                    tr
+                        td(style='height:33px;font-weight:normal;') Other receives:
+                        each val, index in send
+                            td(style='text-align:center;height:33px;width:30px;', class='feedbackBottom', id='secondHoverBottom' + index)= val
+
+        div(id='colors', style='display:none;')
+            p
+                div(style='display:inline;') 
+                     img(src='../pictures/yourChoice.gif')
+                span  Your choice.
+            p
+                div(style='display:inline;') 
+                     img(src='../pictures/partnersChoice.gif')
+                span  Your next partner's choice. 
+            p
+                div(style='display:inline;')
+                     img(src='../pictures/sameChoice.gif')
+                span  Same choice.
+ 
+
+        br
+        input(type='button', value='Continue', name='continue', id='continue', class='btn')
+        
