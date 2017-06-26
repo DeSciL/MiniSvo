@@ -118,25 +118,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         timer: 30000
     });
 
-//     stager.extendStep('decision', {
-//         cb: function() {
-//             this.node.log('Choices');
-//             cbs.doMatchPrev();
-//         },
-//         pushClients: true,
-//         timer: 60000
-//     });
-//     
-//     stager.extendStep('feedback', {
-//         cb: function() {
-//             this.node.log('Feedback');
-//             cbs.feedback();
-//             cbs.doMatchNext();
-//         },
-//         pushClients: true,
-//         timer: 30000
-//     });
-
 
     // Handling stepping and synchronization during questionnaire.
 
@@ -224,7 +205,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('endgame', {
         cb: function() {
-            cb: cbs.endgame
+            cbs.endgame
         }
 //        minPlayers: undefined,
 //        steprule: stepRules.SOLO

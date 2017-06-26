@@ -58,16 +58,6 @@ function init() {
         'do not reconnect within ' + settings.WAIT_TIME  +
         ' seconds the game will be terminated.';
 
-    // Roundrobin Re-matching Table
-
-//    Commented out May 25 2017.
-//    var Matcher = ngc.Matcher;
-//    node.game.matcher = new Matcher();
-
-//    node.game.matcher.generateMatches('roundrobin', 4); 
-//    node.game.matcher.setIds(node.game.pl.id.getAllKeys());
-//    node.game.matcher.match();
-    
     // Bonus
     
     node.game.bonuses = [];
@@ -93,22 +83,6 @@ function init() {
         }
         // Update last stage reference.
         node.game.lastStage = currentStage;
-
-        /*
-        for (p in node.game.lastBids) {
-            if (node.game.lastBids.hasOwnProperty(p)) {
-
-                // Respondent payoff.
-                code = channel.registry.getClient(p);
-                
-                gain = node.game.lastBids[p];
-                if (gain) {
-                    code.win = !code.win ? gain : code.win + gain;
-                    console.log('Added to ' + p + ' ' + gain + ' ECU');
-                }
-            }
-        }
-        */
 
         db = node.game.memory.stage[currentStage];
 
@@ -241,75 +215,76 @@ function init() {
 
 function feedback() {
 
-    //FEEDBACK OF NEXT PARTNER
+    var treatment = settings.treatmentName;
     var previousStage; 
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
-    var round = node.player.stage.round;
-    var nextRound = parseInt(round) + 1;
-    var matches = node.game.matcher.getMatches("ARRAY", nextRound)
 
-	for (var j = 0; j < matches.length; j++) {
-        var player1 = matches[j][0];
-        var other1 = matches[j][1];
-		var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
+    //FEEDBACK OF NEXT PARTNER
+    if(treatment == 'next') {
+        var round = node.player.stage.round;
+        var nextRound = parseInt(round) + 1;
+        var matches = node.game.matcher.getMatches("ARRAY", nextRound)
 
-        if (otherChoiceItem1) {
-            var bot1 = otherChoiceItem1.bot;
-            var timeup1 = otherChoiceItem1.timeup;
-            var botSameRound1 = false;
-            var otherChoice1 =  otherChoiceItem1.choice;
-            node.say('OTHER_CHOICE', player1,  {choice: otherChoice1, timeup: timeup1, bot: bot1, botSameRound: botSameRound1});
+        for (var j = 0; j < matches.length; j++) {
+            var player1 = matches[j][0];
+            var other1 = matches[j][1];
+            var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
+
+            if (otherChoiceItem1) {
+                var bot1 = otherChoiceItem1.bot;
+                var timeup1 = otherChoiceItem1.timeup;
+                var botSameRound1 = false;
+                var otherChoice1 =  otherChoiceItem1.choice;
+                node.say('OTHER_CHOICE', player1,  {choice: otherChoice1, timeup: timeup1, bot: bot1, botSameRound: botSameRound1});
+            }
+            else { node.say('OTHER_CHOICE', player1,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
+
+
+            var player2 = matches[j][1];
+            var other2 = matches[j][0];
+            var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
+
+            if (otherChoiceItem2) {
+                var bot2 = otherChoiceItem2.bot;
+                var timeup2 = otherChoiceItem2.timeup;
+                var botSameRound2 = false;
+                var otherChoice2=  otherChoiceItem2.choice;
+                node.say('OTHER_CHOICE', player2,  {choice: otherChoice2, timeup: timeup2, bot: bot2, botSameRound: botSameRound2});
+            }
+            else { node.say('OTHER_CHOICE', player2,  {choice: 10, timeup: true, bot: false, botSameRound: true}); }
         }
-        else { node.say('OTHER_CHOICE', player1,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
-
-
-        var player2 = matches[j][1];
-        var other2 = matches[j][0];
-		var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
-
-        if (otherChoiceItem2) {
-            var bot2 = otherChoiceItem2.bot;
-            var timeup2 = otherChoiceItem2.timeup;
-            var botSameRound2 = false;
-            var otherChoice2=  otherChoiceItem2.choice;
-            node.say('OTHER_CHOICE', player2,  {choice: otherChoice2, timeup: timeup2, bot: bot2, botSameRound: botSameRound2});
-        }
-        else { node.say('OTHER_CHOICE', player2,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
-}
-
+    }
 
 
     // FEEDBACK SAME ROUND
-    /*var previousStage; 
-    previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
+    else if(treatment =='previous' || treatment =='none') {
+        node.game.memory.stage[previousStage].each(function(item) {
 
-    node.game.memory.stage[previousStage].each(function(item) {
-
-        var other = item.other;
-        
-        if (other) {
-            var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
+            var other = item.other;
             
-            if (otherChoiceItem) {
-                var bot = otherChoiceItem.bot;
-                var timeup = otherChoiceItem.timeup;
-                var botSameRound = false;
-                var otherChoice =  otherChoiceItem.choice;
-            }
-            else {
-                var bot = false;
-                var botSameRound = true;
-                var timeup = true;
-                var otherChoice =  10;
-            }
+            if (other) {
+                var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
+                
+                if (otherChoiceItem) {
+                    var bot = otherChoiceItem.bot;
+                    var timeup = otherChoiceItem.timeup;
+                    var botSameRound = false;
+                    var otherChoice =  otherChoiceItem.choice;
+                }
+                else {
+                    var bot = false;
+                    var botSameRound = true;
+                    var timeup = true;
+                    var otherChoice =  10;
+                }
 
-            //node.say('OTHER_CHOICE', item.player,  {choice1: otherChoice1, choice2: otherChoice2});
-            node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup, bot: bot, botSameRound: botSameRound});
-        } else {
-            
-            node.say('ERROR_CHOICE', item.player);  
-        }
-    });*/
+                node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup, bot: bot, botSameRound: botSameRound});
+            } else {
+                
+                node.say('ERROR_CHOICE', item.player);  
+            }
+        });
+    }
 }
 
 
@@ -454,47 +429,6 @@ function doMatchPrev() {
     }
 }
 
-
-function doMatchNext() {
-    /*var g, i, bidder, respondent, data_b, data_r;
-
-    if (node.game.pl.size() < 2) {
-        if (!this.countdown) notEnoughPlayers();
-        return;
-    }
-    var treatment = node.env('treatment');
-    
-    
-    if (treatment == 'rmNext') {
-        
-        
-        // ROUNDROBIN RE-MATCHING
-        // Set number of players in game.settings (to do)
-        // Number of rounds must make sense in combination with numbers of players
-        var round = node.player.stage.round; // or another counter
-        var matches = node.game.matcher.getMatch(round); 
-        var item;
-
-        for (var j = 0; j < matches.length; j++) {
-            
-            data_b = {
-                //role: 'bidder',
-                other: matches[i][1]
-            };
-            data_r = {
-                //role: 'respondent',
-                other: matches[i][0]
-            };
-            
-            node.say('BIDDER', matches[i][0], data_b);
-            node.say('BIDDER', matches[i][1], data_r);
-        }
-    
-        console.log('Re-Matching completed.');
-    }
-    */
-}
-
 function notEnoughPlayers() {
     // if (this.countdown) return;
     console.log('Warning: not enough players!!');
@@ -528,68 +462,6 @@ function enoughPlayersAgain() {
     // Delete countdown to terminate the game.
     clearTimeout(this.countdown);
 }
-
-// function endgame() {
-//     var code, exitcode, accesscode;
-//     var filename, bonusFile, bonus;
-//     var EXCHANGE_RATE;
-// 
-//     EXCHANGE_RATE = settings.EXCHANGE_RATE_INSTRUCTIONS / settings.COINS;
-// 
-//     console.log('FINAL PAYOFF PER PLAYER');
-//     console.log('***********************');
-// 
-//     bonus = node.game.pl.map(function(p) {
-// 
-//         code = channel.registry.getClient(p.id);
-//         if (!code) {
-//             console.log('ERROR: no code in endgame:', p.id);
-//             return ['NA', 'NA'];
-//         }
-// 
-//         accesscode = code.AccessCode;
-//         exitcode = code.ExitCode;
-// 
-//         if (node.env('treatment') === 'pp' && node.game.gameTerminated) {
-//             code.win = 0;
-//         }
-//         else {
-//             code.win = Number((code.win || 0) * (EXCHANGE_RATE)).toFixed(2);
-//             code.win = parseFloat(code.win, 10);
-//         }
-//         channel.registry.checkOut(p.id);
-// 
-//         node.say('WIN', p.id, {
-//             win: code.win,
-//             exitcode: code.ExitCode
-//         });
-// 
-//         console.log(p.id, ': ',  code.win, code.ExitCode);
-//         return [p.id, code.ExitCode || 'na', code.win,
-//                 node.game.gameTerminated];
-//     });
-// 
-//     console.log('***********************');
-//     console.log('Game ended');
-// 
-//     // Write down bonus file.
-//     filename = DUMP_DIR + 'bonus.csv';
-//     bonusFile = fs.createWriteStream(filename);
-//     bonusFile.on('error', function(err) {
-//         console.log('Error while saving bonus file: ', err);
-//     });
-//     bonusFile.write(["access", "exit", "bonus", "terminated"].join(', ') + '\n');
-//     bonus.forEach(function(v) {
-//         bonusFile.write(v.join(', ') + '\n'); 
-//     });
-//     bonusFile.end();
-// 
-//     // node.fs.writeCsv(bonusFile, bonus, {
-//     //     headers: ["access", "exit", "bonus", "terminated"]
-//     // });
-// 
-//     node.done();
-// }
 
 
 function endgame(playerId) {
