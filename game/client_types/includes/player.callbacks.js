@@ -12,7 +12,6 @@ module.exports = {
     choices: choices,
     feedback: feedback,
     totalpayoff: totalpayoff,
-    postgame: postgame,
     postgame2: postgame2,
     postgame3: postgame3,
     endgame: endgame,
@@ -253,7 +252,7 @@ function init() {
         return n >= 0 && n <= 100;
     };
 
-
+/*
     // Adapting the game to the treatment.
     if (treatment == 'nf') {
         node.game.instructionsPage = 'instructions_nf.html';
@@ -261,6 +260,7 @@ function init() {
     else {
         node.game.instructionsPage = 'instructions.html';
     }
+*/
 
     // Set default language prefix.
     W.setUriPrefix(node.player.lang.path);
@@ -286,7 +286,7 @@ function precache() {
     console.log('pre-caching...');
     W.preCache([
         'languageSelection.html', // no text here.
-        node.game.instructionsPage,
+        // node.game.instructionsPage,
         // 'quiz.html',
         // 'bidder.html',
 
@@ -345,7 +345,7 @@ function instructions() {
     // passed as second parameter.
     //
     /////////////////////////////////////////////
-    W.loadFrame(node.game.instructionsPage, function() {
+    //W.loadFrame(node.game.instructionsPage, function() {
 
         var b = W.getElementById('read');
         b.onclick = function() {
@@ -376,7 +376,7 @@ function instructions() {
                 node.done();
             }, 2000);
         });
-    });
+    //});
     console.log('Instructions');
 }
 
@@ -391,7 +391,6 @@ function quiz() {
                 node.done();
             }
         };
-
 
         node.game.visualTimer.startTiming(options);
 
@@ -445,10 +444,7 @@ function quiz() {
                 thisRadio.checked = true;               
             }
         }
-        
-       
-        
-            
+                    
         var b = W.getElementById('continue');
 
         b.onclick = function() {
@@ -499,12 +495,10 @@ function quiz() {
             
         };
         
-        
         node.timer.setTimestamp('quiz_loaded');
         
     // });
-    
-    
+     
     console.log('Quiz');
 }
 
@@ -893,14 +887,6 @@ function feedback() {
         node.game.visualTimer.startTiming(options);
         
         node.on.data('OTHER_CHOICE', function(msg) {
-        
-            //console.log('CHOICES DONE!');
-            //other = msg.data.other;
-            //node.set({role: 'BIDDER'});
-            /*if (node.env('reload')) {
-                debugger;
-            }*/
-
             
             
             // Get the input from last round
@@ -942,6 +928,7 @@ function feedback() {
             
             // Show the first sentence for feedback treatment and pass it the values
             var treatment = node.env('treatment');
+            var round = node.player.stage.round;
             /*if (treatment != 'nf' && chosenValue1 && chosenValue2 && otherValue1 && otherValue2) {
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
@@ -961,7 +948,7 @@ function feedback() {
                 var noSelection = W.getElementById('noSelection');
                 noSelection.style.display = '';
             }
-            else if(treatment != 'nf' && otherValue) {
+            else if(treatment != 'none' && otherValue) {
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
                 
@@ -1005,10 +992,13 @@ function feedback() {
                 otherSelfBottom.className += ' highlightSelfBottom';
 
                 
-                // Feedback about partners choice. only show if bot's choice is really saved.
+                    
+                // Feedback about partners choice. only show if bot's choice is really saved, and don't show it for round 10 for next treatment.
                 if(otherValueIndex < 10){
-                    var treatment = node.env('treatment');
-                    if(treatment != 'nf') {
+                    if(treatment == 'none' || (treatment == 'standard' && round == 10)) {
+                        var colorsNF = W.getElementById('colorsNF');
+                        colorsNF.style.display = ''; 
+                    } else {
                         var colors = W.getElementById('colors');
                         colors.style.display = '';
                         
@@ -1044,10 +1034,6 @@ function feedback() {
                             var secondOtherBottom = W.getElementById(secondOtherBottomId);
                             secondOtherBottom.className += ' highlightOtherBottom';
                         }
-
-                    } else {
-                        var colorsNF = W.getElementById('colorsNF');
-                        colorsNF.style.display = ''; 
                     }
                 }
             }
@@ -1061,6 +1047,16 @@ function feedback() {
                 botSentence.style.display = '';
                 var feedbackSentence = W.getElementById('feedbackSentence');
                 feedbackSentence.style.display = '';
+            }
+
+            // For the Next Partner Feedback treatment some things need to be switched up for last round: Don't show feedback about any upcming rounds anymore.
+            if(treatment == 'standard'){
+                if(round == 10) {
+                    var otherSentence = W.getElementById('otherSentence');
+                    otherSentence.style.display = 'none';
+                    var otherSentenceLastRound = W.getElementById('otherSentenceLastRound');
+                    otherSentenceLastRound.style.display = '';
+                }
             }
 
 
@@ -1195,108 +1191,6 @@ function totalpayoff() {
         
     // });
     
-}
-
-function postgame() {
-    node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
-
-    // W.loadFrame('postgame.html', function() {
-        window.scrollTo(0,0);
-
-        node.env('auto', function() {
-            node.timer.randomExec(function() {
-                node.game.visualTimer.doTimeUp();
-            });
-        });
-        
-            
-            
-        
-        for (var i = 0; i < 3; i++) {
-            var questionnaireClassesId1 = 'choices' + i;
-            var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
-            questionnaireClasses1.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'choices_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
-            }
-        }
-        
-        for (var i = 0; i < 3; i++) {
-            var questionnaireClassesId2 = 'intend' + i;
-            var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
-            questionnaireClasses2.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'intend_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
-            }
-        }
-        
-        for (var i = 0; i < 2; i++) {
-            var questionnaireClassesId3 = 'depend' + i;
-            var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
-            questionnaireClasses3.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'depend_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
-            }
-        }
-        
-        var b = W.getElementById('submit');
-        
-        b.onclick = function() {
-
-            for (var i = 0; i < 3; i++) {
-                var posname = 'choices_radio' + i;
-                var position = W.getElementById(posname);
-                if (position.checked) {
-                    var choicesValue = position.value;
-                    break;
-                }
-            }
-            
-            for (var i = 0; i < 3; i++) {
-                var posname2 = 'intend_radio' + i;
-                var position2 = W.getElementById(posname2);
-                if (position2.checked) {
-                    var intendValue = position2.value;
-                    break;
-                }
-            }
-            
-            for (var i = 0; i < 4; i++) {
-                var posname3 = 'depend_radio' + i;
-                var position3 = W.getElementById(posname3);
-                if (position3.checked) {
-                    var dependValue = position3.value;
-                    break;
-                }
-            }
-            
-            
-            var badAlert = W.getElementById('badAlert');
-            var goodAlert = W.getElementById('goodAlert');
-            
-            if (!choicesValue || !intendValue || !dependValue) {
-                badAlert.style.display = '';
-            } else {
-                badAlert.style.display = 'none';
-                goodAlert.style.display = '';
-                node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
-            }    
-            
-        }
-        
-        
-    // });
-    
-    console.log('Postgame');
 }
 
 

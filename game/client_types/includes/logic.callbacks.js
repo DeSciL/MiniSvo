@@ -13,8 +13,6 @@ var DUMP_DIR, DUMP_DIR_JSON, DUMP_DIR_CSV;
 module.exports = {
     init: init,
     gameover: gameover,
-    doMatchPrev: doMatchPrev,
-    doMatchNext: doMatchNext,
     endgame: endgame,
     feedback: feedback,
     totalpayoff: totalpayoff,
@@ -220,7 +218,7 @@ function feedback() {
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
 
     //FEEDBACK OF NEXT PARTNER
-    if(treatment == 'next') {
+    if(treatment == 'standard') {
         var round = node.player.stage.round;
         var nextRound = parseInt(round) + 1;
         var matches = node.game.matcher.getMatches("ARRAY", nextRound)

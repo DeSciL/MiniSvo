@@ -99,6 +99,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('instructions', {
+        frame: settings.instructionsPage,
         cb: cbs.instructions,
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
@@ -116,7 +117,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('decision', {
-        frame: 'bidder.html',
+        frame: 'decision.html',
         cb: cbs.choices,
         // minPlayers: MIN_PLAYERS,
         // `syncOnLoaded` forces the clients to wait for all the others to be
@@ -135,7 +136,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('feedback', {
         // Carry along the partner.
         partner: function() { return this.partner; },
-        frame: 'feedback.html',
+        //frame: 'feedback_next.html',
+        frame: settings.feedbackPage,
         cb: cbs.feedback,
         // minPlayers: MIN_PLAYERS,
     });
@@ -155,8 +157,116 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('questionnaire1', {
-        frame: 'postgame.html',
-        cb: cbs.postgame,
+        frame: settings.postgamePage,
+        cb: function () {
+            
+            var treatment = node.env('treatment');
+            // Don't show this step for no feedback treatment
+            if (treatment == 'none') {
+                //HACK: Delay node.done() a little bit, otherwise it jumps multiple steps ahead
+                setTimeout(function() { node.done(); }, 30);
+            }
+            else {
+
+                node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
+
+                window.scrollTo(0,0);
+
+                node.env('auto', function() {
+                    node.timer.randomExec(function() {
+                        node.game.visualTimer.doTimeUp();
+                    });
+                });
+                
+                    
+                    
+                
+                for (var i = 0; i < 3; i++) {
+                    var questionnaireClassesId1 = 'choices' + i;
+                    var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
+                    questionnaireClasses1.onclick = function(i) {
+                        var thisId = this.id;
+                        var thisNumber = thisId.slice(-1);
+                        var thisRadioId = 'choices_radio' + thisNumber;
+                        var thisRadio = W.getElementById(thisRadioId);
+                        thisRadio.checked = true;               
+                    }
+                }
+                
+                for (var i = 0; i < 3; i++) {
+                    var questionnaireClassesId2 = 'intend' + i;
+                    var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
+                    questionnaireClasses2.onclick = function(i) {
+                        var thisId = this.id;
+                        var thisNumber = thisId.slice(-1);
+                        var thisRadioId = 'intend_radio' + thisNumber;
+                        var thisRadio = W.getElementById(thisRadioId);
+                        thisRadio.checked = true;               
+                    }
+                }
+                
+                for (var i = 0; i < 2; i++) {
+                    var questionnaireClassesId3 = 'depend' + i;
+                    var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
+                    questionnaireClasses3.onclick = function(i) {
+                        var thisId = this.id;
+                        var thisNumber = thisId.slice(-1);
+                        var thisRadioId = 'depend_radio' + thisNumber;
+                        var thisRadio = W.getElementById(thisRadioId);
+                        thisRadio.checked = true;               
+                    }
+                }
+                
+                var b = W.getElementById('submit');
+                
+                b.onclick = function() {
+
+                    for (var i = 0; i < 3; i++) {
+                        var posname = 'choices_radio' + i;
+                        var position = W.getElementById(posname);
+                        if (position.checked) {
+                            var choicesValue = position.value;
+                            break;
+                        }
+                    }
+                    
+                    for (var i = 0; i < 3; i++) {
+                        var posname2 = 'intend_radio' + i;
+                        var position2 = W.getElementById(posname2);
+                        if (position2.checked) {
+                            var intendValue = position2.value;
+                            break;
+                        }
+                    }
+                    
+                    for (var i = 0; i < 2; i++) {
+                        var posname3 = 'depend_radio' + i;
+                        var position3 = W.getElementById(posname3);
+                        if (position3.checked) {
+                            var dependValue = position3.value;
+                            break;
+                        }
+                    }
+                    
+                    
+                    var badAlert = W.getElementById('badAlert');
+                    var goodAlert = W.getElementById('goodAlert');
+                    
+                    if (!choicesValue || !intendValue || !dependValue) {
+                        badAlert.style.display = '';
+                    } else {
+                        badAlert.style.display = 'none';
+                        goodAlert.style.display = '';
+                        node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
+                    }    
+                    
+                }
+                
+                
+                console.log('Postgame');
+            }
+
+        },
         timer: 120000,
         // `done` is a callback function that is executed as soon as a
         // _DONE_ event is emitted. It can perform clean-up operations (such
@@ -164,65 +274,29 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // client will enter the _DONE_ stage level, and the step rule
         // will be evaluated.
         done: function() {
-            var q1, q2, q2checked, i, isTimeup;
-            /*q1 = W.getElementById('comment').value;
-            q2 = W.getElementById('disconnect_form');
-            q2checked = -1;
-
-            for (i = 0; i < q2.length; i++) {
-                if (q2[i].checked) {
-                    q2checked = i;
-                    break;
-                }
-            }*/
-
-      //      /*isTimeup = node.game.timer.isTimeup();*/
-
-            // If there is still some time left, let's ask the player
-            // to complete at least the second question.
-            /*if (q2checked === -1 && !isTimeup) {
-                alert('Please answer Question 2');
-                return false;
-            }
-
-            node.set({
-                questionnaire: true,
-                q1: q1 || '',
-                q2: q2checked
-            });*/
-
             node.emit('INPUT_DISABLE');
-
             return true;
         }
     });
 
     stager.extendStep('questionnaire2', {
-        frame: 'postgame2.html',
+        frame: settings.postgame2Page,
+        //frame: 'postgame2.html',
         cb: cbs.postgame2,
         timer: 120000,
         done: function() {
-            var q1, q2, q2checked, i, isTimeup;
-           
-            isTimeup = node.game.timer.isTimeup();
-
             node.emit('INPUT_DISABLE');
-
             return true;
         }
     });
 
     stager.extendStep('questionnaire3', {
-        frame: 'postgame3.html',
+        frame: settings.postgame3Page,
+        //frame: 'postgame3.html',
         cb: cbs.postgame3,
         timer: 180000,
         done: function() {
-            var q1, q2, q2checked, i, isTimeup;
-           
-            isTimeup = node.game.timer.isTimeup();
-
             node.emit('INPUT_DISABLE');
-
             return true;
         }
     });

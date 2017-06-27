@@ -16,9 +16,6 @@ module.exports = function(stager, settings) {
         .next('quiz2')
         .repeat('choices', settings.REPEAT)
         .next('final')
-//         .next('totalpayoff')
-//         .next('questionnaire')
-//         .next('endgame')
         .gameover();
 
 //    stager.skip('instructions');

@@ -104,7 +104,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         cb: function() {
             this.node.log('Feedback');
             cbs.feedback();
-            cbs.doMatchNext();
         },
         matcher: {
             // roles: [ 'BIDDER', 'RESPONDENT', 'SOLO' ],

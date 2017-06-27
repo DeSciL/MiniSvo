@@ -1,0 +1,60 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h1 Questionnaire I/III
+        
+        
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+            span Please choose an answer for all questions.
+            
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+            span You have submitted your answers.
+        
+        
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') With your choices, did you
+                br
+                span(id="choices0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='choices', id='choices_radio0', value=1)
+                    |  allocate more to others than they allocated to you?
+                br
+                span(id="choices1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='choices', id='choices_radio1', value=2)
+                    |  allocate less to others than they allocated to you?
+                br
+                span(id="choices2", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='choices', id='choices_radio2', value=3)
+                    |  allocate the same to them as they allocated to you?
+         
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') With your choices, did you intend to
+                br
+                span(id="intend0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='intend', id='intend_radio0', value=1)
+                    |  allocate more to others than they allocated to you?
+                br
+                span(id="intend1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='intend', id='intend_radio1', value=2)
+                    |  allocate less to others than they allocated to you?
+                br
+                span(id="intend2", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='intend', id='intend_radio2', value=3)
+                    |  allocate the same to them as they allocated to you?
+            
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Did your choices
+                br
+                span(id="depend0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='depend', id='depend_radio0', value=1)
+                    |  depend on how much your partners allocated to their previous partners?
+                br
+                span(id="depend1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='depend', id='depend_radio1', value=2)
+                    |  not depend on others?
+              
+        br
+        input(type='button', id='submit', value='Continue', class='btn')
