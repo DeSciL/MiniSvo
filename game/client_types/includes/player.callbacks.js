@@ -386,7 +386,7 @@ function quiz() {
         window.scrollTo(0,0);
 
         var options = {
-            milliseconds: 120000,
+            milliseconds: 90000,
             timeup: function() {
                 node.done();
             }

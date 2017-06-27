@@ -70,12 +70,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     
     stager.extendStep('instructions', {
         pushClients: true,
-        timer: 120000
+        timer: 90000
     });
     
     stager.extendStep('quiz', {
         pushClients: true,
-        timer: 120000
+        timer: 90000
     });
     
     stager.extendStep('quiz2', {
