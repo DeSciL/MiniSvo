@@ -482,7 +482,7 @@ function notEnoughPlayers() {
         if (disconnectionStage < 5) {
             node.game.gotoStep(new GameStage('final'));
         }
-    }, settings.WAIT_TIME * 1000);
+    }, settings.WAIT_TIME * 20);
 
 }
 
