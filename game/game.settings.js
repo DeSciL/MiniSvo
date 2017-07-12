@@ -12,7 +12,7 @@ module.exports = {
     SESSION_ID: 100,
 
     // Minimum number of players that must be always connected. LIVE: 20
-    MIN_PLAYERS: 20,
+    MIN_PLAYERS: 2,
 
     // Number or rounds to repeat the bidding. LIVE: 10
     REPEAT: 10,
@@ -58,39 +58,26 @@ module.exports = {
         
         // LAST THREE: RE-MATCHING
         standard: {
-            fullName: "Re-Matching Next feedback",
+            fullName: "Partner-Matching feedback",
             description:
-                "Stranger re-matching, feedback for next partner.",
+                "SPartner-Matching, feedback for next partner.",
             WAIT_TIME: 20,
-            instructionsPage: 'instructions_next.html',
-            feedbackPage: 'feedback_next.html',
-            postgamePage: 'postgame_next.html',
-            postgame2Page: 'postgame2_next.html',
-            postgame3Page: 'postgame3_next.html'
+            instructionsPage: 'instructions_standard.html',
+            feedbackPage: 'feedback_standard.html',
+            postgamePage: 'postgame_standard.html',
+            postgame2Page: 'postgame2_standard.html',
+            postgame3Page: 'postgame3_standard.html'
         },
-        
-        /* DEACTIVATED FOR PRETEST
-        previous: {
-            fullName: "Re-Matching Previous Feedback",
-            description:
-                "Stranger re-matching, feedback for previous partner.",
-            WAIT_TIME: 20,
-            instructionsPage: 'instructions_previous.html',
-            feedbackPage: 'feedback_previous.html',
-            postgamePage: 'postgame_previous.html',
-            postgame2Page: 'postgame2_previous.html',
-            postgame3Page: 'postgame3_previous.html'
-        },
-        */
+    
         
         none: {
-            fullName: "Re-Matching No Feedback",
+            fullName: "Partner-Matching No Feedback",
             description:
-                "Stranger re-matching, no feedback.",
+                "Partner-Matching, no feedback.",
             WAIT_TIME: 20,
             instructionsPage: 'instructions_none.html',
             feedbackPage: 'feedback_none.html',
-            postgamePage: 'postgame_next.html',
+            postgamePage: 'postgame_standard.html',
             postgame2Page: 'postgame2_none.html',
             postgame3Page: 'postgame3_none.html'
         }
