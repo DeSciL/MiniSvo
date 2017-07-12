@@ -56,7 +56,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     //stager.setDefaultProperty('pushClients', true);
 
     stager.setDefaultCallback(function() {});
-
+/*
     stager.extendStep('selectLanguage', {
         cb: function() {
             // Storing the language setting.
@@ -67,20 +67,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             });
         }
     });
-    
+*/    
     stager.extendStep('instructions', {
         pushClients: true,
-        timer: 90000
+        timer: 85000
     });
     
     stager.extendStep('quiz', {
         pushClients: true,
-        timer: 90000
+        timer: 85000
     });
     
     stager.extendStep('quiz2', {
         pushClients: true,
-        timer: 60000
+        timer: 65000
     });
 
     stager.extendStep('decision', {
@@ -97,7 +97,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // cbs.doMatchPrev();
         },
         pushClients: true,
-        timer: 60000
+        timer: 65000
     });
     
     stager.extendStep('feedback', {
@@ -114,7 +114,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // setPartner: true // default
         },
         pushClients: true,
-        timer: 30000
+        timer: 35000
     });
 
 

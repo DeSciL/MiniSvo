@@ -4,8 +4,8 @@
 
 module.exports = {
     init: init,
-    precache: precache,
-    selectLanguage: selectLanguage,
+    //precache: precache,
+    //selectLanguage: selectLanguage,
     instructions: instructions,
     quiz: quiz,
     quiz2: quiz2,
@@ -281,7 +281,7 @@ function init() {
 // done.
 //
 /////////////////////////////////////////////
-function precache() {
+/*function precache() {
     W.lockScreen('Loading...');
     console.log('pre-caching...');
     W.preCache([
@@ -303,8 +303,8 @@ function precache() {
         // Pre-Caching done; proceed to the next stage.
         node.done();
     });
-}
-
+}*/
+/*
 function selectLanguage() {
     // W.loadFrame('languageSelection.html', function() {
         var b = W.getElement('input', 'done', {
@@ -327,7 +327,7 @@ function selectLanguage() {
         });
     // });
 }
-
+*/
 function instructions() {
     var that = this;
     var count = 0;
@@ -386,7 +386,7 @@ function quiz() {
         window.scrollTo(0,0);
 
         var options = {
-            milliseconds: 90000,
+            milliseconds: 80000,
             timeup: function() {
                 node.done();
             }

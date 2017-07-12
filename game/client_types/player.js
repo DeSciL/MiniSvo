@@ -73,6 +73,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     MIN_PLAYERS = [ settings.MIN_PLAYERS, cbs.notEnoughPlayers ];
 
+/*
     stager.extendStep('selectLanguage', {
         frame: 'languageSelection.html',
         cb: cbs.selectLanguage,
@@ -88,7 +89,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             return true;
         }
     });
-
+*/
+/*
     stager.extendStep('precache', {
         cb: cbs.precache,
         // `minPlayers` triggers the execution of a callback in the case
@@ -97,13 +99,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
     });
-
+*/
     stager.extendStep('instructions', {
         frame: settings.instructionsPage,
         cb: cbs.instructions,
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
-        timer: 90000
+        timer: 80000
     });
 
     stager.extendStep('quiz', {

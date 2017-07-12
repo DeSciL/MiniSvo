@@ -220,7 +220,7 @@ function feedback() {
     //FEEDBACK OF NEXT PARTNER
     if(treatment == 'standard') {
         var round = node.player.stage.round;
-        var nextRound = parseInt(round) + 1;
+        var nextRound = round + 1;
         var matches = node.game.matcher.getMatches("ARRAY", nextRound)
 
         for (var j = 0; j < matches.length; j++) {

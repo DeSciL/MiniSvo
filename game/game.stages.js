@@ -9,8 +9,8 @@
 module.exports = function(stager, settings) {
 
     stager
-        .next('precache')
-        .next('selectLanguage')
+        //.next('precache')
+        //.next('selectLanguage')
         .next('instructions')
         .next('quiz')
         .next('quiz2')
@@ -19,7 +19,7 @@ module.exports = function(stager, settings) {
         .gameover();
 
 //    stager.skip('instructions');
-    stager.skip('selectLanguage');
+//    stager.skip('selectLanguage');
 //    stager.skip('quiz');
 //    stager.skip('quiz2');
     
