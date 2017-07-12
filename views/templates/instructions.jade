@@ -6,9 +6,10 @@ block mainContent
         div(id='instructions')
         
             p Please read these instructions carefully.
-            p This game consists of ten rounds of play. Your decisions will affect your own payoff and that of another person, who remains your partner for the entire game.
-            p Each round, you will make a choice to allocate a number of coins to your private account and another number of coins to your recipient.
-            p Here is how such a choice works: you make an allocation decision on a slider (see below) – whatever allocation you choose, you will receive the number at the top and your recipient will receive the number at the bottom.
+            p This game consists of 2 players and 10 rounds of play.
+            p You are paired with one randomly chosen person who remains your partner for the entire game.
+            p Each round, you will make a choice to allocate a number of coins to yourself and another number of coins to your partner, and your partner will be facing the same decision at the same time.
+            p Here is how such a decision works: after you choose an allocation on a slider (see below), you will receive the number of coins at the top and your recipient will receive the number of coins at the bottom.
 
             div(class="panel panel-default", style="max-width:530px;")
                 div(class="panel-heading") Example choice
@@ -30,11 +31,9 @@ block mainContent
                                 td(style='height:33px;text-align:center;background:#fff;-webkit-border-radius: 0px 0px 5px 5px;-moz-border-radius: 0px 0px 5px 5px;border-radius: 0px 0px 5px 5px;', class='firstHoverclass' + index)= val
                     
             
-            p After each decision, you will be informed about your partner’s choice.
-            p At the end of the ten rounds, you will receive the total number of coins that you allocated to yourself plus the total number of coins that were allocated to you. The exchange rate is such that 2,000 coins are worth 1 USD.
+            p After each decision you will be informed about your partner’s choice.
+            p At the end of the 10 rounds, you will receive the total number of coins that you allocated to yourself plus the total number of coins that were allocated to you. The exchange rate is such that 2,000 coins are worth 1 USD.
             p If you understand these instructions please continue to the quiz.
                        
             br
             input(type='button', id='read', value='Continue', class='btn')
- 
- 

@@ -73,7 +73,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     MIN_PLAYERS = [ settings.MIN_PLAYERS, cbs.notEnoughPlayers ];
 
-    stager.extendStep('selectLanguage', {
+/*    stager.extendStep('selectLanguage', {
         cb: cbs.selectLanguage,
         timer: 100000,
         // minPlayers: MIN_PLAYERS,
@@ -95,13 +95,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // the chosen threshold. Related: `maxPlayers`, and `exactPlayers`.
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
-    });
+    });*/
 
     stager.extendStep('instructions', {
         cb: cbs.instructions,
         // minPlayers: MIN_PLAYERS,
         // syncOnLoaded: true,
-        timer: 120000
+        timer: 80000
     });
 
     stager.extendStep('quiz', {

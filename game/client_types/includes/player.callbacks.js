@@ -4,8 +4,8 @@
 
 module.exports = {
     init: init,
-    precache: precache,
-    selectLanguage: selectLanguage,
+//    precache: precache,
+//    selectLanguage: selectLanguage,
     instructions: instructions,
     quiz: quiz,
     quiz2: quiz2,
@@ -256,9 +256,15 @@ function init() {
     // Adapting the game to the treatment.
     if (treatment == 'nf') {
         node.game.instructionsPage = 'instructions_nf.html';
+        node.game.postgamePage = 'postgame_standard.html';
+        node.game.postgame2Page = 'postgame2_none.html';
+        node.game.postgame3Page = 'postgame3_none.html';
     }
     else {
         node.game.instructionsPage = 'instructions.html';
+        node.game.postgamePage = 'postgame_standard.html';
+        node.game.postgame2Page = 'postgame2_standard.html';
+        node.game.postgame3Page = 'postgame3_standard.html';
     }
 
     // Set default language prefix.
@@ -280,7 +286,7 @@ function init() {
 // done.
 //
 /////////////////////////////////////////////
-function precache() {
+/*function precache() {
     W.lockScreen('Loading...');
     console.log('pre-caching...');
     W.preCache([
@@ -325,7 +331,7 @@ function selectLanguage() {
             });
         });
     });
-}
+}*/
 
 function instructions() {
     var that = this;
@@ -385,7 +391,7 @@ function quiz() {
         window.scrollTo(0,0);
 
         var options = {
-            milliseconds: 120000,
+            milliseconds: 80000,
             timeup: function() {
                 node.done();
             }
@@ -1171,101 +1177,108 @@ function totalpayoff() {
 function postgame() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame.html', function() {
-        window.scrollTo(0,0);
+    var treatment = node.env('treatment');
+    if(treatment == 'nf') {
+        setTimeout(function() { node.done(); }, 30);
+    }
+    else {
 
-        node.env('auto', function() {
-            node.timer.randomExec(function() {
-                node.game.visualTimer.doTimeUp();
+        W.loadFrame(node.game.postgamePage, function() {
+            window.scrollTo(0,0);
+
+            node.env('auto', function() {
+                node.timer.randomExec(function() {
+                    node.game.visualTimer.doTimeUp();
+                });
             });
-        });
-        
             
+                
+                
             
-        
-        for (var i = 0; i < 3; i++) {
-            var questionnaireClassesId1 = 'choices' + i;
-            var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
-            questionnaireClasses1.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'choices_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
+            for (var i = 0; i < 3; i++) {
+                var questionnaireClassesId1 = 'choices' + i;
+                var questionnaireClasses1 = W.getElementById(questionnaireClassesId1);
+                questionnaireClasses1.onclick = function(i) {
+                    var thisId = this.id;
+                    var thisNumber = thisId.slice(-1);
+                    var thisRadioId = 'choices_radio' + thisNumber;
+                    var thisRadio = W.getElementById(thisRadioId);
+                    thisRadio.checked = true;               
+                }
             }
-        }
-        
-        for (var i = 0; i < 3; i++) {
-            var questionnaireClassesId2 = 'intend' + i;
-            var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
-            questionnaireClasses2.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'intend_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
+            
+            for (var i = 0; i < 3; i++) {
+                var questionnaireClassesId2 = 'intend' + i;
+                var questionnaireClasses2 = W.getElementById(questionnaireClassesId2);
+                questionnaireClasses2.onclick = function(i) {
+                    var thisId = this.id;
+                    var thisNumber = thisId.slice(-1);
+                    var thisRadioId = 'intend_radio' + thisNumber;
+                    var thisRadio = W.getElementById(thisRadioId);
+                    thisRadio.checked = true;               
+                }
             }
-        }
-        
-        for (var i = 0; i < 4; i++) {
-            var questionnaireClassesId3 = 'depend' + i;
-            var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
-            questionnaireClasses3.onclick = function(i) {
-                var thisId = this.id;
-                var thisNumber = thisId.slice(-1);
-                var thisRadioId = 'depend_radio' + thisNumber;
-                var thisRadio = W.getElementById(thisRadioId);
-                thisRadio.checked = true;               
+            
+            for (var i = 0; i < 2; i++) {
+                var questionnaireClassesId3 = 'depend' + i;
+                var questionnaireClasses3 = W.getElementById(questionnaireClassesId3);
+                questionnaireClasses3.onclick = function(i) {
+                    var thisId = this.id;
+                    var thisNumber = thisId.slice(-1);
+                    var thisRadioId = 'depend_radio' + thisNumber;
+                    var thisRadio = W.getElementById(thisRadioId);
+                    thisRadio.checked = true;               
+                }
             }
-        }
-        
-        var b = W.getElementById('submit');
-        
-        b.onclick = function() {
+            
+            var b = W.getElementById('submit');
+            
+            b.onclick = function() {
 
-            for (var i = 0; i < 3; i++) {
-                var posname = 'choices_radio' + i;
-                var position = W.getElementById(posname);
-                if (position.checked) {
-                    var choicesValue = position.value;
-                    break;
+                for (var i = 0; i < 3; i++) {
+                    var posname = 'choices_radio' + i;
+                    var position = W.getElementById(posname);
+                    if (position.checked) {
+                        var choicesValue = position.value;
+                        break;
+                    }
                 }
+                
+                for (var i = 0; i < 3; i++) {
+                    var posname2 = 'intend_radio' + i;
+                    var position2 = W.getElementById(posname2);
+                    if (position2.checked) {
+                        var intendValue = position2.value;
+                        break;
+                    }
+                }
+                
+                for (var i = 0; i < 2; i++) {
+                    var posname3 = 'depend_radio' + i;
+                    var position3 = W.getElementById(posname3);
+                    if (position3.checked) {
+                        var dependValue = position3.value;
+                        break;
+                    }
+                }
+                
+                
+                var badAlert = W.getElementById('badAlert');
+                var goodAlert = W.getElementById('goodAlert');
+                
+                if (!choicesValue || !intendValue || !dependValue) {
+                    badAlert.style.display = '';
+                } else {
+                    badAlert.style.display = 'none';
+                    goodAlert.style.display = '';
+                    node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
+                }    
+                
             }
             
-            for (var i = 0; i < 3; i++) {
-                var posname2 = 'intend_radio' + i;
-                var position2 = W.getElementById(posname2);
-                if (position2.checked) {
-                    var intendValue = position2.value;
-                    break;
-                }
-            }
             
-            for (var i = 0; i < 4; i++) {
-                var posname3 = 'depend_radio' + i;
-                var position3 = W.getElementById(posname3);
-                if (position3.checked) {
-                    var dependValue = position3.value;
-                    break;
-                }
-            }
-            
-            
-            var badAlert = W.getElementById('badAlert');
-            var goodAlert = W.getElementById('goodAlert');
-            
-            if (!choicesValue || !intendValue || !dependValue) {
-                badAlert.style.display = '';
-            } else {
-                badAlert.style.display = 'none';
-                goodAlert.style.display = '';
-                node.emit('QUEST1_DONE', choicesValue, intendValue, dependValue);
-            }    
-            
-        }
-        
-        
-    });
+        });
+    }
     
     console.log('Postgame');
 }
@@ -1274,7 +1287,7 @@ function postgame() {
 function postgame2() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame2.html', function() {
+    W.loadFrame(node.game.postgame2Page, function() {
         window.scrollTo(0,0);
 
         node.env('auto', function() {
@@ -1358,7 +1371,7 @@ function postgame2() {
 function postgame3() {
     node.game.rounds.setDisplayMode(['COUNT_UP_STAGES_TO_TOTAL']);
 
-    W.loadFrame('postgame3.html', function() {
+    W.loadFrame(node.game.postgame3Page, function() {
         window.scrollTo(0,0);
 
         node.env('auto', function() {

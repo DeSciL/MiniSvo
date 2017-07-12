@@ -57,7 +57,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.setDefaultCallback(function() {});
 
-    stager.extendStep('selectLanguage', {
+ /*   stager.extendStep('selectLanguage', {
         cb: function() {
             // Storing the language setting.
             node.on.data('mylang', function(msg) {
@@ -66,21 +66,21 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 }
             });
         }
-    });
+    });*/
     
     stager.extendStep('instructions', {
         pushClients: true,
-        timer: 120000
+        timer: 85000
     });
     
     stager.extendStep('quiz', {
         pushClients: true,
-        timer: 120000
+        timer: 85000
     });
     
     stager.extendStep('quiz2', {
         pushClients: true,
-        timer: 60000
+        timer: 65000
     });
 
     stager.extendStep('decision', {
@@ -89,17 +89,16 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             cbs.doMatchPrev();
         },
         pushClients: true,
-        timer: 60000
+        timer: 60000,
     });
     
     stager.extendStep('feedback', {
         cb: function() {
             this.node.log('Feedback');
             cbs.feedback();
-            cbs.doMatchNext();
         },
         pushClients: true,
-        timer: 30000
+        timer: 35000
     });
 
 
@@ -146,7 +145,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             // cbs.totalpayoff();
         },
         pushClients: false,
-        timer: 30000
+        timer: 60000
         // minPlayers: undefined,
         // syncStepping: false,
     });
@@ -189,7 +188,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.extendStep('endgame', {
         cb: function() {
-            cb: cbs.endgame
+            cbs.endgame
         }
 //        minPlayers: undefined,
 //        steprule: stepRules.SOLO

@@ -1,0 +1,58 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h1 Questionnaire I/II
+        
+        
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+            span Please answer all questions.
+            
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+            span You have submitted your answers.
+        
+        
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Overall, was your motivation to
+                br
+                span(id="motivation0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='motivation', id='motivation_radio0', value=1)
+                    |  make as much money for yourself as possible?
+                br
+                span(id="motivation1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='motivation', id='motivation_radio1', value=2)
+                    |  maximize the total payoff for all subjects?
+                br
+                span(id="motivation2", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='motivation', id='motivation_radio2', value=3)
+                    |  make all subjects get the same payoff?
+                br
+                span(id="motivation3", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='motivation', id='motivation_radio3', value=4)
+                    |  make random choices?
+            
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Are you female or male?
+                br
+                span(id="gender0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='gender', id='gender_radio0', value=1)
+                    |  Female
+                br 
+                span(id="gender1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='gender', id='gender_radio1', value=2)
+                    |  Male
+                
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') What is your total of "HITs submitted" on Amazon Mechanical Turk?
+                br
+                span If you don't know this number, you can find it on your 
+                    a(href='https://www.mturk.com/mturk/dashboard', target='_blank') Mturk dashboard
+                    | .
+                br
+                input(type="text", class="form-control", name="hitsSubmitted", placeholder="eg. 15", id="hitsSubmitted")
+                
+        br
+        input(type='button', id='submit', value='Continue', class='btn')

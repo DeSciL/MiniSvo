@@ -1,0 +1,40 @@
+extends iframe-layout
+
+block mainContent
+    div(id='container')
+        h1 Questionnaire II/II
+        
+        
+        div(class="alert alert-danger", role="alert", id="badAlert", style="display:none;width:530px;")
+            span Please answer the first question.
+            
+        div(class="alert alert-success", role="alert", id="goodAlert", style="display:none;width:530px;")
+            span You have submitted your answers.
+                
+                
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') All in all: How well have you understood the instructions?
+                br
+                span(id="understood0", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='understood', id='understood_radio0', value=1)
+                    |  Not very well
+                br
+                span(id="understood1", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='understood', id='understood_radio1', value=2)
+                    |  Partly
+                br
+                span(id="understood2", style="cursor:hand;cursor:pointer;")
+                    input(type='radio', name='understood', id='understood_radio2', value=3)
+                    |  Totally
+        
+        div(class="panel panel-default")
+            div(class="panel-body")
+                span(style='font-weight:bold;') Comments
+                br
+                span Do you have any final Comments? Did everything work as expected? We would appreciate your feedback.
+                br
+                textarea(rows="10", style="width:100%;", name="comments", id='comments')
+        
+        br 
+        input(type='button', id='submit', value='Continue', class='btn')
