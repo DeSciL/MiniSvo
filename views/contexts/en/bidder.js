@@ -2,10 +2,10 @@ module.exports = function(settings, headers) {
     // var coins = settings.pp.COINS;
     
     
-    var receive1 = settings.standard.receive1;
-    var send1 = settings.standard.send1;
-    var receive2 = settings.standard.receive2;
-    var send2 = settings.standard.send2;
+    var receive1 = settings.receive1;
+    var send1 = settings.send1;
+    var receive2 = settings.receive2;
+    var send2 = settings.send2;
 
     return {
         "title": "Allocations",
