@@ -143,7 +143,7 @@ function init() {
 
     // Player reconnecting.
     // Reconnections must be handled by the game developer.
-    node.on.preconnect(function(p) {
+    /*node.on.preconnect(function(p) {
         var code;
 
         console.log('Oh...somebody reconnected!', p);
@@ -199,7 +199,7 @@ function init() {
         // Unpause ALL players
         // node.remoteCommand('resume', 'ALL');
     });
-
+    */
     /*
 
     // Update the Payoffs
@@ -479,7 +479,7 @@ function notEnoughPlayers() {
         // Step must be not-skipped if you give the id (else give a number).
 
         // Only push to final stage if final stage has not been reached yet
-        if (disconnectionStage < 6) {
+        if (disconnectionStage < 5) {
             node.game.gotoStep(new GameStage('final'));
         }
     }, settings.WAIT_TIME * 1000);

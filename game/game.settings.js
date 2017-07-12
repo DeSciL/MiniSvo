@@ -52,14 +52,14 @@ module.exports = {
             fullName: "Standard",
             description:
                 "Partner, feedback.",
-            WAIT_TIME: 20
+            WAIT_TIME: 5
         },
 
         nf: { 
             fullName: "No Feedback",
             description:
                 "Partner, no feedback.",
-            WAIT_TIME: 20
+            WAIT_TIME: 5
         },
         
         /*
