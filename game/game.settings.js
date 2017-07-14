@@ -69,7 +69,7 @@ module.exports = {
             postgame3Page: 'postgame3_next.html'
         },
         
-        /* DEACTIVATED FOR PRETEST
+
         previous: {
             fullName: "Re-Matching Previous Feedback",
             description:
@@ -81,7 +81,7 @@ module.exports = {
             postgame2Page: 'postgame2_previous.html',
             postgame3Page: 'postgame3_previous.html'
         },
-        */
+
         
         none: {
             fullName: "Re-Matching No Feedback",
