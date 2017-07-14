@@ -117,14 +117,15 @@ function init() {
     node.on.pdisconnect(function(player) {
             // TEST:
             player.allowReconnect = false; // check if registry maybe
-
-            console.log('Connecting bot to room: ' + gameRoom.name + '. Stage: ' + node.player.stage + '. Player ID: ' + player.id);
-            channel.connectBot({
-                room: gameRoom,
-                clientType: 'bot',
-                replaceId: player.id,
-                gotoStep: node.player.stage,
-            });
+            if(node.player.stage.stage < 5) {
+                console.log('Connecting bot to room: ' + gameRoom.name + '. Stage: ' + node.player.stage + '. Player ID: ' + player.id);
+                channel.connectBot({
+                    room: gameRoom,
+                    clientType: 'bot',
+                    replaceId: player.id,
+                    gotoStep: node.player.stage,
+                });
+            }
         });
 
 

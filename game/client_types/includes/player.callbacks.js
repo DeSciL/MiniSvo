@@ -26,7 +26,7 @@ function init() {
 
     that = this;
     this.node.log('Init.');
-    treatment = node.env('treatment');
+    var treatment = node.env('treatment');
 
     // Setup the header (by default on the left side).
     if (!W.getHeader()) {
@@ -348,8 +348,11 @@ function instructions() {
     //W.loadFrame(node.game.instructionsPage, function() {
 
         var b = W.getElementById('read');
+        var treatment = node.env('treatment');
         b.onclick = function() {
-            node.done();
+            node.done({
+                treatment: treatment
+            });
         };
 
         ////////////////////////////////////////////////
@@ -373,7 +376,9 @@ function instructions() {
             //
             //////////////////////////////////////////////
             node.timer.randomExec(function() {
-                node.done();
+                node.done({
+                treatment: treatment
+            });
             }, 2000);
         });
     //});
@@ -885,6 +890,8 @@ function feedback() {
                 }
         };
         node.game.visualTimer.startTiming(options);
+
+        var otherValue = 0;
         
         node.on.data('OTHER_CHOICE', function(msg) {
             
@@ -916,7 +923,7 @@ function feedback() {
             
             var otherValueIndex = msg.data.choice
             if(otherValueIndex && otherValueIndex < 10) {
-                var otherValue = node.game.settings.send[otherValueIndex]
+                otherValue = node.game.settings.send[otherValueIndex]
             }
 
 
@@ -1078,7 +1085,9 @@ function feedback() {
         b = W.getElementById('continue');
 
         b.onclick = function() {
-            node.done();
+            node.done({
+                feedbackSeen: otherValue
+            });
         };
         
     // }, { cache: { loadMode: 'cache', storeMode: 'onLoad' } });
