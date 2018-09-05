@@ -1002,7 +1002,7 @@ function feedback() {
                     
                 // Feedback about partners choice. only show if bot's choice is really saved, and don't show it for round 10 for next treatment.
                 if(otherValueIndex < 10){
-                    if(treatment == 'none' || (treatment == 'standard' && round == 10)) {
+                    if(treatment == 'none') {
                         var colorsNF = W.getElementById('colorsNF');
                         colorsNF.style.display = ''; 
                     } else {
@@ -1057,14 +1057,14 @@ function feedback() {
             }
 
             // For the Next Partner Feedback treatment some things need to be switched up for last round: Don't show feedback about any upcming rounds anymore.
-            if(treatment == 'standard'){
+            /*if(treatment == 'standard'){
                 if(round == 10) {
                     var otherSentence = W.getElementById('otherSentence');
                     otherSentence.style.display = 'none';
                     var otherSentenceLastRound = W.getElementById('otherSentenceLastRound');
                     otherSentenceLastRound.style.display = '';
                 }
-            }
+            }*/
 
 
 

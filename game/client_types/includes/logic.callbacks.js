@@ -219,15 +219,19 @@ function feedback() {
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
 
     //FEEDBACK OF NEXT PARTNER
-    if(treatment == 'standard') {
+    /*if(treatment == 'standard') {
         var round = node.player.stage.round;
         var nextRound = round + 1;
-        var matches = node.game.matcher.getMatches("ARRAY", nextRound)
+        //var matches = node.game.matcher.getMatches("ARRAY", nextRound)
+        var matches = node.game.matcher.matcher.resolvedMatches[round]
+        console.log('Round: ' + round)
+        console.log('Next Round: ' + nextRound)
 
         for (var j = 0; j < matches.length; j++) {
             var player1 = matches[j][0];
             var other1 = matches[j][1];
             var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
+            console.log('Other1: ' + other1)
 
             if (otherChoiceItem1) {
                 var bot1 = otherChoiceItem1.bot;
@@ -242,6 +246,7 @@ function feedback() {
             var player2 = matches[j][1];
             var other2 = matches[j][0];
             var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
+            console.log('Other2: ' + other2)
 
             if (otherChoiceItem2) {
                 var bot2 = otherChoiceItem2.bot;
@@ -252,11 +257,12 @@ function feedback() {
             }
             else { node.say('OTHER_CHOICE', player2,  {choice: 10, timeup: true, bot: false, botSameRound: true}); }
         }
-    }
+}*/
 
 
     // FEEDBACK SAME ROUND
-    else if(treatment =='previous' || treatment =='none') {
+    
+    //if(treatment =='standard' || treatment =='none') {
         node.game.memory.stage[previousStage].each(function(item) {
 
             var other = item.other;
@@ -283,7 +289,7 @@ function feedback() {
                 node.say('ERROR_CHOICE', item.player);  
             }
         });
-    }
+    //}
 }
 
 
@@ -346,86 +352,6 @@ function gameover() {
 
     // TODO: fix this.
     // channel.destroyGameRoom(gameRoom.name);
-}
-
-function doMatchPrev() {
-    var g, i, bidder, respondent, data_b, data_r;
-
-    if (node.game.pl.size() < 2) {
-        if (!this.countdown) notEnoughPlayers();
-        return;
-    }
-    var treatment = settings.treatmentName;
-    //treatment = 'standard';
-    
-    
-    var round = node.player.stage.round; // or another counter
-    
-    
-    if ((treatment == 'rmNext' && round == 1) || treatment == 'standard' || treatment == 'rmNf') { // TREATMENT HACK
-        
-        
-        // ROUNDROBIN RE-MATCHING
-        // Set number of players in game.settings
-        // Number of rounds must make sense in combination with numbers of players
-        // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedback
-        // Run this once in first round for rmNext treatment because we need a match!
-        
-        var matches = node.game.matcher.getMatch(round); 
-        var item;
-
-        for (var j = 0; j < matches.length; j++) {
-            
-            data_b = {
-                //role: 'bidder',
-                other: matches[i][1]
-            };
-            data_r = {
-                //role: 'respondent',
-                other: matches[i][0]
-            };
-            
-            node.say('BIDDER', matches[i][0], data_b);
-            node.say('BIDDER', matches[i][1], data_r);
-        }
-        console.log('Re-Matching completed.');
-    } else if (/*treatment == 'standard' || */treatment == 'nf'){
-
-        // RANDOM RE-MATCHING
-        // Method shuffle accepts one parameter to update the db, as well as
-        // returning a shuffled copy.
-        
-        g = node.game.pl.shuffle();
-
-        for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
-            bidder = g.db[i];
-            respondent = g.db[i+1];
-
-            data_b = {
-                //role: 'bidder',
-                other: respondent.id
-            };
-            data_r = {
-                //role: 'respondent',
-                other: bidder.id
-            };
-
-            console.log('Group ' + i + ': ', bidder.id, respondent.id);
-
-            // Send a message to each player with their role
-            // and the id of the other player.
-            console.log('==================== LOGIC: BIDDER is', bidder.id, 
-                        '; RESPONDENT IS', respondent.id);
-        
-            console.log(node.game.pl.size());
-            console.log(node.nodename);
-
-            node.say('BIDDER', bidder.id, data_b);
-            node.say('BIDDER', respondent.id, data_r);
-            //node.say('RESPONDENT', respondent.id, data_r);
-        }
-        console.log('Matching completed.');
-    }
 }
 
 function notEnoughPlayers() {
