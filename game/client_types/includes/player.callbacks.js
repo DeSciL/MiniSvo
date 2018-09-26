@@ -895,15 +895,7 @@ function feedback() {
         
         node.on.data('OTHER_CHOICE', function(msg) {
             
-            
-            // Get the input from last round
-            // If there is no values (happens on re-connect), just don't show any feedback, they already saw it.   
-            /*var chosenValueIndex1 = node.game.lastChoice1;
-            if(chosenValueIndex1) {
-                var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];
-            }*/            
-            
-            
+           
 
             var chosenValueIndex = node.game.lastChoice;
             var chosenValue;
@@ -916,13 +908,8 @@ function feedback() {
             }      
             
             
-            /*var otherValueIndex1 = msg.data.choice1;
-            if(otherValueIndex1) {
-                var otherValue1 = node.game.settings.send1[otherValueIndex1]
-            }*/
-            
             var otherValueIndex = msg.data.choice
-            if(otherValueIndex && otherValueIndex < 10) {
+            if(otherValueIndex < 10) {
                 otherValue = node.game.settings.send[otherValueIndex]
             }
 
@@ -1075,6 +1062,103 @@ function feedback() {
                
         
         });
+
+
+        /*
+        // combined feedback for new treatment. only gets called in that treatment.
+        node.on.data('OTHER_CHOICE2', function(msg) {
+        
+            var otherValueIndex2 = msg.data.choice2
+            if(otherValueIndex2 < 10) {
+                otherValue2 = node.game.settings.send[otherValueIndex2]
+            }
+
+
+            // if the decision was made by bot, let's inform the player affected by it
+            var otherBot2 = msg.data.bot2;
+            var otherBotSameRound2 = true;
+            otherBotSameRound2 = msg.data.botSameRound2;
+            
+            
+            // The message is already shown, just adapt for additional feedback
+            var round = node.player.stage.round;
+
+            if(otherValue2) {
+                var otherValueSpan2 = W.getElementById('other3');
+                otherValueSpan2.innerHTML = otherValue;
+            }
+          
+            if(otherValue2) {
+                // table is already set. just include new additonal feedback and find solutions for when they match.
+                if(otherValueIndex2 < 10){
+                    
+                    
+                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
+                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
+                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
+                    
+
+                    if (chosenValueIndex == otherValueIndex2) {
+                        var secondSameTop = W.getElementById(secondOtherTopId);
+                        secondSameTop.className += ' highlightSameTop';
+                    }
+                    else {
+                        var secondOtherTop = W.getElementById(secondOtherTopId);
+                        secondOtherTop.className += ' highlightOtherTop';
+                    }
+
+                    if (chosenValueIndex == otherValueIndex) {
+                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                        secondSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
+                        secondOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+
+                    if (chosenValueIndex == otherValueIndex) {
+                        var secondSameBottom = W.getElementById(secondOtherBottomId);
+                        secondSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
+                        secondOtherBottom.className += ' highlightOtherBottom';
+                    }
+                }
+            }
+
+            if(otherBot) {
+                var botSentence = W.getElementById('botSentence');
+                botSentence.style.display = '';
+            }
+            else if(otherBotSameRound) {
+                var botSentence = W.getElementById('botSentence2');
+                botSentence.style.display = '';
+                var feedbackSentence = W.getElementById('feedbackSentence');
+                feedbackSentence.style.display = '';
+            }
+
+            // For the Next Partner Feedback treatment some things need to be switched up for last round: Don't show feedback about any upcming rounds anymore.
+            if(treatment == 'standard'){
+                if(round == 10) {
+                    var otherSentence = W.getElementById('otherSentence');
+                    otherSentence.style.display = 'none';
+                    var otherSentenceLastRound = W.getElementById('otherSentenceLastRound');
+                    otherSentenceLastRound.style.display = '';
+                }
+            }
+
+
+
+            
+            root = W.getElementById('container');
+
+            node.timer.setTimestamp('bidder_loaded');
+               
+        
+        });
+        */
+
         
         // if clients get pushed there is no feedback to be displayed!
         node.on.data('ERROR_CHOICE', function(msg) {

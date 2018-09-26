@@ -70,30 +70,17 @@ module.exports = {
         },
         
 
-        previous: {
-            fullName: "Re-Matching Previous Feedback",
+        /*combined: {
+            fullName: "Re-Matching Combined Feedback",
             description:
-                "Stranger re-matching, feedback for previous partner.",
+                "Stranger re-matching, feedback for previous and next partner.",
             WAIT_TIME: 20,
-            instructionsPage: 'instructions_previous.html',
-            feedbackPage: 'feedback_previous.html',
-            postgamePage: 'postgame_previous.html',
-            postgame2Page: 'postgame2_previous.html',
-            postgame3Page: 'postgame3_previous.html'
-        },
-
-        
-        none: {
-            fullName: "Re-Matching No Feedback",
-            description:
-                "Stranger re-matching, no feedback.",
-            WAIT_TIME: 20,
-            instructionsPage: 'instructions_none.html',
-            feedbackPage: 'feedback_none.html',
-            postgamePage: 'postgame_next.html',
-            postgame2Page: 'postgame2_none.html',
-            postgame3Page: 'postgame3_none.html'
-        }
+            instructionsPage: 'instructions_combined.html',
+            feedbackPage: 'feedback_combined.html',
+            postgamePage: 'postgame_combined.html',
+            postgame2Page: 'postgame2_combined.html',
+            postgame3Page: 'postgame3_combined.html'
+        },*/
         
     }
 };
