@@ -97,6 +97,74 @@ input#exitCode {
     color:#fff !important;
 }
 
+.highlightSameNextTop {
+    background:#f00 url('../pictures/stripes2.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightSameNextPreviousTop {
+    background:#f00 url('../pictures/stripes3.gif') repeat !important;
+    color:#fff !important;
+}
+
+.highlightCombinedTop {
+    background:#00f url('../pictures/stripes4.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightOtherNextTop {
+    background:#62809e !important;
+    color:#fff !important;
+}
+
+.highlightOtherNextMiddle {
+    background:#62809e !important;
+    color:#fff !important;
+    border-top: 1px solid #62809e;
+    border-bottom: 1px solid #62809e;
+}
+
+.highlightSameNextMiddle {
+    background:#f00 url('../pictures/stripes2.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightSameNextPreviousMiddle {
+    background:#f00 url('../pictures/stripes3.gif') repeat !important;
+    color:#fff !important;
+}
+
+.highlightCombinedMiddle {
+    background:#00f url('../pictures/stripes4.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightOtherNextBottom {
+    background:#62809e !important;
+    color:#fff !important;
+}
+
+.highlightSameNextBottom {
+    background:#f00 url('../pictures/stripes2.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+.highlightSameNextPreviousBottom {
+    background:#f00 url('../pictures/stripes3.gif') repeat !important;
+    color:#fff !important;
+}
+
+.highlightCombinedBottom {
+    background:#00f url('../pictures/stripes4.gif') repeat !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
 .highlightSameMiddle {
     background:#f00 url('../pictures/stripes.gif') repeat !important;
     color:#fff !important;

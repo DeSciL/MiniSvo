@@ -892,37 +892,24 @@ function feedback() {
         node.game.visualTimer.startTiming(options);
 
         var otherValue = 0;
+        var otherValue2 = 0;
+        var otherValueIndex;
+        var chosenValueIndex = node.game.lastChoice;
+        var chosenValue;
+        if(chosenValueIndex) {
+            if(node.game.lastTimeup != true) {
+                chosenValue = node.game.settings.receive[chosenValueIndex];
+            } else {
+                chosenValue = 0;
+            }      
+        }
+
+
         
         node.on.data('OTHER_CHOICE', function(msg) {
-            
-            
-            // Get the input from last round
-            // If there is no values (happens on re-connect), just don't show any feedback, they already saw it.   
-            /*var chosenValueIndex1 = node.game.lastChoice1;
-            if(chosenValueIndex1) {
-                var chosenValue1 = node.game.settings.receive1[chosenValueIndex1];
-            }*/            
-            
-            
 
-            var chosenValueIndex = node.game.lastChoice;
-            var chosenValue;
-            if(chosenValueIndex) {
-                if(node.game.lastTimeup != true) {
-                    chosenValue = node.game.settings.receive[chosenValueIndex];
-                } else {
-                    chosenValue = 0;
-                }      
-            }      
-            
-            
-            /*var otherValueIndex1 = msg.data.choice1;
-            if(otherValueIndex1) {
-                var otherValue1 = node.game.settings.send1[otherValueIndex1]
-            }*/
-            
-            var otherValueIndex = msg.data.choice
-            if(otherValueIndex && otherValueIndex < 10) {
+            otherValueIndex = msg.data.choice
+            if(otherValueIndex < 10) {
                 otherValue = node.game.settings.send[otherValueIndex]
             }
 
@@ -1075,6 +1062,121 @@ function feedback() {
                
         
         });
+
+
+
+        // combined feedback for new treatment. only gets called in that treatment.
+        node.on.data('OTHER_CHOICE2', function(msg) {
+
+            // but we also need the partners choice for extra comparison      
+        
+            // next partners feedback
+            var otherValueIndex2 = msg.data.choice2
+            if(otherValueIndex2 < 10) {
+                otherValue2 = node.game.settings.send[otherValueIndex2]
+            }
+
+
+            // if the decision was made by bot, let's inform the player affected by it (later)
+            var otherBot2 = msg.data.bot2;
+            var otherBotSameRound2 = true;
+            otherBotSameRound2 = msg.data.botSameRound2;
+            
+            // The message is already shown, just adapt for additional feedback
+            var round = node.player.stage.round;
+
+            // adapt for round 10!
+
+            if(otherValue2) {
+                var otherValueSpan2 = W.getElementById('other3');
+                otherValueSpan2.innerHTML = otherValue2;
+            }
+          
+            if(otherValue2) {
+                // table is already set. just include new additonal feedback and find solutions for when they match.
+                if(otherValueIndex2 < 10){
+                    
+                    
+                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex2;
+                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex2;
+                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex2;
+                    
+                    
+                    //Top
+                    var secondSameTop = W.getElementById(secondOtherTopId);
+                    if (chosenValueIndex == otherValueIndex2 && otherValueIndex != otherValueIndex2) {
+                        secondSameTop.className += ' highlightSameNextTop';
+                    }
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex != otherValueIndex2) {
+                        secondSameTop.className += ' highlightSameNextPreviousTop';
+                    } 
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex == otherValueIndex2) {
+                        secondSameTop.className += ' highlightCombinedTop';
+                    }
+                    else {
+                        secondSameTop.className += ' highlightOtherNextTop';
+                    }
+
+                    //Middle
+                    var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                    if (chosenValueIndex == otherValueIndex2 && otherValueIndex != otherValueIndex2) {
+                        secondSameMiddle.className += ' highlightSameNextMiddle';
+                    }
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex != otherValueIndex2) {
+                        secondSameMiddle.className += ' highlightSameNextPreviousMiddle';
+                    } 
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex == otherValueIndex2) {
+                        secondSameMiddle.className += ' highlightCombinedMiddle';
+                    }
+                    else {
+                        secondSameMiddle.className += ' highlightOtherNextMiddle';
+                    }
+
+                    //Bottom
+                    var secondSameBottom = W.getElementById(secondOtherBottomId);
+                    if (chosenValueIndex == otherValueIndex2 && otherValueIndex != otherValueIndex2) {
+                        secondSameBottom.className += ' highlightSameNextBottom';
+                    }
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex != otherValueIndex2) {
+                        secondSameBottom.className += ' highlightSameNextPreviousBottom';
+                    } 
+                    else if (otherValueIndex == otherValueIndex2 && chosenValueIndex == otherValueIndex2) {
+                        secondSameBottom.className += ' highlightCombinedBottom';
+                    }
+                    else {
+                        secondSameBottom.className += ' highlightOtherNextBottom';
+                    }
+
+                }
+            }
+
+            if(otherBot2) {
+                var botSentence2 = W.getElementById('botSentence_next');
+                botSentence2.style.display = '';
+            }
+            else if(otherBotSameRound2) {
+                var botSentence2 = W.getElementById('botSentence2_next');
+                botSentence2.style.display = '';
+                var feedbackSentence = W.getElementById('feedbackSentence');
+                feedbackSentence.style.display = '';
+            }
+
+            // For the Next Partner Feedback treatment some things need to be switched up for last round: Don't show feedback about any upcming rounds anymore.
+
+            if(round == 10) {
+                var otherSentence = W.getElementById('otherSentence');
+                otherSentence.style.display = 'none';
+                var otherSentenceLastRound = W.getElementById('otherSentenceLastRound');
+                otherSentenceLastRound.style.display = '';
+            }
+
+
+
+               
+        
+        });
+        
+
         
         // if clients get pushed there is no feedback to be displayed!
         node.on.data('ERROR_CHOICE', function(msg) {
@@ -1086,7 +1188,8 @@ function feedback() {
 
         b.onclick = function() {
             node.done({
-                feedbackSeen: otherValue
+                feedbackSeen: otherValue,
+                feedbackSeenNext: otherValue2
             });
         };
         

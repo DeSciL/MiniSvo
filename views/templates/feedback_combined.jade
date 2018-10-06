@@ -7,6 +7,11 @@ block mainContent
         div(id='feedbackSentence', style='display:none;')
             p(id='botSentence', style='display:none;') Your partner disconnected. Therefore a random selection was made in his/her place. In the upcoming round you will be paired with a real person again.
             p(id='botSentence2', style='display:none;') Your partner disconnected. Therefore a random selection was made in his/her place. Due to an error this random selection is not displayed here but you will see the payoff from this round at the end of the game. In the upcoming round you will be paired with a real person again.
+
+
+            p(id='botSentence_next', style='display:none;') Your upcoming partner disconnected. Therefore a random selection was made in his/her place.
+            p(id='botSentence2_next', style='display:none;') Your upcomung partner disconnected. Therefore a random selection was made in his/her place. Due to an error this random selection is not displayed here but you will see the payoff from this round at the end of the game. In the upcoming round you will be paired with a real person again.
+
             span You receive 
             //span(id='self1') 
             //|  and 
@@ -17,7 +22,7 @@ block mainContent
             span(id='other2') 
             |  from your partner's choice (red, bottom number). In the next round you will be paired again with another randomly chosen player, unless this is the final round.
             
-            span(id='otherSentence') Your next partner in the upcoming round chose to give 
+            span(id='otherSentence')  Your next partner in the upcoming round chose to give 
                 span(id='other3') 
                 |  to his/her previous partner (blue, bottom number).
                 br

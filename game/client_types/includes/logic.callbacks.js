@@ -218,72 +218,71 @@ function feedback() {
     var previousStage; 
     previousStage = node.game.plot.previous(node.game.getCurrentGameStage());
 
-    //FEEDBACK OF NEXT PARTNER
-    if(treatment == 'standard') {
-        var round = node.player.stage.round;
-        var nextRound = round + 1;
-        var matches = node.game.matcher.getMatches("ARRAY", nextRound)
-
-        for (var j = 0; j < matches.length; j++) {
-            var player1 = matches[j][0];
-            var other1 = matches[j][1];
-            var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
-
-            if (otherChoiceItem1) {
-                var bot1 = otherChoiceItem1.bot;
-                var timeup1 = otherChoiceItem1.timeup;
-                var botSameRound1 = false;
-                var otherChoice1 =  otherChoiceItem1.choice;
-                node.say('OTHER_CHOICE', player1,  {choice: otherChoice1, timeup: timeup1, bot: bot1, botSameRound: botSameRound1});
-            }
-            else { node.say('OTHER_CHOICE', player1,  {choice: 10, timeup: true, bot: false, botSameRound: true});}
-
-
-            var player2 = matches[j][1];
-            var other2 = matches[j][0];
-            var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
-
-            if (otherChoiceItem2) {
-                var bot2 = otherChoiceItem2.bot;
-                var timeup2 = otherChoiceItem2.timeup;
-                var botSameRound2 = false;
-                var otherChoice2=  otherChoiceItem2.choice;
-                node.say('OTHER_CHOICE', player2,  {choice: otherChoice2, timeup: timeup2, bot: bot2, botSameRound: botSameRound2});
-            }
-            else { node.say('OTHER_CHOICE', player2,  {choice: 10, timeup: true, bot: false, botSameRound: true}); }
-        }
-    }
-
-
-    // FEEDBACK SAME ROUND
-    else if(treatment =='previous' || treatment =='none') {
-        node.game.memory.stage[previousStage].each(function(item) {
-
-            var other = item.other;
+    // FEEDBACK NEXT ROUND AND SAME ROUND
+    //else if (treatment == 'combined') {
+    
+    // SAME ROUND
+    node.game.memory.stage[previousStage].each(function(item) {
+        var other = item.other;
+        
+        if (other) {
+            var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
             
-            if (other) {
-                var otherChoiceItem = node.game.memory.stage[previousStage].select('player', '=', other).first();
-                
-                if (otherChoiceItem) {
-                    var bot = otherChoiceItem.bot;
-                    var timeup = otherChoiceItem.timeup;
-                    var botSameRound = false;
-                    var otherChoice =  otherChoiceItem.choice;
-                }
-                else {
-                    var bot = false;
-                    var botSameRound = true;
-                    var timeup = true;
-                    var otherChoice =  10;
-                }
-
-                node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup, bot: bot, botSameRound: botSameRound});
-            } else {
-                
-                node.say('ERROR_CHOICE', item.player);  
+            if (otherChoiceItem) {
+                var bot = otherChoiceItem.bot;
+                var timeup = otherChoiceItem.timeup;
+                var botSameRound = false;
+                var otherChoice =  otherChoiceItem.choice;
             }
-        });
+            else {
+                var bot = false;
+                var botSameRound = true;
+                var timeup = true;
+                var otherChoice =  10;
+            }
+
+            node.say('OTHER_CHOICE', item.player,  {choice: otherChoice, timeup: timeup, bot: bot, botSameRound: botSameRound});
+        } else {
+            
+            node.say('ERROR_CHOICE', item.player);  
+        }
+    });
+
+
+    // NEXT ROUND SEND AGAIN
+    var round = node.player.stage.round;
+    var matches = node.game.matcher.matcher.resolvedMatches[round]
+    console.log('Round: ' + round)
+
+    for (var j = 0; j < matches.length; j++) {
+        var player1 = matches[j][0];
+        var other1 = matches[j][1];
+        var otherChoiceItem1 = node.game.memory.stage[previousStage].select('player', '=', other1).first();
+
+        if (otherChoiceItem1) {
+            var bot1 = otherChoiceItem1.bot;
+            var timeup1 = otherChoiceItem1.timeup;
+            var botSameRound1 = false;
+            var otherChoice1 =  otherChoiceItem1.choice;
+            node.say('OTHER_CHOICE2', player1,  {choice2: otherChoice1, timeup2: timeup1, bot2: bot1, botSameRound2: botSameRound1});
+        }
+        else { node.say('OTHER_CHOICE2', player1,  {choice2: 10, timeup2: true, bot2: false, botSameRound2: true});}
+
+
+        var player2 = matches[j][1];
+        var other2 = matches[j][0];
+        var otherChoiceItem2 = node.game.memory.stage[previousStage].select('player', '=', other2).first();
+
+        if (otherChoiceItem2) {
+            var bot2 = otherChoiceItem2.bot;
+            var timeup2 = otherChoiceItem2.timeup;
+            var botSameRound2 = false;
+            var otherChoice2=  otherChoiceItem2.choice;
+            node.say('OTHER_CHOICE2', player2,  {choice2: otherChoice2, timeup2: timeup2, bot2: bot2, botSameRound2: botSameRound2});
+        }
+        else { node.say('OTHER_CHOICE2', player2,  {choice2: 10, timeup2: true, bot2: false, botSameRound2: true}); }
     }
+    //}
 }
 
 
@@ -346,86 +345,6 @@ function gameover() {
 
     // TODO: fix this.
     // channel.destroyGameRoom(gameRoom.name);
-}
-
-function doMatchPrev() {
-    var g, i, bidder, respondent, data_b, data_r;
-
-    if (node.game.pl.size() < 2) {
-        if (!this.countdown) notEnoughPlayers();
-        return;
-    }
-    var treatment = settings.treatmentName;
-    //treatment = 'standard';
-    
-    
-    var round = node.player.stage.round; // or another counter
-    
-    
-    if ((treatment == 'rmNext' && round == 1) || treatment == 'standard' || treatment == 'rmNf') { // TREATMENT HACK
-        
-        
-        // ROUNDROBIN RE-MATCHING
-        // Set number of players in game.settings
-        // Number of rounds must make sense in combination with numbers of players
-        // Is executed here so you see the feedback of your partner in this round (Previous), plus for no feedback
-        // Run this once in first round for rmNext treatment because we need a match!
-        
-        var matches = node.game.matcher.getMatch(round); 
-        var item;
-
-        for (var j = 0; j < matches.length; j++) {
-            
-            data_b = {
-                //role: 'bidder',
-                other: matches[i][1]
-            };
-            data_r = {
-                //role: 'respondent',
-                other: matches[i][0]
-            };
-            
-            node.say('BIDDER', matches[i][0], data_b);
-            node.say('BIDDER', matches[i][1], data_r);
-        }
-        console.log('Re-Matching completed.');
-    } else if (/*treatment == 'standard' || */treatment == 'nf'){
-
-        // RANDOM RE-MATCHING
-        // Method shuffle accepts one parameter to update the db, as well as
-        // returning a shuffled copy.
-        
-        g = node.game.pl.shuffle();
-
-        for (i = 0 ; i < node.game.pl.size() ; i = i + 2) {
-            bidder = g.db[i];
-            respondent = g.db[i+1];
-
-            data_b = {
-                //role: 'bidder',
-                other: respondent.id
-            };
-            data_r = {
-                //role: 'respondent',
-                other: bidder.id
-            };
-
-            console.log('Group ' + i + ': ', bidder.id, respondent.id);
-
-            // Send a message to each player with their role
-            // and the id of the other player.
-            console.log('==================== LOGIC: BIDDER is', bidder.id, 
-                        '; RESPONDENT IS', respondent.id);
-        
-            console.log(node.game.pl.size());
-            console.log(node.nodename);
-
-            node.say('BIDDER', bidder.id, data_b);
-            node.say('BIDDER', respondent.id, data_r);
-            //node.say('RESPONDENT', respondent.id, data_r);
-        }
-        console.log('Matching completed.');
-    }
 }
 
 function notEnoughPlayers() {

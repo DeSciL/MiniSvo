@@ -58,42 +58,16 @@ module.exports = {
         
         // LAST THREE: RE-MATCHING
         standard: {
-            fullName: "Re-Matching Next feedback",
+            fullName: "Re-Matching Combined Feedback",
             description:
-                "Stranger re-matching, feedback for next partner.",
+                "Stranger re-matching, feedback for previous and next partner.",
             WAIT_TIME: 20,
-            instructionsPage: 'instructions_next.html',
-            feedbackPage: 'feedback_next.html',
-            postgamePage: 'postgame_next.html',
-            postgame2Page: 'postgame2_next.html',
-            postgame3Page: 'postgame3_next.html'
+            instructionsPage: 'instructions_combined.html',
+            feedbackPage: 'feedback_combined.html',
+            postgamePage: 'postgame_combined.html',
+            postgame2Page: 'postgame2_combined.html',
+            postgame3Page: 'postgame3_combined.html'
         },
-        
-
-        previous: {
-            fullName: "Re-Matching Previous Feedback",
-            description:
-                "Stranger re-matching, feedback for previous partner.",
-            WAIT_TIME: 20,
-            instructionsPage: 'instructions_previous.html',
-            feedbackPage: 'feedback_previous.html',
-            postgamePage: 'postgame_previous.html',
-            postgame2Page: 'postgame2_previous.html',
-            postgame3Page: 'postgame3_previous.html'
-        },
-
-        
-        none: {
-            fullName: "Re-Matching No Feedback",
-            description:
-                "Stranger re-matching, no feedback.",
-            WAIT_TIME: 20,
-            instructionsPage: 'instructions_none.html',
-            feedbackPage: 'feedback_none.html',
-            postgamePage: 'postgame_next.html',
-            postgame2Page: 'postgame2_none.html',
-            postgame3Page: 'postgame3_none.html'
-        }
         
     }
 };
