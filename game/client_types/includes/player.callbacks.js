@@ -989,46 +989,43 @@ function feedback() {
                     
                 // Feedback about partners choice. only show if bot's choice is really saved, and don't show it for round 10 for next treatment.
                 if(otherValueIndex < 10){
-                    if(treatment == 'none' || (treatment == 'standard' && round == 10)) {
-                        var colorsNF = W.getElementById('colorsNF');
-                        colorsNF.style.display = ''; 
-                    } else {
-                        var colors = W.getElementById('colors');
-                        colors.style.display = '';
-                        
-                        
-                        var secondOtherTopId = 'secondHoverTop' + otherValueIndex;
-                        var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex;
-                        var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex;
-                        
+                    
+                    var colors = W.getElementById('colors');
+                    colors.style.display = '';
+                    
+                    
+                    var secondOtherTopId = 'secondHoverTop' + otherValueIndex;
+                    var secondOtherMiddleId = 'secondHoverMiddle' + otherValueIndex;
+                    var secondOtherBottomId = 'secondHoverBottom' + otherValueIndex;
+                    
 
-                        if (chosenValueIndex == otherValueIndex) {
-                            var secondSameTop = W.getElementById(secondOtherTopId);
-                            secondSameTop.className += ' highlightSameTop';
-                        }
-                        else {
-                            var secondOtherTop = W.getElementById(secondOtherTopId);
-                            secondOtherTop.className += ' highlightOtherTop';
-                        }
-
-                        if (chosenValueIndex == otherValueIndex) {
-                            var secondSameMiddle = W.getElementById(secondOtherMiddleId);
-                            secondSameMiddle.className += ' highlightSameMiddle';
-                        }
-                        else {
-                            var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
-                            secondOtherMiddle.className += ' highlightOtherMiddle';
-                        }
-
-                        if (chosenValueIndex == otherValueIndex) {
-                            var secondSameBottom = W.getElementById(secondOtherBottomId);
-                            secondSameBottom.className += ' highlightSameBottom';
-                        }
-                        else {
-                            var secondOtherBottom = W.getElementById(secondOtherBottomId);
-                            secondOtherBottom.className += ' highlightOtherBottom';
-                        }
+                    if (chosenValueIndex == otherValueIndex) {
+                        var secondSameTop = W.getElementById(secondOtherTopId);
+                        secondSameTop.className += ' highlightSameTop';
                     }
+                    else {
+                        var secondOtherTop = W.getElementById(secondOtherTopId);
+                        secondOtherTop.className += ' highlightOtherTop';
+                    }
+
+                    if (chosenValueIndex == otherValueIndex) {
+                        var secondSameMiddle = W.getElementById(secondOtherMiddleId);
+                        secondSameMiddle.className += ' highlightSameMiddle';
+                    }
+                    else {
+                        var secondOtherMiddle = W.getElementById(secondOtherMiddleId);
+                        secondOtherMiddle.className += ' highlightOtherMiddle';
+                    }
+
+                    if (chosenValueIndex == otherValueIndex) {
+                        var secondSameBottom = W.getElementById(secondOtherBottomId);
+                        secondSameBottom.className += ' highlightSameBottom';
+                    }
+                    else {
+                        var secondOtherBottom = W.getElementById(secondOtherBottomId);
+                        secondOtherBottom.className += ' highlightOtherBottom';
+                    }
+                    
                 }
             }
 
@@ -1044,14 +1041,14 @@ function feedback() {
             }
 
             // For the Next Partner Feedback treatment some things need to be switched up for last round: Don't show feedback about any upcming rounds anymore.
-            if(treatment == 'standard'){
+            /*if(treatment == 'standard'){
                 if(round == 10) {
                     var otherSentence = W.getElementById('otherSentence');
                     otherSentence.style.display = 'none';
                     var otherSentenceLastRound = W.getElementById('otherSentenceLastRound');
                     otherSentenceLastRound.style.display = '';
                 }
-            }
+            }*/
 
 
 
